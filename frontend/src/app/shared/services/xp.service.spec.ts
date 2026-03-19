@@ -5,6 +5,8 @@ import {
 } from "@angular/common/http/testing";
 import { TestBed } from "@angular/core/testing";
 import { API_CONFIG } from "@core/config/api.config";
+import { AuthService } from "@core/services/auth";
+import { signal } from "@angular/core";
 import { XpService } from "./xp.service";
 
 const baseUrl = API_CONFIG.baseUrl;
@@ -12,10 +14,21 @@ const baseUrl = API_CONFIG.baseUrl;
 describe("XpService", () => {
 	let service: XpService;
 	let httpMock: HttpTestingController;
+	const isLoggedIn = signal(false);
 
 	beforeEach(() => {
+		isLoggedIn.set(false);
+
 		TestBed.configureTestingModule({
-			providers: [XpService, provideHttpClient(), provideHttpClientTesting()],
+			providers: [
+				XpService,
+				provideHttpClient(),
+				provideHttpClientTesting(),
+				{
+					provide: AuthService,
+					useValue: { isLoggedIn: isLoggedIn.asReadonly() },
+				},
+			],
 		});
 
 		service = TestBed.inject(XpService);
@@ -32,8 +45,9 @@ describe("XpService", () => {
 			expect(service.profile()).toBeUndefined();
 		});
 
-		it("should indicate loading state", () => {
-			expect(service.profileLoading()).toBe(true);
+		it("should not fetch when user is not logged in", () => {
+			expect(service.profileLoading()).toBe(false);
+			httpMock.expectNone(`${baseUrl}${API_CONFIG.endpoints.xpProfile}`);
 		});
 	});
 

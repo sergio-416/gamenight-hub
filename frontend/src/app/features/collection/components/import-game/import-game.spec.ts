@@ -1,5 +1,12 @@
 import { signal } from "@angular/core";
+import { provideHttpClient } from "@angular/common/http";
+import {
+	HttpTestingController,
+	provideHttpClientTesting,
+} from "@angular/common/http/testing";
+import { TestBed } from "@angular/core/testing";
 import { provideRouter, Router } from "@angular/router";
+import { AuthService } from "@core/services/auth";
 import { provideTranslocoTesting } from "@core/testing/transloco-testing";
 import { ToastService } from "@core/services/toast";
 import {
@@ -37,7 +44,13 @@ describe("ImportGame", () => {
 		const rendered = await render(ImportGame, {
 			providers: [
 				provideRouter(routes),
+				provideHttpClient(),
+				provideHttpClientTesting(),
 				provideTranslocoTesting(),
+				{
+					provide: AuthService,
+					useValue: { isLoggedIn: signal(true).asReadonly() },
+				},
 				{ provide: GamesService, useValue: mockGamesService },
 				{ provide: ToastService, useValue: mockToastService },
 			],
@@ -49,6 +62,8 @@ describe("ImportGame", () => {
 	}
 
 	afterEach(() => {
+		const httpMock = TestBed.inject(HttpTestingController);
+		httpMock.match(() => true).forEach((r) => r.flush({}));
 		vi.clearAllMocks();
 		mockOwnedBggIds.set(new Set());
 	});

@@ -1,6 +1,7 @@
 import { HttpClient, httpResource } from "@angular/common/http";
 import { Injectable, computed, inject, signal } from "@angular/core";
 import { API_CONFIG } from "@core/config/api.config";
+import { AuthService } from "@core/services/auth";
 import type {
 	XpAwardFeedback,
 	XpHistoryResponse,
@@ -10,10 +11,13 @@ import type {
 @Injectable({ providedIn: "root" })
 export class XpService {
 	readonly #http = inject(HttpClient);
+	readonly #auth = inject(AuthService);
 	readonly #base = API_CONFIG.baseUrl;
 
-	readonly #profileResource = httpResource<XpProfile>(
-		() => `${this.#base}${API_CONFIG.endpoints.xpProfile}`,
+	readonly #profileResource = httpResource<XpProfile>(() =>
+		this.#auth.isLoggedIn()
+			? `${this.#base}${API_CONFIG.endpoints.xpProfile}`
+			: undefined,
 	);
 
 	readonly profile = computed(() =>

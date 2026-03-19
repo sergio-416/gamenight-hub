@@ -3,7 +3,9 @@ import {
 	HttpTestingController,
 	provideHttpClientTesting,
 } from "@angular/common/http/testing";
+import { signal } from "@angular/core";
 import { API_CONFIG } from "@core/config/api.config";
+import { AuthService } from "@core/services/auth";
 import { provideTranslocoTesting } from "@core/testing/transloco-testing";
 import { fireEvent, render, screen, waitFor } from "@testing-library/angular";
 import { XpHistory } from "./xp-history";
@@ -37,6 +39,10 @@ async function renderHistory() {
 			provideHttpClient(),
 			provideHttpClientTesting(),
 			provideTranslocoTesting(),
+			{
+				provide: AuthService,
+				useValue: { isLoggedIn: signal(true).asReadonly() },
+			},
 		],
 	});
 
