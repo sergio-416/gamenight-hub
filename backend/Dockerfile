@@ -7,8 +7,8 @@ WORKDIR /app
 COPY package.json bun.lock ./
 COPY packages/shared/package.json ./packages/shared/
 COPY backend/package.json ./backend/
+COPY frontend/package.json ./frontend/
 
-# Install ALL workspace dependencies
 RUN bun install --frozen-lockfile
 
 # Copy source code
@@ -28,10 +28,10 @@ WORKDIR /app
 COPY package.json bun.lock ./
 COPY packages/shared/package.json ./packages/shared/
 COPY backend/package.json ./backend/
+COPY frontend/package.json ./frontend/
 
-# Install production dependencies only (using bun)
 COPY --from=builder /usr/local/bin/bun /usr/local/bin/bun
-RUN bun install --frozen-lockfile --production
+RUN bun install --frozen-lockfile --production && bun add tsx
 
 # Copy built output and shared source (consumed as TypeScript source)
 COPY packages/shared/ ./packages/shared/

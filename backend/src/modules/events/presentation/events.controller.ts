@@ -60,8 +60,7 @@ export class EventsController {
   @ApiOperation({ summary: "Get an event by ID" })
   @Get(":id")
   async findOne(@Param("id", ParseUuidPipe) id: string) {
-    const { createdBy: _, ...event } = await this.eventsService.findOne(id);
-    return event;
+    return this.eventsService.findOne(id);
   }
 
   @ApiOperation({ summary: "Update an event" })

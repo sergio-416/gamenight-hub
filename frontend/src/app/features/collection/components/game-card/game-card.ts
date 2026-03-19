@@ -39,7 +39,6 @@ export class GameCard {
 	readonly #lang = toSignal(this.#transloco.langChanges$);
 
 	game = input.required<Game>();
-	priorityImage = input(false);
 
 	gameClick = output<string>();
 

@@ -12,7 +12,7 @@
 			[ngSrc]="game().imageUrl!"
 			[alt]="game().name"
 			fill
-			[priority]="priorityImage()"
+			loading="lazy"
 			class="object-cover"
 		/>
 		} @else if (game().thumbnailUrl) {
@@ -20,7 +20,7 @@
 			[ngSrc]="game().thumbnailUrl!"
 			[alt]="game().name"
 			fill
-			[priority]="priorityImage()"
+			loading="lazy"
 			class="object-cover"
 		/>
 		} @else {

@@ -28,7 +28,7 @@ export class EventCard {
 	readonly locationName = input<string>("Unknown location");
 	readonly postalCode = input<string | undefined>(undefined);
 	readonly formatDate = input.required<DateFormatter>();
-	readonly priorityImage = input(false);
+
 
 	readonly categoryMeta = computed(() => {
 		const cat = this.event().category;

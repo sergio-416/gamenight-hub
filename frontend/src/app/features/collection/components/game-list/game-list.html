@@ -77,10 +77,9 @@
 		<div
 			class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
 		>
-			@for (game of displayedGames(); track game.id; let idx = $index) {
+			@for (game of displayedGames(); track game.id) {
 			<app-game-card
 				[game]="game"
-				[priorityImage]="idx < 4"
 				(gameClick)="onGameClick($event)"
 			/>
 			} @if (isLoggedIn()) {
