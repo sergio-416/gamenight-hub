@@ -1,0 +1,37 @@
+{
+	"hero": {
+		"titleBefore": "Bereit für dein nächstes ",
+		"titleHighlight": "Abenteuer",
+		"titleAfter": "?",
+		"subtitle": "Entdecke lokale Spieleabende oder veranstalte deine eigene Runde. Erstelle deine Sammlung. Spiel los.",
+		"imageAlt": "Gemütlicher Spieleabend mit warmer Beleuchtung",
+		"cta": {
+			"explore": "Jetzt entdecken",
+			"host": "Runde veranstalten",
+			"browse": "Events durchsuchen"
+		}
+	},
+	"features": {
+		"perks": {
+			"title": "Mitgliedervorteile",
+			"description": "Schalte exklusive Vorteile und Belohnungen frei, während du in der Community aktiv wirst",
+			"link": "Mehr erfahren →"
+		},
+		"xp": {
+			"title": "XP & Stufen",
+			"description": "Verdiene Erfahrungspunkte bei jedem Spieleabend und steige im Level auf",
+			"link": "Mehr erfahren →"
+		},
+		"achievements": {
+			"title": "Erfolge",
+			"description": "Sammle Abzeichen, die deine Spielerfolge und dein Engagement zeigen",
+			"link": "Mehr erfahren →"
+		}
+	},
+	"support": {
+		"title": "Brauchst du Hilfe, Reisender?",
+		"subtitle": "Wir helfen dir gerne auf deinem Weg weiter",
+		"hub": "Hilfezentrum",
+		"rules": "Community-Regeln"
+	}
+}

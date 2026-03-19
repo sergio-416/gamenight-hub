@@ -1,0 +1,96 @@
+{
+	"layout": {
+		"prevAria": "Pàgina anterior de funcionalitats",
+		"nextAria": "Pàgina següent de funcionalitats",
+		"backToHome": "← Tornar a l'inici"
+	},
+	"perks": {
+		"title": "Avantatges de Membre",
+		"description": "Els membres de GameNight Hub tenen accés exclusiu a funcionalitats pensades per als autèntics entusiastes dels jocs de taula. Des de registre prioritari a esdeveniments fins a drets de vot a la comunitat, la teva membresia desbloqueja l'experiència social completa dels jocs de taula. Uneix-te a una comunitat que es pren l'afició tan seriosament com tu.",
+		"howItWorks": {
+			"title": "Com funciona",
+			"createAccount": {
+				"title": "Crea el teu compte",
+				"description": "Registra't i uneix-te a una comunitat creixent d'entusiastes dels jocs de taula arreu d'Espanya"
+			},
+			"completeProfile": {
+				"title": "Completa el teu perfil",
+				"description": "Configura les teves preferències de joc, col·lecció i ubicació per rebre recomanacions personalitzades"
+			},
+			"unlockAccess": {
+				"title": "Desbloqueja l'accés exclusiu",
+				"description": "Obtén accés immediat a funcionalitats exclusives, registre prioritari i privilegis de la comunitat"
+			}
+		},
+		"whatYouUnlock": {
+			"title": "Què desbloquegen",
+			"items": {
+				"priorityRegistration": "Registre prioritari a esdeveniments",
+				"membersOnly": "Nits de joc exclusives per a membres",
+				"votingRights": "Drets de vot a la comunitat",
+				"earlyAccess": "Accés anticipat a noves funcionalitats",
+				"collectionTracking": "Seguiment personal de la col·lecció de jocs"
+			},
+			"srLabel": "avantatge de membre"
+		}
+	},
+	"xp": {
+		"title": "XP i Nivells",
+		"description": "Guanya punts d'experiència cada cop que interactues amb la comunitat — organitza esdeveniments, confirma assistència a nits de joc i construeix el teu perfil. A mesura que creix la teva XP, el teu nivell puja i s'obren nous privilegis. Com més jugues, més et recompensa la plataforma.",
+		"howYouEarn": {
+			"title": "Com guanyes XP",
+			"hostGameNight": {
+				"title": "Organitza una nit de joc",
+				"description": "Organitza un esdeveniment i reuneix jugadors — guanya <1>+50 XP</1> per cada nit que organitzis"
+			},
+			"rsvp": {
+				"title": "Confirma assistència a un esdeveniment",
+				"description": "Vine i juga — cada assistència confirmada suma <1>+10 XP</1> al teu total"
+			},
+			"completeProfile": {
+				"title": "Completa el teu perfil",
+				"description": "Omple les teves preferències, col·lecció i ubicació un cop i embutxaca't <1>+25 XP</1>"
+			}
+		},
+		"milestones": {
+			"title": "Fites de nivell",
+			"items": {
+				"apprentice": "Nivell 1 – Aprenent (0 XP)",
+				"strategist": "Nivell 5 – Estratega (250 XP)",
+				"gameMaster": "Nivell 10 – Mestre de Joc (1000 XP)",
+				"grandMaster": "Nivell 20 – Gran Mestre (5000 XP)"
+			},
+			"srLabel": "avantatge de membre"
+		}
+	},
+	"badges": {
+		"title": "Assoliments",
+		"description": "Guanya insígnies mantenint-te actiu a la comunitat — com més jugues, més desbloquegen. Construeix la teva col·lecció, organitza nits de joc i mostra la teva dedicació amb un aparador que parla per si sol.",
+		"howYouEarn": {
+			"title": "Com guanyes insígnies",
+			"earlyAdopter": {
+				"title": "Sigues dels primers",
+				"description": "Uneix-te abans del llançament públic i assegura't el teu lloc entre els membres fundadors de GameNight Hub"
+			},
+			"hostFirst": {
+				"title": "Organitza la teva primera nit de joc",
+				"description": "Crea i gestiona el teu primer esdeveniment per convertir-te en amfitrió oficial i desbloquejar assoliments d'amfitrió"
+			},
+			"buildCollection": {
+				"title": "Construeix la teva col·lecció",
+				"description": "Afegeix 10 o més jocs a la teva col·lecció personal i guanya la insígnia de Col·leccionista"
+			}
+		},
+		"showcase": {
+			"title": "Aparador d'insígnies",
+			"items": {
+				"earlyAdopter": "Pioner",
+				"gameMaster": "Mestre de Joc",
+				"socialButterfly": "Ànima Social",
+				"collector": "Col·leccionista",
+				"partyStarter": "Animador de Festes"
+			},
+			"srLabel": "avantatge de membre"
+		}
+	}
+}

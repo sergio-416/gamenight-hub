@@ -1,0 +1,154 @@
+{
+	"header": {
+		"title": "My Collection",
+		"subtitle": "You have {{ count }} {{ count === 1 ? 'game' : 'games' }} in your library. Keep playing!",
+		"subtitleSingular": "You have {{ count }} game in your library. Keep playing!",
+		"subtitlePlural": "You have {{ count }} games in your library. Keep playing!",
+		"addGame": "Add Game"
+	},
+	"toolbar": {
+		"searchPlaceholder": "Search collection...",
+		"searchAriaLabel": "Search games in collection",
+		"gridView": "Grid view",
+		"listView": "List view"
+	},
+	"empty": {
+		"noGamesFound": "No games found",
+		"tryAdjusting": "Try adjusting your search or filters",
+		"collectionEmpty": "Your collection is empty",
+		"startBuilding": "Start building your tabletop library",
+		"importFirst": "Import your first game"
+	},
+	"list": {
+		"players": "Players",
+		"min": "min",
+		"loadMore": "Load More Games"
+	},
+	"confirmRemove": {
+		"title": "Remove Game",
+		"message": "Are you sure you want to remove this game from your collection?",
+		"confirm": "Remove",
+		"cancel": "Cancel"
+	},
+	"unauthenticated": {
+		"heading": "Your Board Game Collection",
+		"description": "Import games from BoardGameGeek, track what you own, and get AI-powered recommendations tailored to your library. Sign in to start building your collection.",
+		"signIn": "Sign in",
+		"createAccount": "Create an account",
+		"imagePlaceholder": "Image coming soon...",
+		"featureImportTitle": "Import",
+		"featureImportDesc": "Search BoardGameGeek and add any game to your personal library in seconds",
+		"featureDiscoverTitle": "Discover",
+		"featureDiscoverDesc": "Get AI-powered game recommendations based on what you already own and love",
+		"featureTrackTitle": "Track",
+		"featureTrackDesc": "See stats and insights across your entire collection at a glance"
+	},
+	"addToLibrary": {
+		"title": "Add to Library",
+		"subtitle": "Expand your tabletop collection"
+	},
+	"import": {
+		"back": "\u2190 Back",
+		"pageTitle": "Add a Game to Your Collection",
+		"searchPlaceholder": "Search for a game (e.g., Catan, Ticket to Ride)...",
+		"searchAriaLabel": "Search for board games",
+		"searching": "Searching...",
+		"search": "Search",
+		"year": "Year",
+		"rank": "Rank",
+		"na": "N/A",
+		"unranked": "Unranked",
+		"inCollection": "In Collection",
+		"importing": "Importing...",
+		"importBtn": "Import",
+		"noGamesFound": "No games found. Try a different search."
+	},
+	"bggPreview": {
+		"backToSearch": "Back to Search",
+		"errorLoading": "Failed to load game details. Please try again.",
+		"alreadyInCollection": "Already in Collection",
+		"importingEllipsis": "Importing...",
+		"addToCollection": "Add to Collection",
+		"players": "Players",
+		"minSuffix": "Min",
+		"agePlus": "Age {{ age }}+",
+		"aboutTheGame": "About the Game",
+		"publisher": "Publisher:",
+		"year": "Year:",
+		"dataPoweredBy": "Data powered by",
+		"bgg": "BoardGameGeek"
+	},
+	"gameDetail": {
+		"backToCollection": "Back to Collection",
+		"errorLoading": "Failed to load game details. Please try again.",
+		"addToCollection": "Add to Collection",
+		"owned": "Owned",
+		"removeFromCollection": "Remove from collection",
+		"removeTitle": "Remove Game",
+		"removeConfirm": "Remove",
+		"removeCancel": "Cancel",
+		"wishlistGame": "Wishlist Game",
+		"players": "Players",
+		"minSuffix": "Min",
+		"agePlus": "Age {{ age }}+",
+		"aboutTheGame": "About the Game",
+		"publisher": "Publisher:",
+		"year": "Year:",
+		"dataPoweredBy": "Data powered by",
+		"bgg": "BoardGameGeek"
+	},
+	"statCards": {
+		"complexity": "Complexity",
+		"rating": "Rating",
+		"rank": "Rank",
+		"weight": "Weight",
+		"na": "N/A"
+	},
+	"tags": {
+		"expansion": "Expansion",
+		"categories": "Categories",
+		"mechanics": "Mechanics"
+	},
+	"recommendations": {
+		"title": "More in your Collection",
+		"addToLibrary": "Add to Library",
+		"expandCollection": "Expand your tabletop collection"
+	},
+	"filters": {
+		"playersAny": "Any Players",
+		"players1": "1 Player",
+		"players2": "2 Players",
+		"players3": "3 Players",
+		"players4": "4 Players",
+		"players5": "5 Players",
+		"players6Plus": "6+ Players",
+		"categoryAll": "All Categories",
+		"sortNameAsc": "A → Z",
+		"sortNameDesc": "Z → A",
+		"sortNewest": "Newest First",
+		"sortOldest": "Oldest First"
+	},
+	"status": {
+		"owned": "Owned",
+		"wantToPlay": "Want to Play",
+		"wantToTry": "Want to Try",
+		"played": "Played"
+	},
+	"weight": {
+		"1": "Light",
+		"2": "Light-Medium",
+		"3": "Medium",
+		"4": "Medium-Heavy",
+		"5": "Heavy",
+		"notRated": "Not rated"
+	},
+	"card": {
+		"playersSingular": "{{ count }} Player",
+		"playersPlural": "{{ count }} Players",
+		"playersRange": "{{ min }}-{{ max }} Players"
+	},
+	"removeConfirmMessage": "Remove \"{{ name }}\" from your collection? This can't be undone.",
+	"toast": {
+		"gameRemoved": "Game removed from collection"
+	}
+}

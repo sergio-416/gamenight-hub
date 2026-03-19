@@ -1,0 +1,55 @@
+{
+	"title": "Serate di Gioco",
+	"subtitle": "Prossimi eventi di giochi da tavolo e dove trovarli!",
+	"addEvent": "Nuovo Evento",
+	"showMap": "MOSTRA MAPPA",
+	"hideMap": "NASCONDI MAPPA",
+	"loading": "Caricamento eventi...",
+	"eventsHeading": "Eventi",
+	"eventsFound": "{{ count }} eventi trovati",
+	"emptyLoggedIn": "Nessun evento trovato per questo periodo. Prova un filtro diverso o crea una nuova serata di gioco!",
+	"emptyLoggedOut": "Nessun evento trovato per questo periodo. Prova un filtro diverso o accedi per crearne uno!",
+	"map": {
+		"heading": "Mappa",
+		"close": "Chiudi",
+		"loadingLocations": "Caricamento sedi..."
+	},
+	"card": {
+		"full": "Completo",
+		"joined": "{{ current }}/{{ max }} Iscritti",
+		"viewDetails": "Vedi Dettagli",
+		"viewDetailsAria": "Vedi dettagli per {{ title }}",
+		"waitlistOnly": "Solo Lista d'Attesa"
+	},
+	"preview": {
+		"closeAria": "Chiudi anteprima",
+		"viewDetails": "Vedi Dettagli",
+		"viewDetailsAria": "Vedi dettagli per {{ title }}",
+		"full": "Completo"
+	},
+	"timeFilter": {
+		"thisWeek": "Questa Settimana",
+		"next7d": "Prossimi 7 Giorni",
+		"next14d": "Prossimi 14 Giorni",
+		"thisMonth": "Questo Mese",
+		"all": "Tutti gli Eventi",
+		"fallback": "Periodo"
+	},
+	"categories": {
+		"all": "Tutte le Categorie",
+		"strategy": "Strategia",
+		"rpg": "GdR",
+		"party": "Party",
+		"classic": "Classico",
+		"cooperative": "Cooperativo",
+		"trivia": "Trivia",
+		"miniatures": "Miniature",
+		"family": "Famiglia",
+		"other": "Altro",
+		"fallback": "Categoria"
+	},
+	"toast": {
+		"locationDeleted": "Sede eliminata",
+		"locationDeleteFailed": "Eliminazione sede non riuscita"
+	}
+}

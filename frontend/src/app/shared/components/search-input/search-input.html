@@ -1,0 +1,53 @@
+<div class="relative">
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		class="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-on-surface-dim"
+		viewBox="0 0 24 24"
+		fill="none"
+		stroke="currentColor"
+		stroke-width="2"
+		aria-hidden="true"
+	>
+		<path
+			stroke-linecap="round"
+			stroke-linejoin="round"
+			d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"
+		/>
+	</svg>
+	<input
+		#inputEl
+		type="text"
+		[value]="value()"
+		[placeholder]="placeholder()"
+		[attr.aria-label]="ariaLabel()"
+		(input)="onInput($event)"
+		(keyup.enter)="search.emit()"
+		(focus)="focused.emit()"
+		(blur)="blurred.emit()"
+		class="w-full rounded-lg border border-border bg-surface-raised py-2 pr-9 pl-10 text-sm text-on-surface placeholder-slate-400 shadow-sm outline-none transition-colors focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
+	/>
+	@if (value()) {
+	<button
+		type="button"
+		(click)="clear()"
+		class="absolute top-1/2 right-3 flex h-5 w-5 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full text-on-surface-dim transition-colors hover:bg-slate-200 hover:text-slate-600"
+		aria-label="Clear search"
+	>
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			class="h-3.5 w-3.5"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="2.5"
+			aria-hidden="true"
+		>
+			<path
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				d="M6 18L18 6M6 6l12 12"
+			/>
+		</svg>
+	</button>
+	}
+</div>

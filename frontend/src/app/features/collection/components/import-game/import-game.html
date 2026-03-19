@@ -1,0 +1,84 @@
+<section *transloco="let t; read: 'collection'" class="mx-auto max-w-4xl p-4">
+	<header class="mb-6 flex items-center">
+		<button
+			(click)="goBack()"
+			class="mr-4 text-on-surface-medium hover:text-on-surface"
+			aria-label="Go back to collection"
+		>
+			{{ t('import.back') }}
+		</button>
+		<h1 class="text-2xl font-bold text-on-surface-strong">
+			{{ t('import.pageTitle') }}
+		</h1>
+	</header>
+	<section class="mb-6">
+		<form class="flex gap-2" (submit)="$event.preventDefault(); search()">
+			<app-search-input
+				class="flex-1"
+				[value]="searchQuery()"
+				[placeholder]="t('import.searchPlaceholder')"
+				[ariaLabel]="t('import.searchAriaLabel')"
+				(valueChange)="onSearchInput($event)"
+				(search)="search()"
+			/>
+			<button
+				type="button"
+				(click)="search()"
+				[disabled]="loading() || !searchQuery()"
+				class="rounded-lg bg-emerald-500 px-6 py-3 text-white transition hover:bg-emerald-600 disabled:cursor-not-allowed disabled:opacity-50"
+			>
+				{{ loading() ? t('import.searching') : t('import.search') }}
+			</button>
+		</form>
+	</section>
+	@if (error()) {
+	<aside class="mb-4 rounded-lg bg-pink-100 p-4 text-pink-700" role="alert">
+		{{ error() }}
+	</aside>
+	} @if (searchResults().length > 0) {
+	<section aria-label="Search results">
+		<ul class="grid gap-4">
+			@for (game of searchResults(); track game.bggId) {
+			<li
+				class="flex items-center justify-between rounded-lg border border-border bg-surface-raised p-4 shadow-sm transition hover:bg-slate-50"
+			>
+				<div>
+					<a
+						[routerLink]="['/collection/bgg', game.bggId]"
+						[queryParams]="{ q: searchQuery() }"
+						class="text-lg font-bold text-on-surface hover:text-emerald-600 hover:underline"
+					>
+						{{ game.name }}
+					</a>
+					<p class="text-sm text-on-surface-medium">
+						{{ t('import.year') }}: {{ game.yearPublished || t('import.na') }} |
+						{{ t('import.rank') }}: {{ game.rank || t('import.unranked') }}
+					</p>
+				</div>
+				@if (isOwned(game.bggId)) {
+				<span
+					class="rounded-lg bg-slate-200 px-4 py-2 text-sm font-medium text-on-surface-muted"
+					[attr.aria-label]="game.name + ' is already in your collection'"
+				>
+					{{ t('import.inCollection') }}
+				</span>
+				} @else {
+				<button
+					type="button"
+					(click)="importGame(game.bggId)"
+					[disabled]="importingBggId() === game.bggId"
+					class="rounded-lg bg-emerald-600 px-4 py-2 text-white transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-50"
+					[attr.aria-label]="'Import ' + game.name"
+				>
+					{{ importingBggId() === game.bggId ? t('import.importing') :
+					t('import.importBtn') }}
+				</button>
+				}
+			</li>
+			}
+		</ul>
+	</section>
+	} @else if (!loading() && hasSearched()) {
+	<p class="py-8 text-center text-on-surface-medium">{{ t('import.noGamesFound') }}</p>
+	}
+</section>

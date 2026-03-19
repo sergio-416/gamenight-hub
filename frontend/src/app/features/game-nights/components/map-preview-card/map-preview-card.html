@@ -1,0 +1,108 @@
+<ng-container *transloco="let t; read: 'game-nights'">
+	<div class="w-[calc(100vw-2rem)] max-w-[300px] rounded-lg bg-slate-800 shadow-lg p-3">
+		<div class="flex items-start justify-between gap-2 mb-2">
+			<h3 class="text-sm font-semibold text-white leading-snug truncate">
+				{{ event().title }}
+			</h3>
+			<button
+				type="button"
+				class="shrink-0 rounded-full p-0.5 text-slate-400 hover:text-white hover:bg-slate-700 transition-colors"
+				[attr.aria-label]="t('preview.closeAria')"
+				(click)="close.emit()"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 20 20"
+					fill="currentColor"
+					class="h-4 w-4"
+					aria-hidden="true"
+				>
+					<path
+						d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z"
+					/>
+				</svg>
+			</button>
+		</div>
+
+		@if (event().category) {
+		<div class="mb-2">
+			<app-category-badge [category]="event().category" />
+		</div>
+		}
+
+		<div class="flex items-center gap-1.5 text-xs text-slate-300 mb-1.5">
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="1.5"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				class="h-3.5 w-3.5 shrink-0"
+				aria-hidden="true"
+			>
+				<circle cx="12" cy="12" r="9" />
+				<path d="M12 6v6l4 2" />
+			</svg>
+			<span>{{ formattedDate() }}</span>
+		</div>
+
+		<div class="flex items-center gap-1.5 text-xs text-slate-300 mb-2">
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="1.5"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				class="h-3.5 w-3.5 shrink-0"
+				aria-hidden="true"
+			>
+				<path d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+				<path
+					d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 0 1 15 0z"
+				/>
+			</svg>
+			<span class="truncate">{{ locationName() }}</span>
+		</div>
+
+		@if (event().maxPlayers) {
+		<div class="flex items-center gap-1.5 mb-3">
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="1.5"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				class="h-3.5 w-3.5 shrink-0 text-slate-400"
+				aria-hidden="true"
+			>
+				<path
+					d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0z"
+				/>
+			</svg>
+			@if (isFull()) {
+			<span
+				class="inline-flex items-center rounded-full bg-red-500/20 px-2 py-0.5 text-xs font-medium text-red-300 ring-1 ring-red-500/30 ring-inset"
+			>
+				{{ t('preview.full') }}
+			</span>
+			} @else {
+			<span class="text-xs text-slate-300">{{ capacityLabel() }}</span>
+			}
+		</div>
+		}
+
+		<a
+			class="block w-full text-center text-xs font-medium text-white bg-emerald-500 hover:bg-emerald-600 rounded-md py-1.5 transition-colors"
+			[routerLink]="['/events', event().id]"
+			[attr.aria-label]="t('preview.viewDetailsAria', { title: event().title })"
+		>
+			{{ t('preview.viewDetails') }}
+		</a>
+	</div>
+</ng-container>

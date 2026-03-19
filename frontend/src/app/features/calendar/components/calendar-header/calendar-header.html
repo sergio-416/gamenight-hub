@@ -1,0 +1,80 @@
+<ng-container *transloco="let t; read: 'calendar'">
+	<div
+		class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"
+	>
+		<div>
+			<h1 class="text-2xl font-bold text-on-surface-strong sm:text-3xl">
+				{{ monthYear() }}
+			</h1>
+			<p class="mt-1 text-sm text-on-surface-muted">{{ subtitle() }}</p>
+		</div>
+
+		<div class="flex items-center gap-2">
+			<div
+				class="flex items-center rounded-lg border border-border bg-surface-raised"
+			>
+				<button
+					type="button"
+					(click)="onPrev()"
+					class="p-2 text-on-surface-muted transition-colors hover:text-on-surface-strong"
+					[attr.aria-label]="t('header.prevMonth')"
+					data-testid="prev-month"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="16"
+						height="16"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2.5"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					 aria-hidden="true">
+						<polyline points="15 18 9 12 15 6" />
+					</svg>
+				</button>
+
+				<button
+					type="button"
+					(click)="onToday()"
+					class="border-x border-border px-3 py-1.5 text-sm font-medium text-on-surface-medium transition-colors hover:text-on-surface-strong"
+					data-testid="today-btn"
+				>
+					{{ t('header.today') }}
+				</button>
+
+				<button
+					type="button"
+					(click)="onNext()"
+					class="p-2 text-on-surface-muted transition-colors hover:text-on-surface-strong"
+					[attr.aria-label]="t('header.nextMonth')"
+					data-testid="next-month"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="16"
+						height="16"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2.5"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					 aria-hidden="true">
+						<polyline points="9 18 15 12 9 6" />
+					</svg>
+				</button>
+			</div>
+
+			<button
+				type="button"
+				(click)="onNewEvent()"
+				class="rounded-lg bg-emerald-500 px-5 py-2 text-sm font-semibold text-white whitespace-nowrap transition-colors hover:bg-emerald-600"
+				data-testid="new-event-btn"
+			>
+				{{ t('header.newEvent') }}
+			</button>
+		</div>
+	</div>
+</ng-container>

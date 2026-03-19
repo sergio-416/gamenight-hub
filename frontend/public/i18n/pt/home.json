@@ -1,0 +1,37 @@
+{
+	"hero": {
+		"titleBefore": "Pronto para a tua próxima ",
+		"titleHighlight": "aventura",
+		"titleAfter": "?",
+		"subtitle": "Descobre noites de jogos perto de ti ou organiza a tua própria sessão. Cria a tua coleção. Joga.",
+		"imageAlt": "Noite acolhedora de jogos de tabuleiro com iluminação ambiente quente",
+		"cta": {
+			"explore": "Começar a Explorar",
+			"host": "Organizar Sessão",
+			"browse": "Ver Eventos"
+		}
+	},
+	"features": {
+		"perks": {
+			"title": "Vantagens de Membro",
+			"description": "Desbloqueia benefícios e recompensas exclusivas à medida que cresces na comunidade",
+			"link": "Saber mais →"
+		},
+		"xp": {
+			"title": "XP e Níveis",
+			"description": "Ganha pontos de experiência por cada noite de jogos e vê o teu nível subir",
+			"link": "Saber mais →"
+		},
+		"achievements": {
+			"title": "Conquistas",
+			"description": "Coleciona insígnias que destacam os teus marcos e dedicação ao jogo",
+			"link": "Saber mais →"
+		}
+	},
+	"support": {
+		"title": "Precisas de ajuda, Viajante?",
+		"subtitle": "Estamos aqui para te ajudar a navegar a tua jornada",
+		"hub": "Centro de Suporte",
+		"rules": "Regras da Comunidade"
+	}
+}

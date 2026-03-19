@@ -1,0 +1,43 @@
+<ng-container *transloco="let t; read: 'collection'">
+	@if (isExpansion()) {
+	<div>
+		<div class="flex flex-wrap gap-2">
+			<span
+				class="rounded-full border border-sky-500/25 bg-sky-500/10 px-3.5 py-1.5 text-xs font-medium text-sky-600"
+			>
+				{{ t('tags.expansion') }}
+			</span>
+		</div>
+	</div>
+	} @if (categories().length > 0) {
+	<div>
+		<h3 class="mb-2 text-sm font-semibold text-on-surface-muted">
+			{{ t('tags.categories') }}
+		</h3>
+		<div class="flex flex-wrap gap-2">
+			@for (cat of categories(); track cat) {
+			<span
+				class="rounded-full border border-emerald-500/25 bg-emerald-500/10 px-3.5 py-1.5 text-xs font-medium text-emerald-600"
+			>
+				{{ cat }}
+			</span>
+			}
+		</div>
+	</div>
+	} @if (mechanics().length > 0) {
+	<div>
+		<h3 class="mb-2 text-sm font-semibold text-on-surface-muted">
+			{{ t('tags.mechanics') }}
+		</h3>
+		<div class="flex flex-wrap gap-2">
+			@for (mech of mechanics(); track mech) {
+			<span
+				class="rounded-full border border-border bg-slate-100 px-3.5 py-1.5 text-xs font-medium text-on-surface-muted"
+			>
+				{{ mech }}
+			</span>
+			}
+		</div>
+	</div>
+	}
+</ng-container>

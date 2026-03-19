@@ -1,0 +1,50 @@
+<ng-container *transloco="let t">
+	@if (transactions().length === 0 && !loading()) {
+	<div class="rounded-xl border border-border bg-surface-raised p-8 text-center">
+		<p class="text-sm text-on-surface-dim" data-testid="xp-empty-state">
+			{{ t('xp.history.emptyState') }}
+		</p>
+	</div>
+	} @else {
+	<div class="overflow-hidden rounded-xl border border-border bg-surface-raised">
+		<div class="divide-y divide-slate-100">
+			@for (tx of transactions(); track tx.id) {
+			<div
+				class="flex items-center gap-4 px-4 py-3"
+				data-testid="xp-transaction-row"
+			>
+				<div
+					class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-100 text-on-surface-muted"
+				>
+					<fa-icon [icon]="getActionIcon(tx.action)" class="text-sm" />
+				</div>
+				<div class="min-w-0 flex-1">
+					<p class="truncate text-sm font-medium text-on-surface-strong">
+						{{ getActionLabel(tx.action) }}
+					</p>
+					<p class="text-xs text-on-surface-dim">
+						{{ formatRelativeTime(tx.createdAt) }}
+					</p>
+				</div>
+				<span class="shrink-0 text-sm font-semibold text-emerald-600">
+					{{ t('xp.history.xpAmount', { amount: tx.finalXp }) }}
+				</span>
+			</div>
+			}
+		</div>
+
+		@if (hasMore()) {
+		<div class="border-t border-border-dim p-3 text-center">
+			<button
+				class="rounded-lg px-4 py-2 text-sm font-medium text-indigo-600 transition-colors hover:bg-indigo-50"
+				[disabled]="loading()"
+				(click)="loadMore()"
+			>
+				@if (loading()) { {{ t('xp.history.loading') }} } @else { {{
+				t('xp.history.loadMore') }} }
+			</button>
+		</div>
+		}
+	</div>
+	}
+</ng-container>

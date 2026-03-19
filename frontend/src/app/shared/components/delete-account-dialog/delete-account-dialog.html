@@ -1,0 +1,136 @@
+@if (isOpen()) {
+<div
+	class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4 backdrop-blur-sm"
+	role="dialog"
+	aria-modal="true"
+	aria-labelledby="delete-account-dialog-title"
+	cdkTrapFocus
+	cdkTrapFocusAutoCapture
+	(click)="handleBackdropClick($event)"
+>
+	<div
+		class="w-full max-w-md rounded-2xl border border-border bg-surface-raised p-6 shadow-2xl"
+		role="document"
+		(click)="$event.stopPropagation()"
+	>
+		@if (step() === 'warning') {
+
+		<div
+			class="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-red-50 ring-1 ring-red-200"
+		>
+			<fa-icon [icon]="iconWarning" class="text-danger"></fa-icon>
+		</div>
+
+		<h3
+			id="delete-account-dialog-title"
+			class="mb-2 text-base font-semibold text-on-surface"
+		>
+			Delete your account?
+		</h3>
+
+		<p class="mb-5 text-sm leading-relaxed text-on-surface-medium">
+			This action
+			<strong class="text-on-surface-strong">cannot be undone</strong>. All your data
+			and collection will be permanently deleted. <br />
+			Note: If you have any open event you must close them before deleting your
+			account.
+		</p>
+
+		@if (hasOpenEvents()) {
+		<div
+			class="mb-5 flex items-start gap-2 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-700"
+		>
+			<span class="mt-0.5 shrink-0">⚠️</span>
+			<span>
+				Please, close all your open events before continuing.
+				<button
+					type="button"
+					(click)="goToEvents()"
+					class="ml-1 font-medium underline transition hover:text-amber-900"
+				>
+					Go to your events
+				</button>
+			</span>
+		</div>
+		}
+
+		<div class="flex gap-3">
+			<button
+				type="button"
+				(click)="onCancel()"
+				class="flex-1 rounded-xl border border-border px-4 py-2.5 text-sm font-medium text-on-surface-strong transition hover:bg-slate-50"
+			>
+				Cancel
+			</button>
+			<button
+				type="button"
+				(click)="handleIUnderstand()"
+				[disabled]="checking() || hasOpenEvents()"
+				class="flex-1 rounded-xl bg-slate-800 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-black disabled:cursor-not-allowed disabled:opacity-50"
+			>
+				@if (checking()) { Checking… } @else { I understand, continue }
+			</button>
+		</div>
+
+		} @else {
+
+		<div
+			class="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-red-50 ring-1 ring-red-200"
+		>
+			<fa-icon [icon]="iconLock" class="text-danger"></fa-icon>
+		</div>
+
+		<h3
+			id="delete-account-dialog-title"
+			class="mb-2 text-base font-semibold text-on-surface"
+		>
+			Confirm deletion
+		</h3>
+
+		<p class="mb-4 text-sm text-on-surface-medium">
+			Type your username
+			<strong class="font-mono text-on-surface-strong">{{ username() }}</strong>
+			to confirm:
+		</p>
+
+		<input
+			type="text"
+			[value]="usernameInput()"
+			(input)="usernameInput.set($any($event.target).value)"
+			[placeholder]="username()"
+			autocomplete="off"
+			class="mb-4 w-full rounded-xl border border-border-strong px-3 py-2.5 text-sm text-on-surface focus:outline-none"
+			[class]="usernameMatches()
+				? 'border-emerald-500 focus:ring-2 focus:ring-emerald-500/20'
+				: 'focus:border-slate-400 focus:ring-2 focus:ring-slate-300/20'"
+		/>
+
+		@if (deleteError()) {
+		<p class="mb-3 text-xs text-danger">{{ deleteError() }}</p>
+		}
+
+		<div class="flex gap-3">
+			<button
+				type="button"
+				(click)="onCancel()"
+				class="flex-1 rounded-xl border border-border px-4 py-2.5 text-sm font-medium text-on-surface-strong transition hover:bg-slate-50"
+			>
+				Cancel
+			</button>
+			<button
+				type="button"
+				(click)="confirmDelete()"
+				[disabled]="!usernameMatches() || deleting()"
+				class="flex-1 rounded-xl px-4 py-2.5 text-sm font-medium text-white transition disabled:cursor-not-allowed disabled:opacity-40"
+				[class]="usernameMatches()
+					? 'bg-danger hover:bg-red-700'
+					: 'bg-slate-300'"
+			>
+				@if (deleting()) { Deleting… } @else { Delete account }
+			</button>
+		</div>
+
+		}
+	</div>
+</div>
+}

@@ -1,0 +1,76 @@
+{
+	"closeWizard": "Cerrar asistente",
+	"stepAria": "Paso {{ step }} de {{ total }}",
+	"stepGame": {
+		"title": "¿A qué jugamos?",
+		"subtitle": "Define el ambiente de tu noche de juegos",
+		"eventTitle": "Título del Evento *",
+		"eventTitlePlaceholder": "ej. Viernes de Estrategia con Catán",
+		"description": "Descripción Breve",
+		"descriptionPlaceholder": "Cuéntales qué tiene de especial esta sesión...",
+		"charCount": "{{ current }}/500",
+		"category": "Categoría",
+		"gameFromCollection": "Juego de la Colección",
+		"coverImage": "Imagen de Portada",
+		"changeCoverImage": "Cambiar imagen",
+		"chooseCoverImage": "Elegir Imagen de Portada"
+	},
+	"stepLocation": {
+		"title": "¿Dónde y Cuándo?",
+		"subtitle": "Prepara el escenario para tu noche de juegos",
+		"privatePlace": "Lugar privado",
+		"privatePlaceDesc": "Casa o dirección privada",
+		"publicVenue": "Lugar público",
+		"comingSoon": "Próximamente",
+		"soon": "Pronto",
+		"address": "Dirección *",
+		"addressPlaceholder": "Buscar dirección...",
+		"date": "Fecha *",
+		"time": "Hora *",
+		"dateAndTime": "[ES] Date & Time",
+		"endDateAndTime": "[ES] End Date & Time",
+		"addEndTime": "Añadir hora de fin",
+		"removeEndTime": "Quitar hora de fin",
+		"endDate": "Fecha de Fin",
+		"endTime": "Hora de Fin"
+	},
+	"stepPlayers": {
+		"title": "¿Quién viene?",
+		"subtitle": "Define la lista de invitados para tu sesión",
+		"maxPlayers": "Jugadores Máximos",
+		"decreaseAria": "Reducir jugadores",
+		"increaseAria": "Aumentar jugadores",
+		"gameSupports": "Este juego admite {{ range }}",
+		"communityGuidelines": "Al crear un evento, aceptas nuestras normas de la comunidad. Sé respetuoso, inclusivo y asegura un entorno acogedor para todos los jugadores.",
+		"tooltipHost": "Este número te incluye como anfitrión"
+	},
+	"nav": {
+		"back": "Atrás",
+		"continue": "Continuar",
+		"createEvent": "Crear Evento",
+		"creating": "Creando..."
+	},
+	"mapPanel": {
+		"heading": "Encuentra el lugar perfecto para tu partida",
+		"subtitle": "La atmósfera adecuada es clave para una sesión épica."
+	},
+	"coverPicker": {
+		"title": "Elegir Imagen de Portada",
+		"closeAria": "Cerrar",
+		"cancel": "Cancelar",
+		"confirm": "Confirmar"
+	},
+	"gamePicker": {
+		"searchPlaceholder": "Buscar en tu colección...",
+		"searchAria": "Buscar en tu colección de juegos",
+		"clearAria": "Limpiar selección de juego",
+		"loading": "Cargando colección...",
+		"noGames": "No hay juegos en tu colección. ¡Importa desde BGG primero!",
+		"noMatches": "No se encontraron coincidencias"
+	},
+	"toast": {
+		"eventCreated": "Evento creado con éxito",
+		"eventFailed": "Error al crear el evento. Inténtalo de nuevo.",
+		"invalidEventData": "Datos del evento no válidos"
+	}
+}

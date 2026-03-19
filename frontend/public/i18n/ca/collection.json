@@ -1,0 +1,151 @@
+{
+	"header": {
+		"title": "La Meva Col·lecció",
+		"subtitle": "Tens {{ count }} {{ count === 1 ? 'game' : 'games' }} a la teva biblioteca. Segueix jugant!",
+		"subtitleSingular": "Tens {{ count }} joc a la teva biblioteca. Segueix jugant!",
+		"subtitlePlural": "Tens {{ count }} jocs a la teva biblioteca. Segueix jugant!",
+		"addGame": "Afegir Joc"
+	},
+	"toolbar": {
+		"searchPlaceholder": "Cercar a la col·lecció...",
+		"searchAriaLabel": "Cercar jocs a la col·lecció",
+		"gridView": "Vista de graella",
+		"listView": "Vista de llista"
+	},
+	"empty": {
+		"noGamesFound": "Cap joc trobat",
+		"tryAdjusting": "Prova d'ajustar la teva cerca o filtres",
+		"collectionEmpty": "La teva col·lecció és buida",
+		"startBuilding": "Comença a construir la teva ludoteca",
+		"importFirst": "Importa el teu primer joc"
+	},
+	"list": {
+		"players": "Jugadors",
+		"min": "min",
+		"loadMore": "Carregar Més Jocs"
+	},
+	"confirmRemove": {
+		"title": "Eliminar Joc",
+		"message": "Segur que vols eliminar aquest joc de la teva col·lecció?",
+		"confirm": "Eliminar",
+		"cancel": "Cancel·lar"
+	},
+	"unauthenticated": {
+		"heading": "La Teva Col·lecció de Jocs de Taula",
+		"description": "Importa jocs de BoardGameGeek, fes seguiment del que tens i rep recomanacions personalitzades amb IA. Inicia sessió per començar a crear la teva col·lecció.",
+		"signIn": "Iniciar sessió",
+		"createAccount": "Crear un compte",
+		"imagePlaceholder": "Imatge disponible aviat...",
+		"featureImportTitle": "Importar",
+		"featureImportDesc": "Cerca a BoardGameGeek i afegeix qualsevol joc a la teva biblioteca personal en segons",
+		"featureDiscoverTitle": "Descobrir",
+		"featureDiscoverDesc": "Rep recomanacions de jocs amb IA basades en el que ja tens i t'agrada",
+		"featureTrackTitle": "Seguiment",
+		"featureTrackDesc": "Consulta estadístiques i informació de tota la teva col·lecció d'un cop d'ull"
+	},
+	"addToLibrary": {
+		"title": "Afegir a la Biblioteca",
+		"subtitle": "Amplia la teva col·lecció de jocs de taula"
+	},
+	"import": {
+		"back": "← Enrere",
+		"pageTitle": "Afegir un Joc a la Teva Col·lecció",
+		"searchPlaceholder": "Cerca un joc (p. ex., Catan, Ticket to Ride)...",
+		"searchAriaLabel": "Cercar jocs de taula",
+		"searching": "Cercant...",
+		"search": "Cercar",
+		"year": "Any",
+		"rank": "Rànquing",
+		"na": "N/D",
+		"unranked": "Sense rànquing",
+		"inCollection": "A la Col·lecció",
+		"importing": "Important...",
+		"importBtn": "Importar",
+		"noGamesFound": "Cap joc trobat. Prova una cerca diferent."
+	},
+	"bggPreview": {
+		"backToSearch": "Tornar a la Cerca",
+		"errorLoading": "Error en carregar els detalls del joc. Torna-ho a provar.",
+		"alreadyInCollection": "Ja a la Col·lecció",
+		"importingEllipsis": "Important...",
+		"addToCollection": "Afegir a la Col·lecció",
+		"players": "Jugadors",
+		"minSuffix": "Min",
+		"agePlus": "Edat {{ age }}+",
+		"aboutTheGame": "Sobre el Joc",
+		"publisher": "Editorial:",
+		"year": "Any:",
+		"dataPoweredBy": "Dades proporcionades per",
+		"bgg": "BoardGameGeek"
+	},
+	"gameDetail": {
+		"backToCollection": "Tornar a la Col·lecció",
+		"errorLoading": "Error en carregar els detalls del joc. Torna-ho a provar.",
+		"addToCollection": "Afegir a la Col·lecció",
+		"owned": "En propietat",
+		"removeFromCollection": "Eliminar de la col·lecció",
+		"wishlistGame": "Afegir a la llista de desitjos",
+		"players": "Jugadors",
+		"minSuffix": "Min",
+		"agePlus": "Edat {{ age }}+",
+		"aboutTheGame": "Sobre el Joc",
+		"publisher": "Editorial:",
+		"year": "Any:",
+		"dataPoweredBy": "Dades proporcionades per",
+		"bgg": "BoardGameGeek"
+	},
+	"statCards": {
+		"complexity": "Complexitat",
+		"rating": "Valoració",
+		"rank": "Rànquing",
+		"weight": "Pes",
+		"na": "N/D"
+	},
+	"tags": {
+		"expansion": "Expansió",
+		"categories": "Categories",
+		"mechanics": "Mecàniques"
+	},
+	"recommendations": {
+		"title": "Més a la teva Col·lecció",
+		"addToLibrary": "Afegir a la Biblioteca",
+		"expandCollection": "Amplia la teva col·lecció de jocs de taula"
+	},
+	"filters": {
+		"playersAny": "[CA] Any Players",
+		"players1": "[CA] 1 Player",
+		"players2": "[CA] 2 Players",
+		"players3": "[CA] 3 Players",
+		"players4": "[CA] 4 Players",
+		"players5": "[CA] 5 Players",
+		"players6Plus": "[CA] 6+ Players",
+		"categoryAll": "[CA] All Categories",
+		"sortNameAsc": "[CA] A → Z",
+		"sortNameDesc": "[CA] Z → A",
+		"sortNewest": "[CA] Newest First",
+		"sortOldest": "[CA] Oldest First"
+	},
+	"status": {
+		"owned": "En Propietat",
+		"wantToPlay": "Vull Jugar",
+		"wantToTry": "Vull Provar",
+		"played": "Jugat"
+	},
+	"weight": {
+		"1": "Lleuger",
+		"2": "Lleuger-Mitjà",
+		"3": "Mitjà",
+		"4": "Mitjà-Pesat",
+		"5": "Pesat",
+		"notRated": "Sense valorar"
+	},
+	"card": {
+		"playersSingular": "{{ count }} Jugador",
+		"playersPlural": "{{ count }} Jugadors",
+		"playersRange": "{{ min }}-{{ max }} Jugadors"
+	},
+	"removeConfirmMessage": "Eliminar \"{{ name }}\" de la teva col·lecció? Aquesta acció no es pot desfer.",
+	"toast": {
+		"gameRemoved": "Joc eliminat de la col·lecció"
+	}
+}

@@ -1,0 +1,37 @@
+{
+	"hero": {
+		"titleBefore": "Prêt pour ta prochaine ",
+		"titleHighlight": "aventure",
+		"titleAfter": " ?",
+		"subtitle": "Découvre des soirées jeux près de chez toi ou organise la tienne. Crée ta collection. Joue.",
+		"imageAlt": "Soirée jeux de société chaleureuse avec un éclairage ambiant",
+		"cta": {
+			"explore": "Commencer à explorer",
+			"host": "Organiser une soirée",
+			"browse": "Parcourir les événements"
+		}
+	},
+	"features": {
+		"perks": {
+			"title": "Avantages Membres",
+			"description": "Débloque des avantages exclusifs et des récompenses en développant ta présence dans la communauté",
+			"link": "En savoir plus →"
+		},
+		"xp": {
+			"title": "XP & Niveaux",
+			"description": "Gagne des points d'expérience à chaque soirée jeux et regarde ton niveau grimper",
+			"link": "En savoir plus →"
+		},
+		"achievements": {
+			"title": "Succès",
+			"description": "Collectionne des badges qui mettent en valeur tes accomplissements et ta passion du jeu",
+			"link": "En savoir plus →"
+		}
+	},
+	"support": {
+		"title": "Besoin d'aide, Voyageur ?",
+		"subtitle": "On est là pour t'accompagner dans ton aventure",
+		"hub": "Centre d'aide",
+		"rules": "Règles de la communauté"
+	}
+}

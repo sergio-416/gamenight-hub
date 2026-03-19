@@ -1,0 +1,37 @@
+{
+	"hero": {
+		"titleBefore": "Ready for your next ",
+		"titleHighlight": "adventure",
+		"titleAfter": "?",
+		"subtitle": "Discover local game nights or host your own session. Create your collection. Play.",
+		"imageAlt": "Cosy board game night with warm ambient lighting",
+		"cta": {
+			"explore": "Start Exploring",
+			"host": "Host Session",
+			"browse": "Browse Events"
+		}
+	},
+	"features": {
+		"perks": {
+			"title": "Member Perks",
+			"description": "Unlock exclusive benefits and rewards as you grow your community presence",
+			"link": "Learn more →"
+		},
+		"xp": {
+			"title": "XP & Levels",
+			"description": "Earn experience points for every game night and watch your level climb",
+			"link": "Learn more →"
+		},
+		"achievements": {
+			"title": "Achievements",
+			"description": "Collect badges that showcase your gaming milestones and dedication",
+			"link": "Learn more →"
+		}
+	},
+	"support": {
+		"title": "Need assistance, Traveler?",
+		"subtitle": "We're here to help you navigate your journey",
+		"hub": "Support Hub",
+		"rules": "Community Rules"
+	}
+}

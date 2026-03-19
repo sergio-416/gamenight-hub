@@ -1,0 +1,73 @@
+<ng-container *transloco="let t; read: 'create-event'">
+	<div class="flex h-[calc(100dvh-88px)] w-full overflow-hidden">
+		<div class="hidden w-2/5 lg:block">
+			<app-wizard-map-panel
+				[latitude]="mapLatitude()"
+				[longitude]="mapLongitude()"
+				[locationName]="mapLocationName()"
+			/>
+		</div>
+
+		<div class="flex flex-1 flex-col overflow-y-auto bg-surface-raised">
+			<div class="mx-auto w-full max-w-xl flex-1 px-6 py-8">
+				<div class="mb-8 flex items-center justify-between">
+					<app-wizard-step-indicator [currentStep]="currentStep()" />
+					<button
+						type="button"
+						class="flex h-8 w-8 items-center justify-center rounded-full text-on-surface-dim transition-colors hover:bg-slate-100 hover:text-slate-600"
+						(click)="close()"
+						[attr.aria-label]="t('closeWizard')"
+					>
+						&#x2715;
+					</button>
+				</div>
+
+				@switch (currentStep()) { @case (1) {
+				<app-wizard-step-game
+					[title]="title()"
+					[description]="description()"
+					[selectedGameId]="selectedGameId()"
+					[coverImage]="coverImage()"
+					[category]="category()"
+					(titleChange)="updateField('title', $event)"
+					(descriptionChange)="updateField('description', $event)"
+					(gameSelected)="onGameSelected($event)"
+					(gameCleared)="onGameCleared()"
+					(coverImageChange)="updateField('coverImage', $event)"
+					(categoryChange)="updateField('category', $event)"
+				/>
+				} @case (2) {
+				<app-wizard-step-location
+					[locationMode]="locationMode()"
+					[startDate]="startDate()"
+					[startTime]="startTime()"
+					[endDate]="endDate()"
+					[endTime]="endTime()"
+					(locationModeChange)="updateField('locationMode', $event)"
+					(locationSelected)="onLocationSelected($event)"
+					(startDateChange)="updateField('startDate', $event)"
+					(startTimeChange)="updateField('startTime', $event)"
+					(endDateChange)="updateField('endDate', $event)"
+					(endTimeChange)="updateField('endTime', $event)"
+				/>
+				} @case (3) {
+				<app-wizard-step-players
+					[maxPlayers]="maxPlayers()"
+					[gameMinPlayers]="gameMinPlayers()"
+					[gameMaxPlayers]="gameMaxPlayers()"
+					(maxPlayersChange)="updateField('maxPlayers', $event)"
+				/>
+				} }
+
+				<app-wizard-navigation
+					[currentStep]="currentStep()"
+					[canContinue]="canContinue()"
+					[isSubmitting]="isSubmitting()"
+					(back)="goBack()"
+					(next)="goNext()"
+					(submit)="handleSubmit()"
+				/>
+			</div>
+		</div>
+	</div>
+</ng-container>

@@ -1,0 +1,1245 @@
+<ng-container *transloco="let t; read: 'profile'">
+	@if (loading()) {
+
+	<div class="flex min-h-[60vh] items-center justify-center">
+		<div class="flex flex-col items-center gap-3">
+			<div
+				class="h-8 w-8 animate-spin rounded-full border-2 border-border border-t-emerald-500"
+			></div>
+			<p class="text-sm text-slate-400">{{ t('loading') }}</p>
+		</div>
+	</div>
+
+	} @else if (profile(); as p) { @if (!editing()) {
+
+	<div class="min-h-screen bg-slate-50 pb-20">
+		<div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+			<div class="grid grid-cols-1 gap-6 lg:grid-cols-[280px_1fr_260px]">
+				<aside class="flex flex-col gap-4">
+					<div
+						class="rounded-2xl border border-border bg-surface-raised p-5 shadow-sm"
+					>
+						<div class="flex flex-col items-center text-center">
+							@if (p.avatar) {
+							<img
+								[ngSrc]="p.avatar"
+								alt="Your avatar"
+								width="96"
+								height="96"
+								priority
+								class="h-24 w-24 shrink-0 rounded-2xl object-cover shadow-md ring-2"
+								[class]="tierColors().ring"
+							/>
+							} @else {
+							<div
+								class="flex h-24 w-24 shrink-0 select-none items-center justify-center rounded-2xl bg-linear-to-br from-emerald-400 to-emerald-600 text-3xl font-bold text-white shadow-md ring-2"
+								[class]="tierColors().ring"
+								aria-label="Avatar placeholder"
+							>
+								{{ p.username ? p.username[0].toUpperCase() : '?' }}
+							</div>
+							}
+
+							<h1 class="mt-3 text-xl font-bold text-on-surface">
+								{{ p.username ?? t('noUsernameSet') }}
+							</h1>
+
+							<p class="mt-0.5 text-sm font-medium" [class]="tierColors().text">
+								{{ xpProfile()?.levelTitle ?? 'Wandering Pawn' }}
+							</p>
+
+							<span
+								class="mt-1.5 inline-block rounded-full px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider"
+								[class]="tierColors().pill"
+							>
+								{{ tierLabel() }}
+							</span>
+
+							<span
+								class="mt-2 inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium"
+								[class]="p.isProfilePublic
+								? 'bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200'
+								: 'bg-slate-100 text-slate-500 ring-1 ring-slate-200'"
+							>
+								<fa-icon
+									[icon]="p.isProfilePublic ? iconGlobe : iconLock"
+									class="text-[10px]"
+								></fa-icon>
+								{{ p.isProfilePublic ? t('public') : t('private') }}
+							</span>
+
+							<div
+								class="mt-3 flex flex-col items-center gap-1 text-xs text-slate-500"
+							>
+								@if (p.location) {
+								<span class="flex items-center gap-1.5">
+									<fa-icon
+										[icon]="iconLocation"
+										class="text-emerald-500"
+									></fa-icon>
+									{{ p.location }}
+								</span>
+								}
+								<span class="flex items-center gap-1.5">
+									<fa-icon
+										[icon]="iconCalendar"
+										class="text-slate-400"
+									></fa-icon>
+									{{ t('memberSince', { date: memberSince() }) }}
+								</span>
+							</div>
+
+							<button
+								type="button"
+								(click)="startEditing()"
+								class="mt-4 flex w-full items-center justify-center gap-2 rounded-xl border border-border bg-surface-raised px-4 py-2 text-sm font-medium text-on-surface-medium shadow-sm transition hover:border-emerald-300 hover:text-emerald-600"
+							>
+								<fa-icon [icon]="iconPen" class="text-xs"></fa-icon>
+								{{ t('profileSettings') }}
+							</button>
+						</div>
+					</div>
+
+					<div
+						class="rounded-2xl border border-border bg-surface-raised p-5 shadow-sm"
+					>
+						<p
+							class="mb-3 text-xs font-semibold uppercase tracking-widest text-on-surface-dim"
+						>
+							{{ t('levelAndXp') }}
+						</p>
+						<div class="flex items-center gap-3">
+							<div
+								class="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl text-white"
+								[class]="tierColors().bg"
+							>
+								<span class="text-2xl font-bold"
+									>{{ xpProfile()?.level ?? 1 }}</span
+								>
+							</div>
+							<div class="min-w-0 flex-1">
+								<p class="font-semibold text-on-surface-strong">
+									{{ xpProfile()?.levelTitle ?? 'Wandering Pawn' }}
+								</p>
+								<p class="text-xs text-on-surface-dim">
+									{{ t('xpProgress', { current: xpProfile()?.xpTotal ?? 0, next:
+									xpProfile()?.nextLevelXp ?? 300 }) }}
+								</p>
+							</div>
+						</div>
+						<div
+							class="mt-3 h-2 w-full overflow-hidden rounded-full bg-slate-100"
+						>
+							<div
+								class="h-full rounded-full transition-all"
+								[class]="tierColors().bar"
+								[style.width.%]="xpProfile()?.progressPercent ?? 0"
+							></div>
+						</div>
+						@if ((xpProfile()?.streakWeeks ?? 0) > 0) {
+						<div class="mt-3 flex items-center gap-1.5 text-xs text-amber-600">
+							<fa-icon [icon]="iconFire"></fa-icon>
+							<span
+								>{{ t('streak', { count: xpProfile()?.streakWeeks ?? 0 })
+								}}</span
+							>
+						</div>
+						}
+					</div>
+
+					<div
+						class="rounded-2xl border border-border bg-surface-raised p-5 shadow-sm"
+					>
+						<p
+							class="mb-3 text-xs font-semibold uppercase tracking-widest text-on-surface-dim"
+						>
+							{{ t('stats.title') }}
+						</p>
+						<div class="space-y-3">
+							<div class="flex items-center justify-between">
+								<span class="text-sm text-on-surface-muted"
+									>{{ t('stats.gamesOwned') }}</span
+								>
+								<span class="text-sm font-bold text-on-surface-strong"
+									>{{ ownedCount() }}</span
+								>
+							</div>
+							<div class="h-px bg-slate-100"></div>
+							<div class="flex items-center justify-between">
+								<span class="text-sm text-on-surface-muted"
+									>{{ t('stats.totalXp') }}</span
+								>
+								<span class="text-sm font-bold text-on-surface-strong"
+									>{{ xpProfile()?.xpTotal ?? 0 }}</span
+								>
+							</div>
+							<div class="h-px bg-slate-100"></div>
+							<div class="flex items-center justify-between">
+								<span class="text-sm text-on-surface-muted"
+									>{{ t('stats.weekStreak') }}</span
+								>
+								<span class="text-sm font-bold text-on-surface-strong"
+									>{{ xpProfile()?.streakWeeks ?? 0 }}</span
+								>
+							</div>
+						</div>
+					</div>
+
+					<div
+						class="rounded-2xl border border-dashed border-border bg-surface-raised p-5 shadow-sm"
+					>
+						<p
+							class="mb-3 text-xs font-semibold uppercase tracking-widest text-on-surface-dim"
+						>
+							{{ t('badges.title') }}
+						</p>
+						<div class="grid grid-cols-4 gap-2">
+							@for (_ of [1,2,3,4,5,6,7,8]; track $index) {
+							<div
+								class="flex aspect-square items-center justify-center rounded-xl bg-slate-100 ring-1 ring-slate-200"
+							>
+								<fa-icon [icon]="iconMedal" class="text-slate-300"></fa-icon>
+							</div>
+							}
+						</div>
+						<p class="mt-3 text-center text-xs text-on-surface-dim">
+							{{ t('badges.comingSoon') }}
+						</p>
+					</div>
+				</aside>
+
+				<section class="flex flex-col gap-4">
+					<div
+						class="rounded-2xl border border-border bg-surface-raised p-5 shadow-sm"
+					>
+						<div class="mb-4 flex items-center justify-between">
+							<p
+								class="text-xs font-semibold uppercase tracking-widest text-on-surface-dim"
+							>
+								{{ t('gameCollection.recentlyAdded') }}
+							</p>
+							<span
+								class="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-500"
+							>
+								{{ ownedCount() === 1 ? t('gameCollection.gameSingular', {
+								count: ownedCount() }) : t('gameCollection.gamePlural', { count:
+								ownedCount() }) }}
+							</span>
+						</div>
+						@if (gamesLoading()) {
+						<div class="flex items-center justify-center py-10">
+							<div
+								class="h-6 w-6 animate-spin rounded-full border-2 border-border border-t-emerald-500"
+							></div>
+						</div>
+						} @else if (ownedGames().length === 0) {
+						<div
+							class="flex flex-col items-center justify-center py-10 text-center"
+						>
+							<fa-icon
+								[icon]="iconDice"
+								class="text-4xl text-slate-300"
+							></fa-icon>
+							<p class="mt-3 text-sm font-medium text-on-surface-medium">
+								{{ t('gameCollection.noGames') }}
+							</p>
+							<p class="mt-1 text-xs text-on-surface-dim">
+								{{ t('gameCollection.ownedGamesAppear') }}
+							</p>
+						</div>
+						} @else {
+						<div class="grid grid-cols-4 gap-2">
+							@for (game of recentGames(); track game.id; let idx = $index) {
+							<div
+								class="group relative flex flex-col overflow-hidden rounded-xl border border-slate-100 bg-slate-50 transition hover:border-slate-200 hover:shadow-sm"
+							>
+								<div
+									class="relative aspect-3/4 w-full overflow-hidden bg-slate-100"
+								>
+									@if (game.imageUrl || game.thumbnailUrl) {
+									<img
+										[ngSrc]="(game.imageUrl ?? game.thumbnailUrl)!"
+										[alt]="game.name"
+										fill
+										sizes="(max-width: 767px) 25vw, 12vw"
+										class="object-cover transition group-hover:scale-105"
+										[priority]="idx < 4"
+									/>
+									} @else {
+									<div
+										class="flex h-full w-full items-center justify-center bg-linear-to-br from-slate-200 to-slate-300"
+									>
+										<span class="text-lg font-bold text-slate-400"
+											>{{ game.name[0]?.toUpperCase() }}</span
+										>
+									</div>
+									}
+								</div>
+								<div class="p-1.5">
+									<p
+										class="line-clamp-1 text-[11px] font-medium text-on-surface-strong"
+									>
+										{{ game.name }}
+									</p>
+								</div>
+							</div>
+							}
+						</div>
+						@if (ownedCount() > 0) {
+						<div class="mt-3 text-right">
+							<a
+								routerLink="/collection"
+								class="text-xs font-medium text-emerald-600 transition-colors hover:text-emerald-500"
+							>
+								{{ t('gameCollection.viewCollection', { count: ownedCount() })
+								}}
+							</a>
+						</div>
+						} }
+					</div>
+
+					<div
+						class="rounded-2xl border border-border bg-surface-raised p-5 shadow-sm"
+					>
+						<div class="mb-4 flex items-center justify-between">
+							<p
+								class="text-xs font-semibold uppercase tracking-widest text-on-surface-dim"
+							>
+								{{ t('wantToPlay.title') }}
+							</p>
+							<div class="flex items-center gap-2">
+								<span
+									class="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-500"
+								>
+									{{ wantToPlayCount() }}/4
+								</span>
+								@if (wantToPlayCount() < 4) {
+								<button
+									type="button"
+									(click)="openAddGameModal('want_to_play')"
+									class="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 transition hover:bg-emerald-200"
+									[attr.aria-label]="t('wantToPlay.ariaAddGame')"
+								>
+									<fa-icon [icon]="iconPlus" class="text-xs"></fa-icon>
+								</button>
+								}
+							</div>
+						</div>
+						@if (gamesLoading()) {
+						<div class="flex items-center justify-center py-6">
+							<div
+								class="h-5 w-5 animate-spin rounded-full border-2 border-border border-t-indigo-600"
+							></div>
+						</div>
+						} @else if (wantToPlayGames().length === 0) {
+						<div
+							class="flex flex-col items-center justify-center py-6 text-center"
+						>
+							<fa-icon
+								[icon]="iconBullseye"
+								class="text-3xl text-slate-300"
+							></fa-icon>
+							<p class="mt-2 text-xs text-on-surface-dim">
+								{{ t('wantToPlay.empty') }}
+							</p>
+						</div>
+						} @else {
+						<div class="space-y-2">
+							@for (game of wantToPlayGames(); track game.id) {
+							<div
+								class="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 p-2.5"
+							>
+								<div class="flex min-w-0 flex-1 items-center gap-2.5">
+									@if (game.thumbnailUrl) {
+									<img
+										[ngSrc]="game.thumbnailUrl"
+										[alt]="game.name"
+										width="32"
+										height="32"
+										class="h-8 w-8 shrink-0 rounded object-cover"
+									/>
+									}
+									<div class="min-w-0 flex-1">
+										<p class="line-clamp-1 text-sm font-medium text-on-surface-strong">
+											{{ game.name }}
+										</p>
+										@if (game.yearPublished) {
+										<p class="text-xs text-on-surface-dim">
+											{{ game.yearPublished }}
+										</p>
+										}
+									</div>
+								</div>
+								<button
+									type="button"
+									(click)="removeWantToPlay(game.id)"
+									class="ml-2 flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-slate-400 transition hover:bg-red-50 hover:text-red-500"
+									[attr.aria-label]="t('wantToPlay.ariaRemove')"
+								>
+									<fa-icon [icon]="iconTrash" class="text-xs"></fa-icon>
+								</button>
+							</div>
+							}
+						</div>
+						}
+					</div>
+
+					<div
+						class="rounded-2xl border border-border bg-surface-raised p-5 shadow-sm"
+					>
+						<div class="mb-4 flex items-center justify-between">
+							<p
+								class="text-xs font-semibold uppercase tracking-widest text-on-surface-dim"
+							>
+								{{ t('wantToTry.title') }}
+							</p>
+							<div class="flex items-center gap-2">
+								<span
+									class="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-500"
+								>
+									{{ wantToTryCount() }}/4
+								</span>
+								@if (wantToTryCount() > 0) {
+								<button
+									type="button"
+									(click)="toggleMarkPlayedMode()"
+									class="flex items-center gap-1.5 rounded-lg px-2 py-1 text-xs font-medium transition"
+									[class]="showMarkPlayedMode()
+									? 'bg-emerald-100 text-emerald-700'
+									: 'bg-slate-100 text-slate-600 hover:bg-slate-200'"
+									[attr.aria-label]="showMarkPlayedMode() ? 'Cancel selection' : 'Mark as played'"
+								>
+									<fa-icon
+										[icon]="showMarkPlayedMode() ? iconX : iconCheckSquare"
+										class="text-xs"
+									></fa-icon>
+									{{ showMarkPlayedMode() ? t('wantToTry.cancel') :
+									t('wantToTry.update') }}
+								</button>
+								} @if (!showMarkPlayedMode() && wantToTryCount() < 4) {
+								<button
+									type="button"
+									(click)="openAddGameModal('want_to_try')"
+									class="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 transition hover:bg-emerald-200"
+									[attr.aria-label]="t('wantToTry.ariaAddGame')"
+								>
+									<fa-icon [icon]="iconPlus" class="text-xs"></fa-icon>
+								</button>
+								} @if (showMarkPlayedMode() && selectedPlayedCount() > 0) {
+								<button
+									type="button"
+									(click)="confirmMarkAsPlayed()"
+									class="flex items-center gap-1.5 rounded-lg bg-emerald-500 px-2 py-1 text-xs font-medium text-white transition hover:bg-emerald-600"
+								>
+									<fa-icon [icon]="iconCheck" class="text-xs"></fa-icon>
+									{{ t('wantToTry.confirm', { count: selectedPlayedCount() }) }}
+								</button>
+								}
+							</div>
+						</div>
+						@if (gamesLoading()) {
+						<div class="flex items-center justify-center py-6">
+							<div
+								class="h-5 w-5 animate-spin rounded-full border-2 border-border border-t-indigo-600"
+							></div>
+						</div>
+						} @else if (wantToTryGames().length === 0) {
+						<div
+							class="flex flex-col items-center justify-center py-6 text-center"
+						>
+							<fa-icon
+								[icon]="iconWand"
+								class="text-3xl text-slate-300"
+							></fa-icon>
+							<p class="mt-2 text-xs text-on-surface-dim">
+								{{ t('wantToTry.empty') }}
+							</p>
+						</div>
+						} @else {
+						<div class="space-y-2">
+							@for (game of wantToTryGames(); track game.id) {
+							<div
+								class="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 p-2.5"
+							>
+								<div class="flex min-w-0 flex-1 items-center gap-2">
+									@if (showMarkPlayedMode()) {
+									<button
+										type="button"
+										(click)="toggleGameSelection(game.id)"
+										class="flex h-5 w-5 shrink-0 items-center justify-center text-slate-400 transition hover:text-emerald-500"
+										[attr.aria-label]="isGameSelected(game.id) ? 'Deselect' : 'Select'"
+									>
+										<fa-icon
+											[icon]="isGameSelected(game.id) ? iconCheckSquare : iconSquare"
+											class="text-lg"
+											[class.text-emerald-500]="isGameSelected(game.id)"
+										></fa-icon>
+									</button>
+									} @if (game.thumbnailUrl) {
+									<img
+										[ngSrc]="game.thumbnailUrl"
+										[alt]="game.name"
+										width="32"
+										height="32"
+										class="h-8 w-8 shrink-0 rounded object-cover"
+									/>
+									}
+									<div class="min-w-0 flex-1">
+										<p class="line-clamp-1 text-sm font-medium text-on-surface-strong">
+											{{ game.name }}
+										</p>
+										@if (game.yearPublished) {
+										<p class="text-xs text-on-surface-dim">
+											{{ game.yearPublished }}
+										</p>
+										}
+									</div>
+								</div>
+								@if (!showMarkPlayedMode()) {
+								<button
+									type="button"
+									(click)="toggleGameSelection(game.id)"
+									class="ml-2 inline-flex items-center gap-1.5 rounded-lg bg-emerald-600 px-3 py-1.5 text-sm font-medium text-white transition hover:bg-emerald-700"
+								>
+									<fa-icon [icon]="iconCheck" class="w-3.5"></fa-icon>
+									{{ t('wantToTry.markAsPlayed') }}
+								</button>
+								}
+							</div>
+							}
+						</div>
+						}
+					</div>
+				</section>
+
+				<aside class="flex flex-col gap-4">
+					<div
+						class="rounded-2xl border border-border bg-surface-raised p-5 shadow-sm"
+					>
+						<p
+							class="mb-3 text-xs font-semibold uppercase tracking-widest text-on-surface-dim"
+						>
+							{{ t('contact.title') }}
+						</p>
+						@if (p.bio) {
+						<p class="mb-3 text-sm leading-relaxed text-on-surface-medium">
+							{{ p.bio }}
+						</p>
+						} @else {
+						<p class="mb-3 text-sm italic text-slate-400">{{ t('noBio') }}</p>
+						}
+						<div class="space-y-3">
+							@if (p.showEmail && p.email) {
+							<div class="flex items-center gap-3 text-sm text-on-surface-medium">
+								<fa-icon
+									[icon]="iconEnvelope"
+									class="w-4 shrink-0 text-emerald-500"
+								></fa-icon>
+								<span class="min-w-0 truncate">{{ p.email }}</span>
+							</div>
+							} @if (p.showMobilePhone && p.mobilePhone) {
+							<div class="flex items-center gap-3 text-sm text-on-surface-medium">
+								<fa-icon
+									[icon]="iconPhone"
+									class="w-4 shrink-0 text-emerald-500"
+								></fa-icon>
+								<span>{{ p.mobilePhone }}</span>
+							</div>
+							} @if (p.showBirthday && p.birthday) {
+							<div class="flex items-center gap-3 text-sm text-on-surface-medium">
+								<fa-icon
+									[icon]="iconBirthday"
+									class="w-4 shrink-0 text-emerald-500"
+								></fa-icon>
+								<span>{{ formatBirthday(p.birthday) }}</span>
+							</div>
+							}
+						</div>
+					</div>
+
+					<div
+						class="rounded-2xl border border-border bg-surface-raised p-5 shadow-sm"
+					>
+						<div class="mb-3 flex items-center gap-2">
+							<fa-icon
+								[icon]="iconPrivacy"
+								class="text-xs text-emerald-500"
+							></fa-icon>
+							<p
+								class="text-xs font-semibold uppercase tracking-widest text-on-surface-dim"
+							>
+								{{ t('visibility.title') }}
+							</p>
+						</div>
+						<div class="space-y-2.5">
+							<div class="flex items-center justify-between">
+								<span class="text-sm text-on-surface-muted"
+									>{{ t('visibility.publicProfile') }}</span
+								>
+								<span
+									class="text-xs font-medium"
+									[class]="p.isProfilePublic ? 'text-emerald-600' : 'text-slate-400'"
+								>
+									{{ p.isProfilePublic ? t('visibility.on') :
+									t('visibility.off') }}
+								</span>
+							</div>
+							<div class="flex items-center justify-between">
+								<span class="text-sm text-on-surface-muted"
+									>{{ t('visibility.location') }}</span
+								>
+								<span
+									class="text-xs font-medium"
+									[class]="p.showLocation ? 'text-emerald-600' : 'text-slate-400'"
+								>
+									{{ p.showLocation ? t('visibility.visible') :
+									t('visibility.hidden') }}
+								</span>
+							</div>
+							<div class="flex items-center justify-between">
+								<span class="text-sm text-on-surface-muted"
+									>{{ t('visibility.email') }}</span
+								>
+								<span
+									class="text-xs font-medium"
+									[class]="p.showEmail ? 'text-emerald-600' : 'text-slate-400'"
+								>
+									{{ p.showEmail ? t('visibility.visible') :
+									t('visibility.hidden') }}
+								</span>
+							</div>
+							<div class="flex items-center justify-between">
+								<span class="text-sm text-on-surface-muted"
+									>{{ t('visibility.phone') }}</span
+								>
+								<span
+									class="text-xs font-medium"
+									[class]="p.showMobilePhone ? 'text-emerald-600' : 'text-slate-400'"
+								>
+									{{ p.showMobilePhone ? t('visibility.visible') :
+									t('visibility.hidden') }}
+								</span>
+							</div>
+							<div class="flex items-center justify-between">
+								<span class="text-sm text-on-surface-muted"
+									>{{ t('visibility.birthday') }}</span
+								>
+								<span
+									class="text-xs font-medium"
+									[class]="p.showBirthday ? 'text-emerald-600' : 'text-slate-400'"
+								>
+									{{ p.showBirthday ? t('visibility.visible') :
+									t('visibility.hidden') }}
+								</span>
+							</div>
+							<div class="flex items-center justify-between">
+								<span class="text-sm text-on-surface-muted"
+									>{{ t('visibility.collection') }}</span
+								>
+								<span
+									class="text-xs font-medium"
+									[class]="p.showGameCollection ? 'text-emerald-600' : 'text-slate-400'"
+								>
+									{{ p.showGameCollection ? t('visibility.visible') :
+									t('visibility.hidden') }}
+								</span>
+							</div>
+						</div>
+					</div>
+				</aside>
+			</div>
+		</div>
+	</div>
+
+	} @else {
+
+	<div class="min-h-screen bg-slate-50 pb-20">
+		<div class="mx-auto max-w-2xl px-4 py-8 sm:px-6">
+			<h1 class="mb-6 text-2xl font-bold text-on-surface">
+				{{ t('settings.title') }}
+			</h1>
+
+			<div class="rounded-2xl border border-border bg-surface-raised p-6 shadow-sm">
+				<div class="mb-6 flex items-center justify-between">
+					<h2 class="text-lg font-semibold text-on-surface">
+						{{ t('settings.editProfile') }}
+					</h2>
+					<div class="flex gap-2">
+						<button
+							type="button"
+							(click)="cancelEditing()"
+							class="rounded-xl border border-border px-4 py-2 text-sm font-medium text-on-surface-medium transition hover:bg-slate-50"
+						>
+							{{ t('settings.cancel') }}
+						</button>
+						<button
+							type="button"
+							(click)="save()"
+							[disabled]="saving()"
+							class="rounded-xl bg-emerald-500 px-5 py-2 text-sm font-medium text-white transition hover:bg-emerald-600 disabled:opacity-50"
+						>
+							{{ saving() ? t('settings.saving') : t('settings.saveChanges') }}
+						</button>
+					</div>
+				</div>
+
+				@if (saveError()) {
+				<div
+					class="mb-5 flex items-start gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
+				>
+					<span>⚠️</span>
+					<span>{{ saveError() }}</span>
+				</div>
+				}
+
+				<div class="space-y-5">
+					<div>
+						<label
+							for="username"
+							class="mb-1.5 block text-sm font-medium text-on-surface-strong"
+							>Username</label
+						>
+						<input
+							id="username"
+							type="text"
+							[value]="editForm().username ?? ''"
+							(input)="updateField('username', $any($event.target).value)"
+							placeholder="your_username"
+							class="w-full rounded-xl border border-border-strong px-3 py-2.5 text-sm text-on-surface focus:border-emerald-500 focus:outline-none"
+						/>
+						<p class="mt-1.5 text-xs text-amber-600">
+							⚠️ Choose your username wisely — inappropriate names may result in
+							a sanction.
+						</p>
+					</div>
+
+					<div>
+						<label
+							for="bio"
+							class="mb-1.5 block text-sm font-medium text-on-surface-strong"
+							>Bio</label
+						>
+						<textarea
+							id="bio"
+							rows="3"
+							[value]="editForm().bio ?? ''"
+							(input)="updateField('bio', $any($event.target).value)"
+							placeholder="Tell the world about yourself…"
+							class="w-full resize-none rounded-xl border border-border-strong px-3 py-2.5 text-sm text-on-surface focus:border-emerald-500 focus:outline-none"
+						></textarea>
+						<p class="mt-1 text-right text-xs text-on-surface-dim">
+							{{ editForm().bio?.length ?? 0 }}/300
+						</p>
+					</div>
+
+					<div>
+						<label
+							for="location"
+							class="mb-1.5 block text-sm font-medium text-on-surface-strong"
+							>Location</label
+						>
+						<input
+							id="location"
+							type="text"
+							[value]="editForm().location ?? ''"
+							(input)="updateField('location', $any($event.target).value)"
+							placeholder="City, Region"
+							class="w-full rounded-xl border border-border-strong px-3 py-2.5 text-sm text-on-surface focus:border-emerald-500 focus:outline-none"
+						/>
+					</div>
+
+					<div>
+						<div class="mb-1.5 flex items-center justify-between">
+							<span class="text-sm font-medium text-on-surface-strong">Name</span>
+							@if (nameFieldsLocked()) {
+							<span class="flex items-center gap-1 text-xs text-amber-600">
+								<fa-icon [icon]="iconLock" class="text-[10px]"></fa-icon>
+								Locked until {{ nameUnlockDate() }}
+							</span>
+							}
+						</div>
+						@if (nameFieldsLocked()) {
+						<div class="grid grid-cols-2 gap-3">
+							<div>
+								<label class="mb-1 block text-xs text-on-surface-dim"
+									>First name</label
+								>
+								<input
+									type="text"
+									[value]="editForm().firstName ?? ''"
+									disabled
+									class="w-full cursor-not-allowed rounded-xl border border-border bg-slate-50 px-3 py-2.5 text-sm text-slate-400"
+								/>
+							</div>
+							<div>
+								<label class="mb-1 block text-xs text-on-surface-dim"
+									>Last name</label
+								>
+								<input
+									type="text"
+									[value]="editForm().lastName ?? ''"
+									disabled
+									class="w-full cursor-not-allowed rounded-xl border border-border bg-slate-50 px-3 py-2.5 text-sm text-slate-400"
+								/>
+							</div>
+						</div>
+						<p class="mt-1.5 text-xs text-on-surface-dim">
+							You can change your name once every 30 days. {{
+							nameCooldownDaysRemaining() }} day{{ nameCooldownDaysRemaining()
+							=== 1 ? '' : 's' }} remaining.
+						</p>
+						} @else {
+						<div class="grid grid-cols-2 gap-3">
+							<div>
+								<label for="firstName" class="mb-1 block text-xs text-slate-500"
+									>First name</label
+								>
+								<input
+									id="firstName"
+									type="text"
+									[value]="editForm().firstName ?? ''"
+									(input)="updateField('firstName', $any($event.target).value)"
+									placeholder="First name"
+									class="w-full rounded-xl border border-border-strong px-3 py-2.5 text-sm text-on-surface focus:border-emerald-500 focus:outline-none"
+								/>
+							</div>
+							<div>
+								<label for="lastName" class="mb-1 block text-xs text-slate-500"
+									>Last name</label
+								>
+								<input
+									id="lastName"
+									type="text"
+									[value]="editForm().lastName ?? ''"
+									(input)="updateField('lastName', $any($event.target).value)"
+									placeholder="Last name"
+									class="w-full rounded-xl border border-border-strong px-3 py-2.5 text-sm text-on-surface focus:border-emerald-500 focus:outline-none"
+								/>
+							</div>
+						</div>
+						@if (profile()?.firstName || profile()?.lastName) {
+						<p class="mt-1.5 text-xs text-on-surface-dim">
+							Once changed, you'll need to wait 30 days before changing again.
+						</p>
+						} }
+					</div>
+
+					<div>
+						<div class="mb-1.5 flex items-center justify-between">
+							<label
+								for="mobilePhone"
+								class="text-sm font-medium text-on-surface-strong"
+								>Mobile phone</label
+							>
+							<div class="flex items-center gap-2">
+								<span class="text-xs text-on-surface-dim">Show on profile</span>
+								<button
+									type="button"
+									role="switch"
+									aria-label="Show phone"
+									[attr.aria-checked]="editForm().showMobilePhone"
+									(click)="updateField('showMobilePhone', !editForm().showMobilePhone)"
+									class="relative inline-flex h-5 w-9 shrink-0 items-center rounded-full transition-colors duration-200"
+									[class]="editForm().showMobilePhone ? 'bg-emerald-500' : 'bg-slate-200'"
+								>
+									<span
+										class="inline-block h-3.5 w-3.5 transform rounded-full bg-white shadow-sm transition-transform duration-200"
+										[class]="editForm().showMobilePhone ? 'translate-x-4' : 'translate-x-0.5'"
+									></span>
+								</button>
+							</div>
+						</div>
+						<input
+							id="mobilePhone"
+							type="tel"
+							[value]="editForm().mobilePhone ?? ''"
+							(input)="updateField('mobilePhone', $any($event.target).value)"
+							placeholder="+34 600 000 000"
+							class="w-full rounded-xl border border-border-strong px-3 py-2.5 text-sm text-on-surface focus:border-emerald-500 focus:outline-none"
+						/>
+					</div>
+
+					<div>
+						<div class="mb-1.5 flex items-center justify-between">
+							<label for="birthday" class="text-sm font-medium text-on-surface-strong"
+								>Birthday</label
+							>
+							<div class="flex items-center gap-2">
+								<span class="text-xs text-on-surface-dim">Show on profile</span>
+								<button
+									type="button"
+									role="switch"
+									aria-label="Show birthday"
+									[attr.aria-checked]="editForm().showBirthday"
+									(click)="updateField('showBirthday', !editForm().showBirthday)"
+									class="relative inline-flex h-5 w-9 shrink-0 items-center rounded-full transition-colors duration-200"
+									[class]="editForm().showBirthday ? 'bg-emerald-500' : 'bg-slate-200'"
+								>
+									<span
+										class="inline-block h-3.5 w-3.5 transform rounded-full bg-white shadow-sm transition-transform duration-200"
+										[class]="editForm().showBirthday ? 'translate-x-4' : 'translate-x-0.5'"
+									></span>
+								</button>
+							</div>
+						</div>
+						<input
+							id="birthday"
+							type="date"
+							[value]="editForm().birthday ?? ''"
+							(input)="updateField('birthday', $any($event.target).value)"
+							class="w-full rounded-xl border border-border-strong px-3 py-2.5 text-sm text-on-surface focus:border-emerald-500 focus:outline-none"
+						/>
+					</div>
+
+					<div>
+						<div class="mb-1.5 flex items-center justify-between">
+							<label
+								for="backupEmail"
+								class="text-sm font-medium text-on-surface-strong"
+								>Backup email</label
+							>
+							<div class="flex items-center gap-2">
+								<span class="text-xs text-on-surface-dim">Show on profile</span>
+								<button
+									type="button"
+									role="switch"
+									aria-label="Show backup email"
+									[attr.aria-checked]="editForm().showBackupEmail"
+									(click)="updateField('showBackupEmail', !editForm().showBackupEmail)"
+									class="relative inline-flex h-5 w-9 shrink-0 items-center rounded-full transition-colors duration-200"
+									[class]="editForm().showBackupEmail ? 'bg-emerald-500' : 'bg-slate-200'"
+								>
+									<span
+										class="inline-block h-3.5 w-3.5 transform rounded-full bg-white shadow-sm transition-transform duration-200"
+										[class]="editForm().showBackupEmail ? 'translate-x-4' : 'translate-x-0.5'"
+									></span>
+								</button>
+							</div>
+						</div>
+						<input
+							id="backupEmail"
+							type="email"
+							[value]="editForm().backupEmail ?? ''"
+							(input)="updateField('backupEmail', $any($event.target).value)"
+							placeholder="alternative@email.com"
+							class="w-full rounded-xl border border-border-strong px-3 py-2.5 text-sm text-on-surface focus:border-emerald-500 focus:outline-none"
+						/>
+						<p class="mt-1.5 text-xs text-on-surface-dim">
+							Your main account email is never shown publicly.
+						</p>
+					</div>
+
+					<div class="rounded-xl border border-border bg-slate-50 p-5">
+						<p class="mb-4 text-sm font-semibold text-on-surface-strong">
+							Visibility Settings
+						</p>
+						<div class="space-y-4">
+							<div class="flex items-center justify-between">
+								<div>
+									<p class="text-sm font-medium text-on-surface-strong">
+										Public profile
+									</p>
+									@if (editForm().isProfilePublic) {
+									<p class="text-xs text-on-surface-dim">
+										Allow others to find and view your profile
+									</p>
+									} @else {
+									<p class="text-xs text-amber-600">Toggle on to join events</p>
+									}
+								</div>
+								<button
+									type="button"
+									role="switch"
+									aria-label="Public profile"
+									[attr.aria-checked]="editForm().isProfilePublic"
+									(click)="onPublicProfileToggle()"
+									class="relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors duration-200"
+									[class]="editForm().isProfilePublic ? 'bg-emerald-500' : 'bg-slate-200'"
+								>
+									<span
+										class="inline-block h-4 w-4 transform rounded-full bg-white shadow-sm transition-transform duration-200"
+										[class]="editForm().isProfilePublic ? 'translate-x-6' : 'translate-x-1'"
+									></span>
+								</button>
+							</div>
+
+							<div class="flex items-center justify-between">
+								<p class="text-sm text-on-surface-strong">Show location</p>
+								<button
+									type="button"
+									role="switch"
+									aria-label="Show location"
+									[attr.aria-checked]="editForm().showLocation"
+									(click)="updateField('showLocation', !editForm().showLocation)"
+									class="relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors duration-200"
+									[class]="editForm().showLocation ? 'bg-emerald-500' : 'bg-slate-200'"
+								>
+									<span
+										class="inline-block h-4 w-4 transform rounded-full bg-white shadow-sm transition-transform duration-200"
+										[class]="editForm().showLocation ? 'translate-x-6' : 'translate-x-1'"
+									></span>
+								</button>
+							</div>
+
+							<div class="flex items-center justify-between">
+								<div>
+									<p class="text-sm text-on-surface-strong">Show account email</p>
+									<p class="text-xs text-on-surface-dim">Your main login email</p>
+								</div>
+								<button
+									type="button"
+									role="switch"
+									aria-label="Show email"
+									[attr.aria-checked]="editForm().showEmail"
+									(click)="updateField('showEmail', !editForm().showEmail)"
+									class="relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors duration-200"
+									[class]="editForm().showEmail ? 'bg-emerald-500' : 'bg-slate-200'"
+								>
+									<span
+										class="inline-block h-4 w-4 transform rounded-full bg-white shadow-sm transition-transform duration-200"
+										[class]="editForm().showEmail ? 'translate-x-6' : 'translate-x-1'"
+									></span>
+								</button>
+							</div>
+
+							<div class="flex items-center justify-between">
+								<p class="text-sm text-on-surface-strong">Show game collection</p>
+								<button
+									type="button"
+									role="switch"
+									aria-label="Show game collection"
+									[attr.aria-checked]="editForm().showGameCollection"
+									(click)="updateField('showGameCollection', !editForm().showGameCollection)"
+									class="relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors duration-200"
+									[class]="editForm().showGameCollection ? 'bg-emerald-500' : 'bg-slate-200'"
+								>
+									<span
+										class="inline-block h-4 w-4 transform rounded-full bg-white shadow-sm transition-transform duration-200"
+										[class]="editForm().showGameCollection ? 'translate-x-6' : 'translate-x-1'"
+									></span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<section id="xp" class="mt-8">
+				<h2 class="mb-4 text-base font-semibold text-on-surface">
+					{{ t('xpHistory.title') }}
+				</h2>
+				<div class="rounded-2xl border border-border bg-surface-raised p-6 shadow-sm">
+					<app-xp-history />
+				</div>
+			</section>
+
+			<div class="mt-8">
+				<h2 class="mb-4 text-base font-semibold text-on-surface">
+					{{ t('account.title') }}
+				</h2>
+				<div class="rounded-2xl border border-border bg-surface-raised p-6 shadow-sm">
+					<div class="flex items-start justify-between gap-4">
+						<div>
+							<p class="text-sm font-semibold text-on-surface">
+								{{ t('account.signOut') }}
+							</p>
+							<p class="mt-1 text-sm leading-relaxed text-slate-500">
+								{{ t('account.signOutDesc') }}
+							</p>
+						</div>
+						<button
+							type="button"
+							(click)="logout()"
+							class="shrink-0 rounded-xl border border-border bg-slate-50 px-4 py-2 text-sm font-medium text-on-surface-medium transition hover:bg-slate-100 hover:text-slate-700"
+						>
+							{{ t('account.signOutBtn') }}
+						</button>
+					</div>
+				</div>
+				<div
+					class="mt-4 rounded-2xl border border-red-200 bg-white p-6 shadow-sm"
+				>
+					<div class="flex items-start justify-between gap-4">
+						<div>
+							<p class="text-sm font-semibold text-on-surface">
+								{{ t('account.deleteAccount') }}
+							</p>
+							<p class="mt-1 text-sm leading-relaxed text-slate-500">
+								{{ t('account.deleteAccountDesc') }}
+							</p>
+						</div>
+						<button
+							type="button"
+							(click)="showDeleteAccountDialog.set(true)"
+							[disabled]="!profile()?.username"
+							class="shrink-0 rounded-xl border border-red-200 bg-red-50 px-4 py-2 text-sm font-medium text-red-600 transition hover:bg-red-100 hover:text-red-700 disabled:cursor-not-allowed disabled:opacity-40"
+						>
+							{{ t('account.deleteAccountBtn') }}
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	} @if (showPrivateProfileModal()) {
+	<div
+		class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4 backdrop-blur-sm"
+		role="dialog"
+		aria-modal="true"
+		aria-labelledby="private-modal-title"
+		cdkTrapFocus
+		cdkTrapFocusAutoCapture
+	>
+		<div
+			class="w-full max-w-sm rounded-2xl border border-border bg-surface-raised p-6 shadow-2xl"
+		>
+			<div
+				class="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-amber-50 ring-1 ring-amber-200"
+			>
+				<fa-icon [icon]="iconLock" class="text-amber-500"></fa-icon>
+			</div>
+			<h3
+				id="private-modal-title"
+				class="mb-2 text-base font-semibold text-on-surface"
+			>
+				Make your profile private?
+			</h3>
+			<p class="mb-5 text-sm leading-relaxed text-on-surface-medium">
+				With a private profile,
+				<strong class="text-slate-800"
+					>you won't be able to join or be invited to events</strong
+				>. Other players won't be able to find you either.
+			</p>
+			<div class="flex gap-3">
+				<button
+					type="button"
+					(click)="cancelMakePrivate()"
+					class="flex-1 rounded-xl border border-border px-4 py-2.5 text-sm font-medium text-on-surface-strong transition hover:bg-slate-50"
+				>
+					Keep it public
+				</button>
+				<button
+					type="button"
+					(click)="confirmMakePrivate()"
+					class="flex-1 rounded-xl bg-slate-800 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-black"
+				>
+					Make private
+				</button>
+			</div>
+		</div>
+	</div>
+	} } @if (showRemoveConfirm()) {
+	<app-confirm-dialog
+		[isOpen]="showRemoveConfirm()"
+		title="Remove game?"
+		message="This will remove the game from your Want to Play list. You can add it again anytime."
+		confirmText="Remove"
+		(confirmed)="removeWantToPlayConfirmed()"
+		(cancelled)="cancelRemoveWantToPlay()"
+	></app-confirm-dialog>
+	} @if (showMarkPlayedConfirm()) {
+	<app-confirm-dialog
+		[isOpen]="showMarkPlayedConfirm()"
+		title="Mark as played?"
+		message="This action cannot be undone. The selected games will be moved to your played list and won't appear here anymore."
+		confirmText="Mark as Played"
+		[danger]="true"
+		(confirmed)="markAsPlayedConfirmed()"
+		(cancelled)="cancelMarkAsPlayed()"
+	></app-confirm-dialog>
+	} @if (showDeleteAccountDialog()) {
+	<app-delete-account-dialog
+		[isOpen]="showDeleteAccountDialog()"
+		[username]="profile()?.username ?? ''"
+		(cancelled)="showDeleteAccountDialog.set(false)"
+		(accountDeleted)="onAccountDeleted()"
+	></app-delete-account-dialog>
+	} @if (showAddGameModal()) {
+	<div
+		class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4 backdrop-blur-sm"
+		role="dialog"
+		aria-modal="true"
+		aria-labelledby="add-game-modal-title"
+		cdkTrapFocus
+		cdkTrapFocusAutoCapture
+		(click)="closeAddGameModal()"
+	>
+		<div
+			class="flex w-full max-w-md flex-col gap-4 rounded-2xl border border-border bg-surface-raised p-5 shadow-2xl"
+			role="document"
+			(click)="$event.stopPropagation()"
+		>
+			<header class="flex items-center justify-between">
+				<h3
+					id="add-game-modal-title"
+					class="text-lg font-semibold text-on-surface"
+				>
+					Add to {{ addGameToStatus() === 'want_to_play' ? 'Want to Play' :
+					'Want to Try' }}
+				</h3>
+				<button
+					type="button"
+					(click)="closeAddGameModal()"
+					class="flex h-8 w-8 items-center justify-center rounded-full text-slate-400 transition hover:bg-slate-100 hover:text-slate-600"
+					aria-label="Close modal"
+				>
+					<fa-icon [icon]="iconX" class="text-sm"></fa-icon>
+				</button>
+			</header>
+
+			<div class="relative">
+				<fa-icon
+					[icon]="iconSearch"
+					class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+				></fa-icon>
+				<input
+					type="text"
+					[value]="searchQuery()"
+					(input)="onSearchInput($event)"
+					placeholder="Search your collection..."
+					class="w-full rounded-xl border border-border py-2.5 pl-9 pr-4 text-sm text-on-surface placeholder:text-on-surface-dim focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+				/>
+			</div>
+
+			@if (searchLoading()) {
+			<div class="flex items-center justify-center py-8">
+				<fa-icon
+					[icon]="iconSpinner"
+					class="animate-spin text-2xl text-emerald-500"
+				></fa-icon>
+			</div>
+			} @else if (searchResults().length > 0) {
+			<div class="max-h-64 space-y-1 overflow-y-auto">
+				@for (game of searchResults(); track game.bggId) {
+				<button
+					type="button"
+					(click)="importGame(game)"
+					[disabled]="importLoading()"
+					class="flex w-full items-center justify-between rounded-lg px-3 py-2 text-left transition hover:bg-slate-50 disabled:opacity-50"
+				>
+					<div class="min-w-0 flex-1">
+						<p class="truncate text-sm font-medium text-on-surface-strong">
+							{{ game.name }}
+						</p>
+						@if (game.yearPublished) {
+						<p class="text-xs text-on-surface-dim">{{ game.yearPublished }}</p>
+						}
+					</div>
+					<fa-icon [icon]="iconPlus" class="ml-2 text-emerald-500"></fa-icon>
+				</button>
+				}
+			</div>
+			} @else if (searchQuery().length >= 2) {
+			<p class="py-4 text-center text-sm text-slate-400">
+				No games found in your collection
+			</p>
+			} @else {
+			<p class="py-4 text-center text-sm text-slate-400">
+				Type to search your collection
+			</p>
+			}
+		</div>
+	</div>
+	}
+</ng-container>

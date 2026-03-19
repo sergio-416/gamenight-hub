@@ -1,0 +1,55 @@
+{
+	"title": "Spieleabende",
+	"subtitle": "Kommende Brettspiel-Events und wo du sie findest!",
+	"addEvent": "Neues Event",
+	"showMap": "KARTE ANZEIGEN",
+	"hideMap": "KARTE AUSBLENDEN",
+	"loading": "Events werden geladen...",
+	"eventsHeading": "Events",
+	"eventsFound": "{{ count }} Events gefunden",
+	"emptyLoggedIn": "Keine Events für diesen Zeitraum gefunden. Probiere einen anderen Filter oder erstelle einen neuen Spieleabend!",
+	"emptyLoggedOut": "Keine Events für diesen Zeitraum gefunden. Probiere einen anderen Filter oder melde dich an, um eines zu erstellen!",
+	"map": {
+		"heading": "Karte",
+		"close": "Schließen",
+		"loadingLocations": "Orte werden geladen..."
+	},
+	"card": {
+		"full": "Voll",
+		"joined": "{{ current }}/{{ max }} dabei",
+		"viewDetails": "Details anzeigen",
+		"viewDetailsAria": "Details anzeigen für {{ title }}",
+		"waitlistOnly": "Nur Warteliste"
+	},
+	"preview": {
+		"closeAria": "Vorschau schließen",
+		"viewDetails": "Details anzeigen",
+		"viewDetailsAria": "Details anzeigen für {{ title }}",
+		"full": "Voll"
+	},
+	"timeFilter": {
+		"thisWeek": "Diese Woche",
+		"next7d": "Nächste 7 Tage",
+		"next14d": "Nächste 14 Tage",
+		"thisMonth": "Dieser Monat",
+		"all": "Alle Events",
+		"fallback": "Zeitraum"
+	},
+	"categories": {
+		"all": "Alle Kategorien",
+		"strategy": "Strategie",
+		"rpg": "Rollenspiel",
+		"party": "Party",
+		"classic": "Klassiker",
+		"cooperative": "Kooperativ",
+		"trivia": "Quizspiele",
+		"miniatures": "Miniaturenspiele",
+		"family": "Familie",
+		"other": "Sonstige",
+		"fallback": "Kategorie"
+	},
+	"toast": {
+		"locationDeleted": "Ort gelöscht",
+		"locationDeleteFailed": "Ort konnte nicht gelöscht werden"
+	}
+}

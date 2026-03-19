@@ -1,0 +1,140 @@
+<ng-container *transloco="let t; read: 'game-nights'">
+	<section class="p-4 max-w-[1400px] mx-auto">
+		<header class="flex items-start justify-between gap-4 mb-4">
+			<div>
+				<h1 class="text-[2rem] font-bold mb-2">{{ t('title') }}</h1>
+				<p class="text-on-surface-muted mb-4">{{ t('subtitle') }}</p>
+			</div>
+			@if (isLoggedIn()) {
+			<div class="flex gap-2 shrink-0">
+				<button
+					type="button"
+					class="rounded-lg bg-emerald-500 px-5 py-2 text-sm font-semibold text-white whitespace-nowrap transition-colors hover:bg-emerald-600"
+					(click)="navigateToCreateEvent()"
+				>
+					{{ t('addEvent') }}
+				</button>
+			</div>
+			}
+		</header>
+		<div class="flex flex-wrap items-center gap-2 mb-4">
+			<app-time-filter-bar
+				[activePreset]="activePreset()"
+				(presetChange)="onPresetChange($event)"
+			/>
+			<app-category-filter-bar
+				[activeCategory]="activeCategory()"
+				(categoryChange)="onCategoryChange($event)"
+			/>
+			<button
+				type="button"
+				class="inline-flex items-center gap-2 h-9 px-4 rounded-full text-sm font-medium uppercase transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
+				[class]="showMap() ? 'bg-emerald-500 text-white shadow-sm' : 'bg-slate-50 text-on-surface-strong border border-border hover:bg-slate-100'"
+				(click)="toggleMap()"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 20 20"
+					fill="currentColor"
+					class="size-4"
+				aria-hidden="true"
+				>
+					<path
+						fill-rule="evenodd"
+						d="M8.157 2.176a1.5 1.5 0 0 0-1.147 0l-4.084 1.69A1.5 1.5 0 0 0 2 5.25v10.877a1.5 1.5 0 0 0 2.074 1.386l3.51-1.452 4.26 1.762a1.5 1.5 0 0 0 1.147 0l4.084-1.69A1.5 1.5 0 0 0 18 14.75V3.872a1.5 1.5 0 0 0-2.074-1.386l-3.51 1.453-4.26-1.763ZM7.58 5a.75.75 0 0 1 .75.75v6.5a.75.75 0 0 1-1.5 0v-6.5A.75.75 0 0 1 7.58 5Zm5.59 2.75a.75.75 0 0 0-1.5 0v6.5a.75.75 0 0 0 1.5 0v-6.5Z"
+						clip-rule="evenodd"
+					/>
+				</svg>
+				{{ showMap() ? t('hideMap') : t('showMap') }}
+			</button>
+		</div>
+		@if (loading()) {
+		<p class="text-center p-8" aria-live="polite">{{ t('loading') }}</p>
+		} @else if (error()) {
+		<p class="text-center p-8 text-danger" role="alert">{{ error() }}</p>
+		} @else {
+		<div
+			[class]="'grid gap-6 ' + (showMap() ? 'grid-cols-1 lg:grid-cols-[3fr_2fr]' : 'grid-cols-1')"
+		>
+			<div class="min-h-0">
+				<div class="flex items-baseline justify-between mb-4">
+					<h2 class="text-2xl font-bold">{{ t('eventsHeading') }}</h2>
+					<span class="text-sm text-on-surface-dim"
+						>{{ t('eventsFound', { count: events().length }) }}</span
+					>
+				</div>
+				@if (events().length === 0) {
+				<p class="text-center p-8 text-on-surface-muted">
+					@if (isLoggedIn()) { {{ t('emptyLoggedIn') }} } @else { {{
+					t('emptyLoggedOut') }} }
+				</p>
+				} @else {
+				<div class="grid gap-6 grid-cols-1 md:grid-cols-2">
+					@for (event of events(); track event.id; let idx = $index) {
+					<app-event-card
+						[event]="event"
+						[locationName]="locationNameById().get(event.locationId) ?? 'Unknown location'"
+						[postalCode]="locationPostalCodeById().get(event.locationId)"
+						[formatDate]="formatDate.bind(this)"
+						[priorityImage]="idx < 2"
+					/>
+					}
+				</div>
+				}
+			</div>
+			@if (showMap()) {
+			<div
+				class="fixed inset-0 z-50 flex flex-col bg-surface-raised overscroll-contain lg:inset-auto lg:z-auto lg:bg-transparent lg:block lg:sticky lg:top-4 lg:h-[calc(100vh-12rem)]"
+			>
+				<div
+					class="flex items-center justify-between p-3 border-b border-border lg:hidden"
+				>
+					<h3 class="text-sm font-semibold text-on-surface-strong">
+						{{ t('map.heading') }}
+					</h3>
+					<button
+						type="button"
+						class="text-sm font-medium text-on-surface-medium hover:text-slate-800 flex items-center gap-1"
+						(click)="toggleMap()"
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 20 20"
+							fill="currentColor"
+							class="size-4"
+						aria-hidden="true"
+						>
+							<path
+								d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z"
+							/>
+						</svg>
+						{{ t('map.close') }}
+					</button>
+				</div>
+				<div class="flex-1 lg:h-full relative">
+					<app-map
+						#gameMap
+						[reloadTrigger]="mapReloadTrigger()"
+						[activeLocationIds]="activeLocationIds()"
+						[events]="events()"
+						[isLoggedIn]="isLoggedIn()"
+						(deleteLocation)="onDeleteLocation($event)"
+						(markerClick)="onMarkerClick($event)"
+					></app-map>
+					@if (selectedEvent()) {
+					<div class="absolute bottom-4 left-4 right-4 z-1000 flex justify-end">
+						<app-map-preview-card
+							[event]="selectedEvent()!"
+							[locationName]="locationNameById().get(selectedEvent()!.locationId) ?? 'Unknown'"
+							[formatDate]="formatDate.bind(this)"
+							(close)="onClosePreview()"
+						/>
+					</div>
+					}
+				</div>
+			</div>
+			}
+		</div>
+		}
+	</section>
+</ng-container>

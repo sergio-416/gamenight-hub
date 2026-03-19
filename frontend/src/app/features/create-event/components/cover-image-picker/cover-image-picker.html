@@ -1,0 +1,91 @@
+<ng-container *transloco="let t; read: 'create-event'">
+	@if (isOpen()) {
+	<div
+		class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+		(click)="close()"
+	>
+		<div
+			class="relative max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-surface-raised p-6 shadow-xl"
+			(click)="$event.stopPropagation()"
+			role="dialog"
+			aria-modal="true"
+			[attr.aria-label]="t('coverPicker.title')"
+			cdkTrapFocus
+			cdkTrapFocusAutoCapture
+		>
+			<div class="mb-6 flex items-center justify-between">
+				<h2 class="text-lg font-semibold text-on-surface">
+					{{ t('coverPicker.title') }}
+				</h2>
+				<button
+					type="button"
+					class="flex h-8 w-8 items-center justify-center rounded-full text-on-surface-dim transition-colors hover:bg-slate-100 hover:text-slate-600"
+					(click)="close()"
+					[attr.aria-label]="t('coverPicker.closeAria')"
+				>
+					&#10005;
+				</button>
+			</div>
+
+			<div class="mb-6">
+				<div class="grid grid-cols-3 gap-3 sm:grid-cols-5">
+					@for (cover of allCovers; track cover.slug) {
+					<button
+						type="button"
+						class="group relative overflow-hidden rounded-xl border-2 transition-all"
+						[class]="cover.slug === internalSelection() ? 'border-emerald-500 ring-2 ring-emerald-500/40 scale-[1.02]' : 'border-transparent hover:border-slate-200'"
+						(click)="selectCover(cover.slug)"
+					>
+						<div class="relative aspect-video bg-slate-100">
+							<img
+								[ngSrc]="getCoverPath(cover.slug)"
+								[alt]="cover.displayName"
+								fill
+								class="object-cover"
+							/>
+						</div>
+						@if (cover.slug === internalSelection()) {
+						<div class="absolute inset-0 bg-emerald-500/15"></div>
+						<div
+							class="absolute top-1.5 right-1.5 flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500 shadow-sm"
+						>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 20 20"
+								fill="currentColor"
+								class="h-3.5 w-3.5 text-white"
+							 aria-hidden="true">
+								<path
+									fill-rule="evenodd"
+									d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+									clip-rule="evenodd"
+								/>
+							</svg>
+						</div>
+						}
+					</button>
+					}
+				</div>
+			</div>
+
+			<div class="flex justify-end gap-3">
+				<button
+					type="button"
+					class="rounded-full px-6 py-2.5 text-sm font-medium text-on-surface-medium transition-colors hover:bg-slate-100"
+					(click)="close()"
+				>
+					{{ t('coverPicker.cancel') }}
+				</button>
+				<button
+					type="button"
+					class="rounded-full bg-emerald-500 px-6 py-2.5 text-sm font-medium text-white transition-colors hover:bg-emerald-600 disabled:cursor-not-allowed disabled:opacity-50"
+					[disabled]="!internalSelection()"
+					(click)="confirm()"
+				>
+					{{ t('coverPicker.confirm') }}
+				</button>
+			</div>
+		</div>
+	</div>
+	}
+</ng-container>

@@ -1,0 +1,13 @@
+<section class="mx-auto max-w-[1400px] p-4">
+	@if (isLoggedIn()) {
+	<app-game-list
+		#gameList
+		[isLoggedIn]="isLoggedIn()"
+		(importGame)="onImportGame()"
+		(gameClick)="onGameClick($event)"
+		(gameDeleted)="onGameDeleted($event)"
+	/>
+	} @else {
+	<app-collection-unauthenticated />
+	}
+</section>

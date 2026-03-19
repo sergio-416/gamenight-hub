@@ -1,0 +1,145 @@
+{
+	"header": {
+		"logoAlt": "Logo di GameNight Hub",
+		"toggleNav": "Apri/chiudi navigazione",
+		"nav": {
+			"collection": "Collezione",
+			"gameNights": "Serate di Gioco",
+			"calendar": "Calendario",
+			"stats": "Statistiche",
+			"notifications": "Notifiche"
+		},
+		"login": "Accedi",
+		"ariaNotifications": "Notifiche",
+		"ariaProfile": "Il mio profilo",
+		"avatarAlt": "Avatar utente",
+		"xpLevel": "Livello XP"
+	},
+	"footer": {
+		"brandName": "GameNight Hub",
+		"nav": {
+			"terms": "Termini",
+			"privacy": "Privacy",
+			"support": "Supporto"
+		},
+		"bggAlt": "BoardGameGeek"
+	},
+	"xp": {
+		"badge": {
+			"levelShort": "Lv.{{ level }}",
+			"tooltip": "Livello {{ level }} · {{ title }} · {{ current }}/{{ next }} XP",
+			"ariaLabel": "Livello XP"
+		},
+		"feedback": {
+			"xpAwarded": "+{{ amount }} XP",
+			"levelUp": "Nuovo livello! → Livello {{ level }}"
+		},
+		"toast": {
+			"levelUp": "Nuovo livello!"
+		},
+		"history": {
+			"emptyState": "Nessun XP guadagnato. Inizia ad aggiungere giochi!",
+			"loadMore": "Carica altri",
+			"loading": "Caricamento...",
+			"xpAmount": "+{{ amount }} XP",
+			"actions": {
+				"gameAdded": "Gioco aggiunto",
+				"eventCreated": "Evento creato",
+				"participantJoined": "Partecipazione a un evento"
+			},
+			"timeAgo": {
+				"justNow": "Adesso",
+				"minutesAgo": "{{ count }}m fa",
+				"hoursAgo": "{{ count }}h fa",
+				"daysAgo": "{{ count }}g fa",
+				"monthsAgo": "{{ count }}me fa"
+			}
+		}
+	},
+	"common": {
+		"search": "Cerca...",
+		"searchLabel": "Cerca",
+		"clearSearch": "Cancella ricerca"
+	},
+	"auth": {
+		"signIn": "Accedi",
+		"signOut": "Esci",
+		"login": "Accedi"
+	},
+	"languageSwitcher": {
+		"switchTo": "Cambia a {{ lang }}",
+		"label": "Seleziona lingua"
+	},
+	"levelTitles": {
+		"1": "Pedina Errante",
+		"2": "Collezionista Curioso",
+		"3": "Archivista Apprendista",
+		"4": "Habitué della Taverna",
+		"5": "Membro della Gilda",
+		"6": "Stratega Navigato",
+		"7": "Custode del Sapere",
+		"8": "Cavaliere della Tavola",
+		"9": "Gran Ciambellano",
+		"10": "Arcimago della Tavola"
+	},
+	"notifications": {
+		"newEvent": "Nuovo evento: {{ title }}"
+	},
+	"errors": {
+		"generic": "Qualcosa è andato storto. Riprova.",
+		"gameAlreadyInCollection": "Questo gioco è già nella tua collezione.",
+		"gameAlreadyPlayed": "Questo gioco è già nel tuo storico partite.",
+		"gameNotFound": "Gioco non trovato.",
+		"eventNotFound": "Evento non trovato.",
+		"eventFull": "Questo evento è al completo.",
+		"notAParticipant": "Non sei un partecipante di questo evento.",
+		"notEventOwner": "Non hai i permessi per modificare questo evento.",
+		"notLocationOwner": "Non hai i permessi per modificare questa sede.",
+		"alreadyJoined": "Hai già aderito a questo evento.",
+		"unauthorized": "Devi effettuare l'accesso per procedere.",
+		"forbidden": "Non hai i permessi per eseguire questa azione.",
+		"validationFailed": "Dati non validi. Controlla i campi inseriti.",
+		"profileNotFound": "Profilo non trovato.",
+		"duplicateUsername": "Questo nome utente è già in uso.",
+		"nameChangeCooldown": "Puoi cambiare nome solo una volta ogni 30 giorni.",
+		"openEventsExist": "Chiudi i tuoi eventi aperti prima di eliminare l'account.",
+		"locationNotFound": "Sede non trovata.",
+		"bggApiError": "BoardGameGeek è temporaneamente non disponibile. Riprova più tardi."
+	},
+	"themeSwitcher": {
+		"toggle": "Cambia tema",
+		"light": "Modalità chiara",
+		"dark": "Modalità scura",
+		"system": "Preferenza di sistema"
+	},
+	"dateTimePicker": {
+		"placeholder": "[IT] Select date & time",
+		"time": "[IT] Time"
+	},
+	"cvdSelector": {
+		"label": "Visione cromatica",
+		"normal": "Visione normale",
+		"protanopia": "Protanopia (cecità al rosso)",
+		"deuteranopia": "Deuteranopia (cecità al verde)",
+		"tritanopia": "Tritanopia (cecità al blu)"
+	},
+	"pwa": {
+		"update": {
+			"title": "[IT] Update Available",
+			"message": "[IT] A new version is ready",
+			"reload": "[IT] Reload",
+			"later": "[IT] Later"
+		},
+		"install": {
+			"title": "[IT] Install App",
+			"message": "[IT] Add GameNight Hub to your home screen",
+			"action": "[IT] Install",
+			"dismiss": "[IT] Not now"
+		},
+		"offline": {
+			"title": "[IT] You're Offline",
+			"message": "[IT] Check your connection and try again",
+			"retry": "[IT] Retry"
+		}
+	}
+}

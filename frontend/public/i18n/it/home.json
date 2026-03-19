@@ -1,0 +1,37 @@
+{
+	"hero": {
+		"titleBefore": "Pronto per la tua prossima ",
+		"titleHighlight": "avventura",
+		"titleAfter": "?",
+		"subtitle": "Scopri serate di gioco nella tua zona o organizza la tua sessione. Crea la tua collezione. Gioca.",
+		"imageAlt": "Accogliente serata di giochi da tavolo con illuminazione calda",
+		"cta": {
+			"explore": "Inizia a Esplorare",
+			"host": "Organizza una Sessione",
+			"browse": "Sfoglia gli Eventi"
+		}
+	},
+	"features": {
+		"perks": {
+			"title": "Vantaggi Membri",
+			"description": "Sblocca benefici e ricompense esclusive man mano che cresci nella comunità",
+			"link": "Scopri di più →"
+		},
+		"xp": {
+			"title": "XP e Livelli",
+			"description": "Guadagna punti esperienza ad ogni serata di gioco e osserva il tuo livello salire",
+			"link": "Scopri di più →"
+		},
+		"achievements": {
+			"title": "Traguardi",
+			"description": "Colleziona badge che mettono in mostra i tuoi traguardi e la tua passione per il gioco",
+			"link": "Scopri di più →"
+		}
+	},
+	"support": {
+		"title": "Hai bisogno di aiuto, Viaggiatore?",
+		"subtitle": "Siamo qui per guidarti nel tuo viaggio",
+		"hub": "Centro Assistenza",
+		"rules": "Regole della Comunità"
+	}
+}

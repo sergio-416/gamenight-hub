@@ -1,0 +1,187 @@
+<ng-container *transloco="let t; read: 'stats'">
+	@if (!isLoggedIn()) {
+	<app-stats-unauthenticated />
+	} @else if (view() === 'organiser') {
+	<section
+		class="stats-dashboard p-4"
+		data-testid="stats-dashboard"
+		aria-label="Organiser statistics"
+	>
+		<h1 class="mb-6 text-2xl font-bold">{{ t('organiser.title') }}</h1>
+		@if (organiserStatsResource.isLoading()) {
+		<div class="loading-state py-8 text-center" aria-live="polite">
+			<p class="text-on-surface-medium">{{ t('loading') }}</p>
+		</div>
+		} @if (organiserStatsResource.error()) {
+		<div class="error-state py-8 text-center text-red-600" role="alert">
+			<p>{{ t('error') }}</p>
+		</div>
+		} @if (!organiserStatsResource.isLoading() &&
+		!organiserStatsResource.error() && organiserStatsResource.hasValue()) {
+		<div
+			data-testid="organiser-stats"
+			class="grid grid-cols-1 gap-6 md:grid-cols-3"
+		>
+			<div
+				class="rounded-lg bg-surface-raised p-6 shadow"
+				data-testid="organiser-events-hosted"
+			>
+				<p class="text-sm font-medium text-on-surface-muted">
+					{{ t('organiser.eventsHosted') }}
+				</p>
+				<p class="mt-2 text-3xl font-bold text-on-surface">
+					{{ organiserStatsResource.value().eventsHosted }}
+				</p>
+			</div>
+			<div
+				class="rounded-lg bg-surface-raised p-6 shadow"
+				data-testid="organiser-total-attendees"
+			>
+				<p class="text-sm font-medium text-on-surface-muted">
+					{{ t('organiser.totalAttendees') }}
+				</p>
+				<p class="mt-2 text-3xl font-bold text-on-surface">
+					{{ organiserStatsResource.value().totalAttendees }}
+				</p>
+			</div>
+			<div
+				class="rounded-lg bg-surface-raised p-6 shadow"
+				data-testid="organiser-popular-games"
+			>
+				<p class="mb-3 text-sm font-medium text-on-surface-muted">
+					{{ t('organiser.popularGames') }}
+				</p>
+				<ul class="space-y-1">
+					@for (game of organiserStatsResource.value().popularGames; track
+					game.name) {
+					<li class="flex justify-between text-sm">
+						<span>{{ game.name }}</span>
+						<span class="font-medium">{{ game.eventCount }}</span>
+					</li>
+					}
+				</ul>
+			</div>
+		</div>
+		}
+	</section>
+	} @else if (view() === 'admin') {
+	<section
+		class="stats-dashboard p-4"
+		data-testid="stats-dashboard"
+		aria-label="Admin statistics"
+	>
+		<h2 class="mb-6 text-2xl font-bold">{{ t('admin.title') }}</h2>
+		@if (adminStatsResource.isLoading()) {
+		<div class="loading-state py-8 text-center" aria-live="polite">
+			<p class="text-on-surface-medium">{{ t('loading') }}</p>
+		</div>
+		} @if (adminStatsResource.error()) {
+		<div class="error-state py-8 text-center text-red-600" role="alert">
+			<p>{{ t('error') }}</p>
+		</div>
+		} @if (!adminStatsResource.isLoading() && !adminStatsResource.error() &&
+		adminStatsResource.hasValue()) {
+		<div
+			data-testid="admin-stats"
+			class="grid grid-cols-1 gap-6 md:grid-cols-3"
+		>
+			<div
+				class="rounded-lg bg-surface-raised p-6 shadow"
+				data-testid="admin-total-users"
+			>
+				<p class="text-sm font-medium text-on-surface-muted">
+					{{ t('admin.totalUsers') }}
+				</p>
+				<p class="mt-2 text-3xl font-bold text-on-surface">
+					{{ adminStatsResource.value().totalUsers }}
+				</p>
+			</div>
+			<div
+				class="rounded-lg bg-surface-raised p-6 shadow"
+				data-testid="admin-total-events"
+			>
+				<p class="text-sm font-medium text-on-surface-muted">
+					{{ t('admin.totalEvents') }}
+				</p>
+				<p class="mt-2 text-3xl font-bold text-on-surface">
+					{{ adminStatsResource.value().totalEvents }}
+				</p>
+			</div>
+			<div
+				class="rounded-lg bg-surface-raised p-6 shadow"
+				data-testid="admin-total-games"
+			>
+				<p class="text-sm font-medium text-on-surface-muted">
+					{{ t('admin.totalGames') }}
+				</p>
+				<p class="mt-2 text-3xl font-bold text-on-surface">
+					{{ adminStatsResource.value().totalGames }}
+				</p>
+			</div>
+		</div>
+		}
+	</section>
+	} @else {
+	<section
+		class="stats-dashboard p-4"
+		data-testid="stats-dashboard"
+		aria-label="Collection statistics"
+	>
+		<h2 class="mb-6 text-2xl font-bold">{{ t('collection.title') }}</h2>
+		@if (statsResource.isLoading()) {
+		<div class="loading-state py-8 text-center" aria-live="polite">
+			<p class="text-on-surface-medium">{{ t('loading') }}</p>
+		</div>
+		} @if (statsResource.error()) {
+		<div class="error-state py-8 text-center text-red-600" role="alert">
+			<p>{{ t('error') }}</p>
+		</div>
+		} @if (!statsResource.isLoading() && !statsResource.error() &&
+		statsResource.hasValue() && totalGames() === 0) {
+		<div class="empty-state py-8 text-center">
+			<p class="text-on-surface-medium">{{ t('collection.emptyState.title') }}</p>
+			<p class="text-sm text-on-surface-muted">
+				{{ t('collection.emptyState.subtitle') }}
+			</p>
+		</div>
+		} @if (!statsResource.isLoading() && !statsResource.error() &&
+		statsResource.hasValue() && totalGames() > 0) {
+		<div class="charts-grid grid grid-cols-1 gap-6 lg:grid-cols-2">
+			<div
+				class="chart-card rounded-lg bg-surface-raised p-4 shadow"
+				data-testid="games-by-category-chart"
+			>
+				<apx-chart
+					[series]="gamesByCategoryOptions().series!"
+					[chart]="gamesByCategoryOptions().chart!"
+					[title]="gamesByCategoryOptions().title!"
+					[xaxis]="gamesByCategoryOptions().xaxis!"
+				></apx-chart>
+			</div>
+			<div
+				class="chart-card rounded-lg bg-surface-raised p-4 shadow"
+				data-testid="collection-growth-chart"
+			>
+				<apx-chart
+					[series]="collectionGrowthOptions().series!"
+					[chart]="collectionGrowthOptions().chart!"
+					[title]="collectionGrowthOptions().title!"
+					[xaxis]="collectionGrowthOptions().xaxis!"
+				></apx-chart>
+			</div>
+			<div
+				class="chart-card rounded-lg bg-surface-raised p-4 shadow"
+				data-testid="complexity-distribution-chart"
+			>
+				<apx-chart
+					[series]="complexityDistributionOptions().series!"
+					[chart]="complexityDistributionOptions().chart!"
+					[title]="complexityDistributionOptions().title!"
+					[labels]="complexityDistributionOptions().labels!"
+				></apx-chart>
+			</div>
+		</div>
+		}
+	</section>
+	}
+</ng-container>

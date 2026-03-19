@@ -1,0 +1,50 @@
+{
+	"unauthenticated": {
+		"title": "Estadístiques de la Teva Col·lecció",
+		"subtitle": "Visualitza la teva col·lecció de jocs de taula amb gràfics i analítiques. Fes seguiment del creixement, consulta la distribució de complexitat i explora quines categories dominen les teves prestatgeries. Inicia sessió per desbloquejar les teves estadístiques.",
+		"signIn": "Iniciar sessió",
+		"createAccount": "Crear un compte",
+		"imageAlt": "Imatge de previsualització d'estadístiques properament",
+		"imagePlaceholder": "Imatge disponible aviat...",
+		"features": {
+			"categories": {
+				"title": "Categories",
+				"description": "Descobreix quines categories de jocs formen la major part de la teva col·lecció"
+			},
+			"growth": {
+				"title": "Creixement",
+				"description": "Fes seguiment de com ha crescut la teva col·lecció mes a mes"
+			},
+			"complexity": {
+				"title": "Complexitat",
+				"description": "Entén la distribució de complexitat de tota la teva biblioteca"
+			}
+		}
+	},
+	"organiser": {
+		"title": "Estadístiques de l'Organitzador",
+		"eventsHosted": "Esdeveniments Organitzats",
+		"totalAttendees": "Total d'Assistents",
+		"popularGames": "Jocs Populars"
+	},
+	"admin": {
+		"title": "Analítiques de la Plataforma",
+		"totalUsers": "Total d'Usuaris",
+		"totalEvents": "Total d'Esdeveniments",
+		"totalGames": "Total de Jocs"
+	},
+	"collection": {
+		"title": "Estadístiques de la Col·lecció",
+		"charts": {
+			"gamesByCategory": "Jocs per Categoria",
+			"collectionGrowth": "Creixement de la Col·lecció",
+			"complexityDistribution": "Distribució de Complexitat"
+		},
+		"emptyState": {
+			"title": "Encara no hi ha estadístiques",
+			"subtitle": "Afegeix jocs per veure les analítiques de la teva col·lecció!"
+		}
+	},
+	"loading": "Carregant estadístiques...",
+	"error": "Error en carregar les estadístiques"
+}

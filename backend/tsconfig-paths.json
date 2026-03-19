@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./dist",
+    "paths": {
+      "@/*": ["./*"],
+      "@games/*": ["./games/*"],
+      "@locations/*": ["./locations/*"],
+      "@auth/*": ["./auth/*"],
+      "@application/*": ["./auth/application/*"],
+      "@domain/*": ["./auth/domain/*"],
+      "@infrastructure/*": ["./auth/infrastructure/*"],
+      "@presentation/*": ["./auth/presentation/*"],
+      "@modules/*": ["./modules/*"],
+      "@events/*": ["./events/*"]
+    }
+  }
+}

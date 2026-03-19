@@ -1,0 +1,173 @@
+<ng-container *transloco="let t; read: 'auth'">
+	<section
+		class="flex min-h-screen items-center justify-center bg-slate-50 px-4 py-12 sm:px-6 lg:px-8"
+	>
+		<form
+			class="w-full max-w-md overflow-hidden rounded bg-surface-raised text-on-surface-muted shadow-md shadow-border"
+		>
+			<div class="p-6">
+				<header class="mb-6 text-center">
+					<h1 class="text-3xl font-medium tracking-tight text-on-surface">
+						<span class="text-on-surface-muted">GameNight</span>
+						<span class="text-emerald-500">Hub</span>
+					</h1>
+					<p class="mt-2 text-sm text-on-surface-medium">
+						{{ t('register.subtitle') }}
+					</p>
+				</header>
+
+				<div
+					class="mb-6 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-700"
+				>
+					{{ t('register.reviewNotice') }}
+				</div>
+
+				@if (error()) {
+				<div class="mb-4 rounded bg-red-50 p-3 text-sm text-red-600">
+					{{ error() }}
+				</div>
+				}
+
+				<div class="relative mt-4">
+					<input
+						id="orgName"
+						type="text"
+						name="orgName"
+						[placeholder]="t('register.orgNamePlaceholder')"
+						[value]="orgName()"
+						(input)="onOrgNameChange($event)"
+						class="peer relative h-10 w-full rounded border border-border px-4 text-sm text-on-surface-muted placeholder-transparent transition-all outline-none focus:border-emerald-500 focus:outline-none"
+					/>
+					<label
+						for="orgName"
+						class="absolute -top-2 left-2 z-1 bg-surface-raised px-2 text-xs text-on-surface-dim transition-all peer-focus:-top-2 peer-focus:text-xs peer-focus:text-emerald-500"
+					>
+						{{ t('register.orgNameLabel') }}
+					</label>
+				</div>
+
+				<div class="relative mt-4">
+					<input
+						id="address"
+						type="text"
+						name="address"
+						[placeholder]="t('register.addressPlaceholder')"
+						[value]="address()"
+						(input)="onAddressChange($event)"
+						class="peer relative h-10 w-full rounded border border-border px-4 text-sm text-on-surface-muted placeholder-transparent transition-all outline-none focus:border-emerald-500 focus:outline-none"
+					/>
+					<label
+						for="address"
+						class="absolute -top-2 left-2 z-1 bg-surface-raised px-2 text-xs text-on-surface-dim transition-all peer-focus:-top-2 peer-focus:text-xs peer-focus:text-emerald-500"
+					>
+						{{ t('register.addressLabel') }}
+					</label>
+				</div>
+
+				<div class="relative mt-4">
+					<input
+						id="email"
+						type="email"
+						name="email"
+						[placeholder]="t('register.emailPlaceholder')"
+						[value]="email()"
+						(input)="onEmailChange($event)"
+						class="peer relative h-10 w-full rounded border border-border px-4 text-sm text-on-surface-muted placeholder-transparent transition-all outline-none focus:border-emerald-500 focus:outline-none"
+					/>
+					<label
+						for="email"
+						class="absolute -top-2 left-2 z-1 bg-surface-raised px-2 text-xs text-on-surface-dim transition-all peer-focus:-top-2 peer-focus:text-xs peer-focus:text-emerald-500"
+					>
+						{{ t('register.emailLabel') }}
+					</label>
+				</div>
+
+				<button
+					type="button"
+					class="mt-6 inline-flex h-10 w-full items-center justify-center gap-2 rounded bg-emerald-500 px-5 text-sm font-medium tracking-wide text-white transition duration-300 hover:bg-emerald-600 focus:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-50"
+					(click)="submit()"
+					[disabled]="isLoading()"
+				>
+					@if (isLoading()) {
+					<svg
+						class="h-4 w-4 animate-spin"
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+					 aria-hidden="true">
+						<circle
+							class="opacity-25"
+							cx="12"
+							cy="12"
+							r="10"
+							stroke="currentColor"
+							stroke-width="4"
+						></circle>
+						<path
+							class="opacity-75"
+							fill="currentColor"
+							d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+						></path>
+					</svg>
+					{{ t('register.submitting') }} } @else { {{
+					t('register.submitApplication') }} }
+				</button>
+
+				<p class="mt-6 text-center text-sm text-on-surface-medium">
+					{{ t('register.alreadyHaveAccount') }}
+					<a
+						routerLink="/login"
+						class="font-medium text-emerald-500 hover:text-emerald-600"
+					>
+						{{ t('register.signInLink') }}
+					</a>
+				</p>
+			</div>
+		</form>
+	</section>
+
+	@if (showSuccess()) {
+	<div
+		class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4 backdrop-blur-sm"
+		(click)="dismissAndRedirect()"
+	>
+		<div
+			class="w-full max-w-sm rounded-lg bg-surface-raised p-6 shadow-xl"
+			(click)="$event.stopPropagation()"
+		>
+			<div
+				class="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100"
+			>
+				<svg
+					class="h-6 w-6 text-emerald-500"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					viewBox="0 0 24 24"
+				 aria-hidden="true">
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M5 13l4 4L19 7"
+					/>
+				</svg>
+			</div>
+			<h2 class="mb-2 text-lg font-semibold text-on-surface">
+				{{ t('register.success.title') }}
+			</h2>
+			<p class="text-sm text-on-surface-muted">
+				{{ t('register.success.message') }}
+				<span class="font-medium text-on-surface-strong">{{ email() }}</span>
+				{{ t('register.success.messageSuffix') }}
+			</p>
+			<button
+				type="button"
+				class="mt-6 inline-flex h-10 w-full items-center justify-center rounded bg-emerald-500 text-sm font-medium text-white transition duration-300 hover:bg-emerald-600"
+				(click)="dismissAndRedirect()"
+			>
+				{{ t('register.success.backToHome') }}
+			</button>
+		</div>
+	</div>
+	}
+</ng-container>

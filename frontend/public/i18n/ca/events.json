@@ -1,0 +1,79 @@
+{
+	"loading": "Carregant esdeveniment…",
+	"notFound": "Esdeveniment no trobat.",
+	"backToGameNights": "Tornar a Nits de Joc",
+	"categoryNight": "Nit de {{ label }}",
+	"hostedBy": "Organitzat per {{ name }}",
+	"templateRating": "PLANTILLA: ★ 4.9 valoració · 12 Esdeveniments Organitzats",
+	"templateMessageHost": "PLANTILLA: Missatge a l'Amfitrió",
+	"youAreHost": "Ets l'Amfitrió",
+	"leaving": "Sortint…",
+	"leaveEvent": "Abandonar Esdeveniment",
+	"joining": "Unint-se…",
+	"eventFull": "Esdeveniment Ple",
+	"joinGame": "Unir-se",
+	"signInToJoin": "Inicia sessió per Unir-te",
+	"aboutThisEvent": "Sobre aquest Esdeveniment",
+	"ownerZone": "Zona de l'Organitzador",
+	"editEvent": "Editar Esdeveniment",
+	"delete": "Eliminar",
+	"edit": {
+		"titleLabel": "Títol",
+		"titlePlaceholder": "Títol de l'esdeveniment",
+		"descriptionLabel": "Descripció",
+		"descriptionPlaceholder": "Descripció de l'esdeveniment",
+		"coverImageLabel": "Imatge de Portada",
+		"coverPreviewAlt": "Previsualització de portada",
+		"changeCover": "Canviar",
+		"chooseCoverImage": "Triar imatge de portada",
+		"maxPlayersLabel": "Màxim de Jugadors",
+		"maxPlayersPlaceholder": "Nombre de jugadors",
+		"startTimeLabel": "Hora d'Inici",
+		"addEndTime": "Afegir hora de finalització",
+		"cancel": "Cancel·lar",
+		"saving": "Desant…",
+		"saveChanges": "Desar Canvis"
+	},
+	"deleteConfirm": {
+		"message": "N'estàs segur? Aquesta acció no es pot desfer.",
+		"deleting": "Eliminant…",
+		"yesDelete": "Sí, eliminar",
+		"cancel": "Cancel·lar"
+	},
+	"templateMapPreview": "PLANTILLA: Previsualització del Mapa",
+	"location": "Ubicació",
+	"postalCode": "CP {{ code }}",
+	"templateGetDirections": "PLANTILLA: Com Arribar-hi",
+	"playersJoined": "Jugadors Units",
+	"playerAlt": "Jugador",
+	"urgency": {
+		"joined": "{{ count }} units",
+		"full": "Esdeveniment Ple",
+		"spotsLeftSingular": "Queda {{ count }} plaça!",
+		"spotsLeftPlural": "Queden {{ count }} places!"
+	},
+	"infoPill": {
+		"category": "Categoria",
+		"weight": "Pes",
+		"playingTime": "Temps de Joc",
+		"players": "Jugadors",
+		"minSuffix": "min"
+	},
+	"editWarning": {
+		"tooManyPlayers": "Aquest joc admet fins a {{ max }} jugadors — n'has posat {{ current }}",
+		"tooFewPlayers": "Aquest joc requereix almenys {{ min }} jugadors — n'has posat {{ current }}"
+	},
+	"toast": {
+		"eventUpdated": "Esdeveniment actualitzat",
+		"eventUpdateFailed": "Error en desar els canvis",
+		"eventDeleted": "Esdeveniment eliminat",
+		"eventDeleteFailed": "Error en eliminar l'esdeveniment",
+		"eventDeleteForbidden": "No tens permís per eliminar aquest esdeveniment",
+		"joinedEvent": "T'has unit a l'esdeveniment!",
+		"joinFailed": "Error en unir-se a l'esdeveniment",
+		"leftEvent": "Has abandonat l'esdeveniment",
+		"leaveFailed": "Error en abandonar l'esdeveniment",
+		"hostCannotLeave": "L'amfitrió no pot abandonar el seu propi esdeveniment",
+		"invalidInput": "Dades no vàlides"
+	}
+}

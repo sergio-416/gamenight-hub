@@ -1,0 +1,184 @@
+<ng-container *transloco="let t; read: 'collection'">
+	<div data-testid="game-list" class="space-y-8">
+		<app-collection-header
+			[totalGames]="totalGames()"
+			[isLoggedIn]="isLoggedIn()"
+			(addGameClick)="onImportGame()"
+		/>
+
+		<app-collection-toolbar
+			[playerFilter]="playerFilter()"
+			[categoryFilter]="categoryFilter()"
+			[sortMode]="sortMode()"
+			[availableCategories]="availableCategories()"
+			[viewMode]="viewMode()"
+			[searchQuery]="searchQuery()"
+			(playerFilterChange)="onPlayerFilterChange($event)"
+			(categoryFilterChange)="onCategoryFilterChange($event)"
+			(sortChange)="onSortChange($event)"
+			(viewModeChange)="onViewModeChange($event)"
+			(searchChange)="onSearchChange($event)"
+		/>
+
+		@if (loading()) {
+		<div
+			class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+		>
+			@for (i of [1, 2, 3, 4, 5, 6, 7, 8]; track i) {
+			<div
+				class="animate-pulse overflow-hidden rounded-xl border border-border bg-surface-raised shadow-sm"
+			>
+				<div class="aspect-square bg-slate-200"></div>
+				<div class="space-y-2.5 p-4">
+					<div class="h-3.5 w-3/4 rounded bg-slate-200"></div>
+					<div class="h-3 w-1/2 rounded bg-slate-100"></div>
+					<div class="h-5 w-16 rounded-full bg-slate-100"></div>
+				</div>
+			</div>
+			}
+		</div>
+		} @else if (displayedGames().length === 0) {
+		<div class="mt-6 py-16 text-center">
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				class="mx-auto h-16 w-16 text-slate-500"
+				fill="none"
+				viewBox="0 0 24 24"
+				stroke="currentColor"
+				stroke-width="1"
+			 aria-hidden="true">
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m6.75 12H9.75m3 0h1.5m-1.5 0v3m0-3v-3m-3 3h1.5m-1.5 0v3m0-3v-3m9-1.5V18a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18V6.75A2.25 2.25 0 015.25 4.5h6.879a3.375 3.375 0 012.386.989l3.372 3.372a3.375 3.375 0 01.988 2.386z"
+				/>
+			</svg>
+			@if (hasActiveFilters()) {
+			<h3 class="mt-4 text-lg font-semibold text-on-surface">
+				{{ t('empty.noGamesFound') }}
+			</h3>
+			<p class="mt-1 text-sm text-on-surface-muted">{{ t('empty.tryAdjusting') }}</p>
+			} @else {
+			<h3 class="mt-4 text-lg font-semibold text-on-surface">
+				{{ t('empty.collectionEmpty') }}
+			</h3>
+			<p class="mt-1 text-sm text-on-surface-muted">{{ t('empty.startBuilding') }}</p>
+			@if (isLoggedIn()) {
+			<button
+				type="button"
+				class="mt-4 inline-flex cursor-pointer items-center gap-2 rounded-lg bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-emerald-600"
+				(click)="onImportGame()"
+			>
+				{{ t('empty.importFirst') }}
+			</button>
+			} }
+		</div>
+		} @else { @if (viewMode() === gridMode) {
+		<div
+			class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+		>
+			@for (game of displayedGames(); track game.id; let idx = $index) {
+			<app-game-card
+				[game]="game"
+				[priorityImage]="idx < 4"
+				(gameClick)="onGameClick($event)"
+			/>
+			} @if (isLoggedIn()) {
+			<app-add-to-library-cta (addClick)="onImportGame()" />
+			}
+		</div>
+		} @else {
+		<div class="mt-6 space-y-2">
+			@for (game of displayedGames(); track game.id) {
+			<div
+				class="flex cursor-pointer items-center gap-4 rounded-lg bg-surface-raised p-3 shadow-sm transition-colors hover:bg-slate-50"
+				(click)="onGameClick(game.id)"
+			>
+				<div
+					class="relative h-12 w-12 shrink-0 overflow-hidden rounded-lg bg-slate-200"
+				>
+					@if (game.thumbnailUrl) {
+					<img
+						[ngSrc]="game.thumbnailUrl!"
+						[alt]="game.name"
+						fill
+						class="h-full w-full object-cover"
+					/>
+					} @else {
+					<div
+						class="flex h-full w-full items-center justify-center bg-linear-to-br from-emerald-400 to-emerald-600"
+					>
+						<span class="text-sm font-bold text-white/80">
+							{{ game.name.charAt(0).toUpperCase() }}
+						</span>
+					</div>
+					}
+				</div>
+				<div class="min-w-0 flex-1">
+					<h3 class="truncate text-sm font-semibold text-on-surface">
+						{{ game.name }}
+					</h3>
+					<p class="text-xs text-on-surface-muted">
+						@if (game.minPlayers && game.maxPlayers) { {{ game.minPlayers }}-{{
+						game.maxPlayers }} {{ t('list.players') }} } @if (game.playingTime)
+						{
+						<span class="ml-2">{{ game.playingTime }} {{ t('list.min') }}</span>
+						}
+					</p>
+				</div>
+				@if (game.status) {
+				<span
+					class="shrink-0 rounded-full px-2.5 py-0.5 text-xs font-medium"
+					[class]="statusColors[game.status]"
+				>
+					{{ statusLabels[game.status] }}
+				</span>
+				} @if (isLoggedIn()) {
+				<button
+					type="button"
+					class="shrink-0 cursor-pointer rounded-lg p-2 text-slate-400 transition-colors hover:bg-red-500/10 hover:text-red-400"
+					(click)="onDeleteGame(game.id); $event.stopPropagation()"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						class="h-4 w-4"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke="currentColor"
+						stroke-width="2"
+					 aria-hidden="true">
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+						/>
+					</svg>
+				</button>
+				}
+			</div>
+			}
+		</div>
+		} @if (hasMore()) {
+		<div class="flex justify-center pt-6">
+			<button
+				type="button"
+				class="cursor-pointer rounded-full border border-border-strong px-6 py-2.5 text-sm font-medium text-on-surface-medium transition-colors hover:border-emerald-500 hover:text-emerald-600"
+				(click)="onLoadMore()"
+			>
+				{{ t('list.loadMore') }}
+			</button>
+		</div>
+		} }
+	</div>
+
+	<app-confirm-dialog
+		[isOpen]="confirmDialogOpen()"
+		[title]="t('confirmRemove.title')"
+		[message]="t('confirmRemove.message')"
+		[confirmText]="t('confirmRemove.confirm')"
+		[cancelText]="t('confirmRemove.cancel')"
+		[danger]="true"
+		(confirmed)="onDeleteConfirmed()"
+		(cancelled)="onDeleteCancelled()"
+	/>
+</ng-container>

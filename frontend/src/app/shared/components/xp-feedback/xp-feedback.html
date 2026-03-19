@@ -1,0 +1,27 @@
+<ng-container *transloco="let t">
+	@if (feedback(); as fb) {
+	<div
+		class="fixed bottom-6 right-6 z-40 animate-[slideUp_0.3s_ease-out]"
+		data-testid="xp-feedback"
+	>
+		<div
+			class="flex items-center gap-3 rounded-xl px-5 py-3 shadow-lg"
+			[class]="isLevelUp()
+				? 'bg-linear-to-r from-amber-500 to-yellow-500 text-white'
+				: 'bg-slate-50 text-emerald-600 border border-border'"
+		>
+			<span class="text-lg font-bold" data-testid="xp-feedback-amount">
+				{{ t('xp.feedback.xpAwarded', { amount: fb.xpAwarded }) }}
+			</span>
+			@if (isLevelUp()) {
+			<span
+				class="text-sm font-medium text-amber-100"
+				data-testid="xp-feedback-levelup"
+			>
+				{{ t('xp.feedback.levelUp', { level: fb.newLevel }) }}
+			</span>
+			}
+		</div>
+	</div>
+	}
+</ng-container>

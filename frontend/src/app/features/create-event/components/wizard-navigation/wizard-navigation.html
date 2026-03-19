@@ -1,0 +1,34 @@
+<ng-container *transloco="let t; read: 'create-event'">
+	<div class="flex items-center justify-between pt-6">
+		@if (currentStep() > 1) {
+		<button
+			type="button"
+			class="flex items-center gap-2 text-sm font-medium text-on-surface-medium transition-colors hover:text-on-surface"
+			(click)="back.emit()"
+		>
+			<span class="text-lg">&larr;</span> {{ t('nav.back') }}
+		</button>
+		} @else {
+		<div></div>
+		} @if (currentStep() < 3) {
+		<button
+			type="button"
+			class="rounded-full bg-emerald-500 px-8 py-3 text-sm font-medium text-white transition-colors hover:bg-emerald-600 disabled:cursor-not-allowed disabled:opacity-50"
+			[disabled]="!canContinue()"
+			(click)="next.emit()"
+		>
+			{{ t('nav.continue') }} &rarr;
+		</button>
+		} @else {
+		<button
+			type="button"
+			class="rounded-full bg-emerald-500 px-8 py-3 text-sm font-medium text-white transition-colors hover:bg-emerald-600 disabled:cursor-not-allowed disabled:opacity-50"
+			[disabled]="!canContinue() || isSubmitting()"
+			(click)="submit.emit()"
+		>
+			@if (isSubmitting()) { {{ t('nav.creating') }} } @else { {{
+			t('nav.createEvent') }} &rarr; }
+		</button>
+		}
+	</div>
+</ng-container>

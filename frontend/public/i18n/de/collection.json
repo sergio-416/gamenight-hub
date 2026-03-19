@@ -1,0 +1,151 @@
+{
+	"header": {
+		"title": "Meine Sammlung",
+		"subtitle": "Du hast {{ count }} {{ count === 1 ? 'game' : 'games' }} in deiner Bibliothek. Weiterspielen!",
+		"subtitleSingular": "Du hast {{ count }} Spiel in deiner Bibliothek. Weiterspielen!",
+		"subtitlePlural": "Du hast {{ count }} Spiele in deiner Bibliothek. Weiterspielen!",
+		"addGame": "Spiel hinzufügen"
+	},
+	"toolbar": {
+		"searchPlaceholder": "Sammlung durchsuchen...",
+		"searchAriaLabel": "Spiele in der Sammlung suchen",
+		"gridView": "Rasteransicht",
+		"listView": "Listenansicht"
+	},
+	"empty": {
+		"noGamesFound": "Keine Spiele gefunden",
+		"tryAdjusting": "Passe deine Suche oder Filter an",
+		"collectionEmpty": "Deine Sammlung ist leer",
+		"startBuilding": "Starte den Aufbau deiner Spielebibliothek",
+		"importFirst": "Importiere dein erstes Spiel"
+	},
+	"list": {
+		"players": "Spieler",
+		"min": "Min.",
+		"loadMore": "Mehr Spiele laden"
+	},
+	"confirmRemove": {
+		"title": "Spiel entfernen",
+		"message": "Möchtest du dieses Spiel wirklich aus deiner Sammlung entfernen?",
+		"confirm": "Entfernen",
+		"cancel": "Abbrechen"
+	},
+	"unauthenticated": {
+		"heading": "Deine Brettspielsammlung",
+		"description": "Importiere Spiele von BoardGameGeek, verwalte deinen Bestand und erhalte KI-gestützte Empfehlungen für deine Bibliothek. Melde dich an, um deine Sammlung aufzubauen.",
+		"signIn": "Anmelden",
+		"createAccount": "Konto erstellen",
+		"imagePlaceholder": "Bild demnächst verfügbar...",
+		"featureImportTitle": "Importieren",
+		"featureImportDesc": "Durchsuche BoardGameGeek und füge jedes Spiel in Sekunden zu deiner persönlichen Bibliothek hinzu",
+		"featureDiscoverTitle": "Entdecken",
+		"featureDiscoverDesc": "Erhalte KI-gestützte Spielempfehlungen basierend auf dem, was du bereits besitzt und liebst",
+		"featureTrackTitle": "Verfolgen",
+		"featureTrackDesc": "Sieh Statistiken und Einblicke zu deiner gesamten Sammlung auf einen Blick"
+	},
+	"addToLibrary": {
+		"title": "Zur Bibliothek hinzufügen",
+		"subtitle": "Erweitere deine Spielesammlung"
+	},
+	"import": {
+		"back": "← Zurück",
+		"pageTitle": "Spiel zur Sammlung hinzufügen",
+		"searchPlaceholder": "Spiel suchen (z. B. Catan, Zug um Zug)...",
+		"searchAriaLabel": "Nach Brettspielen suchen",
+		"searching": "Suche läuft...",
+		"search": "Suchen",
+		"year": "Jahr",
+		"rank": "Rang",
+		"na": "k. A.",
+		"unranked": "Ohne Rang",
+		"inCollection": "In der Sammlung",
+		"importing": "Wird importiert...",
+		"importBtn": "Importieren",
+		"noGamesFound": "Keine Spiele gefunden. Versuche eine andere Suche."
+	},
+	"bggPreview": {
+		"backToSearch": "Zurück zur Suche",
+		"errorLoading": "Spieldetails konnten nicht geladen werden. Bitte versuche es erneut.",
+		"alreadyInCollection": "Bereits in der Sammlung",
+		"importingEllipsis": "Wird importiert...",
+		"addToCollection": "Zur Sammlung hinzufügen",
+		"players": "Spieler",
+		"minSuffix": "Min.",
+		"agePlus": "Ab {{ age }} Jahren",
+		"aboutTheGame": "Über das Spiel",
+		"publisher": "Verlag:",
+		"year": "Jahr:",
+		"dataPoweredBy": "Daten bereitgestellt von",
+		"bgg": "BoardGameGeek"
+	},
+	"gameDetail": {
+		"backToCollection": "Zurück zur Sammlung",
+		"errorLoading": "Spieldetails konnten nicht geladen werden. Bitte versuche es erneut.",
+		"addToCollection": "Zur Sammlung hinzufügen",
+		"owned": "Im Besitz",
+		"removeFromCollection": "Aus der Sammlung entfernen",
+		"wishlistGame": "Auf die Wunschliste",
+		"players": "Spieler",
+		"minSuffix": "Min.",
+		"agePlus": "Ab {{ age }} Jahren",
+		"aboutTheGame": "Über das Spiel",
+		"publisher": "Verlag:",
+		"year": "Jahr:",
+		"dataPoweredBy": "Daten bereitgestellt von",
+		"bgg": "BoardGameGeek"
+	},
+	"statCards": {
+		"complexity": "Komplexität",
+		"rating": "Bewertung",
+		"rank": "Rang",
+		"weight": "Gewicht",
+		"na": "k. A."
+	},
+	"tags": {
+		"expansion": "Erweiterung",
+		"categories": "Kategorien",
+		"mechanics": "Mechaniken"
+	},
+	"recommendations": {
+		"title": "Mehr aus deiner Sammlung",
+		"addToLibrary": "Zur Bibliothek hinzufügen",
+		"expandCollection": "Erweitere deine Spielesammlung"
+	},
+	"filters": {
+		"playersAny": "[DE] Any Players",
+		"players1": "[DE] 1 Player",
+		"players2": "[DE] 2 Players",
+		"players3": "[DE] 3 Players",
+		"players4": "[DE] 4 Players",
+		"players5": "[DE] 5 Players",
+		"players6Plus": "[DE] 6+ Players",
+		"categoryAll": "[DE] All Categories",
+		"sortNameAsc": "[DE] A → Z",
+		"sortNameDesc": "[DE] Z → A",
+		"sortNewest": "[DE] Newest First",
+		"sortOldest": "[DE] Oldest First"
+	},
+	"status": {
+		"owned": "Im Besitz",
+		"wantToPlay": "Möchte spielen",
+		"wantToTry": "Möchte ausprobieren",
+		"played": "Gespielt"
+	},
+	"weight": {
+		"1": "Leicht",
+		"2": "Leicht-Mittel",
+		"3": "Mittel",
+		"4": "Mittel-Schwer",
+		"5": "Schwer",
+		"notRated": "Nicht bewertet"
+	},
+	"card": {
+		"playersSingular": "{{ count }} Spieler",
+		"playersPlural": "{{ count }} Spieler",
+		"playersRange": "{{ min }}–{{ max }} Spieler"
+	},
+	"removeConfirmMessage": "\"{{ name }}\" aus deiner Sammlung entfernen? Das kann nicht rückgängig gemacht werden.",
+	"toast": {
+		"gameRemoved": "Spiel aus der Sammlung entfernt"
+	}
+}

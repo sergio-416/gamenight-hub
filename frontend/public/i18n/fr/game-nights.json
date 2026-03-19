@@ -1,0 +1,55 @@
+{
+	"title": "Soirées Jeux",
+	"subtitle": "Les prochains événements jeux de société et où les trouver !",
+	"addEvent": "Nouvel événement",
+	"showMap": "AFFICHER LA CARTE",
+	"hideMap": "MASQUER LA CARTE",
+	"loading": "Chargement des événements...",
+	"eventsHeading": "Événements",
+	"eventsFound": "{{ count }} événements trouvés",
+	"emptyLoggedIn": "Aucun événement trouvé pour cette période. Essaie un autre filtre ou crée une nouvelle soirée jeux !",
+	"emptyLoggedOut": "Aucun événement trouvé pour cette période. Essaie un autre filtre ou connecte-toi pour en créer un !",
+	"map": {
+		"heading": "Carte",
+		"close": "Fermer",
+		"loadingLocations": "Chargement des lieux..."
+	},
+	"card": {
+		"full": "Complet",
+		"joined": "{{ current }}/{{ max }} inscrits",
+		"viewDetails": "Voir les détails",
+		"viewDetailsAria": "Voir les détails de {{ title }}",
+		"waitlistOnly": "Liste d'attente uniquement"
+	},
+	"preview": {
+		"closeAria": "Fermer l'aperçu",
+		"viewDetails": "Voir les détails",
+		"viewDetailsAria": "Voir les détails de {{ title }}",
+		"full": "Complet"
+	},
+	"timeFilter": {
+		"thisWeek": "Cette semaine",
+		"next7d": "7 prochains jours",
+		"next14d": "14 prochains jours",
+		"thisMonth": "Ce mois-ci",
+		"all": "Tous les événements",
+		"fallback": "Période"
+	},
+	"categories": {
+		"all": "Toutes les catégories",
+		"strategy": "Stratégie",
+		"rpg": "JDR",
+		"party": "Ambiance",
+		"classic": "Classique",
+		"cooperative": "Coopératif",
+		"trivia": "Quiz",
+		"miniatures": "Figurines",
+		"family": "Familial",
+		"other": "Autre",
+		"fallback": "Catégorie"
+	},
+	"toast": {
+		"locationDeleted": "Lieu supprimé",
+		"locationDeleteFailed": "Échec de la suppression du lieu"
+	}
+}

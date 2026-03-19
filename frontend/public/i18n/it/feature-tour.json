@@ -1,0 +1,96 @@
+{
+	"layout": {
+		"prevAria": "Pagina funzionalità precedente",
+		"nextAria": "Pagina funzionalità successiva",
+		"backToHome": "← Torna alla home"
+	},
+	"perks": {
+		"title": "Vantaggi Membri",
+		"description": "I membri di GameNight Hub hanno accesso esclusivo a funzionalità pensate per veri appassionati di giochi da tavolo. Dalla registrazione prioritaria agli eventi ai diritti di voto nella comunità, la tua iscrizione sblocca l'esperienza social completa per i giochi da tavolo. Unisciti a una comunità che prende questo hobby tanto seriamente quanto te.",
+		"howItWorks": {
+			"title": "Come funziona",
+			"createAccount": {
+				"title": "Crea il tuo account",
+				"description": "Registrati e unisciti a una comunità in crescita di appassionati di giochi da tavolo in tutta la Spagna"
+			},
+			"completeProfile": {
+				"title": "Completa il tuo profilo",
+				"description": "Imposta le tue preferenze di gioco, la collezione e la posizione per ricevere raccomandazioni personalizzate"
+			},
+			"unlockAccess": {
+				"title": "Sblocca l'accesso esclusivo",
+				"description": "Ottieni accesso immediato a funzionalità riservate ai membri, registrazione prioritaria e privilegi della comunità"
+			}
+		},
+		"whatYouUnlock": {
+			"title": "Cosa sblocchi",
+			"items": {
+				"priorityRegistration": "Registrazione prioritaria agli eventi",
+				"membersOnly": "Serate di gioco riservate ai membri",
+				"votingRights": "Diritti di voto nella comunità",
+				"earlyAccess": "Accesso anticipato alle nuove funzionalità",
+				"collectionTracking": "Tracciamento della collezione personale"
+			},
+			"srLabel": "vantaggio membro"
+		}
+	},
+	"xp": {
+		"title": "XP e Livelli",
+		"description": "Guadagna punti esperienza ogni volta che interagisci con la comunità — organizza eventi, conferma la tua presenza alle serate di gioco e arricchisci il tuo profilo. Man mano che i tuoi XP crescono, il tuo livello sale e nuovi privilegi si sbloccano. Più giochi, più la piattaforma ti premia.",
+		"howYouEarn": {
+			"title": "Come guadagni XP",
+			"hostGameNight": {
+				"title": "Organizza una serata di gioco",
+				"description": "Crea un evento e riunisci i giocatori — guadagna <1>+50 XP</1> per ogni serata che organizzi"
+			},
+			"rsvp": {
+				"title": "Conferma la presenza a un evento",
+				"description": "Presentati e gioca — ogni partecipazione confermata aggiunge <1>+10 XP</1> al tuo totale"
+			},
+			"completeProfile": {
+				"title": "Completa il tuo profilo",
+				"description": "Inserisci le tue preferenze, collezione e posizione una volta e guadagna <1>+25 XP</1>"
+			}
+		},
+		"milestones": {
+			"title": "Traguardi di livello",
+			"items": {
+				"apprentice": "Livello 1 – Apprendista (0 XP)",
+				"strategist": "Livello 5 – Stratega (250 XP)",
+				"gameMaster": "Livello 10 – Game Master (1000 XP)",
+				"grandMaster": "Livello 20 – Gran Maestro (5000 XP)"
+			},
+			"srLabel": "vantaggio membro"
+		}
+	},
+	"badges": {
+		"title": "Traguardi",
+		"description": "Guadagna badge restando attivo nella comunità — più giochi, più ne sblocchi. Costruisci la tua collezione, organizza serate di gioco e metti in mostra la tua passione con una vetrina che parla da sé.",
+		"howYouEarn": {
+			"title": "Come guadagni i badge",
+			"earlyAdopter": {
+				"title": "Sii un pioniere",
+				"description": "Unisciti prima del lancio pubblico e assicurati un posto tra i membri fondatori di GameNight Hub"
+			},
+			"hostFirst": {
+				"title": "Organizza la tua prima serata di gioco",
+				"description": "Crea e gestisci il tuo primo evento per diventare un organizzatore ufficiale e sbloccare i traguardi da host"
+			},
+			"buildCollection": {
+				"title": "Costruisci la tua collezione",
+				"description": "Aggiungi 10 o più giochi alla tua collezione personale e ottieni il badge Collezionista"
+			}
+		},
+		"showcase": {
+			"title": "Vetrina badge",
+			"items": {
+				"earlyAdopter": "Pioniere",
+				"gameMaster": "Game Master",
+				"socialButterfly": "Anima della Festa",
+				"collector": "Collezionista",
+				"partyStarter": "Animatore"
+			},
+			"srLabel": "vantaggio membro"
+		}
+	}
+}

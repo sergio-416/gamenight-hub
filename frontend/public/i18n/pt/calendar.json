@@ -1,0 +1,58 @@
+{
+	"loading": "A carregar eventos...",
+	"error": "Falha ao carregar eventos. Por favor, tenta novamente mais tarde.",
+	"header": {
+		"today": "Hoje",
+		"newEvent": "Novo Evento",
+		"prevMonth": "Mês anterior",
+		"nextMonth": "Mês seguinte",
+		"noEvents": "Nenhuma noite de jogos agendada este mês",
+		"eventCount": "Tens {{ count }} noite de jogos agendada este mês",
+		"eventCountPlural": "Tens {{ count }} noites de jogos agendadas este mês"
+	},
+	"grid": {
+		"overflow": "+{{ count }} mais"
+	},
+	"details": {
+		"heading": "Detalhes do Evento",
+		"upcoming": "Próximos Eventos",
+		"eventsOn": "Eventos em {{ date }}",
+		"noEventsDay": "Nenhum evento agendado para este dia",
+		"noEventsMonth": "Nenhum evento próximo este mês",
+		"hostedBy": "Organizado por {{ username }}",
+		"playersMax": "{{ count }} jogadores máx.",
+		"todayLabel": "HOJE"
+	},
+	"weekdays": {
+		"sun": "DOM",
+		"mon": "SEG",
+		"tue": "TER",
+		"wed": "QUA",
+		"thu": "QUI",
+		"fri": "SEX",
+		"sat": "SÁB"
+	},
+	"weekdaysShort": {
+		"sun": "D",
+		"mon": "S",
+		"tue": "T",
+		"wed": "Q",
+		"thu": "Q",
+		"fri": "S",
+		"sat": "S"
+	},
+	"months": {
+		"0": "Janeiro",
+		"1": "Fevereiro",
+		"2": "Março",
+		"3": "Abril",
+		"4": "Maio",
+		"5": "Junho",
+		"6": "Julho",
+		"7": "Agosto",
+		"8": "Setembro",
+		"9": "Outubro",
+		"10": "Novembro",
+		"11": "Dezembro"
+	}
+}

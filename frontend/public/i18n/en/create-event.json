@@ -1,0 +1,76 @@
+{
+	"closeWizard": "Close wizard",
+	"stepAria": "Step {{ step }} of {{ total }}",
+	"stepGame": {
+		"title": "What are we playing?",
+		"subtitle": "Set the vibe for your game night",
+		"eventTitle": "Event Title *",
+		"eventTitlePlaceholder": "e.g. Friday Night Catan Strategy",
+		"description": "Short Description",
+		"descriptionPlaceholder": "Tell everyone what's special about this session...",
+		"charCount": "{{ current }}/500",
+		"category": "Category",
+		"gameFromCollection": "Game from Collection",
+		"coverImage": "Cover Image",
+		"changeCoverImage": "Change image",
+		"chooseCoverImage": "Choose Cover Image"
+	},
+	"stepLocation": {
+		"title": "Where & When",
+		"subtitle": "Set the stage for your game night",
+		"privatePlace": "Private place",
+		"privatePlaceDesc": "Home or private address",
+		"publicVenue": "Public venue",
+		"comingSoon": "Coming soon",
+		"soon": "Soon",
+		"address": "Address *",
+		"addressPlaceholder": "Search address...",
+		"date": "Date *",
+		"time": "Time *",
+		"dateAndTime": "Date & Time",
+		"endDateAndTime": "End Date & Time",
+		"addEndTime": "Add end time",
+		"removeEndTime": "Remove end time",
+		"endDate": "End Date",
+		"endTime": "End Time"
+	},
+	"stepPlayers": {
+		"title": "Who's coming?",
+		"subtitle": "Set the guest list for your session",
+		"maxPlayers": "Max Players",
+		"decreaseAria": "Decrease players",
+		"increaseAria": "Increase players",
+		"gameSupports": "This game supports {{ range }}",
+		"communityGuidelines": "By creating an event, you agree to our community guidelines. Be respectful, inclusive, and ensure a welcoming environment for all players.",
+		"tooltipHost": "This number includes you as the host"
+	},
+	"nav": {
+		"back": "Back",
+		"continue": "Continue",
+		"createEvent": "Create Event",
+		"creating": "Creating..."
+	},
+	"mapPanel": {
+		"heading": "Find the perfect spot for your game",
+		"subtitle": "Setting the right atmosphere is key to an epic session."
+	},
+	"coverPicker": {
+		"title": "Choose Cover Image",
+		"closeAria": "Close",
+		"cancel": "Cancel",
+		"confirm": "Confirm"
+	},
+	"gamePicker": {
+		"searchPlaceholder": "Search your collection...",
+		"searchAria": "Search your game collection",
+		"clearAria": "Clear game selection",
+		"loading": "Loading collection...",
+		"noGames": "No games in your collection. Import from BGG first!",
+		"noMatches": "No matches found"
+	},
+	"toast": {
+		"eventCreated": "Event created successfully",
+		"eventFailed": "Failed to create event. Please try again.",
+		"invalidEventData": "Invalid event data"
+	}
+}

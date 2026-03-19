@@ -1,0 +1,9 @@
+<button
+	type="button"
+	class="flex w-full items-center gap-1 truncate rounded px-1.5 py-0.5 text-xs text-on-surface-strong cursor-pointer hover:bg-slate-100"
+	(click)="onClick($event)"
+	[attr.data-testid]="'event-pill-' + event().id"
+>
+	<span [class]="dotClass()" class="size-2 shrink-0 rounded-full"></span>
+	<span class="truncate">{{ event().title }}</span>
+</button>

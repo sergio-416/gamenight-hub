@@ -1,0 +1,123 @@
+<app-feature-page-layout>
+	<ng-container *transloco="let t; read: 'feature-tour'">
+		<div class="max-w-2xl mx-auto px-6 py-16">
+			<section class="text-center mb-16">
+				<fa-icon
+					[icon]="faGift"
+					size="3x"
+					class="text-emerald-500 mb-6 block"
+					aria-hidden="true"
+				/>
+				<h1 class="text-4xl font-bold text-on-surface-strong mb-4">
+					{{ t('perks.title') }}
+				</h1>
+				<p class="text-lg leading-relaxed text-on-surface-medium">
+					{{ t('perks.description') }}
+				</p>
+			</section>
+
+			@defer (on viewport) {
+			<section class="mb-16">
+				<h2 class="text-2xl font-semibold text-on-surface-strong mb-8 text-center">
+					{{ t('perks.howItWorks.title') }}
+				</h2>
+				<div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
+					<div
+						class="overflow-hidden text-center bg-surface-raised rounded shadow-md text-on-surface-muted shadow-border"
+					>
+						<figure class="p-6 pb-0">
+							<fa-icon
+								[icon]="faUserPlus"
+								class="text-4xl text-emerald-500"
+								aria-hidden="true"
+							/>
+						</figure>
+						<div class="p-6">
+							<h3 class="mb-4 text-xl font-medium text-on-surface-strong">
+								{{ t('perks.howItWorks.createAccount.title') }}
+							</h3>
+							<p>{{ t('perks.howItWorks.createAccount.description') }}</p>
+						</div>
+					</div>
+					<div
+						class="overflow-hidden text-center bg-surface-raised rounded shadow-md text-on-surface-muted shadow-border"
+					>
+						<figure class="p-6 pb-0">
+							<fa-icon
+								[icon]="faCircleCheck"
+								class="text-4xl text-emerald-500"
+								aria-hidden="true"
+							/>
+						</figure>
+						<div class="p-6">
+							<h3 class="mb-4 text-xl font-medium text-on-surface-strong">
+								{{ t('perks.howItWorks.completeProfile.title') }}
+							</h3>
+							<p>{{ t('perks.howItWorks.completeProfile.description') }}</p>
+						</div>
+					</div>
+					<div
+						class="overflow-hidden text-center bg-surface-raised rounded shadow-md text-on-surface-muted shadow-border"
+					>
+						<figure class="p-6 pb-0">
+							<fa-icon
+								[icon]="faUnlock"
+								class="text-4xl text-emerald-500"
+								aria-hidden="true"
+							/>
+						</figure>
+						<div class="p-6">
+							<h3 class="mb-4 text-xl font-medium text-on-surface-strong">
+								{{ t('perks.howItWorks.unlockAccess.title') }}
+							</h3>
+							<p>{{ t('perks.howItWorks.unlockAccess.description') }}</p>
+						</div>
+					</div>
+				</div>
+			</section>
+			} @placeholder {
+			<div class="mb-16 h-64 animate-pulse rounded-lg bg-slate-200"></div>
+			} @defer (on viewport) {
+			<section>
+				<h2 class="text-2xl font-semibold text-on-surface-strong mb-8 text-center">
+					{{ t('perks.whatYouUnlock.title') }}
+				</h2>
+				<div class="flex flex-wrap gap-3 justify-center">
+					<span
+						class="inline-flex items-center justify-center gap-1 rounded-full bg-emerald-500 px-1.5 text-sm text-white"
+					>
+						{{ t('perks.whatYouUnlock.items.priorityRegistration') }}
+						<span class="sr-only">{{ t('perks.whatYouUnlock.srLabel') }}</span>
+					</span>
+					<span
+						class="inline-flex items-center justify-center gap-1 rounded-full bg-emerald-500 px-1.5 text-sm text-white"
+					>
+						{{ t('perks.whatYouUnlock.items.membersOnly') }}
+						<span class="sr-only">{{ t('perks.whatYouUnlock.srLabel') }}</span>
+					</span>
+					<span
+						class="inline-flex items-center justify-center gap-1 rounded-full bg-emerald-500 px-1.5 text-sm text-white"
+					>
+						{{ t('perks.whatYouUnlock.items.votingRights') }}
+						<span class="sr-only">{{ t('perks.whatYouUnlock.srLabel') }}</span>
+					</span>
+					<span
+						class="inline-flex items-center justify-center gap-1 rounded-full bg-emerald-500 px-1.5 text-sm text-white"
+					>
+						{{ t('perks.whatYouUnlock.items.earlyAccess') }}
+						<span class="sr-only">{{ t('perks.whatYouUnlock.srLabel') }}</span>
+					</span>
+					<span
+						class="inline-flex items-center justify-center gap-1 rounded-full bg-emerald-500 px-1.5 text-sm text-white"
+					>
+						{{ t('perks.whatYouUnlock.items.collectionTracking') }}
+						<span class="sr-only">{{ t('perks.whatYouUnlock.srLabel') }}</span>
+					</span>
+				</div>
+			</section>
+			} @placeholder {
+			<div class="h-24 animate-pulse rounded-lg bg-slate-200"></div>
+			}
+		</div>
+	</ng-container>
+</app-feature-page-layout>

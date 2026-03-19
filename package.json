@@ -1,0 +1,25 @@
+{
+	"name": "gamenight-hub",
+	"version": "0.0.0",
+	"private": true,
+	"packageManager": "bun@1.3.10",
+	"workspaces": [
+		"frontend",
+		"backend",
+		"packages/*"
+	],
+	"scripts": {
+		"test:backend": "bun --filter backend test",
+		"test:frontend": "bun --filter gamenight-hub test",
+		"test": "bun run test:backend && bun run test:frontend",
+		"lint": "biome check .",
+		"format": "biome format --write ."
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.4.7",
+		"@oxc-project/runtime": "^0.120.0"
+	},
+	"overrides": {
+		"vite": "^8.0.0"
+	}
+}

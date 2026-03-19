@@ -1,0 +1,76 @@
+{
+	"closeWizard": "Tancar assistent",
+	"stepAria": "Pas {{ step }} de {{ total }}",
+	"stepGame": {
+		"title": "A què juguem?",
+		"subtitle": "Defineix l'ambient de la teva nit de joc",
+		"eventTitle": "Títol de l'Esdeveniment *",
+		"eventTitlePlaceholder": "p. ex. Divendres d'Estratègia amb Catan",
+		"description": "Descripció Breu",
+		"descriptionPlaceholder": "Explica què fa especial aquesta sessió...",
+		"charCount": "{{ current }}/500",
+		"category": "Categoria",
+		"gameFromCollection": "Joc de la Col·lecció",
+		"coverImage": "Imatge de Portada",
+		"changeCoverImage": "Canviar imatge",
+		"chooseCoverImage": "Triar Imatge de Portada"
+	},
+	"stepLocation": {
+		"title": "On i Quan",
+		"subtitle": "Prepara l'escenari per a la teva nit de joc",
+		"privatePlace": "Lloc privat",
+		"privatePlaceDesc": "Casa o adreça privada",
+		"publicVenue": "Local públic",
+		"comingSoon": "Properament",
+		"soon": "Aviat",
+		"address": "Adreça *",
+		"addressPlaceholder": "Cerca una adreça...",
+		"date": "Data *",
+		"time": "Hora *",
+		"dateAndTime": "[CA] Date & Time",
+		"endDateAndTime": "[CA] End Date & Time",
+		"addEndTime": "Afegir hora de finalització",
+		"removeEndTime": "Eliminar hora de finalització",
+		"endDate": "Data de Finalització",
+		"endTime": "Hora de Finalització"
+	},
+	"stepPlayers": {
+		"title": "Qui ve?",
+		"subtitle": "Defineix la llista de convidats per a la teva sessió",
+		"maxPlayers": "Màxim de Jugadors",
+		"decreaseAria": "Reduir jugadors",
+		"increaseAria": "Augmentar jugadors",
+		"gameSupports": "Aquest joc admet {{ range }}",
+		"communityGuidelines": "En crear un esdeveniment, acceptes les nostres normes de la comunitat. Sigues respectuós, inclusiu i garanteix un ambient acollidor per a tots els jugadors.",
+		"tooltipHost": "Aquest nombre t'inclou a tu com a amfitrió"
+	},
+	"nav": {
+		"back": "Enrere",
+		"continue": "Continuar",
+		"createEvent": "Crear Esdeveniment",
+		"creating": "Creant..."
+	},
+	"mapPanel": {
+		"heading": "Troba el lloc perfecte per a la teva partida",
+		"subtitle": "Crear l'ambient adequat és clau per a una sessió èpica."
+	},
+	"coverPicker": {
+		"title": "Triar Imatge de Portada",
+		"closeAria": "Tancar",
+		"cancel": "Cancel·lar",
+		"confirm": "Confirmar"
+	},
+	"gamePicker": {
+		"searchPlaceholder": "Cercar a la teva col·lecció...",
+		"searchAria": "Cercar a la teva col·lecció de jocs",
+		"clearAria": "Esborrar selecció de joc",
+		"loading": "Carregant col·lecció...",
+		"noGames": "Cap joc a la teva col·lecció. Importa des de BGG primer!",
+		"noMatches": "Cap resultat trobat"
+	},
+	"toast": {
+		"eventCreated": "Esdeveniment creat correctament",
+		"eventFailed": "Error en crear l'esdeveniment. Torna-ho a provar.",
+		"invalidEventData": "Dades de l'esdeveniment no vàlides"
+	}
+}

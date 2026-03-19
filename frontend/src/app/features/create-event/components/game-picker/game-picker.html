@@ -1,0 +1,125 @@
+<ng-container *transloco="let t; read: 'create-event'">
+	@if (selectedGame(); as game) {
+	<div
+		class="flex items-center gap-3 rounded-xl border border-border bg-surface-raised px-4 py-3"
+	>
+		@if (game.thumbnailUrl) {
+		<div
+			class="relative h-10 w-10 shrink-0 overflow-hidden rounded-lg bg-slate-100"
+		>
+			<img
+				[ngSrc]="game.thumbnailUrl"
+				[alt]="game.name"
+				fill
+				class="object-cover"
+			/>
+		</div>
+		} @else {
+		<div
+			class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-100 text-sm font-semibold text-emerald-700"
+		>
+			{{ game.name.charAt(0) }}
+		</div>
+		}
+		<div class="min-w-0 flex-1">
+			<p class="truncate text-sm font-medium text-on-surface">{{ game.name }}</p>
+			@if (game.categories?.length) {
+			<div class="flex flex-wrap gap-1 mt-0.5">
+				@for (cat of game.categories!.slice(0, 3); track cat) {
+				<span
+					class="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-medium text-on-surface-muted"
+					>{{ cat }}</span
+				>
+				}
+			</div>
+			}
+		</div>
+		<button
+			type="button"
+			class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-on-surface-dim transition-colors hover:bg-slate-100 hover:text-slate-600"
+			(click)="clearSelection()"
+			[attr.aria-label]="t('gamePicker.clearAria')"
+		>
+			&#10005;
+		</button>
+	</div>
+	} @else {
+	<div class="relative">
+		<app-search-input
+			[value]="searchText()"
+			[placeholder]="t('gamePicker.searchPlaceholder')"
+			[ariaLabel]="t('gamePicker.searchAria')"
+			(valueChange)="onSearchInput($event)"
+			(focused)="onSearchFocus()"
+			(blurred)="onSearchBlur()"
+		/>
+
+		@if (showDropdown()) {
+		<div
+			class="absolute left-0 right-0 top-full z-20 mt-1 max-h-60 overflow-y-auto rounded-xl border border-border bg-surface-raised shadow-lg"
+		>
+			@if (isLoading()) {
+			<div class="px-4 py-3 text-center text-sm text-on-surface-dim">
+				{{ t('gamePicker.loading') }}
+			</div>
+			} @else if (!hasGames()) {
+			<div class="px-4 py-3 text-center text-sm text-on-surface-muted">
+				{{ t('gamePicker.noGames') }}
+			</div>
+			} @else if (!filteredGames().length) {
+			<div class="px-4 py-3 text-center text-sm text-on-surface-dim">
+				{{ t('gamePicker.noMatches') }}
+			</div>
+			} @else { @for (game of filteredGames(); track game.id) {
+			<button
+				type="button"
+				class="flex w-full items-center gap-3 px-4 py-2.5 text-left transition-colors hover:bg-slate-50"
+				(mousedown)="selectGame(game)"
+			>
+				@if (game.thumbnailUrl) {
+				<div
+					class="relative h-10 w-10 shrink-0 overflow-hidden rounded-lg bg-slate-100"
+				>
+					<img
+						[ngSrc]="game.thumbnailUrl"
+						[alt]="game.name"
+						fill
+						class="object-cover"
+					/>
+				</div>
+				} @else {
+				<div
+					class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-100 text-sm font-semibold text-emerald-700"
+				>
+					{{ game.name.charAt(0) }}
+				</div>
+				}
+				<div class="min-w-0 flex-1">
+					<p class="truncate text-sm font-medium text-on-surface">
+						{{ game.name }}
+					</p>
+					<div class="flex items-center gap-2">
+						@if (formatPlayerCount(game)) {
+						<span class="text-xs text-on-surface-dim"
+							>{{ formatPlayerCount(game) }}</span
+						>
+						}
+					</div>
+					@if (game.categories?.length) {
+					<div class="mt-0.5 flex flex-wrap gap-1">
+						@for (cat of game.categories!.slice(0, 3); track cat) {
+						<span
+							class="rounded-full bg-slate-100 px-1.5 py-0.5 text-[10px] font-medium text-on-surface-muted"
+							>{{ cat }}</span
+						>
+						}
+					</div>
+					}
+				</div>
+			</button>
+			} }
+		</div>
+		}
+	</div>
+	}
+</ng-container>

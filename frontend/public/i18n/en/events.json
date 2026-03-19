@@ -1,0 +1,79 @@
+{
+	"loading": "Loading event\u2026",
+	"notFound": "Event not found.",
+	"backToGameNights": "Back to Game Nights",
+	"categoryNight": "{{ label }} Night",
+	"hostedBy": "Hosted by {{ name }}",
+	"templateRating": "TEMPLATE: \u2605 4.9 rating \u00b7 12 Events Hosted",
+	"templateMessageHost": "TEMPLATE: Message Host",
+	"youAreHost": "You're the Host",
+	"leaving": "Leaving\u2026",
+	"leaveEvent": "Leave Event",
+	"joining": "Joining\u2026",
+	"eventFull": "Event Full",
+	"joinGame": "Join Game",
+	"signInToJoin": "Sign in to Join",
+	"aboutThisEvent": "About this Event",
+	"ownerZone": "Owner Zone",
+	"editEvent": "Edit Event",
+	"delete": "Delete",
+	"edit": {
+		"titleLabel": "Title",
+		"titlePlaceholder": "Event title",
+		"descriptionLabel": "Description",
+		"descriptionPlaceholder": "Event description",
+		"coverImageLabel": "Cover Image",
+		"coverPreviewAlt": "Cover preview",
+		"changeCover": "Change",
+		"chooseCoverImage": "Choose cover image",
+		"maxPlayersLabel": "Max Players",
+		"maxPlayersPlaceholder": "Number of players",
+		"startTimeLabel": "Start Time",
+		"addEndTime": "Add end time",
+		"cancel": "Cancel",
+		"saving": "Saving\u2026",
+		"saveChanges": "Save Changes"
+	},
+	"deleteConfirm": {
+		"message": "Are you sure? This action cannot be undone.",
+		"deleting": "Deleting\u2026",
+		"yesDelete": "Yes, delete",
+		"cancel": "Cancel"
+	},
+	"templateMapPreview": "TEMPLATE: Map Preview",
+	"location": "Location",
+	"postalCode": "CP {{ code }}",
+	"templateGetDirections": "TEMPLATE: Get Directions",
+	"playersJoined": "Players Joined",
+	"playerAlt": "Player",
+	"urgency": {
+		"joined": "{{ count }} joined",
+		"full": "Event Full",
+		"spotsLeftSingular": "{{ count }} spot left!",
+		"spotsLeftPlural": "{{ count }} spots left!"
+	},
+	"infoPill": {
+		"category": "Category",
+		"weight": "Weight",
+		"playingTime": "Playing Time",
+		"players": "Players",
+		"minSuffix": "min"
+	},
+	"editWarning": {
+		"tooManyPlayers": "This game supports up to {{ max }} players — you've set {{ current }}",
+		"tooFewPlayers": "This game requires at least {{ min }} players — you've set {{ current }}"
+	},
+	"toast": {
+		"eventUpdated": "Event updated",
+		"eventUpdateFailed": "Failed to save changes",
+		"eventDeleted": "Event deleted",
+		"eventDeleteFailed": "Failed to delete event",
+		"eventDeleteForbidden": "You do not have permission to delete this event",
+		"joinedEvent": "Joined event!",
+		"joinFailed": "Failed to join event",
+		"leftEvent": "Left event",
+		"leaveFailed": "Failed to leave event",
+		"hostCannotLeave": "Event host cannot leave their own event",
+		"invalidInput": "Invalid input"
+	}
+}

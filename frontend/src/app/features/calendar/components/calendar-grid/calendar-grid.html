@@ -1,0 +1,64 @@
+<ng-container *transloco="let t; read: 'calendar'">
+	<div class="w-full">
+		<div class="grid grid-cols-7 border-b border-border mb-1 bg-slate-50">
+			@for (header of weekdayHeaders(); track $index) {
+			<div
+				class="py-2 text-center text-xs font-medium uppercase tracking-wide text-on-surface-medium"
+			>
+				<span class="hidden sm:inline">{{ header }}</span>
+				<span class="inline sm:hidden"
+					>{{ weekdayHeadersShort()[$index] }}</span
+				>
+			</div>
+			}
+		</div>
+
+		<div
+			class="grid grid-cols-7 gap-px bg-slate-200 rounded-lg overflow-hidden"
+		>
+			@for (day of days(); track day.date.getTime()) {
+			<button
+				type="button"
+				(click)="onDayClick(day)"
+				[attr.data-testid]="'day-' + day.dayOfMonth"
+				[attr.data-month]="day.isCurrentMonth ? 'current' : 'other'"
+				[class]="
+				'min-h-20 sm:min-h-24 p-1.5 flex flex-col text-left transition-colors cursor-pointer ' +
+				(isSelected(day)
+					? 'bg-slate-50 ring-2 ring-emerald-500 ring-inset'
+					: day.isToday
+						? 'bg-emerald-50'
+						: 'bg-slate-50 hover:bg-slate-100')
+			"
+			>
+				<span
+					[class]="
+					'text-xs font-medium leading-none mb-1 ' +
+					(day.isToday
+						? 'text-emerald-600 font-bold'
+						: day.isCurrentMonth
+							? 'text-slate-800'
+							: 'text-slate-300')
+				"
+				>
+					{{ day.dayOfMonth }}
+				</span>
+
+				<div class="flex flex-col gap-0.5 min-w-0 flex-1">
+					@for (event of getVisibleEvents(day); track event.id) {
+					<app-event-pill
+						[event]="event"
+						[dotClass]="getDotClass(event)"
+						(pillClick)="onPillClick($event)"
+					/>
+					} @if (getOverflowCount(day) > 0) {
+					<span class="text-[10px] text-on-surface-muted px-1">
+						{{ t('grid.overflow', { count: getOverflowCount(day) }) }}
+					</span>
+					}
+				</div>
+			</button>
+			}
+		</div>
+	</div>
+</ng-container>

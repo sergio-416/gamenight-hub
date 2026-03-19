@@ -1,0 +1,287 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;900&display=swap");
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+body {
+	font-family:
+		"Outfit",
+		system-ui,
+		-apple-system,
+		sans-serif;
+	line-height: 1.5;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background-color: var(--color-slate-50);
+	color: var(--color-slate-500);
+}
+app-root {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+#main-content {
+	flex: 1;
+}
+img,
+picture,
+video,
+canvas,
+svg {
+	display: block;
+	max-width: 100%;
+}
+input,
+button,
+textarea,
+select {
+	font: inherit;
+}
+button {
+	border: none;
+	cursor: pointer;
+}
+ul,
+ol {
+	list-style: none;
+}
+html {
+	scroll-behavior: smooth;
+}
+a {
+	text-decoration: none;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	overflow-wrap: break-word;
+}
+.custom-marker {
+	cursor: pointer;
+}
+.leaflet-container {
+	font-family: inherit;
+}
+.hover\:text-emerald-500:hover {
+	color: var(--color-emerald-500) !important;
+}
+.px-6 {
+	padding-left: 1.5rem !important;
+	padding-right: 1.5rem !important;
+}
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+@keyframes scaleIn {
+	from {
+		opacity: 0;
+		transform: scale(0.7);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+@keyframes slideUp {
+	from {
+		opacity: 0;
+		transform: translateY(1rem);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+@theme {
+	--color-emerald-50: hsl(150 80% 96%);
+	--color-emerald-100: hsl(149 80% 90%);
+	--color-emerald-200: hsl(152 69% 80%);
+	--color-emerald-300: hsl(156 64% 70%);
+	--color-emerald-400: hsl(158 64% 52%);
+	--color-emerald-500: hsl(160 84% 39%);
+	--color-emerald-600: hsl(161 94% 30%);
+	--color-emerald-700: hsl(162 93% 24%);
+	--color-slate-50: hsl(210 40% 98%);
+	--color-slate-100: hsl(210 40% 96%);
+	--color-slate-200: hsl(214 32% 91%);
+	--color-slate-300: hsl(213 27% 84%);
+	--color-slate-400: hsl(215 20% 65%);
+	--color-slate-500: hsl(215 16% 47%);
+	--color-slate-600: hsl(215 19% 35%);
+	--color-slate-700: hsl(215 25% 27%);
+	--color-slate-800: hsl(217 33% 17%);
+	--color-slate-900: hsl(222 47% 11%);
+	--color-danger: hsl(0 84% 60%);
+	--color-warning: hsl(38 92% 50%);
+	--color-info: hsl(215 75% 60%);
+	--color-success: hsl(160 84% 39%);
+	--color-home: var(--color-emerald-500);
+	--color-collection: hsl(215 75% 60%);
+	--color-game-nights: hsl(332 100% 50%);
+	--color-calendar: var(--color-warning);
+	--color-stats: hsl(215 75% 60%);
+	--color-surface: var(--color-slate-50);
+	--color-surface-raised: hsl(0 0% 100%);
+	--color-surface-sunken: var(--color-slate-100);
+	--color-surface-overlay: hsl(0 0% 100% / 0.9);
+	--color-on-surface: var(--color-slate-900);
+	--color-on-surface-strong: var(--color-slate-800);
+	--color-on-surface-medium: var(--color-slate-600);
+	--color-on-surface-muted: var(--color-slate-500);
+	--color-on-surface-dim: var(--color-slate-400);
+	--color-border: var(--color-slate-200);
+	--color-border-strong: var(--color-slate-300);
+	--color-border-dim: var(--color-slate-100);
+	--color-input-bg: hsl(0 0% 100%);
+	--color-input-border: var(--color-slate-300);
+	--color-shadow: var(--color-slate-700);
+	--font-weight-thin: 100;
+	--font-weight-extralight: 200;
+	--font-weight-light: 300;
+	--font-weight-normal: 400;
+	--font-weight-medium: 500;
+	--font-weight-semibold: 600;
+	--font-weight-bold: 700;
+	--font-weight-extrabold: 800;
+	--font-weight-black: 900;
+}
+html.dark {
+	color-scheme: dark;
+	--color-slate-50: hsl(28 8% 10%);
+	--color-slate-100: hsl(28 8% 13%);
+	--color-slate-200: hsl(28 8% 18%);
+	--color-slate-300: hsl(28 8% 25%);
+	--color-slate-400: hsl(28 6% 45%);
+	--color-slate-500: hsl(28 6% 70%);
+	--color-slate-600: hsl(28 5% 78%);
+	--color-slate-700: hsl(28 4% 84%);
+	--color-slate-800: hsl(28 6% 88%);
+	--color-slate-900: hsl(28 4% 92%);
+	--color-emerald-50: hsl(160 30% 12%);
+	--color-emerald-100: hsl(160 35% 16%);
+	--color-emerald-200: hsl(156 40% 25%);
+	--color-danger: hsl(0 70% 65%);
+	--color-warning: hsl(38 80% 55%);
+	--color-info: hsl(215 65% 65%);
+	--color-surface-raised: hsl(28 8% 13%);
+	--color-surface-overlay: hsl(28 8% 13% / 0.9);
+	--color-input-bg: hsl(28 8% 13%);
+	--color-input-border: hsl(28 8% 25%);
+	--color-shadow: hsl(0 0% 0%);
+}
+html.dark .bg-white {
+	background-color: var(--color-slate-100);
+}
+html.dark .bg-white\/90 {
+	background-color: hsl(28 8% 13% / 0.9);
+}
+html.dark .bg-white\/0 {
+	background-color: transparent;
+}
+html.dark .shadow-slate-200 {
+	--tw-shadow-color: hsl(28 8% 10%);
+}
+html.dark .shadow-slate-700\/5,
+html.dark .shadow-slate-700\/10,
+html.dark .shadow-slate-700\/20 {
+	--tw-shadow-color: hsl(0 0% 0% / 0.3);
+}
+html,
+html.cvd-protanopia,
+html.cvd-deuteranopia,
+html.cvd-tritanopia {
+	transition:
+		background-color 0.2s ease,
+		color 0.2s ease;
+}
+html.cvd-protanopia {
+	--color-danger: hsl(24 94% 53%);
+	--color-success: hsl(217 91% 60%);
+	--color-warning: hsl(48 96% 53%);
+	--color-info: hsl(263 70% 50%);
+	--color-emerald-50: hsl(207 80% 96%);
+	--color-emerald-100: hsl(207 80% 90%);
+	--color-emerald-200: hsl(209 69% 80%);
+	--color-emerald-300: hsl(211 64% 70%);
+	--color-emerald-400: hsl(213 64% 52%);
+	--color-emerald-500: hsl(215 84% 39%);
+	--color-emerald-600: hsl(215 94% 30%);
+	--color-emerald-700: hsl(215 93% 24%);
+	--color-home: hsl(24 94% 53%);
+	--color-game-nights: hsl(332 100% 50%);
+	--color-calendar: hsl(38 92% 50%);
+	--color-collection: hsl(263 70% 50%);
+	--color-stats: hsl(263 70% 50%);
+}
+html.dark.cvd-protanopia {
+	--color-danger: hsl(24 94% 63%);
+	--color-success: hsl(217 91% 70%);
+	--color-warning: hsl(48 96% 60%);
+	--color-info: hsl(263 70% 65%);
+	--color-emerald-50: hsl(215 30% 12%);
+	--color-emerald-100: hsl(215 35% 16%);
+	--color-emerald-200: hsl(215 40% 25%);
+}
+html.cvd-deuteranopia {
+	--color-danger: hsl(20 90% 48%);
+	--color-success: hsl(224 76% 48%);
+	--color-warning: hsl(48 96% 53%);
+	--color-info: hsl(272 67% 56%);
+	--color-emerald-50: hsl(217 80% 96%);
+	--color-emerald-100: hsl(217 80% 90%);
+	--color-emerald-200: hsl(219 69% 80%);
+	--color-emerald-300: hsl(221 64% 70%);
+	--color-emerald-400: hsl(222 64% 52%);
+	--color-emerald-500: hsl(224 84% 39%);
+	--color-emerald-600: hsl(224 94% 30%);
+	--color-emerald-700: hsl(224 93% 24%);
+	--color-home: hsl(20 90% 48%);
+	--color-game-nights: hsl(332 100% 50%);
+	--color-calendar: hsl(38 92% 50%);
+	--color-collection: hsl(272 67% 56%);
+	--color-stats: hsl(272 67% 56%);
+}
+html.dark.cvd-deuteranopia {
+	--color-danger: hsl(20 90% 58%);
+	--color-success: hsl(224 76% 62%);
+	--color-warning: hsl(48 96% 60%);
+	--color-info: hsl(272 67% 68%);
+	--color-emerald-50: hsl(224 30% 12%);
+	--color-emerald-100: hsl(224 35% 16%);
+	--color-emerald-200: hsl(224 40% 25%);
+}
+html.cvd-tritanopia {
+	--color-danger: hsl(0 84% 60%);
+	--color-success: hsl(142 71% 45%);
+	--color-warning: hsl(28 80% 52%);
+	--color-info: hsl(210 50% 30%);
+	--color-emerald-50: hsl(150 80% 96%);
+	--color-emerald-100: hsl(149 80% 90%);
+	--color-emerald-200: hsl(152 69% 80%);
+	--color-emerald-300: hsl(156 64% 70%);
+	--color-emerald-400: hsl(158 64% 52%);
+	--color-emerald-500: hsl(160 84% 39%);
+	--color-emerald-600: hsl(161 94% 30%);
+	--color-emerald-700: hsl(162 93% 24%);
+	--color-home: hsl(160 84% 39%);
+	--color-game-nights: hsl(332 100% 50%);
+	--color-calendar: hsl(270 60% 40%);
+	--color-collection: hsl(210 50% 30%);
+	--color-stats: hsl(215 75% 60%);
+}
+html.dark.cvd-tritanopia {
+	--color-danger: hsl(0 70% 65%);
+	--color-success: hsl(142 60% 55%);
+	--color-warning: hsl(28 70% 58%);
+	--color-info: hsl(210 40% 45%);
+	--color-emerald-50: hsl(160 30% 12%);
+	--color-emerald-100: hsl(160 35% 16%);
+	--color-emerald-200: hsl(156 40% 25%);
+}

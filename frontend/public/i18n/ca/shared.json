@@ -1,0 +1,145 @@
+{
+	"header": {
+		"logoAlt": "Logotip de GameNight Hub",
+		"toggleNav": "Alternar navegació",
+		"nav": {
+			"collection": "Col·lecció",
+			"gameNights": "Nits de Joc",
+			"calendar": "Calendari",
+			"stats": "Estadístiques",
+			"notifications": "Notificacions"
+		},
+		"login": "Iniciar sessió",
+		"ariaNotifications": "Notificacions",
+		"ariaProfile": "El meu perfil",
+		"avatarAlt": "Avatar de l'usuari",
+		"xpLevel": "Nivell d'XP"
+	},
+	"footer": {
+		"brandName": "GameNight Hub",
+		"nav": {
+			"terms": "Termes",
+			"privacy": "Privacitat",
+			"support": "Suport"
+		},
+		"bggAlt": "BoardGameGeek"
+	},
+	"xp": {
+		"badge": {
+			"levelShort": "Nv.{{ level }}",
+			"tooltip": "Nivell {{ level }} · {{ title }} · {{ current }}/{{ next }} XP",
+			"ariaLabel": "Nivell d'XP"
+		},
+		"feedback": {
+			"xpAwarded": "+{{ amount }} XP",
+			"levelUp": "Has pujat de nivell! → Nivell {{ level }}"
+		},
+		"toast": {
+			"levelUp": "Has pujat de nivell!"
+		},
+		"history": {
+			"emptyState": "Encara no has guanyat XP. Comença afegint jocs!",
+			"loadMore": "Carregar més",
+			"loading": "Carregant...",
+			"xpAmount": "+{{ amount }} XP",
+			"actions": {
+				"gameAdded": "Has afegit un joc",
+				"eventCreated": "Has creat un esdeveniment",
+				"participantJoined": "T'has unit a un esdeveniment"
+			},
+			"timeAgo": {
+				"justNow": "Ara mateix",
+				"minutesAgo": "Fa {{ count }}min",
+				"hoursAgo": "Fa {{ count }}h",
+				"daysAgo": "Fa {{ count }}d",
+				"monthsAgo": "Fa {{ count }}m"
+			}
+		}
+	},
+	"common": {
+		"search": "Cercar...",
+		"searchLabel": "Cercar",
+		"clearSearch": "Esborrar cerca"
+	},
+	"auth": {
+		"signIn": "Iniciar sessió",
+		"signOut": "Tancar sessió",
+		"login": "Iniciar sessió"
+	},
+	"languageSwitcher": {
+		"switchTo": "Canviar a {{ lang }}",
+		"label": "Seleccionar idioma"
+	},
+	"levelTitles": {
+		"1": "Peó Errant",
+		"2": "Col·leccionista Curiós",
+		"3": "Arxiver Aprenent",
+		"4": "Habitual de la Taverna",
+		"5": "Membre del Gremi",
+		"6": "Estratega Veterà",
+		"7": "Guardià del Saber",
+		"8": "Cavaller de la Taula",
+		"9": "Alt Camarlenc",
+		"10": "Arximag de la Taula"
+	},
+	"notifications": {
+		"newEvent": "Nou esdeveniment: {{ title }}"
+	},
+	"errors": {
+		"generic": "Alguna cosa ha anat malament. Torna-ho a provar.",
+		"gameAlreadyInCollection": "Aquest joc ja és a la teva col·lecció.",
+		"gameAlreadyPlayed": "Aquest joc ja és al teu historial de jugats.",
+		"gameNotFound": "Joc no trobat.",
+		"eventNotFound": "Esdeveniment no trobat.",
+		"eventFull": "Aquest esdeveniment és ple.",
+		"notAParticipant": "No ets participant d'aquest esdeveniment.",
+		"notEventOwner": "No tens permís per modificar aquest esdeveniment.",
+		"notLocationOwner": "No tens permís per modificar aquesta ubicació.",
+		"alreadyJoined": "Ja t'has unit a aquest esdeveniment.",
+		"unauthorized": "Has d'iniciar sessió per fer això.",
+		"forbidden": "No tens permís per realitzar aquesta acció.",
+		"validationFailed": "Dades no vàlides. Comprova la informació introduïda.",
+		"profileNotFound": "Perfil no trobat.",
+		"duplicateUsername": "Aquest nom d'usuari ja està en ús.",
+		"nameChangeCooldown": "Només pots canviar el teu nom un cop cada 30 dies.",
+		"openEventsExist": "Tanca els teus esdeveniments oberts abans d'eliminar el teu compte.",
+		"locationNotFound": "Ubicació no trobada.",
+		"bggApiError": "BoardGameGeek no està disponible temporalment. Torna-ho a provar més tard."
+	},
+	"themeSwitcher": {
+		"toggle": "Canviar tema",
+		"light": "Mode clar",
+		"dark": "Mode fosc",
+		"system": "Preferència del sistema"
+	},
+	"dateTimePicker": {
+		"placeholder": "[CA] Select date & time",
+		"time": "[CA] Time"
+	},
+	"cvdSelector": {
+		"label": "Visió cromàtica",
+		"normal": "Visió normal",
+		"protanopia": "Protanòpia (ceguesa al vermell)",
+		"deuteranopia": "Deuteranòpia (ceguesa al verd)",
+		"tritanopia": "Tritanòpia (ceguesa al blau)"
+	},
+	"pwa": {
+		"update": {
+			"title": "[CA] Update Available",
+			"message": "[CA] A new version is ready",
+			"reload": "[CA] Reload",
+			"later": "[CA] Later"
+		},
+		"install": {
+			"title": "[CA] Install App",
+			"message": "[CA] Add GameNight Hub to your home screen",
+			"action": "[CA] Install",
+			"dismiss": "[CA] Not now"
+		},
+		"offline": {
+			"title": "[CA] You're Offline",
+			"message": "[CA] Check your connection and try again",
+			"retry": "[CA] Retry"
+		}
+	}
+}

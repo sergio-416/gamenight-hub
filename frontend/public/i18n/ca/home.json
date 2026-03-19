@@ -1,0 +1,37 @@
+{
+	"hero": {
+		"titleBefore": "Preparat per a la teva propera ",
+		"titleHighlight": "aventura",
+		"titleAfter": "?",
+		"subtitle": "Descobreix nits de joc a prop teu o organitza la teva pròpia sessió. Crea la teva col·lecció. Juga.",
+		"imageAlt": "Nit de jocs de taula acollidora amb il·luminació càlida",
+		"cta": {
+			"explore": "Comença a Explorar",
+			"host": "Organitza Sessió",
+			"browse": "Veure Esdeveniments"
+		}
+	},
+	"features": {
+		"perks": {
+			"title": "Avantatges de Membre",
+			"description": "Desbloqueja beneficis i recompenses exclusives a mesura que creixes dins la comunitat",
+			"link": "Saber-ne més →"
+		},
+		"xp": {
+			"title": "XP i Nivells",
+			"description": "Guanya punts d'experiència per cada nit de joc i observa com puges de nivell",
+			"link": "Saber-ne més →"
+		},
+		"achievements": {
+			"title": "Assoliments",
+			"description": "Aconsegueix insígnies que mostren les teves fites i dedicació al món dels jocs",
+			"link": "Saber-ne més →"
+		}
+	},
+	"support": {
+		"title": "Necessites ajuda, Viatger?",
+		"subtitle": "Som aquí per ajudar-te a navegar el teu camí",
+		"hub": "Centre de Suport",
+		"rules": "Normes de la Comunitat"
+	}
+}

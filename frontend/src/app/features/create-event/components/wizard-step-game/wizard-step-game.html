@@ -1,0 +1,115 @@
+<ng-container *transloco="let t; read: 'create-event'">
+	<div class="space-y-6">
+		<div>
+			<h2 class="text-xl font-semibold text-on-surface">
+				{{ t('stepGame.title') }}
+			</h2>
+			<p class="mt-1 text-sm text-on-surface-muted">{{ t('stepGame.subtitle') }}</p>
+		</div>
+
+		<div>
+			<label class="mb-1.5 block text-sm font-medium text-on-surface-strong"
+				>{{ t('stepGame.eventTitle') }}</label
+			>
+			<input
+				type="text"
+				class="w-full rounded-xl border border-border bg-surface-raised px-4 py-3 text-sm text-on-surface outline-none transition-colors placeholder:text-on-surface-dim focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
+				[placeholder]="t('stepGame.eventTitlePlaceholder')"
+				[value]="title()"
+				(input)="onTitleInput($event)"
+			/>
+		</div>
+
+		<div>
+			<label class="mb-1.5 block text-sm font-medium text-on-surface-strong"
+				>{{ t('stepGame.description') }}</label
+			>
+			<textarea
+				class="w-full resize-none rounded-xl border border-border bg-surface-raised px-4 py-3 text-sm text-on-surface outline-none transition-colors placeholder:text-on-surface-dim focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
+				rows="3"
+				maxlength="500"
+				[placeholder]="t('stepGame.descriptionPlaceholder')"
+				[value]="description()"
+				(input)="onDescriptionInput($event)"
+			></textarea>
+			<p class="mt-1 text-right text-xs text-on-surface-dim">
+				{{ t('stepGame.charCount', { current: description().length }) }}
+			</p>
+		</div>
+
+		<div>
+			<label class="mb-1.5 block text-sm font-medium text-on-surface-strong"
+				>{{ t('stepGame.category') }}</label
+			>
+			<div class="flex flex-wrap gap-2">
+				@for (cat of categories; track cat.value) {
+				<button
+					type="button"
+					[class]="
+					'rounded-full px-3 py-1.5 text-xs font-medium transition-colors ' +
+					(category() === cat.value
+						? categoryMeta[cat.value].colorClass +
+							' ring-2 ring-offset-1 ring-current font-semibold'
+						: 'bg-slate-100 text-slate-600 hover:bg-slate-200')
+				"
+					(click)="onCategorySelect(cat.value)"
+					[attr.aria-pressed]="category() === cat.value"
+				>
+					{{ cat.label }}
+				</button>
+				}
+			</div>
+		</div>
+
+		<div>
+			<label class="mb-1.5 block text-sm font-medium text-on-surface-strong"
+				>{{ t('stepGame.gameFromCollection') }}</label
+			>
+			<app-game-picker
+				[selectedGameId]="selectedGameId()"
+				(gameSelected)="gameSelected.emit($event)"
+				(gameCleared)="gameCleared.emit()"
+			/>
+		</div>
+
+		<div>
+			<label class="mb-1.5 block text-sm font-medium text-on-surface-strong"
+				>{{ t('stepGame.coverImage') }}</label
+			>
+			@if (coverImage()) {
+			<div class="flex items-center gap-4">
+				<div class="relative h-20 w-36 overflow-hidden rounded-lg">
+					<img
+						[ngSrc]="coverImagePath()"
+						[alt]="coverImage()"
+						fill
+						class="object-cover"
+					/>
+				</div>
+				<button
+					type="button"
+					class="text-sm font-medium text-emerald-600 hover:text-emerald-700"
+					(click)="openCoverPicker()"
+				>
+					{{ t('stepGame.changeCoverImage') }}
+				</button>
+			</div>
+			} @else {
+			<button
+				type="button"
+				class="flex w-full items-center justify-center gap-2 rounded-xl border-2 border-dashed border-border bg-slate-50 px-4 py-8 text-sm font-medium text-on-surface-muted transition-colors hover:border-emerald-300 hover:bg-emerald-50 hover:text-emerald-600"
+				(click)="openCoverPicker()"
+			>
+				{{ t('stepGame.chooseCoverImage') }}
+			</button>
+			}
+		</div>
+	</div>
+
+	<app-cover-image-picker
+		[isOpen]="showCoverPicker()"
+		[selectedSlug]="coverImage()"
+		(selected)="onCoverSelected($event)"
+		(closed)="closeCoverPicker()"
+	/>
+</ng-container>

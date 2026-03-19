@@ -1,0 +1,50 @@
+{
+	"unauthenticated": {
+		"title": "Informações da Tua Coleção",
+		"subtitle": "Visualiza a tua coleção de jogos de tabuleiro com gráficos e análises. Acompanha o crescimento ao longo do tempo, vê a distribuição de complexidade e explora que categorias dominam as tuas prateleiras. Inicia sessão para desbloquear as tuas estatísticas.",
+		"signIn": "Iniciar sessão",
+		"createAccount": "Criar uma conta",
+		"imageAlt": "Pré-visualização de estatísticas em breve",
+		"imagePlaceholder": "Imagem em breve...",
+		"features": {
+			"categories": {
+				"title": "Categorias",
+				"description": "Vê que categorias de jogos compõem a maior parte da tua coleção"
+			},
+			"growth": {
+				"title": "Crescimento",
+				"description": "Acompanha como a tua coleção cresceu mês a mês ao longo do tempo"
+			},
+			"complexity": {
+				"title": "Complexidade",
+				"description": "Compreende a distribuição de complexidade em toda a tua biblioteca"
+			}
+		}
+	},
+	"organiser": {
+		"title": "Estatísticas do Organizador da Loja",
+		"eventsHosted": "Eventos Organizados",
+		"totalAttendees": "Total de Participantes",
+		"popularGames": "Jogos Populares"
+	},
+	"admin": {
+		"title": "Análises da Plataforma",
+		"totalUsers": "Total de Utilizadores",
+		"totalEvents": "Total de Eventos",
+		"totalGames": "Total de Jogos"
+	},
+	"collection": {
+		"title": "Estatísticas da Coleção",
+		"charts": {
+			"gamesByCategory": "Jogos por Categoria",
+			"collectionGrowth": "Crescimento da Coleção ao Longo do Tempo",
+			"complexityDistribution": "Distribuição de Complexidade"
+		},
+		"emptyState": {
+			"title": "Ainda sem estatísticas",
+			"subtitle": "Adiciona alguns jogos para ver as análises da tua coleção!"
+		}
+	},
+	"loading": "A carregar estatísticas...",
+	"error": "Falha ao carregar estatísticas"
+}

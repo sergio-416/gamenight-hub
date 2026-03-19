@@ -1,0 +1,35 @@
+<div
+	*transloco="let t; read: 'collection'"
+	class="grid grid-cols-2 gap-3 md:grid-cols-4"
+>
+	<div class="rounded-xl border border-border bg-surface-raised p-4 shadow-sm">
+		<p class="text-xs font-semibold uppercase tracking-wide text-on-surface-dim">
+			{{ t('statCards.complexity') }}
+		</p>
+		<p class="mt-1 text-xl font-bold text-emerald-500">
+			{{ complexity() !== null ? complexity() + "/5" : t('statCards.na') }}
+		</p>
+	</div>
+	<div class="rounded-xl border border-border bg-surface-raised p-4 shadow-sm">
+		<p class="text-xs font-semibold uppercase tracking-wide text-on-surface-dim">
+			{{ t('statCards.rating') }}
+		</p>
+		<p class="mt-1 text-xl font-bold text-emerald-500">
+			{{ rating() !== null ? rating() : t('statCards.na') }}
+		</p>
+	</div>
+	<div class="rounded-xl border border-border bg-surface-raised p-4 shadow-sm">
+		<p class="text-xs font-semibold uppercase tracking-wide text-on-surface-dim">
+			{{ t('statCards.rank') }}
+		</p>
+		<p class="mt-1 text-xl font-bold text-emerald-500">
+			{{ rank() !== null ? "#" + rank() : t('statCards.na') }}
+		</p>
+	</div>
+	<div class="rounded-xl border border-border bg-surface-raised p-4 shadow-sm">
+		<p class="text-xs font-semibold uppercase tracking-wide text-on-surface-dim">
+			{{ t('statCards.weight') }}
+		</p>
+		<p class="mt-1 text-xl font-bold text-emerald-500">{{ weightLabel() }}</p>
+	</div>
+</div>

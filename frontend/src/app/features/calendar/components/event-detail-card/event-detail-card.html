@@ -1,0 +1,19 @@
+<div
+	[class]="containerClass()"
+	(click)="onCardClick()"
+	(keydown.enter)="onCardClick()"
+	role="button"
+	tabindex="0"
+	[attr.aria-label]="'View details for ' + event().title"
+	[attr.data-testid]="'detail-card-' + event().id"
+>
+	<p [class]="dateLabelClass()">{{ dateLabel() }}</p>
+
+	<h4 class="mt-1.5 text-base font-semibold text-on-surface-strong">
+		{{ event().title }}
+	</h4>
+
+	@if (metaLine(); as meta) {
+	<p class="mt-1 text-sm text-on-surface-muted">{{ meta }}</p>
+	}
+</div>

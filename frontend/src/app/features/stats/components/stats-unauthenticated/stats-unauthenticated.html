@@ -1,0 +1,107 @@
+<ng-container *transloco="let t; read: 'stats'">
+	<main class="min-h-screen bg-slate-50">
+		<section class="py-20 lg:py-28" aria-labelledby="stats-heading">
+			<div
+				class="container mx-auto grid items-center gap-12 px-6 lg:grid-cols-2"
+			>
+				<div>
+					<h1
+						id="stats-heading"
+						class="mb-6 text-4xl font-bold text-on-surface-strong lg:text-5xl"
+					>
+						{{ t('unauthenticated.title') }}
+					</h1>
+					<p class="mb-8 text-lg leading-relaxed text-on-surface-medium">
+						{{ t('unauthenticated.subtitle') }}
+					</p>
+					<div class="flex flex-wrap gap-4">
+						<a
+							routerLink="/login"
+							class="inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded bg-emerald-500 px-6 text-base font-medium tracking-wide whitespace-nowrap text-white transition duration-300 hover:bg-emerald-600 focus:bg-emerald-700 focus-visible:outline-none"
+						>
+							{{ t('unauthenticated.signIn') }}
+						</a>
+						<a
+							routerLink="/login"
+							[queryParams]="{ mode: 'register' }"
+							class="inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded border-2 border-emerald-500 px-6 text-base font-medium tracking-wide text-emerald-500 transition duration-300 hover:bg-emerald-50 focus:bg-emerald-100 focus-visible:outline-none"
+						>
+							{{ t('unauthenticated.createAccount') }}
+						</a>
+					</div>
+				</div>
+				<figure
+					[attr.aria-label]="t('unauthenticated.imageAlt')"
+					class="hidden aspect-square items-center justify-center rounded-xl bg-slate-200 lg:flex"
+				>
+					<figcaption class="text-on-surface-dim">
+						{{ t('unauthenticated.imagePlaceholder') }}
+					</figcaption>
+				</figure>
+			</div>
+		</section>
+		<section class="py-16" aria-label="Stats features">
+			<div class="container mx-auto px-6">
+				<div class="grid gap-8 md:grid-cols-3">
+					<article
+						class="overflow-hidden rounded-lg bg-surface-raised text-center text-on-surface-muted shadow-md shadow-border"
+					>
+						<figure class="p-8 pb-0" aria-hidden="true">
+							<fa-icon
+								[icon]="barChartIcon"
+								size="4x"
+								class="text-emerald-500"
+							/>
+						</figure>
+						<div class="p-8">
+							<h2 class="mb-4 text-4xl font-semibold text-on-surface-strong">
+								{{ t('unauthenticated.features.categories.title') }}
+							</h2>
+							<p class="text-on-surface-muted">
+								{{ t('unauthenticated.features.categories.description') }}
+							</p>
+						</div>
+					</article>
+					<article
+						class="overflow-hidden rounded-lg bg-surface-raised text-center text-on-surface-muted shadow-md shadow-border"
+					>
+						<figure class="p-8 pb-0" aria-hidden="true">
+							<fa-icon
+								[icon]="lineChartIcon"
+								size="4x"
+								class="text-emerald-500"
+							/>
+						</figure>
+						<div class="p-8">
+							<h2 class="mb-4 text-4xl font-semibold text-on-surface-strong">
+								{{ t('unauthenticated.features.growth.title') }}
+							</h2>
+							<p class="text-on-surface-muted">
+								{{ t('unauthenticated.features.growth.description') }}
+							</p>
+						</div>
+					</article>
+					<article
+						class="overflow-hidden rounded-lg bg-surface-raised text-center text-on-surface-muted shadow-md shadow-border"
+					>
+						<figure class="p-8 pb-0" aria-hidden="true">
+							<fa-icon
+								[icon]="pieChartIcon"
+								size="4x"
+								class="text-emerald-500"
+							/>
+						</figure>
+						<div class="p-8">
+							<h2 class="mb-4 text-4xl font-semibold text-on-surface-strong">
+								{{ t('unauthenticated.features.complexity.title') }}
+							</h2>
+							<p class="text-on-surface-muted">
+								{{ t('unauthenticated.features.complexity.description') }}
+							</p>
+						</div>
+					</article>
+				</div>
+			</div>
+		</section>
+	</main>
+</ng-container>

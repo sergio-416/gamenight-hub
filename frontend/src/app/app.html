@@ -1,0 +1,31 @@
+<app-update-banner />
+<a
+	href="#main-content"
+	class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-emerald-700 focus:text-white"
+>
+	Skip to main content
+</a>
+@if (showChrome()) {
+<app-header />
+}
+<main id="main-content">
+	<router-outlet />
+</main>
+@if (showChrome()) {
+<app-footer />
+}
+<app-toast-container />
+<app-xp-feedback />
+@if (levelUpData(); as lu) {
+<app-level-up-toast [level]="lu.level" [title]="lu.title" />
+} @if (confirmDialog.pending(); as dialog) {
+<app-confirm-dialog
+	[isOpen]="true"
+	[title]="dialog.title"
+	[message]="dialog.message"
+	[confirmText]="dialog.confirmText"
+	(confirmed)="dialog.resolve(true)"
+	(cancelled)="dialog.resolve(false)"
+/>
+}
+<app-install-banner />

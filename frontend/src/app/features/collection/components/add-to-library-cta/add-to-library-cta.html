@@ -1,0 +1,35 @@
+<div
+	*transloco="let t; read: 'collection'"
+	role="button"
+	tabindex="0"
+	class="flex h-full w-full cursor-pointer flex-col overflow-hidden rounded-xl border-2 border-dashed border-emerald-400 bg-emerald-50 transition-all hover:border-emerald-500 hover:bg-emerald-100/50 hover:shadow-md"
+	(click)="addClick.emit()"
+	(keydown.enter)="addClick.emit()"
+>
+	<div class="flex aspect-square w-full items-center justify-center">
+		<div
+			class="flex h-14 w-14 items-center justify-center rounded-xl border-2 border-emerald-400 bg-emerald-100"
+		>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				class="h-7 w-7 text-emerald-600"
+				fill="none"
+				viewBox="0 0 24 24"
+				stroke="currentColor"
+				stroke-width="2.5"
+			 aria-hidden="true">
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					d="M12 4v16m8-8H4"
+				/>
+			</svg>
+		</div>
+	</div>
+	<div class="space-y-1 p-4 text-center">
+		<h4 class="text-sm font-bold text-emerald-600">
+			{{ t('addToLibrary.title') }}
+		</h4>
+		<p class="text-xs text-on-surface-muted">{{ t('addToLibrary.subtitle') }}</p>
+	</div>
+</div>

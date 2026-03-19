@@ -1,0 +1,117 @@
+<ng-container *transloco="let t; read: 'create-event'">
+	<div class="space-y-6">
+		<div>
+			<h2 class="text-xl font-semibold text-slate-900">
+				{{ t('stepLocation.title') }}
+			</h2>
+			<p class="mt-1 text-sm text-slate-500">
+				{{ t('stepLocation.subtitle') }}
+			</p>
+		</div>
+
+		<div class="grid grid-cols-2 gap-3">
+			<button
+				type="button"
+				class="rounded-xl border-2 px-4 py-3 text-left transition-all"
+				[class]="locationMode() === 'private' ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-500/15' : 'border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:border-slate-300 dark:hover:border-slate-600'"
+				(click)="locationModeChange.emit('private')"
+			>
+				<p class="text-sm font-semibold text-slate-900">
+					{{ t('stepLocation.privatePlace') }}
+				</p>
+				<p class="text-xs text-slate-500">
+					{{ t('stepLocation.privatePlaceDesc') }}
+				</p>
+			</button>
+			<button
+				type="button"
+				class="relative rounded-xl border-2 border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-4 py-3 text-left opacity-60"
+				disabled
+			>
+				<p class="text-sm font-semibold text-slate-400">
+					{{ t('stepLocation.publicVenue') }}
+				</p>
+				<p class="text-xs text-slate-400">{{ t('stepLocation.comingSoon') }}</p>
+				<span
+					class="absolute right-2 top-2 rounded-full bg-slate-200 dark:bg-slate-700 px-2 py-0.5 text-[10px] font-medium text-slate-500"
+					>{{ t('stepLocation.soon') }}</span
+				>
+			</button>
+		</div>
+
+		@if (locationMode() === 'private') {
+		<div class="relative">
+			<label class="mb-1.5 block text-sm font-medium text-slate-700"
+				>{{ t('stepLocation.address') }}</label
+			>
+			<div class="relative">
+				<input
+					type="text"
+					class="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 py-3 pl-10 pr-4 text-sm text-slate-900 outline-none transition-colors placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
+					[placeholder]="t('stepLocation.addressPlaceholder')"
+					[value]="internalAddress()"
+					(input)="onAddressInput($event)"
+					(focus)="onAddressFocus()"
+					(blur)="onAddressBlur()"
+				/>
+				<fa-icon
+					[icon]="iconSearch"
+					class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+					size="sm"
+				/>
+			</div>
+
+			@if (showSuggestions()) {
+			<ul
+				class="absolute z-40 mt-1 max-h-48 w-full overflow-y-auto rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-lg"
+			>
+				@for (suggestion of suggestions(); track suggestion.place_id) {
+				<li>
+					<button
+						type="button"
+						class="w-full px-4 py-2.5 text-left text-sm text-slate-700 transition-colors hover:bg-emerald-50 dark:hover:bg-emerald-500/15"
+						(mousedown)="selectSuggestion(suggestion)"
+					>
+						{{ suggestion.display_name }}
+					</button>
+				</li>
+				}
+			</ul>
+			} @if (selectedLocationDisplay()) {
+			<p class="mt-2 flex items-center gap-1.5 text-sm text-emerald-600 dark:text-emerald-400">
+				<span>&#x1f4cd;</span> {{ selectedLocationDisplay() }}
+			</p>
+			}
+		</div>
+		}
+
+		<app-date-time-picker
+			[label]="t('stepLocation.dateAndTime')"
+			[required]="true"
+			[initialDate]="startDateTime()"
+			[minDate]="today"
+			(dateTimeChange)="onStartDateTimeChange($event)"
+		/>
+
+		<div>
+			<button
+				type="button"
+				class="flex items-center gap-2 text-sm font-medium text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300"
+				(click)="toggleEndTime()"
+			>
+				@if (showEndTimeInternal()) { {{ t('stepLocation.removeEndTime') }} }
+				@else { {{ t('stepLocation.addEndTime') }} }
+			</button>
+			@if (showEndTimeInternal()) {
+			<div class="mt-3">
+				<app-date-time-picker
+					[label]="t('stepLocation.endDateAndTime')"
+					[initialDate]="endDateTime()"
+					[minDate]="startDateTime()"
+					(dateTimeChange)="onEndDateTimeChange($event)"
+				/>
+			</div>
+			}
+		</div>
+	</div>
+</ng-container>

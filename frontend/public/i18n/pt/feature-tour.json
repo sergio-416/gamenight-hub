@@ -1,0 +1,96 @@
+{
+	"layout": {
+		"prevAria": "Página de funcionalidade anterior",
+		"nextAria": "Página de funcionalidade seguinte",
+		"backToHome": "← Voltar ao início"
+	},
+	"perks": {
+		"title": "Vantagens de Membro",
+		"description": "Os membros do GameNight Hub têm acesso exclusivo a funcionalidades pensadas para verdadeiros entusiastas de jogos de tabuleiro. Desde inscrição prioritária em eventos até direitos de voto na comunidade, a tua adesão desbloqueia a experiência social completa de jogos de tabuleiro. Junta-te a uma comunidade que leva o hobby tão a sério como tu.",
+		"howItWorks": {
+			"title": "Como funciona",
+			"createAccount": {
+				"title": "Cria a tua conta",
+				"description": "Regista-te e junta-te a uma comunidade crescente de entusiastas de jogos de tabuleiro por toda a Espanha"
+			},
+			"completeProfile": {
+				"title": "Completa o teu perfil",
+				"description": "Configura as tuas preferências de jogos, coleção e localização para receberes recomendações personalizadas"
+			},
+			"unlockAccess": {
+				"title": "Desbloqueia acesso exclusivo",
+				"description": "Obtém acesso imediato a funcionalidades exclusivas para membros, inscrição prioritária e privilégios na comunidade"
+			}
+		},
+		"whatYouUnlock": {
+			"title": "O que desbloqueias",
+			"items": {
+				"priorityRegistration": "Inscrição prioritária em eventos",
+				"membersOnly": "Noites de jogos exclusivas para membros",
+				"votingRights": "Direitos de voto na comunidade",
+				"earlyAccess": "Acesso antecipado a novas funcionalidades",
+				"collectionTracking": "Acompanhamento da coleção pessoal de jogos"
+			},
+			"srLabel": "vantagem de funcionalidade"
+		}
+	},
+	"xp": {
+		"title": "XP e Níveis",
+		"description": "Ganha pontos de experiência cada vez que interages com a comunidade — organiza eventos, confirma presença em noites de jogos e completa o teu perfil. À medida que o teu XP cresce, o teu nível sobe e novos privilégios ficam disponíveis. Quanto mais jogas, mais a plataforma te recompensa.",
+		"howYouEarn": {
+			"title": "Como ganhas XP",
+			"hostGameNight": {
+				"title": "Organiza uma noite de jogos",
+				"description": "Organiza um evento e junta jogadores — ganha <1>+50 XP</1> por cada noite que organizas"
+			},
+			"rsvp": {
+				"title": "Confirma presença num evento",
+				"description": "Aparece e joga — cada presença confirmada adiciona <1>+10 XP</1> ao teu total"
+			},
+			"completeProfile": {
+				"title": "Completa o teu perfil",
+				"description": "Preenche as tuas preferências, coleção e localização uma vez e recebe <1>+25 XP</1>"
+			}
+		},
+		"milestones": {
+			"title": "Marcos de nível",
+			"items": {
+				"apprentice": "Nível 1 – Aprendiz (0 XP)",
+				"strategist": "Nível 5 – Estratega (250 XP)",
+				"gameMaster": "Nível 10 – Mestre de Jogo (1000 XP)",
+				"grandMaster": "Nível 20 – Grão-Mestre (5000 XP)"
+			},
+			"srLabel": "vantagem de funcionalidade"
+		}
+	},
+	"badges": {
+		"title": "Conquistas",
+		"description": "Ganha insígnias ao manteres-te ativo na comunidade — quanto mais jogas, mais desbloqueias. Constrói a tua coleção, organiza noites de jogos e mostra a tua dedicação com uma vitrina que fala por si.",
+		"howYouEarn": {
+			"title": "Como ganhas insígnias",
+			"earlyAdopter": {
+				"title": "Sê um dos primeiros",
+				"description": "Junta-te antes do lançamento público e garante o teu lugar entre os membros fundadores do GameNight Hub"
+			},
+			"hostFirst": {
+				"title": "Organiza a tua primeira noite de jogos",
+				"description": "Cria e gere o teu primeiro evento para te tornares organizador oficial e desbloquear conquistas de organizador"
+			},
+			"buildCollection": {
+				"title": "Constrói a tua coleção",
+				"description": "Adiciona 10 ou mais jogos à tua coleção pessoal e ganha a insígnia de Colecionador"
+			}
+		},
+		"showcase": {
+			"title": "Vitrina de insígnias",
+			"items": {
+				"earlyAdopter": "Pioneiro",
+				"gameMaster": "Mestre de Jogo",
+				"socialButterfly": "Borboleta Social",
+				"collector": "Colecionador",
+				"partyStarter": "Animador de Festas"
+			},
+			"srLabel": "vantagem de funcionalidade"
+		}
+	}
+}

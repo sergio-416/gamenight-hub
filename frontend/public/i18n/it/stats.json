@@ -1,0 +1,50 @@
+{
+	"unauthenticated": {
+		"title": "Statistiche della Tua Collezione",
+		"subtitle": "Visualizza la tua collezione di giochi da tavolo con grafici e analisi. Monitora la crescita nel tempo, scopri la distribuzione della complessità ed esplora quali categorie dominano i tuoi scaffali. Accedi per sbloccare le tue statistiche.",
+		"signIn": "Accedi",
+		"createAccount": "Crea un account",
+		"imageAlt": "Anteprima statistiche in arrivo",
+		"imagePlaceholder": "Immagine in arrivo...",
+		"features": {
+			"categories": {
+				"title": "Categorie",
+				"description": "Scopri quali categorie di giochi compongono la maggior parte della tua collezione"
+			},
+			"growth": {
+				"title": "Crescita",
+				"description": "Monitora come la tua collezione è cresciuta mese dopo mese nel tempo"
+			},
+			"complexity": {
+				"title": "Complessità",
+				"description": "Comprendi la distribuzione della complessità nell'intera tua libreria"
+			}
+		}
+	},
+	"organiser": {
+		"title": "Statistiche Organizzatore",
+		"eventsHosted": "Eventi Organizzati",
+		"totalAttendees": "Partecipanti Totali",
+		"popularGames": "Giochi Popolari"
+	},
+	"admin": {
+		"title": "Analisi Piattaforma",
+		"totalUsers": "Utenti Totali",
+		"totalEvents": "Eventi Totali",
+		"totalGames": "Giochi Totali"
+	},
+	"collection": {
+		"title": "Statistiche Collezione",
+		"charts": {
+			"gamesByCategory": "Giochi per Categoria",
+			"collectionGrowth": "Crescita Collezione nel Tempo",
+			"complexityDistribution": "Distribuzione Complessità"
+		},
+		"emptyState": {
+			"title": "Nessuna statistica ancora",
+			"subtitle": "Aggiungi qualche gioco per vedere le analisi della tua collezione!"
+		}
+	},
+	"loading": "Caricamento statistiche...",
+	"error": "Caricamento statistiche non riuscito"
+}

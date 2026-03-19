@@ -1,0 +1,51 @@
+@if (isOpen()) {
+<div
+	data-testid="confirm-dialog-backdrop"
+	class="fixed top-0 left-0 z-50 flex h-screen w-screen items-center justify-center bg-black/50 backdrop-blur-sm"
+	role="dialog"
+	aria-modal="true"
+	aria-labelledby="confirm-dialog-title"
+	cdkTrapFocus
+	cdkTrapFocusAutoCapture
+	(click)="handleBackdropClick($event)"
+>
+	<div
+		data-testid="confirm-dialog"
+		class="flex w-11/12 max-w-md flex-col gap-4 overflow-hidden rounded-lg bg-surface-raised p-6 shadow-xl shadow-shadow/20"
+		role="document"
+		(click)="$event.stopPropagation()"
+	>
+		<header class="border-b border-border-dim pb-4">
+			<h2
+				id="confirm-dialog-title"
+				class="text-xl font-semibold text-on-surface-strong"
+			>
+				{{ title() }}
+			</h2>
+		</header>
+		<div class="py-2">
+			<p class="text-on-surface-medium">{{ message() }}</p>
+		</div>
+		<footer class="flex justify-end gap-3 border-t border-border-dim pt-4">
+			<button
+				data-testid="cancel-button"
+				type="button"
+				class="inline-flex h-10 items-center justify-center rounded-lg px-5 text-sm font-medium tracking-wide text-on-surface-medium transition duration-300 hover:bg-slate-100 focus:bg-slate-200"
+				(click)="onCancel()"
+			>
+				{{ cancelText() }}
+			</button>
+			<button
+				data-testid="confirm-button"
+				type="button"
+				[class]="danger()
+					? 'inline-flex h-10 items-center justify-center rounded-lg bg-pink-600 px-5 text-sm font-medium tracking-wide text-white transition duration-300 hover:bg-pink-700 focus:bg-pink-800'
+					: 'inline-flex h-10 items-center justify-center rounded-lg bg-emerald-500 px-5 text-sm font-medium tracking-wide text-white transition duration-300 hover:bg-emerald-600 focus:bg-emerald-700'"
+				(click)="onConfirm()"
+			>
+				{{ confirmText() }}
+			</button>
+		</footer>
+	</div>
+</div>
+}

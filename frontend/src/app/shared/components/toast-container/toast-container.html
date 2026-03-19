@@ -1,0 +1,42 @@
+<div
+	data-testid="toast-container"
+	class="pointer-events-none fixed bottom-4 left-4 right-4 z-9999 flex flex-col-reverse items-end gap-3 sm:left-auto"
+>
+	@for (toast of toasts(); track toast.id) {
+	<div
+		[attr.data-testid]="'toast-' + toast.type"
+		[attr.data-toast-id]="toast.id"
+		class="animate-in slide-in-from-right-full pointer-events-auto w-full max-w-md sm:min-w-[300px] rounded-lg border-l-4 bg-surface-raised p-4 shadow-lg shadow-shadow/10 duration-300"
+		[class.border-l-emerald-500]="toast.type === 'success'"
+		[class.border-l-pink-600]="toast.type === 'error'"
+		[class.border-l-amber-500]="toast.type === 'warning'"
+		[class.border-l-blue-500]="toast.type === 'info'"
+		role="alert"
+	>
+		<div class="flex items-center justify-between gap-3">
+			<span class="flex-1 text-sm text-on-surface-strong">{{ toast.message }}</span>
+			<button
+				type="button"
+				class="-mr-2 inline-flex h-8 w-8 items-center justify-center rounded text-on-surface-dim transition hover:bg-slate-100 hover:text-slate-600"
+				(click)="dismiss(toast.id)"
+				aria-label="Close"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					class="h-4 w-4"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+					stroke-width="2"
+				 aria-hidden="true">
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M6 18L18 6M6 6l12 12"
+					/>
+				</svg>
+			</button>
+		</div>
+	</div>
+	}
+</div>

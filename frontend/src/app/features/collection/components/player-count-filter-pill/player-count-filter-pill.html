@@ -1,0 +1,43 @@
+<div class="relative">
+	<button
+		type="button"
+		(click)="open.set(!open())"
+		[attr.aria-expanded]="open()"
+		aria-haspopup="listbox"
+		class="inline-flex items-center gap-2 h-9 px-4 rounded-full text-sm font-medium border border-border bg-surface-raised text-on-surface-strong hover:bg-slate-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
+	>
+		<span>{{ activeLabel() }}</span>
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			viewBox="0 0 20 20"
+			fill="currentColor"
+			class="size-4 text-on-surface-dim transition-transform"
+			[class.rotate-180]="open()"
+			aria-hidden="true"
+		>
+			<path
+				fill-rule="evenodd"
+				d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+				clip-rule="evenodd"
+			/>
+		</svg>
+	</button>
+	@if (open()) {
+	<ul
+		role="listbox"
+		class="absolute top-full left-0 mt-1.5 z-50 bg-surface-raised rounded-xl shadow-lg border border-border py-1 min-w-[160px]"
+	>
+		@for (opt of options(); track opt.key) {
+		<li
+			role="option"
+			[attr.aria-selected]="activeCount() === opt.key"
+			(click)="select(opt.key)"
+			[class]="activeCount() === opt.key ? 'bg-emerald-50 text-emerald-700 font-semibold' : 'text-on-surface-medium hover:bg-slate-50'"
+			class="w-full text-left px-4 py-2 text-sm transition-colors cursor-pointer"
+		>
+			{{ opt.label }}
+		</li>
+		}
+	</ul>
+	}
+</div>

@@ -1,0 +1,151 @@
+{
+	"header": {
+		"title": "Ma Collection",
+		"subtitle": "Tu as {{ count }} {{ count === 1 ? 'game' : 'games' }} dans ta ludothèque. Continue à jouer !",
+		"subtitleSingular": "Tu as {{ count }} jeu dans ta ludothèque. Continue à jouer !",
+		"subtitlePlural": "Tu as {{ count }} jeux dans ta ludothèque. Continue à jouer !",
+		"addGame": "Ajouter un jeu"
+	},
+	"toolbar": {
+		"searchPlaceholder": "Rechercher dans la collection...",
+		"searchAriaLabel": "Rechercher des jeux dans la collection",
+		"gridView": "Vue grille",
+		"listView": "Vue liste"
+	},
+	"empty": {
+		"noGamesFound": "Aucun jeu trouvé",
+		"tryAdjusting": "Essaie d'ajuster ta recherche ou tes filtres",
+		"collectionEmpty": "Ta collection est vide",
+		"startBuilding": "Commence à construire ta ludothèque",
+		"importFirst": "Importe ton premier jeu"
+	},
+	"list": {
+		"players": "Joueurs",
+		"min": "min",
+		"loadMore": "Charger plus de jeux"
+	},
+	"confirmRemove": {
+		"title": "Retirer le jeu",
+		"message": "Tu es sûr de vouloir retirer ce jeu de ta collection ?",
+		"confirm": "Retirer",
+		"cancel": "Annuler"
+	},
+	"unauthenticated": {
+		"heading": "Ta Collection de Jeux de Société",
+		"description": "Importe des jeux depuis BoardGameGeek, suis ce que tu possèdes et obtiens des recommandations IA adaptées à ta ludothèque. Connecte-toi pour commencer à construire ta collection.",
+		"signIn": "Se connecter",
+		"createAccount": "Créer un compte",
+		"imagePlaceholder": "Image bientôt disponible...",
+		"featureImportTitle": "Importer",
+		"featureImportDesc": "Recherche sur BoardGameGeek et ajoute n'importe quel jeu à ta ludothèque personnelle en quelques secondes",
+		"featureDiscoverTitle": "Découvrir",
+		"featureDiscoverDesc": "Obtiens des recommandations de jeux par IA basées sur ce que tu possèdes déjà et ce que tu aimes",
+		"featureTrackTitle": "Suivre",
+		"featureTrackDesc": "Consulte les statistiques et analyses de toute ta collection en un coup d'œil"
+	},
+	"addToLibrary": {
+		"title": "Ajouter à la ludothèque",
+		"subtitle": "Enrichis ta collection de jeux de société"
+	},
+	"import": {
+		"back": "← Retour",
+		"pageTitle": "Ajouter un jeu à ta collection",
+		"searchPlaceholder": "Rechercher un jeu (ex. : Catane, Les Aventuriers du Rail)...",
+		"searchAriaLabel": "Rechercher des jeux de société",
+		"searching": "Recherche en cours...",
+		"search": "Rechercher",
+		"year": "Année",
+		"rank": "Classement",
+		"na": "N/D",
+		"unranked": "Non classé",
+		"inCollection": "Dans la collection",
+		"importing": "Importation...",
+		"importBtn": "Importer",
+		"noGamesFound": "Aucun jeu trouvé. Essaie une autre recherche."
+	},
+	"bggPreview": {
+		"backToSearch": "Retour à la recherche",
+		"errorLoading": "Impossible de charger les détails du jeu. Réessaie.",
+		"alreadyInCollection": "Déjà dans la collection",
+		"importingEllipsis": "Importation...",
+		"addToCollection": "Ajouter à la collection",
+		"players": "Joueurs",
+		"minSuffix": "Min",
+		"agePlus": "{{ age }} ans et +",
+		"aboutTheGame": "À propos du jeu",
+		"publisher": "Éditeur :",
+		"year": "Année :",
+		"dataPoweredBy": "Données fournies par",
+		"bgg": "BoardGameGeek"
+	},
+	"gameDetail": {
+		"backToCollection": "Retour à la collection",
+		"errorLoading": "Impossible de charger les détails du jeu. Réessaie.",
+		"addToCollection": "Ajouter à la collection",
+		"owned": "Possédé",
+		"removeFromCollection": "Retirer de la collection",
+		"wishlistGame": "Ajouter à la liste de souhaits",
+		"players": "Joueurs",
+		"minSuffix": "Min",
+		"agePlus": "{{ age }} ans et +",
+		"aboutTheGame": "À propos du jeu",
+		"publisher": "Éditeur :",
+		"year": "Année :",
+		"dataPoweredBy": "Données fournies par",
+		"bgg": "BoardGameGeek"
+	},
+	"statCards": {
+		"complexity": "Complexité",
+		"rating": "Note",
+		"rank": "Classement",
+		"weight": "Poids",
+		"na": "N/D"
+	},
+	"tags": {
+		"expansion": "Extension",
+		"categories": "Catégories",
+		"mechanics": "Mécaniques"
+	},
+	"recommendations": {
+		"title": "Plus dans ta collection",
+		"addToLibrary": "Ajouter à la ludothèque",
+		"expandCollection": "Enrichis ta collection de jeux de société"
+	},
+	"filters": {
+		"playersAny": "[FR] Any Players",
+		"players1": "[FR] 1 Player",
+		"players2": "[FR] 2 Players",
+		"players3": "[FR] 3 Players",
+		"players4": "[FR] 4 Players",
+		"players5": "[FR] 5 Players",
+		"players6Plus": "[FR] 6+ Players",
+		"categoryAll": "[FR] All Categories",
+		"sortNameAsc": "[FR] A → Z",
+		"sortNameDesc": "[FR] Z → A",
+		"sortNewest": "[FR] Newest First",
+		"sortOldest": "[FR] Oldest First"
+	},
+	"status": {
+		"owned": "Possédé",
+		"wantToPlay": "Envie de jouer",
+		"wantToTry": "Envie d'essayer",
+		"played": "Joué"
+	},
+	"weight": {
+		"1": "Léger",
+		"2": "Léger-Moyen",
+		"3": "Moyen",
+		"4": "Moyen-Lourd",
+		"5": "Lourd",
+		"notRated": "Non évalué"
+	},
+	"card": {
+		"playersSingular": "{{ count }} Joueur",
+		"playersPlural": "{{ count }} Joueurs",
+		"playersRange": "{{ min }}-{{ max }} Joueurs"
+	},
+	"removeConfirmMessage": "Retirer « {{ name }} » de ta collection ? Cette action est irréversible.",
+	"toast": {
+		"gameRemoved": "Jeu retiré de la collection"
+	}
+}

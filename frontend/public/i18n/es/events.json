@@ -1,0 +1,79 @@
+{
+	"loading": "Cargando evento\u2026",
+	"notFound": "Evento no encontrado.",
+	"backToGameNights": "Volver a Noches de Juego",
+	"categoryNight": "Noche de {{ label }}",
+	"hostedBy": "Organizado por {{ name }}",
+	"templateRating": "TEMPLATE: \u2605 4.9 valoraci\u00f3n \u00b7 12 Eventos Organizados",
+	"templateMessageHost": "TEMPLATE: Escribir al Anfitri\u00f3n",
+	"youAreHost": "Eres el Anfitri\u00f3n",
+	"leaving": "Saliendo\u2026",
+	"leaveEvent": "Abandonar Evento",
+	"joining": "Uni\u00e9ndose\u2026",
+	"eventFull": "Evento Lleno",
+	"joinGame": "Unirse",
+	"signInToJoin": "Inicia sesi\u00f3n para unirte",
+	"aboutThisEvent": "Sobre este Evento",
+	"ownerZone": "Zona del Organizador",
+	"editEvent": "Editar Evento",
+	"delete": "Eliminar",
+	"edit": {
+		"titleLabel": "T\u00edtulo",
+		"titlePlaceholder": "T\u00edtulo del evento",
+		"descriptionLabel": "Descripci\u00f3n",
+		"descriptionPlaceholder": "Descripci\u00f3n del evento",
+		"coverImageLabel": "Imagen de Portada",
+		"coverPreviewAlt": "Vista previa de portada",
+		"changeCover": "Cambiar",
+		"chooseCoverImage": "Elegir imagen de portada",
+		"maxPlayersLabel": "M\u00e1x. Jugadores",
+		"maxPlayersPlaceholder": "N\u00famero de jugadores",
+		"startTimeLabel": "Hora de Inicio",
+		"addEndTime": "A\u00f1adir hora de fin",
+		"cancel": "Cancelar",
+		"saving": "Guardando\u2026",
+		"saveChanges": "Guardar Cambios"
+	},
+	"deleteConfirm": {
+		"message": "\u00bfEst\u00e1s seguro? Esta acci\u00f3n no se puede deshacer.",
+		"deleting": "Eliminando\u2026",
+		"yesDelete": "S\u00ed, eliminar",
+		"cancel": "Cancelar"
+	},
+	"templateMapPreview": "TEMPLATE: Vista previa del mapa",
+	"location": "Ubicaci\u00f3n",
+	"postalCode": "CP {{ code }}",
+	"templateGetDirections": "TEMPLATE: C\u00f3mo llegar",
+	"playersJoined": "Jugadores Unidos",
+	"playerAlt": "Jugador",
+	"urgency": {
+		"joined": "{{ count }} unidos",
+		"full": "Evento Lleno",
+		"spotsLeftSingular": "¡{{ count }} plaza libre!",
+		"spotsLeftPlural": "¡{{ count }} plazas libres!"
+	},
+	"infoPill": {
+		"category": "Categoría",
+		"weight": "Peso",
+		"playingTime": "Tiempo de Juego",
+		"players": "Jugadores",
+		"minSuffix": "min"
+	},
+	"editWarning": {
+		"tooManyPlayers": "Este juego admite hasta {{ max }} jugadores — has puesto {{ current }}",
+		"tooFewPlayers": "Este juego requiere al menos {{ min }} jugadores — has puesto {{ current }}"
+	},
+	"toast": {
+		"eventUpdated": "Evento actualizado",
+		"eventUpdateFailed": "Error al guardar los cambios",
+		"eventDeleted": "Evento eliminado",
+		"eventDeleteFailed": "Error al eliminar el evento",
+		"eventDeleteForbidden": "No tienes permiso para eliminar este evento",
+		"joinedEvent": "¡Te uniste al evento!",
+		"joinFailed": "Error al unirse al evento",
+		"leftEvent": "Abandonaste el evento",
+		"leaveFailed": "Error al abandonar el evento",
+		"hostCannotLeave": "El anfitrión no puede abandonar su propio evento",
+		"invalidInput": "Datos no válidos"
+	}
+}

@@ -1,0 +1,11 @@
+node_modules
+dist
+coverage
+.env
+.env.*
+*.spec.ts
+*.test.ts
+vitest.config*.ts
+tsconfig*.tsbuildinfo
+.git
+README.md

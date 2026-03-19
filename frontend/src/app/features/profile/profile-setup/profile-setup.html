@@ -1,0 +1,379 @@
+<section *transloco="let t; read: 'profile'" class="mx-auto max-w-4xl px-4 py-12">
+	<div class="mb-8 text-center">
+		<h1 class="text-3xl font-bold text-on-surface">{{ t('setup.welcome') }}</h1>
+		<p class="mt-2 text-on-surface-muted">{{ t('setup.welcomeDesc') }}</p>
+	</div>
+
+	<div class="rounded-2xl border border-border bg-surface-raised p-8 shadow-sm">
+		@if (error()) {
+		<div
+			role="alert"
+			class="mb-6 flex w-full items-start gap-4 rounded border-l-4 border-pink-500 bg-pink-50 px-4 py-3 text-sm text-pink-700"
+		>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				class="mt-0.5 h-5 w-5 shrink-0"
+				fill="none"
+				viewBox="0 0 24 24"
+				stroke="currentColor"
+				stroke-width="1.5"
+				aria-hidden="true"
+			>
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+				/>
+			</svg>
+			<p>{{ error() }}</p>
+		</div>
+		}
+
+		<form
+			(submit)="save($event)"
+			class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2"
+		>
+			<p
+				class="col-span-full mb-2 mt-2 text-xs font-semibold uppercase tracking-wide text-on-surface-dim"
+			>
+				Required
+			</p>
+
+			<div class="relative my-4">
+				<input
+					id="firstName"
+					type="text"
+					placeholder="your first name"
+					[formField]="profileForm.firstName"
+					class="relative w-full h-10 px-4 text-sm placeholder-transparent transition-all border rounded outline-none focus-visible:outline-none peer border-slate-200 text-on-surface-muted autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
+				/>
+				<label
+					for="firstName"
+					class="cursor-text peer-focus:cursor-default absolute left-2 -top-2 z-1 px-2 text-xs text-on-surface-dim transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:text-xs peer-focus:text-emerald-500 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
+					>First Name</label
+				>
+				@if (profileForm.firstName().touched() &&
+				profileForm.firstName().invalid()) { @for (err of
+				profileForm.firstName().errors(); track err) {
+				<p class="mt-1 text-xs text-pink-600">{{ err.message }}</p>
+				} }
+			</div>
+
+			<div class="relative my-4">
+				<input
+					id="lastName"
+					type="text"
+					placeholder="your last name"
+					[formField]="profileForm.lastName"
+					class="relative w-full h-10 px-4 text-sm placeholder-transparent transition-all border rounded outline-none focus-visible:outline-none peer border-slate-200 text-on-surface-muted autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
+				/>
+				<label
+					for="lastName"
+					class="cursor-text peer-focus:cursor-default absolute left-2 -top-2 z-1 px-2 text-xs text-on-surface-dim transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:text-xs peer-focus:text-emerald-500 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
+					>Last Name</label
+				>
+				@if (profileForm.lastName().touched() &&
+				profileForm.lastName().invalid()) { @for (err of
+				profileForm.lastName().errors(); track err) {
+				<p class="mt-1 text-xs text-pink-600">{{ err.message }}</p>
+				} }
+			</div>
+
+			<div
+				class="col-span-full flex items-center justify-between rounded-lg border border-border p-4"
+			>
+				<div>
+					<p class="text-sm font-medium text-on-surface-strong">
+						Use my real name when contacted by the administration
+					</p>
+					<p class="mt-0.5 text-xs text-on-surface-dim">
+						If disabled, the administration will refer to you by your username.
+						Your name is never shown publicly either way.
+					</p>
+				</div>
+				<div class="relative ml-4 flex shrink-0 items-center">
+					<input
+						id="useRealNameForContact"
+						type="checkbox"
+						[formField]="profileForm.useRealNameForContact"
+						class="relative w-8 h-4 transition-colors rounded-lg appearance-none cursor-pointer hover:bg-slate-400 after:hover:bg-slate-600 checked:hover:bg-emerald-300 checked:after:hover:bg-emerald-600 focus:outline-none checked:focus:bg-emerald-400 checked:after:focus:bg-emerald-700 focus-visible:outline-none peer bg-slate-300 after:absolute after:top-0 after:left-0 after:h-4 after:w-4 after:rounded-full after:bg-slate-500 after:transition-all checked:bg-emerald-200 checked:after:left-4 checked:after:bg-emerald-500 disabled:cursor-not-allowed disabled:bg-slate-200 disabled:after:bg-slate-300"
+					/>
+				</div>
+			</div>
+
+			<div class="relative my-4 col-span-full">
+				<input
+					id="username"
+					type="text"
+					placeholder="your_username"
+					[formField]="profileForm.username"
+					class="relative w-full h-10 px-4 text-sm placeholder-transparent transition-all border rounded outline-none focus-visible:outline-none peer border-slate-200 text-on-surface-muted autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400 z-1"
+				/>
+				<label
+					for="username"
+					class="cursor-text peer-focus:cursor-default absolute left-2 -top-2 z-1 px-2 text-xs text-on-surface-dim transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:text-xs peer-focus:text-emerald-500 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
+					>Username</label
+				>
+				@if (profileForm.username().touched() &&
+				profileForm.username().invalid()) { @for (err of
+				profileForm.username().errors(); track err) {
+				<p class="mt-1 text-xs text-pink-600">{{ err.message }}</p>
+				} }
+				<p class="mt-1.5 flex items-start gap-1 text-xs text-on-surface-dim">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						class="mt-0.5 h-3.5 w-3.5 shrink-0"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke="currentColor"
+						stroke-width="2"
+						aria-hidden="true"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+						/>
+					</svg>
+					Choose your username wisely — inappropriate names may result in a
+					sanction.
+				</p>
+			</div>
+
+			<p
+				class="col-span-full mb-2 mt-4 text-xs font-semibold uppercase tracking-wide text-on-surface-dim"
+			>
+				Contact Info (optional)
+			</p>
+
+			<div class="relative col-span-full my-4">
+				<input
+					id="backupEmail"
+					type="email"
+					placeholder="backup@email.com"
+					[formField]="profileForm.backupEmail"
+					class="relative w-full h-10 px-4 text-sm placeholder-transparent transition-all border rounded outline-none focus-visible:outline-none peer border-slate-200 text-on-surface-muted autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
+				/>
+				<label
+					for="backupEmail"
+					class="cursor-text peer-focus:cursor-default absolute left-2 -top-2 z-1 px-2 text-xs text-on-surface-dim transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-focus:-top-2 peer-focus:text-xs peer-focus:text-emerald-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
+					>Backup Email</label
+				>
+			</div>
+
+			<p
+				class="col-span-full flex items-start gap-1.5 -mt-2 mb-2 text-xs text-on-surface-dim"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					class="mt-0.5 h-3.5 w-3.5 shrink-0 text-slate-400"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+					stroke-width="2"
+					aria-hidden="true"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+					/>
+				</svg>
+				Your main email and this backup email will never be displayed on your
+				public profile.
+			</p>
+
+			<div class="relative my-4">
+				<input
+					id="mobilePhone"
+					type="tel"
+					placeholder="+34 612 345 678"
+					[formField]="profileForm.mobilePhone"
+					class="relative w-full h-10 px-4 text-sm placeholder-transparent transition-all border rounded outline-none focus-visible:outline-none peer border-slate-200 text-on-surface-muted autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
+				/>
+				<label
+					for="mobilePhone"
+					class="cursor-text peer-focus:cursor-default absolute left-2 -top-2 z-1 px-2 text-xs text-on-surface-dim transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-focus:-top-2 peer-focus:text-xs peer-focus:text-emerald-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
+					>Mobile Phone</label
+				>
+			</div>
+
+			<div class="flex items-center justify-between mb-2">
+				<p class="text-sm font-medium text-on-surface-strong">Show mobile phone</p>
+				<input
+					id="showMobilePhone"
+					type="checkbox"
+					[formField]="profileForm.showMobilePhone"
+					class="relative w-8 h-4 transition-colors rounded-lg appearance-none cursor-pointer hover:bg-slate-400 after:hover:bg-slate-600 checked:hover:bg-emerald-300 checked:after:hover:bg-emerald-600 focus:outline-none checked:focus:bg-emerald-400 checked:after:focus:bg-emerald-700 focus-visible:outline-none peer bg-slate-300 after:absolute after:top-0 after:left-0 after:h-4 after:w-4 after:rounded-full after:bg-slate-500 after:transition-all checked:bg-emerald-200 checked:after:left-4 checked:after:bg-emerald-500 disabled:cursor-not-allowed disabled:bg-slate-200 disabled:after:bg-slate-300"
+				/>
+			</div>
+
+			<p
+				class="col-span-full mb-2 mt-4 text-xs font-semibold uppercase tracking-wide text-on-surface-dim"
+			>
+				Location (optional)
+			</p>
+
+			<div class="relative my-4">
+				<input
+					id="location"
+					type="text"
+					placeholder="City, Country"
+					[formField]="profileForm.location"
+					class="relative w-full h-10 px-4 text-sm placeholder-transparent transition-all border rounded outline-none focus-visible:outline-none peer border-slate-200 text-on-surface-muted autofill:bg-white focus:border-emerald-500 focus:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
+				/>
+				<label
+					for="location"
+					class="cursor-text peer-focus:cursor-default absolute left-2 -top-2 z-1 px-2 text-xs text-on-surface-dim transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-focus:-top-2 peer-focus:text-xs peer-focus:text-emerald-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
+					>Location</label
+				>
+			</div>
+
+			<div class="flex items-center justify-between mb-2">
+				<p class="text-sm font-medium text-on-surface-strong">Show location</p>
+				<input
+					id="showLocation"
+					type="checkbox"
+					[formField]="profileForm.showLocation"
+					class="relative w-8 h-4 transition-colors rounded-lg appearance-none cursor-pointer hover:bg-slate-400 after:hover:bg-slate-600 checked:hover:bg-emerald-300 checked:after:hover:bg-emerald-600 focus:outline-none checked:focus:bg-emerald-400 checked:after:focus:bg-emerald-700 focus-visible:outline-none peer bg-slate-300 after:absolute after:top-0 after:left-0 after:h-4 after:w-4 after:rounded-full after:bg-slate-500 after:transition-all checked:bg-emerald-200 checked:after:left-4 checked:after:bg-emerald-500 disabled:cursor-not-allowed disabled:bg-slate-200 disabled:after:bg-slate-300"
+				/>
+			</div>
+
+			<div class="relative my-4">
+				<input
+					id="postalZip"
+					type="text"
+					placeholder="28001"
+					[formField]="profileForm.postalZip"
+					class="relative w-full h-10 px-4 text-sm placeholder-transparent transition-all border rounded outline-none focus-visible:outline-none peer border-slate-200 text-on-surface-muted autofill:bg-white focus:border-emerald-500 focus:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
+				/>
+				<label
+					for="postalZip"
+					class="cursor-text peer-focus:cursor-default absolute left-2 -top-2 z-1 px-2 text-xs text-on-surface-dim transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-focus:-top-2 peer-focus:text-xs peer-focus:text-emerald-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
+					>Postal Zip</label
+				>
+			</div>
+
+			<div class="flex items-center justify-between mb-2">
+				<p class="text-sm font-medium text-on-surface-strong">Show postal zip</p>
+				<input
+					id="showPostalZip"
+					type="checkbox"
+					[formField]="profileForm.showPostalZip"
+					class="relative w-8 h-4 transition-colors rounded-lg appearance-none cursor-pointer hover:bg-slate-400 after:hover:bg-slate-600 checked:hover:bg-emerald-300 checked:after:hover:bg-emerald-600 focus:outline-none checked:focus:bg-emerald-400 checked:after:focus:bg-emerald-700 focus-visible:outline-none peer bg-slate-300 after:absolute after:top-0 after:left-0 after:h-4 after:w-4 after:rounded-full after:bg-slate-500 after:transition-all checked:bg-emerald-200 checked:after:left-4 checked:after:bg-emerald-500 disabled:cursor-not-allowed disabled:bg-slate-200 disabled:after:bg-slate-300"
+				/>
+			</div>
+
+			<p
+				class="col-span-full mb-2 mt-4 text-xs font-semibold uppercase tracking-wide text-on-surface-dim"
+			>
+				Personal (optional)
+			</p>
+
+			<div class="relative my-4">
+				<input
+					id="birthday"
+					type="date"
+					[formField]="profileForm.birthday"
+					class="relative w-full h-10 px-4 text-sm placeholder-transparent transition-all border rounded outline-none focus-visible:outline-none peer border-slate-200 text-on-surface-muted autofill:bg-white focus:border-emerald-500 focus:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
+				/>
+				<label
+					for="birthday"
+					class="cursor-text peer-focus:cursor-default absolute left-2 -top-2 z-1 px-2 text-xs text-on-surface-dim transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-focus:-top-2 peer-focus:text-xs peer-focus:text-emerald-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
+					>Birthday</label
+				>
+			</div>
+
+			<div class="flex items-center justify-between mb-2">
+				<p class="text-sm font-medium text-on-surface-strong">Show birthday</p>
+				<input
+					id="showBirthday"
+					type="checkbox"
+					[formField]="profileForm.showBirthday"
+					class="relative w-8 h-4 transition-colors rounded-lg appearance-none cursor-pointer hover:bg-slate-400 after:hover:bg-slate-600 checked:hover:bg-emerald-300 checked:after:hover:bg-emerald-600 focus:outline-none checked:focus:bg-emerald-400 checked:after:focus:bg-emerald-700 focus-visible:outline-none peer bg-slate-300 after:absolute after:top-0 after:left-0 after:h-4 after:w-4 after:rounded-full after:bg-slate-500 after:transition-all checked:bg-emerald-200 checked:after:left-4 checked:after:bg-emerald-500 disabled:cursor-not-allowed disabled:bg-slate-200 disabled:after:bg-slate-300"
+				/>
+			</div>
+
+			<div class="relative my-4 col-span-full">
+				<textarea
+					id="bio"
+					rows="3"
+					placeholder="Tell us about yourself..."
+					[formField]="profileForm.bio"
+					class="relative w-full px-4 py-2 text-sm placeholder-transparent transition-all border rounded outline-none focus-visible:outline-none peer border-slate-200 text-on-surface-muted autofill:bg-white focus:border-emerald-500 focus:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
+				></textarea>
+				<label
+					for="bio"
+					class="cursor-text peer-focus:cursor-default absolute left-2 -top-2 z-1 px-2 text-xs text-on-surface-dim transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-focus:-top-2 peer-focus:text-xs peer-focus:text-emerald-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
+					>Bio</label
+				>
+				@if (profileForm.bio().touched() && profileForm.bio().invalid()) { @for
+				(err of profileForm.bio().errors(); track err) {
+				<p class="mt-1 text-xs text-pink-600">{{ err.message }}</p>
+				} }
+			</div>
+
+			<p
+				class="col-span-full mb-2 mt-4 text-xs font-semibold uppercase tracking-wide text-on-surface-dim"
+			>
+				Privacy settings
+			</p>
+
+			<div
+				class="col-span-full flex flex-col gap-3 rounded-lg border border-border p-4"
+			>
+				<div class="flex items-center justify-between">
+					<div>
+						<p class="text-sm font-medium text-on-surface-strong">
+							Show game collection
+						</p>
+						<p class="text-xs text-on-surface-dim">
+							Let others see what games you own
+						</p>
+					</div>
+					<input
+						id="showGameCollection"
+						type="checkbox"
+						[formField]="profileForm.showGameCollection"
+						class="relative w-8 h-4 transition-colors rounded-lg appearance-none cursor-pointer hover:bg-slate-400 after:hover:bg-slate-600 checked:hover:bg-emerald-300 checked:after:hover:bg-emerald-600 focus:outline-none checked:focus:bg-emerald-400 checked:after:focus:bg-emerald-700 focus-visible:outline-none peer bg-slate-300 after:absolute after:top-0 after:left-0 after:h-4 after:w-4 after:rounded-full after:bg-slate-500 after:transition-all checked:bg-emerald-200 checked:after:left-4 checked:after:bg-emerald-500 disabled:cursor-not-allowed disabled:bg-slate-200 disabled:after:bg-slate-300"
+					/>
+				</div>
+			</div>
+
+			<div class="col-span-full mt-6 flex items-center justify-end gap-3">
+				<button
+					type="submit"
+					[disabled]="loading() || profileForm().invalid()"
+					class="inline-flex items-center justify-center gap-2 rounded bg-emerald-500 px-8 py-2 text-sm font-medium text-white shadow-md transition duration-300 hover:bg-emerald-600 hover:shadow-sm focus:outline-none disabled:cursor-not-allowed disabled:opacity-70 cursor-pointer"
+				>
+					@if (loading()) {
+					<svg
+						class="h-4 w-4 animate-spin"
+						viewBox="0 0 24 24"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+						aria-hidden="true"
+					>
+						<circle
+							class="opacity-25"
+							cx="12"
+							cy="12"
+							r="10"
+							stroke="currentColor"
+							stroke-width="4"
+						></circle>
+						<path
+							class="opacity-75"
+							fill="currentColor"
+							d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+						></path>
+					</svg>
+					<span>Saving...</span>
+					} @else {
+					<span>Complete profile</span>
+					}
+				</button>
+			</div>
+		</form>
+	</div>
+</section>

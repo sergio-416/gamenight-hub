@@ -1,0 +1,96 @@
+{
+	"layout": {
+		"prevAria": "Vorherige Feature-Seite",
+		"nextAria": "Nächste Feature-Seite",
+		"backToHome": "← Zurück zur Startseite"
+	},
+	"perks": {
+		"title": "Mitgliedervorteile",
+		"description": "Mitglieder von GameNight Hub erhalten exklusiven Zugang zu Funktionen, die für echte Brettspiel-Fans gemacht sind. Von bevorzugter Event-Registrierung bis hin zu Community-Stimmrechten — deine Mitgliedschaft schaltet das volle Brettspiel-Erlebnis frei. Werde Teil einer Community, die das Hobby genauso ernst nimmt wie du.",
+		"howItWorks": {
+			"title": "So funktioniert's",
+			"createAccount": {
+				"title": "Erstelle dein Konto",
+				"description": "Melde dich an und werde Teil einer wachsenden Community von Brettspiel-Fans in ganz Spanien"
+			},
+			"completeProfile": {
+				"title": "Vervollständige dein Profil",
+				"description": "Richte deine Spielvorlieben, Sammlung und deinen Standort ein, um personalisierte Empfehlungen zu erhalten"
+			},
+			"unlockAccess": {
+				"title": "Schalte exklusiven Zugang frei",
+				"description": "Erhalte sofortigen Zugriff auf Mitglieder-exklusive Funktionen, bevorzugte Registrierung und Community-Privilegien"
+			}
+		},
+		"whatYouUnlock": {
+			"title": "Das wird freigeschaltet",
+			"items": {
+				"priorityRegistration": "Bevorzugte Event-Registrierung",
+				"membersOnly": "Exklusive Spieleabende für Mitglieder",
+				"votingRights": "Community-Stimmrechte",
+				"earlyAccess": "Frühzeitiger Zugang zu neuen Funktionen",
+				"collectionTracking": "Persönliche Spielesammlung verwalten"
+			},
+			"srLabel": "Mitgliedervorteil"
+		}
+	},
+	"xp": {
+		"title": "XP & Stufen",
+		"description": "Verdiene Erfahrungspunkte bei jeder Interaktion mit der Community — veranstalte Events, melde dich für Spieleabende an und baue dein Profil aus. Mit wachsenden XP steigst du im Level auf und schaltest neue Privilegien frei. Je mehr du spielst, desto mehr belohnt dich die Plattform.",
+		"howYouEarn": {
+			"title": "So verdienst du XP",
+			"hostGameNight": {
+				"title": "Veranstalte einen Spieleabend",
+				"description": "Organisiere ein Event und bringe Spieler zusammen — verdiene <1>+50 XP</1> für jeden Abend, den du veranstaltest"
+			},
+			"rsvp": {
+				"title": "Melde dich für ein Event an",
+				"description": "Zeig dich und spiel mit — jede bestätigte Teilnahme bringt dir <1>+10 XP</1>"
+			},
+			"completeProfile": {
+				"title": "Vervollständige dein Profil",
+				"description": "Trage deine Vorlieben, Sammlung und Standort einmalig ein und erhalte <1>+25 XP</1>"
+			}
+		},
+		"milestones": {
+			"title": "Stufen-Meilensteine",
+			"items": {
+				"apprentice": "Stufe 1 – Lehrling (0 XP)",
+				"strategist": "Stufe 5 – Stratege (250 XP)",
+				"gameMaster": "Stufe 10 – Spielmeister (1000 XP)",
+				"grandMaster": "Stufe 20 – Großmeister (5000 XP)"
+			},
+			"srLabel": "Mitgliedervorteil"
+		}
+	},
+	"badges": {
+		"title": "Erfolge",
+		"description": "Verdiene Abzeichen, indem du in der Community aktiv bleibst — je mehr du spielst, desto mehr schaltest du frei. Baue deine Sammlung auf, veranstalte Spieleabende und zeige dein Engagement mit einer Vitrine, die für sich spricht.",
+		"howYouEarn": {
+			"title": "So verdienst du Abzeichen",
+			"earlyAdopter": {
+				"title": "Sei ein Early Adopter",
+				"description": "Tritt vor dem öffentlichen Launch bei und sichere dir deinen Platz unter den Gründungsmitgliedern von GameNight Hub"
+			},
+			"hostFirst": {
+				"title": "Veranstalte deinen ersten Spieleabend",
+				"description": "Erstelle und leite dein erstes Event, um offizieller Veranstalter zu werden und Veranstalter-Erfolge freizuschalten"
+			},
+			"buildCollection": {
+				"title": "Baue deine Sammlung auf",
+				"description": "Füge 10 oder mehr Spiele zu deiner persönlichen Sammlung hinzu und verdiene das Sammler-Abzeichen"
+			}
+		},
+		"showcase": {
+			"title": "Abzeichen-Vitrine",
+			"items": {
+				"earlyAdopter": "Early Adopter",
+				"gameMaster": "Spielmeister",
+				"socialButterfly": "Gesellschaftslöwe",
+				"collector": "Sammler",
+				"partyStarter": "Partystarter"
+			},
+			"srLabel": "Mitgliedervorteil"
+		}
+	}
+}

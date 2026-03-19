@@ -1,0 +1,34 @@
+<ng-container *transloco="let t; read: 'create-event'">
+	<div
+		class="flex items-center gap-4 rounded-xl border border-border bg-surface-raised px-5 py-4"
+	>
+		<div class="flex-1">
+			<p class="text-sm font-semibold text-on-surface">
+				{{ t('stepPlayers.maxPlayers') }}
+			</p>
+		</div>
+		<div class="flex items-center gap-3">
+			<button
+				type="button"
+				class="flex h-9 w-9 items-center justify-center rounded-full border border-border text-on-surface-medium transition-colors hover:border-emerald-500 hover:text-emerald-600 disabled:cursor-not-allowed disabled:opacity-40"
+				[disabled]="isMin()"
+				(click)="decrement()"
+				[attr.aria-label]="t('stepPlayers.decreaseAria')"
+			>
+				&minus;
+			</button>
+			<span class="w-8 text-center text-lg font-semibold text-on-surface"
+				>{{ value() }}</span
+			>
+			<button
+				type="button"
+				class="flex h-9 w-9 items-center justify-center rounded-full border border-border text-on-surface-medium transition-colors hover:border-emerald-500 hover:text-emerald-600 disabled:cursor-not-allowed disabled:opacity-40"
+				[disabled]="isMax()"
+				(click)="increment()"
+				[attr.aria-label]="t('stepPlayers.increaseAria')"
+			>
+				+
+			</button>
+		</div>
+	</div>
+</ng-container>

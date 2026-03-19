@@ -1,0 +1,16 @@
+[DEFAULT]
+bantime = 1h
+findtime = 10m
+maxretry = 5
+
+[nginx-http-auth]
+enabled = true
+port = http,https
+filter = nginx-http-auth
+logpath = /var/lib/docker/volumes/gamenight-hub_nginx_logs/_data/error.log
+
+[nginx-limit-req]
+enabled = true
+port = http,https
+filter = nginx-limit-req
+logpath = /var/lib/docker/volumes/gamenight-hub_nginx_logs/_data/error.log

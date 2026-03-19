@@ -1,0 +1,16 @@
+<ng-container *transloco="let t; read: 'game-nights'">
+	@if (loading()) {
+	<div data-testid="loading-indicator" class="text-slate-600">
+		{{ t('map.loadingLocations') }}
+	</div>
+	} @if (error()) {
+	<div
+		data-testid="error-message"
+		class="rounded bg-pink-100 p-4 text-pink-700"
+		role="alert"
+	>
+		{{ error() }}
+	</div>
+	}
+	<div #mapContainer data-testid="map-container" class="w-full h-full"></div>
+</ng-container>

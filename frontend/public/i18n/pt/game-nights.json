@@ -1,0 +1,55 @@
+{
+	"title": "Noites de Jogos",
+	"subtitle": "Próximos eventos de jogos de tabuleiro e onde encontrá-los!",
+	"addEvent": "Novo Evento",
+	"showMap": "MOSTRAR MAPA",
+	"hideMap": "OCULTAR MAPA",
+	"loading": "A carregar eventos...",
+	"eventsHeading": "Eventos",
+	"eventsFound": "{{ count }} eventos encontrados",
+	"emptyLoggedIn": "Nenhum evento encontrado para este período. Experimenta um filtro diferente ou cria uma nova noite de jogos!",
+	"emptyLoggedOut": "Nenhum evento encontrado para este período. Experimenta um filtro diferente ou inicia sessão para criar um!",
+	"map": {
+		"heading": "Mapa",
+		"close": "Fechar",
+		"loadingLocations": "A carregar localizações..."
+	},
+	"card": {
+		"full": "Cheio",
+		"joined": "{{ current }}/{{ max }} Inscritos",
+		"viewDetails": "Ver Detalhes",
+		"viewDetailsAria": "Ver detalhes de {{ title }}",
+		"waitlistOnly": "Só Lista de Espera"
+	},
+	"preview": {
+		"closeAria": "Fechar pré-visualização",
+		"viewDetails": "Ver Detalhes",
+		"viewDetailsAria": "Ver detalhes de {{ title }}",
+		"full": "Cheio"
+	},
+	"timeFilter": {
+		"thisWeek": "Esta Semana",
+		"next7d": "Próximos 7 Dias",
+		"next14d": "Próximos 14 Dias",
+		"thisMonth": "Este Mês",
+		"all": "Todos os Eventos",
+		"fallback": "Período"
+	},
+	"categories": {
+		"all": "Todas as Categorias",
+		"strategy": "Estratégia",
+		"rpg": "RPG",
+		"party": "Festa",
+		"classic": "Clássico",
+		"cooperative": "Cooperativo",
+		"trivia": "Trivia",
+		"miniatures": "Miniaturas",
+		"family": "Família",
+		"other": "Outro",
+		"fallback": "Categoria"
+	},
+	"toast": {
+		"locationDeleted": "Localização eliminada",
+		"locationDeleteFailed": "Falha ao eliminar a localização"
+	}
+}

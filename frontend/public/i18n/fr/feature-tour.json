@@ -1,0 +1,96 @@
+{
+	"layout": {
+		"prevAria": "Page précédente",
+		"nextAria": "Page suivante",
+		"backToHome": "← Retour à l'accueil"
+	},
+	"perks": {
+		"title": "Avantages Membres",
+		"description": "Les membres de GameNight Hub bénéficient d'un accès exclusif à des fonctionnalités conçues pour les vrais passionnés de jeux de société. De l'inscription prioritaire aux événements au droit de vote communautaire, ton adhésion débloque l'expérience sociale complète du jeu de société. Rejoins une communauté qui prend le hobby aussi au sérieux que toi.",
+		"howItWorks": {
+			"title": "Comment ça marche",
+			"createAccount": {
+				"title": "Crée ton compte",
+				"description": "Inscris-toi et rejoins une communauté grandissante de passionnés de jeux de société à travers l'Espagne"
+			},
+			"completeProfile": {
+				"title": "Complète ton profil",
+				"description": "Configure tes préférences de jeu, ta collection et ta localisation pour obtenir des recommandations personnalisées"
+			},
+			"unlockAccess": {
+				"title": "Débloque un accès exclusif",
+				"description": "Obtiens un accès immédiat aux fonctionnalités réservées aux membres, à l'inscription prioritaire et aux privilèges communautaires"
+			}
+		},
+		"whatYouUnlock": {
+			"title": "Ce que tu débloques",
+			"items": {
+				"priorityRegistration": "Inscription prioritaire aux événements",
+				"membersOnly": "Soirées jeux réservées aux membres",
+				"votingRights": "Droit de vote communautaire",
+				"earlyAccess": "Accès anticipé aux nouvelles fonctionnalités",
+				"collectionTracking": "Suivi de ta collection personnelle"
+			},
+			"srLabel": "avantage membre"
+		}
+	},
+	"xp": {
+		"title": "XP & Niveaux",
+		"description": "Gagne des points d'expérience chaque fois que tu interagis avec la communauté — organise des événements, inscris-toi aux soirées jeux et enrichis ton profil. Plus ton XP augmente, plus ton niveau monte et de nouveaux privilèges se débloquent. Plus tu joues, plus la plateforme te récompense.",
+		"howYouEarn": {
+			"title": "Comment gagner de l'XP",
+			"hostGameNight": {
+				"title": "Organise une soirée jeux",
+				"description": "Crée un événement et rassemble des joueurs — gagne <1>+50 XP</1> pour chaque soirée que tu organises"
+			},
+			"rsvp": {
+				"title": "Inscris-toi à un événement",
+				"description": "Viens et joue — chaque participation confirmée ajoute <1>+10 XP</1> à ton total"
+			},
+			"completeProfile": {
+				"title": "Complète ton profil",
+				"description": "Remplis tes préférences, ta collection et ta localisation une fois et empoche <1>+25 XP</1>"
+			}
+		},
+		"milestones": {
+			"title": "Paliers de niveau",
+			"items": {
+				"apprentice": "Niveau 1 – Apprenti (0 XP)",
+				"strategist": "Niveau 5 – Stratège (250 XP)",
+				"gameMaster": "Niveau 10 – Maître du Jeu (1000 XP)",
+				"grandMaster": "Niveau 20 – Grand Maître (5000 XP)"
+			},
+			"srLabel": "avantage membre"
+		}
+	},
+	"badges": {
+		"title": "Succès",
+		"description": "Gagne des badges en restant actif dans la communauté — plus tu joues, plus tu en débloques. Enrichis ta collection, organise des soirées jeux et affiche ta passion avec une vitrine qui parle d'elle-même.",
+		"howYouEarn": {
+			"title": "Comment gagner des badges",
+			"earlyAdopter": {
+				"title": "Sois un pionnier",
+				"description": "Inscris-toi avant le lancement public et assure ta place parmi les membres fondateurs de GameNight Hub"
+			},
+			"hostFirst": {
+				"title": "Organise ta première soirée jeux",
+				"description": "Crée et anime ton premier événement pour devenir un organisateur officiel et débloquer les succès d'organisateur"
+			},
+			"buildCollection": {
+				"title": "Construis ta collection",
+				"description": "Ajoute 10 jeux ou plus à ta collection personnelle et obtiens le badge Collectionneur"
+			}
+		},
+		"showcase": {
+			"title": "Vitrine des badges",
+			"items": {
+				"earlyAdopter": "Pionnier",
+				"gameMaster": "Maître du Jeu",
+				"socialButterfly": "Papillon Social",
+				"collector": "Collectionneur",
+				"partyStarter": "Meneur de Soirée"
+			},
+			"srLabel": "avantage membre"
+		}
+	}
+}

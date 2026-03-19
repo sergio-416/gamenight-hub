@@ -1,0 +1,18 @@
+<span class="relative inline-flex items-center">
+	<button
+		type="button"
+		class="flex h-5 w-5 items-center justify-center rounded-full border border-border-strong text-xs text-on-surface-muted hover:border-emerald-500 hover:text-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+		[attr.aria-describedby]="tooltipId"
+		(mouseenter)="show()"
+		(mouseleave)="hide()"
+		(focus)="show()"
+		(blur)="hide()"
+	>
+		i
+	</button>
+	@if (visible()) {
+	<span [id]="tooltipId" role="tooltip" [class]="positionClasses()"
+		>{{ text() }}</span
+	>
+	}
+</span>

@@ -1,0 +1,21 @@
+<div
+	*transloco="let t; read: 'collection'"
+	class="flex items-start justify-between gap-4"
+>
+	<div>
+		<h1 class="text-3xl font-bold text-on-surface">{{ t('header.title') }}</h1>
+		<p class="mt-2 text-sm text-on-surface-muted">
+			{{ totalGames() === 1 ? t('header.subtitleSingular', { count: totalGames()
+			}) : t('header.subtitlePlural', { count: totalGames() }) }}
+		</p>
+	</div>
+	@if (isLoggedIn()) {
+	<button
+		type="button"
+		class="rounded-lg bg-emerald-500 px-5 py-2 text-sm font-semibold text-white whitespace-nowrap transition-colors hover:bg-emerald-600"
+		(click)="addGameClick.emit()"
+	>
+		{{ t('header.addGame') }}
+	</button>
+	}
+</div>

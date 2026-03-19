@@ -1,0 +1,151 @@
+{
+	"header": {
+		"title": "Mi Colección",
+		"subtitle": "Tienes {{ count }} juegos en tu biblioteca. ¡Sigue jugando!",
+		"subtitleSingular": "Tienes {{ count }} juego en tu biblioteca. ¡Sigue jugando!",
+		"subtitlePlural": "Tienes {{ count }} juegos en tu biblioteca. ¡Sigue jugando!",
+		"addGame": "Añadir Juego"
+	},
+	"toolbar": {
+		"searchPlaceholder": "Buscar en la colección...",
+		"searchAriaLabel": "Buscar juegos en la colección",
+		"gridView": "Vista de cuadrícula",
+		"listView": "Vista de lista"
+	},
+	"empty": {
+		"noGamesFound": "No se encontraron juegos",
+		"tryAdjusting": "Intenta ajustar tu búsqueda o filtros",
+		"collectionEmpty": "Tu colección está vacía",
+		"startBuilding": "Empieza a construir tu biblioteca de juegos de mesa",
+		"importFirst": "Importa tu primer juego"
+	},
+	"list": {
+		"players": "Jugadores",
+		"min": "min",
+		"loadMore": "Cargar Más Juegos"
+	},
+	"confirmRemove": {
+		"title": "Eliminar Juego",
+		"message": "¿Estás seguro de que quieres eliminar este juego de tu colección?",
+		"confirm": "Eliminar",
+		"cancel": "Cancelar"
+	},
+	"unauthenticated": {
+		"heading": "Tu Colección de Juegos de Mesa",
+		"description": "Importa juegos de BoardGameGeek, lleva un seguimiento de lo que tienes y obtén recomendaciones con IA adaptadas a tu biblioteca. Inicia sesión para empezar a construir tu colección.",
+		"signIn": "Iniciar sesión",
+		"createAccount": "Crear una cuenta",
+		"imagePlaceholder": "Imagen próximamente...",
+		"featureImportTitle": "Importar",
+		"featureImportDesc": "Busca en BoardGameGeek y añade cualquier juego a tu biblioteca personal en segundos",
+		"featureDiscoverTitle": "Descubrir",
+		"featureDiscoverDesc": "Obtén recomendaciones de juegos con IA basadas en lo que ya tienes y te encanta",
+		"featureTrackTitle": "Seguimiento",
+		"featureTrackDesc": "Consulta estadísticas e información de toda tu colección de un vistazo"
+	},
+	"addToLibrary": {
+		"title": "Añadir a la Biblioteca",
+		"subtitle": "Amplía tu colección de juegos de mesa"
+	},
+	"import": {
+		"back": "← Volver",
+		"pageTitle": "Añadir un Juego a Tu Colección",
+		"searchPlaceholder": "Buscar un juego (ej: Catán, Aventureros al Tren)...",
+		"searchAriaLabel": "Buscar juegos de mesa",
+		"searching": "Buscando...",
+		"search": "Buscar",
+		"year": "Año",
+		"rank": "Ranking",
+		"na": "N/D",
+		"unranked": "Sin clasificar",
+		"inCollection": "En la Colección",
+		"importing": "Importando...",
+		"importBtn": "Importar",
+		"noGamesFound": "No se encontraron juegos. Prueba con otra búsqueda."
+	},
+	"bggPreview": {
+		"backToSearch": "Volver a la Búsqueda",
+		"errorLoading": "Error al cargar los detalles del juego. Inténtalo de nuevo.",
+		"alreadyInCollection": "Ya en la Colección",
+		"importingEllipsis": "Importando...",
+		"addToCollection": "Añadir a la Colección",
+		"players": "Jugadores",
+		"minSuffix": "Min",
+		"agePlus": "Edad {{ age }}+",
+		"aboutTheGame": "Sobre el Juego",
+		"publisher": "Editorial:",
+		"year": "Año:",
+		"dataPoweredBy": "Datos proporcionados por",
+		"bgg": "BoardGameGeek"
+	},
+	"gameDetail": {
+		"backToCollection": "Volver a la Colección",
+		"errorLoading": "Error al cargar los detalles del juego. Inténtalo de nuevo.",
+		"addToCollection": "Añadir a la Colección",
+		"owned": "En propiedad",
+		"removeFromCollection": "Eliminar de la colección",
+		"wishlistGame": "Lista de deseos",
+		"players": "Jugadores",
+		"minSuffix": "Min",
+		"agePlus": "Edad {{ age }}+",
+		"aboutTheGame": "Sobre el Juego",
+		"publisher": "Editorial:",
+		"year": "Año:",
+		"dataPoweredBy": "Datos proporcionados por",
+		"bgg": "BoardGameGeek"
+	},
+	"statCards": {
+		"complexity": "Complejidad",
+		"rating": "Puntuación",
+		"rank": "Ranking",
+		"weight": "Peso",
+		"na": "N/D"
+	},
+	"tags": {
+		"expansion": "Expansión",
+		"categories": "Categorías",
+		"mechanics": "Mecánicas"
+	},
+	"recommendations": {
+		"title": "Más en tu Colección",
+		"addToLibrary": "Añadir a la Biblioteca",
+		"expandCollection": "Amplía tu colección de juegos de mesa"
+	},
+	"filters": {
+		"playersAny": "[ES] Any Players",
+		"players1": "[ES] 1 Player",
+		"players2": "[ES] 2 Players",
+		"players3": "[ES] 3 Players",
+		"players4": "[ES] 4 Players",
+		"players5": "[ES] 5 Players",
+		"players6Plus": "[ES] 6+ Players",
+		"categoryAll": "[ES] All Categories",
+		"sortNameAsc": "[ES] A → Z",
+		"sortNameDesc": "[ES] Z → A",
+		"sortNewest": "[ES] Newest First",
+		"sortOldest": "[ES] Oldest First"
+	},
+	"status": {
+		"owned": "En Propiedad",
+		"wantToPlay": "Quiero Jugar",
+		"wantToTry": "Quiero Probar",
+		"played": "Jugado"
+	},
+	"weight": {
+		"1": "Ligero",
+		"2": "Ligero-Medio",
+		"3": "Medio",
+		"4": "Medio-Pesado",
+		"5": "Pesado",
+		"notRated": "Sin valorar"
+	},
+	"card": {
+		"playersSingular": "{{ count }} Jugador",
+		"playersPlural": "{{ count }} Jugadores",
+		"playersRange": "{{ min }}-{{ max }} Jugadores"
+	},
+	"removeConfirmMessage": "¿Eliminar \"{{ name }}\" de tu colección? No se puede deshacer.",
+	"toast": {
+		"gameRemoved": "Juego eliminado de la colección"
+	}
+}

@@ -1,0 +1,18 @@
+<ng-container *transloco="let t; read: 'create-event'">
+	<nav class="flex items-center gap-2" aria-label="Wizard progress">
+		@for (step of steps(); track step) {
+		<span
+			class="rounded-full transition-all"
+			[class]="
+				step <= currentStep()
+					? step === currentStep()
+						? 'h-2.5 w-2.5 bg-emerald-500'
+						: 'h-2 w-2 bg-emerald-400'
+					: 'h-2 w-2 bg-slate-300'
+			"
+			[attr.aria-label]="t('stepAria', { step: step, total: totalSteps() })"
+			[attr.aria-current]="step === currentStep() ? 'step' : null"
+		></span>
+		}
+	</nav>
+</ng-container>

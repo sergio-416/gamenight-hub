@@ -1,0 +1,50 @@
+{
+	"unauthenticated": {
+		"title": "Your Collection Insights",
+		"subtitle": "Visualise your board game collection with charts and analytics. Track growth over time, see complexity distribution, and explore what categories dominate your shelves. Sign in to unlock your stats.",
+		"signIn": "Sign in",
+		"createAccount": "Create an account",
+		"imageAlt": "Stats preview image coming soon",
+		"imagePlaceholder": "Image coming soon...",
+		"features": {
+			"categories": {
+				"title": "Categories",
+				"description": "See which game categories make up the bulk of your collection"
+			},
+			"growth": {
+				"title": "Growth",
+				"description": "Track how your collection has grown month by month over time"
+			},
+			"complexity": {
+				"title": "Complexity",
+				"description": "Understand the complexity spread across your entire library"
+			}
+		}
+	},
+	"organiser": {
+		"title": "Store Organiser Statistics",
+		"eventsHosted": "Events Hosted",
+		"totalAttendees": "Total Attendees",
+		"popularGames": "Popular Games"
+	},
+	"admin": {
+		"title": "Platform Analytics",
+		"totalUsers": "Total Users",
+		"totalEvents": "Total Events",
+		"totalGames": "Total Games"
+	},
+	"collection": {
+		"title": "Collection Statistics",
+		"charts": {
+			"gamesByCategory": "Games by Category",
+			"collectionGrowth": "Collection Growth Over Time",
+			"complexityDistribution": "Complexity Distribution"
+		},
+		"emptyState": {
+			"title": "No statistics yet",
+			"subtitle": "Add some games to see your collection analytics!"
+		}
+	},
+	"loading": "Loading statistics...",
+	"error": "Failed to load statistics"
+}

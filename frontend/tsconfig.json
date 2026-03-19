@@ -1,0 +1,47 @@
+{
+	"compileOnSave": false,
+	"compilerOptions": {
+		"strict": true,
+		"noImplicitOverride": true,
+		"noPropertyAccessFromIndexSignature": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+		"skipLibCheck": true,
+		"isolatedModules": true,
+		"experimentalDecorators": true,
+		"importHelpers": true,
+		"target": "ES2022",
+		"module": "preserve",
+		"baseUrl": "./",
+		"paths": {
+			"@core/*": ["src/app/core/*"],
+			"@features/*": ["src/app/features/*"],
+			"@shared/*": ["src/app/shared/*"],
+			"@env": ["src/environments/environment"],
+			"@collection/*": ["src/app/features/collection/*"],
+			"@game-nights/*": ["src/app/features/game-nights/*"],
+			"@calendar/*": ["src/app/features/calendar/*"],
+			"@stats/*": ["src/app/features/stats/*"],
+			"@gamenight-hub/shared": ["../packages/shared/src/index.ts"]
+		}
+	},
+	"angularCompilerOptions": {
+		"enableI18nLegacyMessageIdFormat": false,
+		"strictInjectionParameters": true,
+		"strictInputAccessModifiers": true,
+		"strictTemplates": true,
+		"strictStandalone": true
+	},
+	"files": [],
+	"references": [
+		{
+			"path": "./tsconfig.app.json"
+		},
+		{
+			"path": "./tsconfig.spec.json"
+		},
+		{
+			"path": "./tsconfig.e2e.json"
+		}
+	]
+}

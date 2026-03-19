@@ -1,0 +1,145 @@
+{
+	"header": {
+		"logoAlt": "GameNight Hub Logo",
+		"toggleNav": "Toggle navigation",
+		"nav": {
+			"collection": "Collection",
+			"gameNights": "Game Nights",
+			"calendar": "Calendar",
+			"stats": "Stats",
+			"notifications": "Notifications"
+		},
+		"login": "Login",
+		"ariaNotifications": "Notifications",
+		"ariaProfile": "My profile",
+		"avatarAlt": "User avatar",
+		"xpLevel": "XP Level"
+	},
+	"footer": {
+		"brandName": "GameNight Hub",
+		"nav": {
+			"terms": "Terms",
+			"privacy": "Privacy",
+			"support": "Support"
+		},
+		"bggAlt": "BoardGameGeek"
+	},
+	"xp": {
+		"badge": {
+			"levelShort": "Lv.{{ level }}",
+			"tooltip": "Level {{ level }} · {{ title }} · {{ current }}/{{ next }} XP",
+			"ariaLabel": "XP Level"
+		},
+		"feedback": {
+			"xpAwarded": "+{{ amount }} XP",
+			"levelUp": "Level Up! → Level {{ level }}"
+		},
+		"toast": {
+			"levelUp": "Level Up!"
+		},
+		"history": {
+			"emptyState": "No XP earned yet. Start adding games!",
+			"loadMore": "Load more",
+			"loading": "Loading...",
+			"xpAmount": "+{{ amount }} XP",
+			"actions": {
+				"gameAdded": "Added a game",
+				"eventCreated": "Created an event",
+				"participantJoined": "Joined an event"
+			},
+			"timeAgo": {
+				"justNow": "Just now",
+				"minutesAgo": "{{ count }}m ago",
+				"hoursAgo": "{{ count }}h ago",
+				"daysAgo": "{{ count }}d ago",
+				"monthsAgo": "{{ count }}mo ago"
+			}
+		}
+	},
+	"common": {
+		"search": "Search...",
+		"searchLabel": "Search",
+		"clearSearch": "Clear search"
+	},
+	"auth": {
+		"signIn": "Sign In",
+		"signOut": "Sign Out",
+		"login": "Login"
+	},
+	"languageSwitcher": {
+		"switchTo": "Switch to {{ lang }}",
+		"label": "Select language"
+	},
+	"levelTitles": {
+		"1": "Wandering Pawn",
+		"2": "Curious Collector",
+		"3": "Apprentice Archivist",
+		"4": "Tavern Regular",
+		"5": "Guild Member",
+		"6": "Seasoned Strategist",
+		"7": "Lorekeeper",
+		"8": "Knight of the Table",
+		"9": "High Chamberlain",
+		"10": "Archmage of the Table"
+	},
+	"notifications": {
+		"newEvent": "New event: {{ title }}"
+	},
+	"errors": {
+		"generic": "Something went wrong. Please try again.",
+		"gameAlreadyInCollection": "This game is already in your collection.",
+		"gameAlreadyPlayed": "This game is already in your played history.",
+		"gameNotFound": "Game not found.",
+		"eventNotFound": "Event not found.",
+		"eventFull": "This event is full.",
+		"notAParticipant": "You are not a participant in this event.",
+		"notEventOwner": "You do not have permission to modify this event.",
+		"notLocationOwner": "You do not have permission to modify this location.",
+		"alreadyJoined": "You have already joined this event.",
+		"unauthorized": "You must be signed in to do that.",
+		"forbidden": "You do not have permission to perform this action.",
+		"validationFailed": "Invalid input. Please check your data.",
+		"profileNotFound": "Profile not found.",
+		"duplicateUsername": "This username is already taken.",
+		"nameChangeCooldown": "You can only change your name once every 30 days.",
+		"openEventsExist": "Please close your open events before deleting your account.",
+		"locationNotFound": "Location not found.",
+		"bggApiError": "BoardGameGeek is temporarily unavailable. Please try again later."
+	},
+	"themeSwitcher": {
+		"toggle": "Toggle theme",
+		"light": "Light mode",
+		"dark": "Dark mode",
+		"system": "System preference"
+	},
+	"dateTimePicker": {
+		"placeholder": "Select date & time",
+		"time": "Time"
+	},
+	"cvdSelector": {
+		"label": "Colour vision",
+		"normal": "Normal vision",
+		"protanopia": "Protanopia (red-blind)",
+		"deuteranopia": "Deuteranopia (green-blind)",
+		"tritanopia": "Tritanopia (blue-blind)"
+	},
+	"pwa": {
+		"update": {
+			"title": "Update Available",
+			"message": "A new version is ready",
+			"reload": "Reload",
+			"later": "Later"
+		},
+		"install": {
+			"title": "Install App",
+			"message": "Add GameNight Hub to your home screen",
+			"action": "Install",
+			"dismiss": "Not now"
+		},
+		"offline": {
+			"title": "You're Offline",
+			"message": "Check your connection and try again",
+			"retry": "Retry"
+		}
+	}
+}

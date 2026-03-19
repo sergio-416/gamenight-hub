@@ -1,0 +1,58 @@
+{
+	"loading": "Carregant esdeveniments...",
+	"error": "Error en carregar els esdeveniments. Torna-ho a provar més tard.",
+	"header": {
+		"today": "Avui",
+		"newEvent": "Nou Esdeveniment",
+		"prevMonth": "Mes anterior",
+		"nextMonth": "Mes següent",
+		"noEvents": "Cap nit de joc programada aquest mes",
+		"eventCount": "Tens {{ count }} nit de joc programada aquest mes",
+		"eventCountPlural": "Tens {{ count }} nits de joc programades aquest mes"
+	},
+	"grid": {
+		"overflow": "+{{ count }} més"
+	},
+	"details": {
+		"heading": "Detalls de l'Esdeveniment",
+		"upcoming": "Propers Esdeveniments",
+		"eventsOn": "Esdeveniments el {{ date }}",
+		"noEventsDay": "Cap esdeveniment programat per a aquest dia",
+		"noEventsMonth": "Cap esdeveniment proper aquest mes",
+		"hostedBy": "Organitzat per {{ username }}",
+		"playersMax": "{{ count }} jugadors màxim",
+		"todayLabel": "AVUI"
+	},
+	"weekdays": {
+		"sun": "DG",
+		"mon": "DL",
+		"tue": "DT",
+		"wed": "DC",
+		"thu": "DJ",
+		"fri": "DV",
+		"sat": "DS"
+	},
+	"weekdaysShort": {
+		"sun": "G",
+		"mon": "L",
+		"tue": "T",
+		"wed": "C",
+		"thu": "J",
+		"fri": "V",
+		"sat": "S"
+	},
+	"months": {
+		"0": "Gener",
+		"1": "Febrer",
+		"2": "Març",
+		"3": "Abril",
+		"4": "Maig",
+		"5": "Juny",
+		"6": "Juliol",
+		"7": "Agost",
+		"8": "Setembre",
+		"9": "Octubre",
+		"10": "Novembre",
+		"11": "Desembre"
+	}
+}

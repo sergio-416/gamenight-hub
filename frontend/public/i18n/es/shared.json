@@ -1,0 +1,145 @@
+{
+	"header": {
+		"logoAlt": "Logo de GameNight Hub",
+		"toggleNav": "Alternar navegación",
+		"nav": {
+			"collection": "Colección",
+			"gameNights": "Noches de Juego",
+			"calendar": "Calendario",
+			"stats": "Estadísticas",
+			"notifications": "Notificaciones"
+		},
+		"login": "Iniciar Sesión",
+		"ariaNotifications": "Notificaciones",
+		"ariaProfile": "Mi perfil",
+		"avatarAlt": "Avatar del usuario",
+		"xpLevel": "Nivel de XP"
+	},
+	"footer": {
+		"brandName": "GameNight Hub",
+		"nav": {
+			"terms": "Términos",
+			"privacy": "Privacidad",
+			"support": "Soporte"
+		},
+		"bggAlt": "BoardGameGeek"
+	},
+	"xp": {
+		"badge": {
+			"levelShort": "Nv.{{ level }}",
+			"tooltip": "Nivel {{ level }} · {{ title }} · {{ current }}/{{ next }} XP",
+			"ariaLabel": "Nivel de XP"
+		},
+		"feedback": {
+			"xpAwarded": "+{{ amount }} XP",
+			"levelUp": "¡Subiste de nivel! → Nivel {{ level }}"
+		},
+		"toast": {
+			"levelUp": "¡Subiste de Nivel!"
+		},
+		"history": {
+			"emptyState": "Aún no has ganado XP. ¡Empieza añadiendo juegos!",
+			"loadMore": "Cargar más",
+			"loading": "Cargando...",
+			"xpAmount": "+{{ amount }} XP",
+			"actions": {
+				"gameAdded": "Añadiste un juego",
+				"eventCreated": "Creaste un evento",
+				"participantJoined": "Te uniste a un evento"
+			},
+			"timeAgo": {
+				"justNow": "Ahora mismo",
+				"minutesAgo": "Hace {{ count }}m",
+				"hoursAgo": "Hace {{ count }}h",
+				"daysAgo": "Hace {{ count }}d",
+				"monthsAgo": "Hace {{ count }} meses"
+			}
+		}
+	},
+	"common": {
+		"search": "Buscar...",
+		"searchLabel": "Buscar",
+		"clearSearch": "Limpiar búsqueda"
+	},
+	"auth": {
+		"signIn": "Iniciar Sesión",
+		"signOut": "Cerrar Sesión",
+		"login": "Iniciar Sesión"
+	},
+	"languageSwitcher": {
+		"switchTo": "Cambiar a {{ lang }}",
+		"label": "Seleccionar idioma"
+	},
+	"levelTitles": {
+		"1": "Peón Errante",
+		"2": "Coleccionista Curioso",
+		"3": "Archivero Aprendiz",
+		"4": "Habitual de la Taberna",
+		"5": "Miembro del Gremio",
+		"6": "Estratega Curtido",
+		"7": "Guardián del Saber",
+		"8": "Caballero de la Mesa",
+		"9": "Alto Chambelán",
+		"10": "Archimago de la Mesa"
+	},
+	"notifications": {
+		"newEvent": "Nuevo evento: {{ title }}"
+	},
+	"errors": {
+		"generic": "Algo salió mal. Inténtalo de nuevo.",
+		"gameAlreadyInCollection": "Este juego ya está en tu colección.",
+		"gameAlreadyPlayed": "Este juego ya está en tu historial de jugados.",
+		"gameNotFound": "Juego no encontrado.",
+		"eventNotFound": "Evento no encontrado.",
+		"eventFull": "Este evento está lleno.",
+		"notAParticipant": "No eres participante de este evento.",
+		"notEventOwner": "No tienes permiso para modificar este evento.",
+		"notLocationOwner": "No tienes permiso para modificar esta ubicación.",
+		"alreadyJoined": "Ya te has unido a este evento.",
+		"unauthorized": "Debes iniciar sesión para hacer eso.",
+		"forbidden": "No tienes permiso para realizar esta acción.",
+		"validationFailed": "Datos no válidos. Revisa la información.",
+		"profileNotFound": "Perfil no encontrado.",
+		"duplicateUsername": "Este nombre de usuario ya está en uso.",
+		"nameChangeCooldown": "Solo puedes cambiar tu nombre una vez cada 30 días.",
+		"openEventsExist": "Cierra tus eventos abiertos antes de eliminar tu cuenta.",
+		"locationNotFound": "Ubicación no encontrada.",
+		"bggApiError": "BoardGameGeek no está disponible temporalmente. Inténtalo más tarde."
+	},
+	"themeSwitcher": {
+		"toggle": "Cambiar tema",
+		"light": "Modo claro",
+		"dark": "Modo oscuro",
+		"system": "Preferencia del sistema"
+	},
+	"dateTimePicker": {
+		"placeholder": "[ES] Select date & time",
+		"time": "[ES] Time"
+	},
+	"cvdSelector": {
+		"label": "Visión cromática",
+		"normal": "Visión normal",
+		"protanopia": "Protanopía (ceguera al rojo)",
+		"deuteranopia": "Deuteranopía (ceguera al verde)",
+		"tritanopia": "Tritanopía (ceguera al azul)"
+	},
+	"pwa": {
+		"update": {
+			"title": "[ES] Update Available",
+			"message": "[ES] A new version is ready",
+			"reload": "[ES] Reload",
+			"later": "[ES] Later"
+		},
+		"install": {
+			"title": "[ES] Install App",
+			"message": "[ES] Add GameNight Hub to your home screen",
+			"action": "[ES] Install",
+			"dismiss": "[ES] Not now"
+		},
+		"offline": {
+			"title": "[ES] You're Offline",
+			"message": "[ES] Check your connection and try again",
+			"retry": "[ES] Retry"
+		}
+	}
+}

@@ -1,0 +1,19 @@
+<ng-container *transloco="let t">
+	@if (visible()) {
+	<div
+		class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm animate-[fadeIn_0.3s_ease-out]"
+		data-testid="level-up-overlay"
+	>
+		<div
+			class="flex flex-col items-center gap-4 rounded-2xl bg-linear-to-br from-amber-500 to-yellow-600 px-12 py-10 shadow-2xl animate-[scaleIn_0.4s_ease-out]"
+		>
+			<div class="text-5xl">&#x1F3C6;</div>
+			<p class="text-2xl font-extrabold tracking-wide text-white uppercase">
+				{{ t('xp.toast.levelUp') }}
+			</p>
+			<p class="text-5xl font-black text-white">{{ level() }}</p>
+			<p class="text-lg font-medium text-amber-100">{{ title() }}</p>
+		</div>
+	</div>
+	}
+</ng-container>

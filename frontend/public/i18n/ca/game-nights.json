@@ -1,0 +1,55 @@
+{
+	"title": "Nits de Joc",
+	"subtitle": "Propers esdeveniments de jocs de taula i on trobar-los!",
+	"addEvent": "Nou Esdeveniment",
+	"showMap": "MOSTRAR MAPA",
+	"hideMap": "AMAGAR MAPA",
+	"loading": "Carregant esdeveniments...",
+	"eventsHeading": "Esdeveniments",
+	"eventsFound": "{{ count }} esdeveniments trobats",
+	"emptyLoggedIn": "No s'han trobat esdeveniments per a aquest període. Prova un filtre diferent o crea una nova nit de joc!",
+	"emptyLoggedOut": "No s'han trobat esdeveniments per a aquest període. Prova un filtre diferent o inicia sessió per crear-ne un!",
+	"map": {
+		"heading": "Mapa",
+		"close": "Tancar",
+		"loadingLocations": "Carregant ubicacions..."
+	},
+	"card": {
+		"full": "Ple",
+		"joined": "{{ current }}/{{ max }} Units",
+		"viewDetails": "Veure Detalls",
+		"viewDetailsAria": "Veure detalls de {{ title }}",
+		"waitlistOnly": "Només Llista d'Espera"
+	},
+	"preview": {
+		"closeAria": "Tancar previsualització",
+		"viewDetails": "Veure Detalls",
+		"viewDetailsAria": "Veure detalls de {{ title }}",
+		"full": "Ple"
+	},
+	"timeFilter": {
+		"thisWeek": "Aquesta Setmana",
+		"next7d": "Propers 7 Dies",
+		"next14d": "Propers 14 Dies",
+		"thisMonth": "Aquest Mes",
+		"all": "Tots els Esdeveniments",
+		"fallback": "Temps"
+	},
+	"categories": {
+		"all": "Totes les Categories",
+		"strategy": "Estratègia",
+		"rpg": "RPG",
+		"party": "Festa",
+		"classic": "Clàssic",
+		"cooperative": "Cooperatiu",
+		"trivia": "Trivia",
+		"miniatures": "Miniatures",
+		"family": "Familiar",
+		"other": "Altres",
+		"fallback": "Categoria"
+	},
+	"toast": {
+		"locationDeleted": "Ubicació eliminada",
+		"locationDeleteFailed": "Error en eliminar la ubicació"
+	}
+}

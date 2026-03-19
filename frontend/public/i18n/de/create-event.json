@@ -1,0 +1,76 @@
+{
+	"closeWizard": "Assistent schließen",
+	"stepAria": "Schritt {{ step }} von {{ total }}",
+	"stepGame": {
+		"title": "Was spielen wir?",
+		"subtitle": "Bestimme die Stimmung für deinen Spieleabend",
+		"eventTitle": "Event-Titel *",
+		"eventTitlePlaceholder": "z. B. Freitag-Abend Catan-Strategie",
+		"description": "Kurze Beschreibung",
+		"descriptionPlaceholder": "Erzähl allen, was diese Runde besonders macht...",
+		"charCount": "{{ current }}/500",
+		"category": "Kategorie",
+		"gameFromCollection": "Spiel aus der Sammlung",
+		"coverImage": "Titelbild",
+		"changeCoverImage": "Bild ändern",
+		"chooseCoverImage": "Titelbild auswählen"
+	},
+	"stepLocation": {
+		"title": "Wo & Wann",
+		"subtitle": "Setze die Bühne für deinen Spieleabend",
+		"privatePlace": "Privater Ort",
+		"privatePlaceDesc": "Zuhause oder private Adresse",
+		"publicVenue": "Öffentlicher Ort",
+		"comingSoon": "Demnächst",
+		"soon": "Bald",
+		"address": "Adresse *",
+		"addressPlaceholder": "Adresse suchen...",
+		"date": "Datum *",
+		"time": "Uhrzeit *",
+		"dateAndTime": "[DE] Date & Time",
+		"endDateAndTime": "[DE] End Date & Time",
+		"addEndTime": "Endzeit hinzufügen",
+		"removeEndTime": "Endzeit entfernen",
+		"endDate": "Enddatum",
+		"endTime": "Endzeit"
+	},
+	"stepPlayers": {
+		"title": "Wer kommt?",
+		"subtitle": "Lege die Gästeliste für deine Runde fest",
+		"maxPlayers": "Max. Spieler",
+		"decreaseAria": "Spieleranzahl verringern",
+		"increaseAria": "Spieleranzahl erhöhen",
+		"gameSupports": "Dieses Spiel unterstützt {{ range }}",
+		"communityGuidelines": "Mit dem Erstellen eines Events stimmst du unseren Community-Richtlinien zu. Sei respektvoll, inklusiv und sorge für eine einladende Atmosphäre für alle Spieler.",
+		"tooltipHost": "Diese Zahl schließt dich als Veranstalter ein"
+	},
+	"nav": {
+		"back": "Zurück",
+		"continue": "Weiter",
+		"createEvent": "Event erstellen",
+		"creating": "Wird erstellt..."
+	},
+	"mapPanel": {
+		"heading": "Finde den perfekten Ort für dein Spiel",
+		"subtitle": "Die richtige Atmosphäre ist der Schlüssel zu einer epischen Runde."
+	},
+	"coverPicker": {
+		"title": "Titelbild auswählen",
+		"closeAria": "Schließen",
+		"cancel": "Abbrechen",
+		"confirm": "Bestätigen"
+	},
+	"gamePicker": {
+		"searchPlaceholder": "Sammlung durchsuchen...",
+		"searchAria": "Spielesammlung durchsuchen",
+		"clearAria": "Spielauswahl löschen",
+		"loading": "Sammlung wird geladen...",
+		"noGames": "Keine Spiele in deiner Sammlung. Importiere zuerst welche von BGG!",
+		"noMatches": "Keine Treffer gefunden"
+	},
+	"toast": {
+		"eventCreated": "Event erfolgreich erstellt",
+		"eventFailed": "Event konnte nicht erstellt werden. Bitte versuche es erneut.",
+		"invalidEventData": "Ungültige Event-Daten"
+	}
+}

@@ -1,0 +1,55 @@
+{
+	"title": "Game Nights",
+	"subtitle": "Upcoming board game events and where to find them!",
+	"addEvent": "New Event",
+	"showMap": "Show Map",
+	"hideMap": "Hide Map",
+	"loading": "Loading events...",
+	"eventsHeading": "Events",
+	"eventsFound": "{{ count }} events found",
+	"emptyLoggedIn": "No events found for this period. Try a different filter or create a new game night!",
+	"emptyLoggedOut": "No events found for this period. Try a different filter or log in to create one!",
+	"map": {
+		"heading": "Map",
+		"close": "Close",
+		"loadingLocations": "Loading locations..."
+	},
+	"card": {
+		"full": "Full",
+		"joined": "{{ current }}/{{ max }} Joined",
+		"viewDetails": "View Details",
+		"viewDetailsAria": "View details for {{ title }}",
+		"waitlistOnly": "Waitlist Only"
+	},
+	"preview": {
+		"closeAria": "Close preview",
+		"viewDetails": "View Details",
+		"viewDetailsAria": "View details for {{ title }}",
+		"full": "Full"
+	},
+	"timeFilter": {
+		"thisWeek": "This Week",
+		"next7d": "Next 7 Days",
+		"next14d": "Next 14 Days",
+		"thisMonth": "This Month",
+		"all": "All Events",
+		"fallback": "Time"
+	},
+	"categories": {
+		"all": "All Categories",
+		"strategy": "Strategy",
+		"rpg": "RPG",
+		"party": "Party",
+		"classic": "Classic",
+		"cooperative": "Co-op",
+		"trivia": "Trivia",
+		"miniatures": "Miniatures",
+		"family": "Family",
+		"other": "Other",
+		"fallback": "Category"
+	},
+	"toast": {
+		"locationDeleted": "Location deleted",
+		"locationDeleteFailed": "Failed to delete location"
+	}
+}

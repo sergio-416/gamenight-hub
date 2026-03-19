@@ -1,0 +1,79 @@
+{
+	"loading": "Event wird geladen…",
+	"notFound": "Event nicht gefunden.",
+	"backToGameNights": "Zurück zu den Spieleabenden",
+	"categoryNight": "{{ label }}-Abend",
+	"hostedBy": "Veranstaltet von {{ name }}",
+	"templateRating": "TEMPLATE: ★ 4.9 Bewertung · 12 Events veranstaltet",
+	"templateMessageHost": "TEMPLATE: Veranstalter kontaktieren",
+	"youAreHost": "Du bist der Veranstalter",
+	"leaving": "Verlassen…",
+	"leaveEvent": "Event verlassen",
+	"joining": "Beitritt…",
+	"eventFull": "Event voll",
+	"joinGame": "Teilnehmen",
+	"signInToJoin": "Anmelden zum Teilnehmen",
+	"aboutThisEvent": "Über dieses Event",
+	"ownerZone": "Veranstalter-Bereich",
+	"editEvent": "Event bearbeiten",
+	"delete": "Löschen",
+	"edit": {
+		"titleLabel": "Titel",
+		"titlePlaceholder": "Event-Titel",
+		"descriptionLabel": "Beschreibung",
+		"descriptionPlaceholder": "Event-Beschreibung",
+		"coverImageLabel": "Titelbild",
+		"coverPreviewAlt": "Titelbildvorschau",
+		"changeCover": "Ändern",
+		"chooseCoverImage": "Titelbild auswählen",
+		"maxPlayersLabel": "Max. Spieler",
+		"maxPlayersPlaceholder": "Anzahl der Spieler",
+		"startTimeLabel": "Startzeit",
+		"addEndTime": "Endzeit hinzufügen",
+		"cancel": "Abbrechen",
+		"saving": "Wird gespeichert…",
+		"saveChanges": "Änderungen speichern"
+	},
+	"deleteConfirm": {
+		"message": "Bist du sicher? Diese Aktion kann nicht rückgängig gemacht werden.",
+		"deleting": "Wird gelöscht…",
+		"yesDelete": "Ja, löschen",
+		"cancel": "Abbrechen"
+	},
+	"templateMapPreview": "TEMPLATE: Kartenvorschau",
+	"location": "Ort",
+	"postalCode": "PLZ {{ code }}",
+	"templateGetDirections": "TEMPLATE: Route berechnen",
+	"playersJoined": "Teilnehmende Spieler",
+	"playerAlt": "Spieler",
+	"urgency": {
+		"joined": "{{ count }} dabei",
+		"full": "Event voll",
+		"spotsLeftSingular": "Noch {{ count }} Platz frei!",
+		"spotsLeftPlural": "Noch {{ count }} Plätze frei!"
+	},
+	"infoPill": {
+		"category": "Kategorie",
+		"weight": "Gewicht",
+		"playingTime": "Spieldauer",
+		"players": "Spieler",
+		"minSuffix": "Min."
+	},
+	"editWarning": {
+		"tooManyPlayers": "Dieses Spiel unterstützt bis zu {{ max }} Spieler — du hast {{ current }} eingestellt",
+		"tooFewPlayers": "Dieses Spiel benötigt mindestens {{ min }} Spieler — du hast {{ current }} eingestellt"
+	},
+	"toast": {
+		"eventUpdated": "Event aktualisiert",
+		"eventUpdateFailed": "Änderungen konnten nicht gespeichert werden",
+		"eventDeleted": "Event gelöscht",
+		"eventDeleteFailed": "Event konnte nicht gelöscht werden",
+		"eventDeleteForbidden": "Du hast keine Berechtigung, dieses Event zu löschen",
+		"joinedEvent": "Event beigetreten!",
+		"joinFailed": "Beitritt zum Event fehlgeschlagen",
+		"leftEvent": "Event verlassen",
+		"leaveFailed": "Verlassen des Events fehlgeschlagen",
+		"hostCannotLeave": "Der Veranstalter kann sein eigenes Event nicht verlassen",
+		"invalidInput": "Ungültige Eingabe"
+	}
+}

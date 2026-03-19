@@ -1,0 +1,137 @@
+<section class="mx-auto max-w-2xl p-4" aria-labelledby="add-location-heading">
+	<header class="mb-6 flex items-center">
+		<button
+			type="button"
+			(click)="goBack()"
+			class="mr-4 text-on-surface-medium hover:text-slate-900"
+			aria-label="Back to game nights"
+		>
+			← Back
+		</button>
+		<h2 id="add-location-heading" class="text-2xl font-bold">
+			Add Game Night Location
+		</h2>
+	</header>
+	@if (error()) {
+	<div class="mb-4 rounded bg-red-100 p-4 text-red-700" role="alert">
+		{{ error() }}
+	</div>
+	} @if (success()) {
+	<div class="mb-4 rounded bg-emerald-100 p-4 text-emerald-700" role="status">
+		Location added successfully!
+	</div>
+	}
+	<form
+		(ngSubmit)="onSubmit()"
+		class="space-y-4"
+		[attr.aria-busy]="submitting()"
+	>
+		<fieldset class="space-y-4" [disabled]="submitting()">
+			<legend class="sr-only">Location and event details</legend>
+			<div>
+				<label for="location-name" class="mb-1 block text-sm font-medium"
+					>Name</label
+				>
+				<input
+					id="location-name"
+					type="text"
+					[value]="name()"
+					(input)="onNameEvent($event)"
+					class="w-full rounded border p-2"
+					placeholder="e.g., The Dice Tower Cafe"
+					required
+					autocomplete="organization"
+				/>
+			</div>
+			<div>
+				<label for="venue-type" class="mb-1 block text-sm font-medium"
+					>Venue Type</label
+				>
+				<select
+					id="venue-type"
+					[value]="venueType()"
+					(change)="onVenueTypeEvent($event)"
+					class="w-full rounded border p-2"
+					required
+				>
+					<option value="">Select type</option>
+					<option value="cafe">Cafe</option>
+					<option value="store">Store</option>
+					<option value="home">Home</option>
+					<option value="public_space">Public Space</option>
+					<option value="other">Other</option>
+				</select>
+			</div>
+			<div class="relative" ngCombobox>
+				<label for="address" class="mb-1 block text-sm font-medium"
+					>Address</label
+				>
+				<input
+					id="address"
+					ngComboboxInput
+					type="text"
+					[(value)]="addressInputValue"
+					(input)="onAddressEvent($event)"
+					class="w-full rounded border p-2"
+					placeholder="Start typing an address..."
+					required
+				/>
+				<ng-template ngComboboxPopupContainer>
+					@if (showSuggestions() && suggestions().length > 0) {
+					<ul
+						ngListbox
+						selectionMode="explicit"
+						class="absolute z-10 m-0 mt-1 max-h-60 w-full list-none overflow-auto rounded border bg-surface-raised p-0 shadow-lg"
+					>
+						@for (suggestion of suggestions(); track suggestion.place_id) {
+						<li
+							ngOption
+							[value]="suggestion"
+							[label]="suggestion.display_name"
+							(click)="selectSuggestion(suggestion)"
+							class="w-full cursor-pointer px-4 py-2 text-left text-sm hover:bg-slate-100"
+						>
+							{{ suggestion.display_name }}
+						</li>
+						}
+					</ul>
+					}
+				</ng-template>
+				@if (isSearching()) {
+				<p
+					id="address-search-status"
+					class="mt-1 text-sm text-on-surface-muted"
+					aria-live="polite"
+				>
+					Searching...
+				</p>
+				}
+			</div>
+			@if (selectedLocation()) {
+			<div class="rounded bg-blue-50 p-3 text-sm text-blue-800" role="status">
+				<p>📍 Selected: {{ selectedLocation()?.display_name }}</p>
+			</div>
+			}
+			<div>
+				<label for="event-datetime" class="mb-1 block text-sm font-medium"
+					>Game Night Date &amp; Time</label
+				>
+				<input
+					id="event-datetime"
+					type="datetime-local"
+					[value]="eventDate()"
+					(input)="onEventDateEvent($event)"
+					class="w-full rounded border p-2"
+					required
+				/>
+			</div>
+			<button
+				type="submit"
+				[disabled]="!canSubmit()"
+				class="w-full rounded bg-emerald-500 px-4 py-2 text-white disabled:opacity-50"
+			>
+				{{ submitting() ? 'Creating Game Night...' : 'Create Game Night' }}
+			</button>
+		</fieldset>
+	</form>
+</section>

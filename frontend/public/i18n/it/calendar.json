@@ -1,0 +1,58 @@
+{
+	"loading": "Caricamento eventi...",
+	"error": "Caricamento eventi non riuscito. Riprova più tardi.",
+	"header": {
+		"today": "Oggi",
+		"newEvent": "Nuovo Evento",
+		"prevMonth": "Mese precedente",
+		"nextMonth": "Mese successivo",
+		"noEvents": "Nessuna serata di gioco in programma questo mese",
+		"eventCount": "Hai {{ count }} serata di gioco in programma questo mese",
+		"eventCountPlural": "Hai {{ count }} serate di gioco in programma questo mese"
+	},
+	"grid": {
+		"overflow": "+{{ count }} altri"
+	},
+	"details": {
+		"heading": "Dettagli Evento",
+		"upcoming": "Prossimi Eventi",
+		"eventsOn": "Eventi del {{ date }}",
+		"noEventsDay": "Nessun evento in programma per questo giorno",
+		"noEventsMonth": "Nessun evento in programma questo mese",
+		"hostedBy": "Organizzato da {{ username }}",
+		"playersMax": "{{ count }} giocatori max",
+		"todayLabel": "OGGI"
+	},
+	"weekdays": {
+		"sun": "DOM",
+		"mon": "LUN",
+		"tue": "MAR",
+		"wed": "MER",
+		"thu": "GIO",
+		"fri": "VEN",
+		"sat": "SAB"
+	},
+	"weekdaysShort": {
+		"sun": "D",
+		"mon": "L",
+		"tue": "M",
+		"wed": "M",
+		"thu": "G",
+		"fri": "V",
+		"sat": "S"
+	},
+	"months": {
+		"0": "Gennaio",
+		"1": "Febbraio",
+		"2": "Marzo",
+		"3": "Aprile",
+		"4": "Maggio",
+		"5": "Giugno",
+		"6": "Luglio",
+		"7": "Agosto",
+		"8": "Settembre",
+		"9": "Ottobre",
+		"10": "Novembre",
+		"11": "Dicembre"
+	}
+}

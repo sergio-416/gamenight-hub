@@ -1,0 +1,30 @@
+CREATE TABLE "profiles" (
+	"uid" text PRIMARY KEY NOT NULL,
+	"first_name" text,
+	"last_name" text,
+	"username" text,
+	"email" text,
+	"backup_email" text,
+	"mobile_phone" text,
+	"avatar" text,
+	"bio" text,
+	"location" text,
+	"postal_zip" text,
+	"birthday" text,
+	"is_profile_public" boolean DEFAULT false NOT NULL,
+	"use_real_name_for_contact" boolean DEFAULT false NOT NULL,
+	"show_first_name" boolean DEFAULT true NOT NULL,
+	"show_last_name" boolean DEFAULT true NOT NULL,
+	"show_location" boolean DEFAULT false NOT NULL,
+	"show_postal_zip" boolean DEFAULT false NOT NULL,
+	"show_birthday" boolean DEFAULT false NOT NULL,
+	"show_mobile_phone" boolean DEFAULT false NOT NULL,
+	"show_backup_email" boolean DEFAULT false NOT NULL,
+	"show_email" boolean DEFAULT false NOT NULL,
+	"show_game_collection" boolean DEFAULT true NOT NULL,
+	"created_at" timestamp DEFAULT now() NOT NULL,
+	"updated_at" timestamp DEFAULT now() NOT NULL,
+	CONSTRAINT "profiles_username_unique" UNIQUE("username")
+);
+--> statement-breakpoint
+CREATE INDEX "profiles_username_idx" ON "profiles" USING btree ("username");

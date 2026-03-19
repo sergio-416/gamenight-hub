@@ -1,0 +1,79 @@
+{
+	"loading": "Chargement de l'événement…",
+	"notFound": "Événement introuvable.",
+	"backToGameNights": "Retour aux soirées jeux",
+	"categoryNight": "Soirée {{ label }}",
+	"hostedBy": "Organisé par {{ name }}",
+	"templateRating": "TEMPLATE: ★ 4.9 note · 12 événements organisés",
+	"templateMessageHost": "TEMPLATE: Contacter l'organisateur",
+	"youAreHost": "Tu es l'organisateur",
+	"leaving": "Départ en cours…",
+	"leaveEvent": "Quitter l'événement",
+	"joining": "Inscription en cours…",
+	"eventFull": "Événement complet",
+	"joinGame": "Rejoindre la partie",
+	"signInToJoin": "Connecte-toi pour rejoindre",
+	"aboutThisEvent": "À propos de cet événement",
+	"ownerZone": "Zone Organisateur",
+	"editEvent": "Modifier l'événement",
+	"delete": "Supprimer",
+	"edit": {
+		"titleLabel": "Titre",
+		"titlePlaceholder": "Titre de l'événement",
+		"descriptionLabel": "Description",
+		"descriptionPlaceholder": "Description de l'événement",
+		"coverImageLabel": "Image de couverture",
+		"coverPreviewAlt": "Aperçu de la couverture",
+		"changeCover": "Changer",
+		"chooseCoverImage": "Choisir une image de couverture",
+		"maxPlayersLabel": "Joueurs max",
+		"maxPlayersPlaceholder": "Nombre de joueurs",
+		"startTimeLabel": "Heure de début",
+		"addEndTime": "Ajouter une heure de fin",
+		"cancel": "Annuler",
+		"saving": "Enregistrement…",
+		"saveChanges": "Enregistrer"
+	},
+	"deleteConfirm": {
+		"message": "Tu es sûr ? Cette action est irréversible.",
+		"deleting": "Suppression…",
+		"yesDelete": "Oui, supprimer",
+		"cancel": "Annuler"
+	},
+	"templateMapPreview": "TEMPLATE: Aperçu de la carte",
+	"location": "Lieu",
+	"postalCode": "CP {{ code }}",
+	"templateGetDirections": "TEMPLATE: Itinéraire",
+	"playersJoined": "Joueurs inscrits",
+	"playerAlt": "Joueur",
+	"urgency": {
+		"joined": "{{ count }} inscrits",
+		"full": "Événement complet",
+		"spotsLeftSingular": "{{ count }} place restante !",
+		"spotsLeftPlural": "{{ count }} places restantes !"
+	},
+	"infoPill": {
+		"category": "Catégorie",
+		"weight": "Poids",
+		"playingTime": "Durée de jeu",
+		"players": "Joueurs",
+		"minSuffix": "min"
+	},
+	"editWarning": {
+		"tooManyPlayers": "Ce jeu supporte jusqu'à {{ max }} joueurs — tu en as défini {{ current }}",
+		"tooFewPlayers": "Ce jeu nécessite au moins {{ min }} joueurs — tu en as défini {{ current }}"
+	},
+	"toast": {
+		"eventUpdated": "Événement mis à jour",
+		"eventUpdateFailed": "Échec de l'enregistrement",
+		"eventDeleted": "Événement supprimé",
+		"eventDeleteFailed": "Échec de la suppression de l'événement",
+		"eventDeleteForbidden": "Tu n'as pas la permission de supprimer cet événement",
+		"joinedEvent": "Événement rejoint !",
+		"joinFailed": "Échec de l'inscription",
+		"leftEvent": "Événement quitté",
+		"leaveFailed": "Échec du départ",
+		"hostCannotLeave": "L'organisateur ne peut pas quitter son propre événement",
+		"invalidInput": "Données invalides"
+	}
+}

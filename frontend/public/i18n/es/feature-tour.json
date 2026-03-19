@@ -1,0 +1,96 @@
+{
+	"layout": {
+		"prevAria": "Página de características anterior",
+		"nextAria": "Página de características siguiente",
+		"backToHome": "← Volver al inicio"
+	},
+	"perks": {
+		"title": "Ventajas de miembro",
+		"description": "Los miembros de GameNight Hub tienen acceso exclusivo a funciones diseñadas para verdaderos entusiastas de los juegos de mesa. Desde registro prioritario en eventos hasta derechos de voto comunitarios, tu membresía desbloquea la experiencia social completa. Únete a una comunidad que se toma el hobby tan en serio como tú.",
+		"howItWorks": {
+			"title": "Cómo funciona",
+			"createAccount": {
+				"title": "Crea tu cuenta",
+				"description": "Regístrate y únete a una comunidad creciente de entusiastas de los juegos de mesa en España"
+			},
+			"completeProfile": {
+				"title": "Completa tu perfil",
+				"description": "Configura tus preferencias de juego, colección y ubicación para obtener recomendaciones personalizadas"
+			},
+			"unlockAccess": {
+				"title": "Desbloquea acceso exclusivo",
+				"description": "Obtén acceso instantáneo a funciones exclusivas para miembros, registro prioritario y privilegios comunitarios"
+			}
+		},
+		"whatYouUnlock": {
+			"title": "Lo que desbloqueas",
+			"items": {
+				"priorityRegistration": "Registro prioritario en eventos",
+				"membersOnly": "Noches de juegos solo para miembros",
+				"votingRights": "Derechos de voto comunitarios",
+				"earlyAccess": "Acceso anticipado a nuevas funciones",
+				"collectionTracking": "Seguimiento personal de la colección"
+			},
+			"srLabel": "ventaja de miembro"
+		}
+	},
+	"xp": {
+		"title": "XP y niveles",
+		"description": "Gana puntos de experiencia cada vez que interactúas con la comunidad: organiza eventos, confirma asistencia a noches de juegos y completa tu perfil. A medida que crece tu XP, tu nivel sube y se abren nuevos privilegios. Cuanto más juegas, más te recompensa la plataforma.",
+		"howYouEarn": {
+			"title": "Cómo ganas XP",
+			"hostGameNight": {
+				"title": "Organiza una noche de juegos",
+				"description": "Organiza un evento y reúne jugadores — gana <1>+50 XP</1> por cada noche que organices"
+			},
+			"rsvp": {
+				"title": "Confirma asistencia a un evento",
+				"description": "Preséntate y juega — cada asistencia confirmada suma <1>+10 XP</1> a tu total"
+			},
+			"completeProfile": {
+				"title": "Completa tu perfil",
+				"description": "Rellena tus preferencias, colección y ubicación una vez y consigue <1>+25 XP</1>"
+			}
+		},
+		"milestones": {
+			"title": "Hitos de nivel",
+			"items": {
+				"apprentice": "Nivel 1 – Aprendiz (0 XP)",
+				"strategist": "Nivel 5 – Estratega (250 XP)",
+				"gameMaster": "Nivel 10 – Maestro del Juego (1000 XP)",
+				"grandMaster": "Nivel 20 – Gran Maestro (5000 XP)"
+			},
+			"srLabel": "ventaja de miembro"
+		}
+	},
+	"badges": {
+		"title": "Logros",
+		"description": "Gana insignias manteniéndote activo en la comunidad — cuanto más juegas, más desbloqueas. Construye tu colección, organiza noches de juegos y presume de tu dedicación con una vitrina que habla por sí sola.",
+		"howYouEarn": {
+			"title": "Cómo ganas insignias",
+			"earlyAdopter": {
+				"title": "Sé un pionero",
+				"description": "Únete antes del lanzamiento público y asegura tu lugar entre los miembros fundadores de GameNight Hub"
+			},
+			"hostFirst": {
+				"title": "Organiza tu primera noche de juegos",
+				"description": "Crea y dirige tu primer evento para convertirte en anfitrión oficial y desbloquear logros de organizador"
+			},
+			"buildCollection": {
+				"title": "Construye tu colección",
+				"description": "Añade 10 o más juegos a tu colección personal y consigue la insignia de Coleccionista"
+			}
+		},
+		"showcase": {
+			"title": "Vitrina de insignias",
+			"items": {
+				"earlyAdopter": "Pionero",
+				"gameMaster": "Maestro del Juego",
+				"socialButterfly": "Mariposa Social",
+				"collector": "Coleccionista",
+				"partyStarter": "Animador"
+			},
+			"srLabel": "ventaja de miembro"
+		}
+	}
+}

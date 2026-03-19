@@ -1,0 +1,96 @@
+{
+	"layout": {
+		"prevAria": "Previous feature page",
+		"nextAria": "Next feature page",
+		"backToHome": "← Back to home"
+	},
+	"perks": {
+		"title": "Member Perks",
+		"description": "GameNight Hub members get exclusive access to features built for serious board game enthusiasts. From priority event registration to community voting rights, your membership unlocks the full board game social experience. Join a community that takes the hobby as seriously as you do.",
+		"howItWorks": {
+			"title": "How it works",
+			"createAccount": {
+				"title": "Create your account",
+				"description": "Sign up and join a growing community of board game enthusiasts across Spain"
+			},
+			"completeProfile": {
+				"title": "Complete your profile",
+				"description": "Set up your game preferences, collection, and location to get personalized recommendations"
+			},
+			"unlockAccess": {
+				"title": "Unlock exclusive access",
+				"description": "Get instant access to member-only features, priority registration, and community privileges"
+			}
+		},
+		"whatYouUnlock": {
+			"title": "What you unlock",
+			"items": {
+				"priorityRegistration": "Priority event registration",
+				"membersOnly": "Members-only game nights",
+				"votingRights": "Community voting rights",
+				"earlyAccess": "Early access to new features",
+				"collectionTracking": "Personal game collection tracking"
+			},
+			"srLabel": "feature perk"
+		}
+	},
+	"xp": {
+		"title": "XP & Levels",
+		"description": "Earn experience points every time you engage with the community — host events, RSVP to game nights, and build out your profile. As your XP grows, your level rises and new privileges open up. The more you play, the more the platform rewards you.",
+		"howYouEarn": {
+			"title": "How you earn XP",
+			"hostGameNight": {
+				"title": "Host a game night",
+				"description": "Organise an event and bring players together — earn <1>+50 XP</1> for every night you host"
+			},
+			"rsvp": {
+				"title": "RSVP to an event",
+				"description": "Show up and play — every confirmed attendance adds <1>+10 XP</1> to your total"
+			},
+			"completeProfile": {
+				"title": "Complete your profile",
+				"description": "Fill in your preferences, collection, and location once and pocket <1>+25 XP</1>"
+			}
+		},
+		"milestones": {
+			"title": "Level milestones",
+			"items": {
+				"apprentice": "Level 1 – Apprentice (0 XP)",
+				"strategist": "Level 5 – Strategist (250 XP)",
+				"gameMaster": "Level 10 – Game Master (1000 XP)",
+				"grandMaster": "Level 20 – Grand Master (5000 XP)"
+			},
+			"srLabel": "feature perk"
+		}
+	},
+	"badges": {
+		"title": "Achievements",
+		"description": "Earn badges by staying active in the community — the more you play, the more you unlock. Build your collection, host game nights, and show off your dedication with a showcase that speaks for itself.",
+		"howYouEarn": {
+			"title": "How you earn badges",
+			"earlyAdopter": {
+				"title": "Be an early adopter",
+				"description": "Join before the public launch and secure your place among the founding members of GameNight Hub"
+			},
+			"hostFirst": {
+				"title": "Host your first game night",
+				"description": "Create and run your first event to become an official host and unlock host-tier achievements"
+			},
+			"buildCollection": {
+				"title": "Build your collection",
+				"description": "Add 10 or more games to your personal collection and earn the Collector badge"
+			}
+		},
+		"showcase": {
+			"title": "Badge showcase",
+			"items": {
+				"earlyAdopter": "Early Adopter",
+				"gameMaster": "Game Master",
+				"socialButterfly": "Social Butterfly",
+				"collector": "Collector",
+				"partyStarter": "Party Starter"
+			},
+			"srLabel": "feature perk"
+		}
+	}
+}
