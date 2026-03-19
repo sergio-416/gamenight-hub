@@ -317,7 +317,7 @@ export class EventDetail {
 		if (!event) return;
 		this.#editForm.set({
 			title: event.title,
-			description: event.description,
+			description: event.description ?? undefined,
 			maxPlayers: event.maxPlayers,
 			coverImage: event.coverImage ?? undefined,
 			startTime:
@@ -398,11 +398,14 @@ export class EventDetail {
 		if (!event || !this.isEditValid() || this.#saving()) return;
 
 		const form = this.#editForm();
-		const payload = {
+		const raw = {
 			...form,
 			startTime: this.#toISOString(form.startTime),
 			endTime: this.#toISOString(form.endTime),
 		};
+		const payload = Object.fromEntries(
+			Object.entries(raw).filter(([, v]) => v !== undefined),
+		);
 
 		const result = UpdateCalendarEventSchema.safeParse(payload);
 		if (!result.success) {
