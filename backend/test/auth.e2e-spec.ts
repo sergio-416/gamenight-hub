@@ -1,12 +1,18 @@
-import { type INestApplication, VersioningType } from '@nestjs/common';
+import { type CanActivate, type INestApplication, VersioningType } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { Test, type TestingModule } from '@nestjs/testing';
-import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { ThrottlerModule } from '@nestjs/throttler';
 import request from 'supertest';
 import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { AuthService } from '../src/modules/auth/application/auth.service.js';
 import { AuthController } from '../src/modules/auth/presentation/auth.controller.js';
 import { EmailService } from '../src/modules/email/application/email.service.js';
+
+class NoOpGuard implements CanActivate {
+	canActivate() {
+		return true;
+	}
+}
 
 describe('Auth API (e2e)', () => {
 	let app: INestApplication;
@@ -28,7 +34,7 @@ describe('Auth API (e2e)', () => {
 			providers: [
 				{ provide: AuthService, useValue: mockAuthService },
 				{ provide: EmailService, useValue: mockEmailService },
-				{ provide: APP_GUARD, useClass: ThrottlerGuard },
+				{ provide: APP_GUARD, useClass: NoOpGuard },
 			],
 		}).compile();
 
