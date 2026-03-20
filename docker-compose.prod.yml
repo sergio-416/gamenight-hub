@@ -91,7 +91,7 @@ services:
         import { drizzle } from 'drizzle-orm/postgres-js';
         import { migrate } from 'drizzle-orm/postgres-js/migrator';
         import postgres from 'postgres';
-        const url = `postgresql://${process.env.POSTGRES_USER}:${process.env.POSTGRES_PASSWORD}@postgres:5432/${process.env.POSTGRES_DB}`;
+        const url = `postgresql://$${process.env.POSTGRES_USER}:$${process.env.POSTGRES_PASSWORD}@postgres:5432/$${process.env.POSTGRES_DB}`;
         const client = postgres(url, { max: 1 });
         const db = drizzle({ client });
         try {
