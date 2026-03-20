@@ -19,6 +19,6 @@ mv "${DIST_DIR}/browser.new" "${DIST_DIR}/browser"
 
 rm -rf "${DIST_DIR}/browser.old"
 
-docker exec gamenight-hub-nginx-1 nginx -s reload
+docker restart gamenight-hub-nginx-1
 
 echo "Frontend deployed successfully from ${TARBALL}"

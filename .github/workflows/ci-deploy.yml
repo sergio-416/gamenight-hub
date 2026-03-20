@@ -206,6 +206,15 @@ jobs:
           source: frontend.tar.gz
           target: /tmp/
 
+      - name: SCP docker-compose to VPS
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          source: docker-compose.prod.yml
+          target: /opt/gamenight-hub/
+
       - name: SCP deploy scripts to VPS
         uses: appleboy/scp-action@v0.1.7
         with:
