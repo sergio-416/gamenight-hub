@@ -1,1 +1,1 @@
-export { ImageLightbox } from "./image-lightbox";
+export { ImageLightbox } from './image-lightbox';

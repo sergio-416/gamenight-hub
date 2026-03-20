@@ -1,10 +1,10 @@
 export interface LocationCreatedPayload {
-  locationId: string;
-  name: string;
+	locationId: string;
+	name: string;
 }
 
 export interface EventCreatedPayload {
-  eventId: string;
-  title: string;
-  createdBy: string;
+	eventId: string;
+	title: string;
+	createdBy: string;
 }

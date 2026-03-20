@@ -1,21 +1,21 @@
-import { signal } from "@angular/core";
-import { provideRouter } from "@angular/router";
-import { AuthService } from "@core/services/auth";
-import { provideTranslocoTesting } from "@core/testing/transloco-testing";
-import { render, screen } from "@testing-library/angular";
-import { Home } from "./home";
+import { signal } from '@angular/core';
+import { provideRouter } from '@angular/router';
+import { AuthService } from '@core/services/auth';
+import { provideTranslocoTesting } from '@core/testing/transloco-testing';
+import { render, screen } from '@testing-library/angular';
+import { Home } from './home';
 
 function createMockAuthService(loggedIn = false) {
 	return {
 		isLoggedIn: signal(loggedIn),
 		currentUser: signal(null),
-		userRole: signal("user"),
+		userRole: signal('user'),
 	};
 }
 
-describe("Home", () => {
-	describe("hero section", () => {
-		it("should render hero title", async () => {
+describe('Home', () => {
+	describe('hero section', () => {
+		it('should render hero title', async () => {
 			await render(Home, {
 				providers: [
 					provideRouter([]),
@@ -25,14 +25,14 @@ describe("Home", () => {
 			});
 
 			expect(
-				screen.getByRole("heading", {
+				screen.getByRole('heading', {
 					level: 1,
 					name: /Ready for your next adventure/,
 				}),
 			).toBeTruthy();
 		});
 
-		it("should render hero subtitle", async () => {
+		it('should render hero subtitle', async () => {
 			await render(Home, {
 				providers: [
 					provideRouter([]),
@@ -44,7 +44,7 @@ describe("Home", () => {
 			expect(screen.getByText(/Discover local game nights/)).toBeTruthy();
 		});
 
-		it("should show Browse Events CTA when logged out", async () => {
+		it('should show Browse Events CTA when logged out', async () => {
 			await render(Home, {
 				providers: [
 					provideRouter([]),
@@ -53,12 +53,12 @@ describe("Home", () => {
 				],
 			});
 
-			const link = screen.getByRole("link", { name: /Browse Events/ });
+			const link = screen.getByRole('link', { name: /Browse Events/ });
 			expect(link).toBeTruthy();
-			expect(link.getAttribute("href")).toBe("/game-nights");
+			expect(link.getAttribute('href')).toBe('/game-nights');
 		});
 
-		it("should show Start Exploring and Host Session CTAs when logged in", async () => {
+		it('should show Start Exploring and Host Session CTAs when logged in', async () => {
 			await render(Home, {
 				providers: [
 					provideRouter([]),
@@ -67,18 +67,18 @@ describe("Home", () => {
 				],
 			});
 
-			const exploreLink = screen.getByRole("link", {
+			const exploreLink = screen.getByRole('link', {
 				name: /Start Exploring/,
 			});
 			expect(exploreLink).toBeTruthy();
-			expect(exploreLink.getAttribute("href")).toBe("/game-nights");
+			expect(exploreLink.getAttribute('href')).toBe('/game-nights');
 
-			const hostLink = screen.getByRole("link", { name: /Host Session/ });
+			const hostLink = screen.getByRole('link', { name: /Host Session/ });
 			expect(hostLink).toBeTruthy();
-			expect(hostLink.getAttribute("href")).toBe("/calendar");
+			expect(hostLink.getAttribute('href')).toBe('/calendar');
 		});
 
-		it("should not show Host Session when logged out", async () => {
+		it('should not show Host Session when logged out', async () => {
 			await render(Home, {
 				providers: [
 					provideRouter([]),
@@ -87,12 +87,12 @@ describe("Home", () => {
 				],
 			});
 
-			expect(screen.queryByRole("link", { name: /Host Session/ })).toBeNull();
+			expect(screen.queryByRole('link', { name: /Host Session/ })).toBeNull();
 		});
 	});
 
-	describe("feature cards", () => {
-		it("should display feature cards with correct titles", async () => {
+	describe('feature cards', () => {
+		it('should display feature cards with correct titles', async () => {
 			await render(Home, {
 				providers: [
 					provideRouter([]),
@@ -101,12 +101,12 @@ describe("Home", () => {
 				],
 			});
 
-			expect(screen.getByText("Member Perks")).toBeTruthy();
-			expect(screen.getByText("XP & Levels")).toBeTruthy();
-			expect(screen.getByText("Achievements")).toBeTruthy();
+			expect(screen.getByText('Member Perks')).toBeTruthy();
+			expect(screen.getByText('XP & Levels')).toBeTruthy();
+			expect(screen.getByText('Achievements')).toBeTruthy();
 		});
 
-		it("should render three feature cards with correct descriptions", async () => {
+		it('should render three feature cards with correct descriptions', async () => {
 			await render(Home, {
 				providers: [
 					provideRouter([]),
@@ -120,7 +120,7 @@ describe("Home", () => {
 			expect(screen.getByText(/Collect badges/)).toBeTruthy();
 		});
 
-		it("should render Learn more links to feature tour pages", async () => {
+		it('should render Learn more links to feature tour pages', async () => {
 			await render(Home, {
 				providers: [
 					provideRouter([]),
@@ -129,16 +129,16 @@ describe("Home", () => {
 				],
 			});
 
-			const links = screen.getAllByRole("link", { name: /Learn more/ });
-			const hrefs = links.map((l) => l.getAttribute("href"));
-			expect(hrefs).toContain("/features/perks");
-			expect(hrefs).toContain("/features/xp");
-			expect(hrefs).toContain("/features/badges");
+			const links = screen.getAllByRole('link', { name: /Learn more/ });
+			const hrefs = links.map((l) => l.getAttribute('href'));
+			expect(hrefs).toContain('/features/perks');
+			expect(hrefs).toContain('/features/xp');
+			expect(hrefs).toContain('/features/badges');
 		});
 	});
 
-	describe("support strip", () => {
-		it("should render support strip title", async () => {
+	describe('support strip', () => {
+		it('should render support strip title', async () => {
 			await render(Home, {
 				providers: [
 					provideRouter([]),
@@ -150,7 +150,7 @@ describe("Home", () => {
 			expect(screen.getByText(/Need assistance, Traveler/)).toBeTruthy();
 		});
 
-		it("should render Support Hub and Community Rules links", async () => {
+		it('should render Support Hub and Community Rules links', async () => {
 			await render(Home, {
 				providers: [
 					provideRouter([]),
@@ -159,10 +159,8 @@ describe("Home", () => {
 				],
 			});
 
-			expect(screen.getByRole("link", { name: /Support Hub/ })).toBeTruthy();
-			expect(
-				screen.getByRole("link", { name: /Community Rules/ }),
-			).toBeTruthy();
+			expect(screen.getByRole('link', { name: /Support Hub/ })).toBeTruthy();
+			expect(screen.getByRole('link', { name: /Community Rules/ })).toBeTruthy();
 		});
 	});
 });

@@ -1,20 +1,15 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	inject,
-	viewChild,
-} from "@angular/core";
-import { Router } from "@angular/router";
-import { GamesService } from "@collection/services/games";
-import { AuthService } from "@core/services/auth";
-import { ToastService } from "@core/services/toast";
-import { CollectionUnauthenticated } from "./components/collection-unauthenticated/collection-unauthenticated";
-import { GameList } from "./components/game-list/game-list";
+import { ChangeDetectionStrategy, Component, inject, viewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { GamesService } from '@collection/services/games';
+import { AuthService } from '@core/services/auth';
+import { ToastService } from '@core/services/toast';
+import { CollectionUnauthenticated } from './components/collection-unauthenticated/collection-unauthenticated';
+import { GameList } from './components/game-list/game-list';
 
 @Component({
-	selector: "app-collection",
+	selector: 'app-collection',
 	imports: [GameList, CollectionUnauthenticated],
-	templateUrl: "./collection.html",
+	templateUrl: './collection.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Collection {
@@ -25,24 +20,24 @@ export class Collection {
 
 	readonly isLoggedIn = this.#authService.isLoggedIn;
 
-	readonly gameListRef = viewChild<GameList>("gameList");
+	readonly gameListRef = viewChild<GameList>('gameList');
 
 	onImportGame(): void {
-		this.#router.navigate(["/collection/import"]);
+		this.#router.navigate(['/collection/import']);
 	}
 
 	onGameClick(gameId: string): void {
-		this.#router.navigate(["/collection", gameId]);
+		this.#router.navigate(['/collection', gameId]);
 	}
 
 	onGameDeleted(gameId: string): void {
 		this.#gamesService.deleteGame(gameId).subscribe({
 			next: () => {
-				this.#toastService.success("Game removed from collection");
+				this.#toastService.success('Game removed from collection');
 				this.gameListRef()?.gamesResource.reload();
 			},
 			error: () => {
-				this.#toastService.error("Failed to remove game from collection");
+				this.#toastService.error('Failed to remove game from collection');
 			},
 		});
 	}

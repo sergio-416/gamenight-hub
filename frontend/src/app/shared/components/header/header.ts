@@ -1,23 +1,17 @@
-import { NgOptimizedImage } from "@angular/common";
-import {
-	ChangeDetectionStrategy,
-	Component,
-	computed,
-	inject,
-	signal,
-} from "@angular/core";
-import { Router, RouterLink, RouterLinkActive } from "@angular/router";
-import { AuthService } from "@core/services/auth";
-import { FaIconComponent } from "@fortawesome/angular-fontawesome";
-import { faBell } from "@fortawesome/free-solid-svg-icons";
-import { TranslocoDirective } from "@jsverse/transloco";
-import { CvdSelector } from "@shared/components/cvd-selector/cvd-selector";
-import { LanguageSwitcher } from "@shared/components/language-switcher/language-switcher";
-import { ThemeToggle } from "@shared/components/theme-toggle/theme-toggle";
-import { XpService } from "@shared/services/xp.service";
+import { NgOptimizedImage } from '@angular/common';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from '@core/services/auth';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { faBell } from '@fortawesome/free-solid-svg-icons';
+import { TranslocoDirective } from '@jsverse/transloco';
+import { CvdSelector } from '@shared/components/cvd-selector/cvd-selector';
+import { LanguageSwitcher } from '@shared/components/language-switcher/language-switcher';
+import { ThemeToggle } from '@shared/components/theme-toggle/theme-toggle';
+import { XpService } from '@shared/services/xp.service';
 
 @Component({
-	selector: "app-header",
+	selector: 'app-header',
 	imports: [
 		RouterLink,
 		RouterLinkActive,
@@ -28,7 +22,7 @@ import { XpService } from "@shared/services/xp.service";
 		LanguageSwitcher,
 		ThemeToggle,
 	],
-	templateUrl: "./header.html",
+	templateUrl: './header.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Header {
@@ -42,11 +36,9 @@ export class Header {
 	readonly userRole = this.#authService.userRole;
 	readonly canSeeStats = computed(() => {
 		const role = this.#authService.userRole();
-		return role === "admin" || role === "moderator";
+		return role === 'admin' || role === 'moderator';
 	});
-	readonly userAvatar = computed(
-		() => this.#authService.currentUser()?.photoURL ?? null,
-	);
+	readonly userAvatar = computed(() => this.#authService.currentUser()?.photoURL ?? null);
 	readonly userLevel = computed(() => this.#xpService.profile()?.level ?? 0);
 	readonly isMobileMenuOpen = this.#mobileMenuOpen.asReadonly();
 
@@ -59,6 +51,6 @@ export class Header {
 	}
 
 	async login(): Promise<void> {
-		await this.#router.navigate(["/login"]);
+		await this.#router.navigate(['/login']);
 	}
 }

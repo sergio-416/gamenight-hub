@@ -1,11 +1,6 @@
-import type {
-	StepGameData,
-	StepLocationData,
-	StepPlayersData,
-} from "../schemas/wizard-validation";
+import type { StepGameData, StepLocationData, StepPlayersData } from '../schemas/wizard-validation';
 
-export interface WizardFormData
-	extends StepGameData, StepLocationData, StepPlayersData {}
+export interface WizardFormData extends StepGameData, StepLocationData, StepPlayersData {}
 
 export type WizardStep = 1 | 2 | 3;
 
@@ -19,7 +14,7 @@ export const INITIAL_WIZARD_STATE: WizardState = {
 	currentStep: 1,
 	formData: {
 		maxPlayers: 4,
-		locationMode: "private",
+		locationMode: 'private',
 	},
 	isSubmitting: false,
 };

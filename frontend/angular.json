@@ -3,7 +3,7 @@
 	"version": 1,
 	"cli": {
 		"packageManager": "bun",
-		"schematicCollections": [ "@schematics/angular" ],
+		"schematicCollections": ["@schematics/angular"],
 		"analytics": false
 	},
 	"newProjectRoot": "projects",
@@ -40,8 +40,8 @@
 								"output": "assets/event-covers"
 							}
 						],
-						"styles": [ "src/styles.css", "node_modules/leaflet/dist/leaflet.css" ],
-						"allowedCommonJsDependencies": [ "leaflet" ]
+						"styles": ["src/styles.css", "node_modules/leaflet/dist/leaflet.css"],
+						"allowedCommonJsDependencies": ["leaflet"]
 					},
 					"configurations": {
 						"production": {
@@ -90,7 +90,7 @@
 					"builder": "@angular/build:unit-test",
 					"options": {
 						"buildTarget": "gamenight-hub:build:development",
-						"setupFiles": [ "src/test-setup.ts" ],
+						"setupFiles": ["src/test-setup.ts"],
 						"runnerConfig": true
 					}
 				}

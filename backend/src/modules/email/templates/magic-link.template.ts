@@ -1,13 +1,13 @@
 interface MagicLinkEmailParams {
-  link: string;
-  appName?: string;
+	link: string;
+	appName?: string;
 }
 
 export function renderMagicLinkEmail({
-  link,
-  appName = "GameNight Hub",
+	link,
+	appName = 'GameNight Hub',
 }: MagicLinkEmailParams): string {
-  return `<!DOCTYPE html>
+	return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />

@@ -1,25 +1,23 @@
-import { afterNextRender, computed, Injectable, signal } from "@angular/core";
+import { afterNextRender, computed, Injectable, signal } from '@angular/core';
 
-const STORAGE_KEY = "pwa-install-dismissed";
+const STORAGE_KEY = 'pwa-install-dismissed';
 const COOLDOWN_MS = 7 * 24 * 60 * 60 * 1000;
 
-@Injectable({ providedIn: "root" })
+@Injectable({ providedIn: 'root' })
 export class PwaInstallService {
 	readonly #deferredPrompt = signal<BeforeInstallPromptEvent | null>(null);
 	readonly #isDismissed = signal(this.#checkDismissed());
 
-	readonly canInstall = computed(
-		() => this.#deferredPrompt() !== null && !this.#isDismissed(),
-	);
+	readonly canInstall = computed(() => this.#deferredPrompt() !== null && !this.#isDismissed());
 
 	constructor() {
 		afterNextRender(() => {
-			window.addEventListener("beforeinstallprompt", (e) => {
+			window.addEventListener('beforeinstallprompt', (e) => {
 				e.preventDefault();
 				this.#deferredPrompt.set(e);
 			});
 
-			window.addEventListener("appinstalled", () => {
+			window.addEventListener('appinstalled', () => {
 				this.#deferredPrompt.set(null);
 			});
 		});
@@ -39,7 +37,7 @@ export class PwaInstallService {
 	}
 
 	#checkDismissed(): boolean {
-		if (typeof localStorage === "undefined") return false;
+		if (typeof localStorage === 'undefined') return false;
 
 		const stored = localStorage.getItem(STORAGE_KEY);
 		if (!stored) return false;

@@ -1,25 +1,20 @@
-import { A11yModule } from "@angular/cdk/a11y";
-import { NgOptimizedImage } from "@angular/common";
-import {
-	ChangeDetectionStrategy,
-	Component,
-	input,
-	output,
-} from "@angular/core";
+import { A11yModule } from '@angular/cdk/a11y';
+import { NgOptimizedImage } from '@angular/common';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 
 @Component({
-	selector: "app-image-lightbox",
+	selector: 'app-image-lightbox',
 	imports: [A11yModule, NgOptimizedImage],
-	templateUrl: "./image-lightbox.html",
+	templateUrl: './image-lightbox.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
-		"(keydown.escape)": "close()",
+		'(keydown.escape)': 'close()',
 	},
 })
 export class ImageLightbox {
 	readonly isOpen = input.required<boolean>();
 	readonly src = input.required<string>();
-	readonly alt = input<string>("");
+	readonly alt = input<string>('');
 
 	readonly closed = output<void>();
 

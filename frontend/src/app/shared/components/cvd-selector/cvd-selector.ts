@@ -5,20 +5,20 @@ import {
 	HostListener,
 	inject,
 	signal,
-} from "@angular/core";
-import { type CvdMode, ThemeService } from "@core/services/theme.service";
-import { TranslocoDirective } from "@jsverse/transloco";
+} from '@angular/core';
+import { type CvdMode, ThemeService } from '@core/services/theme.service';
+import { TranslocoDirective } from '@jsverse/transloco';
 
 const CVD_OPTIONS: { value: CvdMode; labelKey: string }[] = [
-	{ value: "none", labelKey: "cvdSelector.normal" },
-	{ value: "protanopia", labelKey: "cvdSelector.protanopia" },
-	{ value: "deuteranopia", labelKey: "cvdSelector.deuteranopia" },
-	{ value: "tritanopia", labelKey: "cvdSelector.tritanopia" },
+	{ value: 'none', labelKey: 'cvdSelector.normal' },
+	{ value: 'protanopia', labelKey: 'cvdSelector.protanopia' },
+	{ value: 'deuteranopia', labelKey: 'cvdSelector.deuteranopia' },
+	{ value: 'tritanopia', labelKey: 'cvdSelector.tritanopia' },
 ];
 
 @Component({
-	selector: "app-cvd-selector",
-	host: { class: "relative block" },
+	selector: 'app-cvd-selector',
+	host: { class: 'relative block' },
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [TranslocoDirective],
 	template: `
@@ -126,14 +126,14 @@ export class CvdSelector {
 		this.open.set(false);
 	}
 
-	@HostListener("document:click", ["$event.target"])
+	@HostListener('document:click', ['$event.target'])
 	onClickOutside(target: EventTarget | null): void {
 		if (this.open() && !this.#elRef.nativeElement.contains(target as Node)) {
 			this.open.set(false);
 		}
 	}
 
-	@HostListener("document:keydown.escape")
+	@HostListener('document:keydown.escape')
 	onEscape(): void {
 		if (this.open()) {
 			this.open.set(false);

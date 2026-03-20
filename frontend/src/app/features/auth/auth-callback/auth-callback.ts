@@ -1,41 +1,35 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	inject,
-	type OnInit,
-	signal,
-} from "@angular/core";
-import { Router, RouterLink } from "@angular/router";
-import { AuthService, translateAuthError } from "@core/services/auth";
-import { TranslocoDirective } from "@jsverse/transloco";
-import { z } from "zod";
+import { ChangeDetectionStrategy, Component, inject, type OnInit, signal } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService, translateAuthError } from '@core/services/auth';
+import { TranslocoDirective } from '@jsverse/transloco';
+import { z } from 'zod';
 
-type CallbackState = "loading" | "prompt" | "error";
+type CallbackState = 'loading' | 'prompt' | 'error';
 
 const EmailSchema = z.object({ email: z.email() });
 
 @Component({
-	selector: "app-auth-callback",
+	selector: 'app-auth-callback',
 	imports: [RouterLink, TranslocoDirective],
-	templateUrl: "./auth-callback.html",
+	templateUrl: './auth-callback.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthCallback implements OnInit {
 	readonly #authService = inject(AuthService);
 	readonly #router = inject(Router);
 
-	readonly #state = signal<CallbackState>("loading");
+	readonly #state = signal<CallbackState>('loading');
 	readonly #errorMessage = signal<string | null>(null);
-	readonly #promptEmail = signal("");
+	readonly #promptEmail = signal('');
 
 	readonly state = this.#state.asReadonly();
 	readonly errorMessage = this.#errorMessage.asReadonly();
 	readonly promptEmail = this.#promptEmail.asReadonly();
 
 	async ngOnInit(): Promise<void> {
-		const email = localStorage.getItem("emailForSignIn");
+		const email = localStorage.getItem('emailForSignIn');
 		if (!email) {
-			this.#state.set("prompt");
+			this.#state.set('prompt');
 			return;
 		}
 		await this.#complete(email);
@@ -52,16 +46,16 @@ export class AuthCallback implements OnInit {
 	}
 
 	async #complete(email: string): Promise<void> {
-		this.#state.set("loading");
+		this.#state.set('loading');
 		try {
 			const { isNewUser } = await this.#authService.completeSignInWithLink(
 				email,
 				window.location.href,
 			);
-			localStorage.removeItem("emailForSignIn");
-			await this.#router.navigate([isNewUser ? "/profile/setup" : "/home"]);
+			localStorage.removeItem('emailForSignIn');
+			await this.#router.navigate([isNewUser ? '/profile/setup' : '/home']);
 		} catch (error: unknown) {
-			this.#state.set("error");
+			this.#state.set('error');
 			this.#errorMessage.set(translateAuthError(error));
 		}
 	}

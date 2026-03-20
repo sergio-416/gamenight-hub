@@ -1,10 +1,10 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable, inject, signal } from "@angular/core";
-import { API_CONFIG } from "@core/config/api.config";
-import type { Profile, UpdateProfileDto } from "@gamenight-hub/shared";
-import { type Observable, tap } from "rxjs";
+import { HttpClient } from '@angular/common/http';
+import { Injectable, inject, signal } from '@angular/core';
+import { API_CONFIG } from '@core/config/api.config';
+import type { Profile, UpdateProfileDto } from '@gamenight-hub/shared';
+import { type Observable, tap } from 'rxjs';
 
-@Injectable({ providedIn: "root" })
+@Injectable({ providedIn: 'root' })
 export class ProfileService {
 	readonly #http = inject(HttpClient);
 	readonly #base = API_CONFIG.baseUrl;

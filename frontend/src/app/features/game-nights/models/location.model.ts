@@ -3,9 +3,9 @@ export type {
 	CreateLocationWithEvent,
 	Location,
 	UpdateLocation,
-} from "@gamenight-hub/shared";
+} from '@gamenight-hub/shared';
 export {
 	CreateLocationSchema,
 	CreateLocationWithEventSchema,
 	UpdateLocationSchema,
-} from "@gamenight-hub/shared";
+} from '@gamenight-hub/shared';

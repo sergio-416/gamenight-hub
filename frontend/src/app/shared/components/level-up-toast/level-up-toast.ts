@@ -1,16 +1,11 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	input,
-	signal,
-} from "@angular/core";
-import { TranslocoDirective } from "@jsverse/transloco";
+import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core';
+import { TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
-	selector: "app-level-up-toast",
-	host: { class: "block" },
+	selector: 'app-level-up-toast',
+	host: { class: 'block' },
 	imports: [TranslocoDirective],
-	templateUrl: "./level-up-toast.html",
+	templateUrl: './level-up-toast.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LevelUpToast {

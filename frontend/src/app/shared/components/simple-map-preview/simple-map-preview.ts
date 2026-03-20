@@ -9,11 +9,11 @@ import {
 	input,
 	type OnDestroy,
 	viewChild,
-} from "@angular/core";
-import { environment } from "@env";
-import * as L from "leaflet";
+} from '@angular/core';
+import { environment } from '@env';
+import * as L from 'leaflet';
 
-const LEAFLET = new InjectionToken<typeof L>("leaflet", {
+const LEAFLET = new InjectionToken<typeof L>('leaflet', {
 	factory: () => L,
 });
 
@@ -28,8 +28,8 @@ const PIN_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" wid
 </svg>`;
 
 @Component({
-	selector: "app-simple-map-preview",
-	host: { class: "block h-full w-full" },
+	selector: 'app-simple-map-preview',
+	host: { class: 'block h-full w-full' },
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
 		<div
@@ -44,15 +44,13 @@ export class SimpleMapPreview implements AfterViewInit, OnDestroy {
 	readonly longitude = input<number | undefined>();
 	readonly locationName = input<string | undefined>();
 
-	readonly mapContainer = viewChild.required<ElementRef>("mapContainer");
+	readonly mapContainer = viewChild.required<ElementRef>('mapContainer');
 
 	readonly #L = inject(LEAFLET);
 	#map?: L.Map;
 	#marker?: L.Marker;
 
-	readonly hasLocation = computed(
-		() => this.latitude() != null && this.longitude() != null,
-	);
+	readonly hasLocation = computed(() => this.latitude() != null && this.longitude() != null);
 
 	ngAfterViewInit(): void {
 		this.#initMap();
@@ -77,10 +75,7 @@ export class SimpleMapPreview implements AfterViewInit, OnDestroy {
 				doubleClickZoom: false,
 				touchZoom: false,
 			})
-			.setView(
-				hasPin ? [lat, lng] : DEFAULT_CENTER,
-				hasPin ? PIN_ZOOM : DEFAULT_ZOOM,
-			);
+			.setView(hasPin ? [lat, lng] : DEFAULT_CENTER, hasPin ? PIN_ZOOM : DEFAULT_ZOOM);
 
 		this.#L.tileLayer(JAWG_URL, { minZoom: 0, maxZoom: 22 }).addTo(this.#map);
 
@@ -94,7 +89,7 @@ export class SimpleMapPreview implements AfterViewInit, OnDestroy {
 		this.#removeMarker();
 
 		const icon = this.#L.divIcon({
-			className: "custom-marker",
+			className: 'custom-marker',
 			html: PIN_SVG,
 			iconSize: [32, 32],
 			iconAnchor: [16, 32],
@@ -105,9 +100,9 @@ export class SimpleMapPreview implements AfterViewInit, OnDestroy {
 		if (name) {
 			this.#marker.bindTooltip(name, {
 				permanent: true,
-				direction: "top",
+				direction: 'top',
 				offset: [0, -32],
-				className: "wizard-map-tooltip",
+				className: 'wizard-map-tooltip',
 			});
 		}
 	}

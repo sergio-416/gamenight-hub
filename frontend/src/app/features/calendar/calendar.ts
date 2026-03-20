@@ -1,35 +1,24 @@
-import { httpResource } from "@angular/common/http";
-import {
-	ChangeDetectionStrategy,
-	Component,
-	computed,
-	inject,
-	signal,
-} from "@angular/core";
-import { Router } from "@angular/router";
-import { CalendarGrid } from "@calendar/components/calendar-grid/calendar-grid";
-import { CalendarHeader } from "@calendar/components/calendar-header/calendar-header";
-import { EventDetailsStrip } from "@calendar/components/event-details-strip/event-details-strip";
+import { httpResource } from '@angular/common/http';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { Router } from '@angular/router';
+import { CalendarGrid } from '@calendar/components/calendar-grid/calendar-grid';
+import { CalendarHeader } from '@calendar/components/calendar-header/calendar-header';
+import { EventDetailsStrip } from '@calendar/components/event-details-strip/event-details-strip';
 import {
 	buildEventsByDateMap,
 	generateMonthGrid,
 	getEventsForDay,
 	getUpcomingEvents,
 	isSameDay,
-} from "@calendar/utils/calendar-dates";
-import { API_CONFIG } from "@core/config/api.config";
-import type { CalendarEvent, PaginatedResponse } from "@gamenight-hub/shared";
-import { TranslocoDirective, translateSignal } from "@jsverse/transloco";
+} from '@calendar/utils/calendar-dates';
+import { API_CONFIG } from '@core/config/api.config';
+import type { CalendarEvent, PaginatedResponse } from '@gamenight-hub/shared';
+import { TranslocoDirective, translateSignal } from '@jsverse/transloco';
 
 @Component({
-	selector: "app-calendar",
-	imports: [
-		CalendarGrid,
-		CalendarHeader,
-		EventDetailsStrip,
-		TranslocoDirective,
-	],
-	templateUrl: "./calendar.html",
+	selector: 'app-calendar',
+	imports: [CalendarGrid, CalendarHeader, EventDetailsStrip, TranslocoDirective],
+	templateUrl: './calendar.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Calendar {
@@ -51,35 +40,31 @@ export class Calendar {
 		};
 	});
 
-	readonly eventsResource = httpResource<PaginatedResponse<CalendarEvent>>(
-		() => {
-			const range = this.#monthDateRange();
-			const params = new URLSearchParams();
-			params.set("from", range.from);
-			params.set("to", range.to);
-			return `${this.#apiUrl}/events?${params.toString()}`;
-		},
-	);
+	readonly eventsResource = httpResource<PaginatedResponse<CalendarEvent>>(() => {
+		const range = this.#monthDateRange();
+		const params = new URLSearchParams();
+		params.set('from', range.from);
+		params.set('to', range.to);
+		return `${this.#apiUrl}/events?${params.toString()}`;
+	});
 
-	readonly #monthEvents = computed(
-		() => this.eventsResource.value()?.data ?? [],
-	);
+	readonly #monthEvents = computed(() => this.eventsResource.value()?.data ?? []);
 
 	readonly loading = computed(() => this.eventsResource.isLoading());
 	readonly error = computed(() => this.eventsResource.error());
 
-	readonly #m0 = translateSignal("months.0", {}, { scope: "calendar" });
-	readonly #m1 = translateSignal("months.1", {}, { scope: "calendar" });
-	readonly #m2 = translateSignal("months.2", {}, { scope: "calendar" });
-	readonly #m3 = translateSignal("months.3", {}, { scope: "calendar" });
-	readonly #m4 = translateSignal("months.4", {}, { scope: "calendar" });
-	readonly #m5 = translateSignal("months.5", {}, { scope: "calendar" });
-	readonly #m6 = translateSignal("months.6", {}, { scope: "calendar" });
-	readonly #m7 = translateSignal("months.7", {}, { scope: "calendar" });
-	readonly #m8 = translateSignal("months.8", {}, { scope: "calendar" });
-	readonly #m9 = translateSignal("months.9", {}, { scope: "calendar" });
-	readonly #m10 = translateSignal("months.10", {}, { scope: "calendar" });
-	readonly #m11 = translateSignal("months.11", {}, { scope: "calendar" });
+	readonly #m0 = translateSignal('months.0', {}, { scope: 'calendar' });
+	readonly #m1 = translateSignal('months.1', {}, { scope: 'calendar' });
+	readonly #m2 = translateSignal('months.2', {}, { scope: 'calendar' });
+	readonly #m3 = translateSignal('months.3', {}, { scope: 'calendar' });
+	readonly #m4 = translateSignal('months.4', {}, { scope: 'calendar' });
+	readonly #m5 = translateSignal('months.5', {}, { scope: 'calendar' });
+	readonly #m6 = translateSignal('months.6', {}, { scope: 'calendar' });
+	readonly #m7 = translateSignal('months.7', {}, { scope: 'calendar' });
+	readonly #m8 = translateSignal('months.8', {}, { scope: 'calendar' });
+	readonly #m9 = translateSignal('months.9', {}, { scope: 'calendar' });
+	readonly #m10 = translateSignal('months.10', {}, { scope: 'calendar' });
+	readonly #m11 = translateSignal('months.11', {}, { scope: 'calendar' });
 
 	readonly #monthNames = computed(() => [
 		this.#m0(),
@@ -100,13 +85,9 @@ export class Calendar {
 		() => `${this.#monthNames()[this.currentMonth()]} ${this.currentYear()}`,
 	);
 
-	readonly days = computed(() =>
-		generateMonthGrid(this.currentYear(), this.currentMonth()),
-	);
+	readonly days = computed(() => generateMonthGrid(this.currentYear(), this.currentMonth()));
 
-	readonly eventsByDate = computed(() =>
-		buildEventsByDateMap(this.#monthEvents()),
-	);
+	readonly eventsByDate = computed(() => buildEventsByDateMap(this.#monthEvents()));
 
 	readonly eventCount = computed(() => this.#monthEvents().length);
 
@@ -155,14 +136,14 @@ export class Calendar {
 	}
 
 	onEventClick(event: CalendarEvent): void {
-		void this.#router.navigate(["/events", event.id]);
+		void this.#router.navigate(['/events', event.id]);
 	}
 
 	onNewEvent(): void {
-		void this.#router.navigate(["/create-event"]);
+		void this.#router.navigate(['/create-event']);
 	}
 
 	onDetailCardClick(eventId: string): void {
-		void this.#router.navigate(["/events", eventId]);
+		void this.#router.navigate(['/events', eventId]);
 	}
 }

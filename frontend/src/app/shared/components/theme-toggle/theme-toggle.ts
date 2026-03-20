@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
-import { ThemeService } from "@core/services/theme.service";
-import { TranslocoDirective } from "@jsverse/transloco";
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ThemeService } from '@core/services/theme.service';
+import { TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
-	selector: "app-theme-toggle",
-	host: { class: "block" },
+	selector: 'app-theme-toggle',
+	host: { class: 'block' },
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [TranslocoDirective],
 	template: `

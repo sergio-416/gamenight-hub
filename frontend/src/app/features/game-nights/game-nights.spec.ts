@@ -1,19 +1,16 @@
-import { provideHttpClient } from "@angular/common/http";
-import {
-	HttpTestingController,
-	provideHttpClientTesting,
-} from "@angular/common/http/testing";
-import { signal } from "@angular/core";
-import { API_CONFIG } from "@core/config/api.config";
-import { AuthService } from "@core/services/auth";
-import { ToastService } from "@core/services/toast";
-import { provideTranslocoTesting } from "@core/testing/transloco-testing";
-import { provideTranslocoScope } from "@jsverse/transloco";
-import { fireEvent, render, screen } from "@testing-library/angular";
-import { of } from "rxjs";
-import { LEAFLET } from "./components/map/map";
-import { GameNights } from "./game-nights";
-import { LocationsService } from "./services/locations";
+import { provideHttpClient } from '@angular/common/http';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { signal } from '@angular/core';
+import { API_CONFIG } from '@core/config/api.config';
+import { AuthService } from '@core/services/auth';
+import { ToastService } from '@core/services/toast';
+import { provideTranslocoTesting } from '@core/testing/transloco-testing';
+import { provideTranslocoScope } from '@jsverse/transloco';
+import { fireEvent, render, screen } from '@testing-library/angular';
+import { of } from 'rxjs';
+import { LEAFLET } from './components/map/map';
+import { GameNights } from './game-nights';
+import { LocationsService } from './services/locations';
 
 const mockLeaflet = {
 	map: vi.fn().mockReturnValue({
@@ -44,15 +41,15 @@ const mockLeaflet = {
 function makeProviders(isLoggedIn = true) {
 	return [
 		provideTranslocoTesting(),
-		provideTranslocoScope("game-nights"),
+		provideTranslocoScope('game-nights'),
 		provideHttpClient(),
 		provideHttpClientTesting(),
 		{
 			provide: AuthService,
 			useValue: {
 				isLoggedIn: signal(isLoggedIn).asReadonly(),
-				userRole: () => "user" as const,
-				userType: () => "regular" as const,
+				userRole: () => 'user' as const,
+				userType: () => 'regular' as const,
 			},
 		},
 		{
@@ -70,13 +67,13 @@ function makeProviders(isLoggedIn = true) {
 	];
 }
 
-describe("GameNights", () => {
+describe('GameNights', () => {
 	beforeEach(() => {
 		vi.clearAllMocks();
 	});
 
-	describe("page display", () => {
-		it("should display page title when component loads", async () => {
+	describe('page display', () => {
+		it('should display page title when component loads', async () => {
 			const { fixture } = await render(GameNights, {
 				providers: makeProviders(),
 			});
@@ -90,12 +87,10 @@ describe("GameNights", () => {
 				totalPages: 0,
 			});
 
-			expect(
-				screen.getByRole("heading", { name: /game nights/i }),
-			).toBeTruthy();
+			expect(screen.getByRole('heading', { name: /game nights/i })).toBeTruthy();
 		});
 
-		it("should display descriptive text about board game spots", async () => {
+		it('should display descriptive text about board game spots', async () => {
 			const { fixture } = await render(GameNights, {
 				providers: makeProviders(),
 			});
@@ -113,9 +108,9 @@ describe("GameNights", () => {
 		});
 	});
 
-	describe("map component", () => {
-		it("should render the map component on page load", async () => {
-			localStorage.setItem("gameNights_showMap", "true");
+	describe('map component', () => {
+		it('should render the map component on page load', async () => {
+			localStorage.setItem('gameNights_showMap', 'true');
 			const { fixture, detectChanges } = await render(GameNights, {
 				providers: makeProviders(),
 			});
@@ -135,11 +130,11 @@ describe("GameNights", () => {
 			await fixture.whenStable();
 			detectChanges();
 
-			expect(screen.getByTestId("map-container")).toBeTruthy();
+			expect(screen.getByTestId('map-container')).toBeTruthy();
 		});
 	});
 
-	describe("map toggle", () => {
+	describe('map toggle', () => {
 		function flushHttp(fixture: {
 			debugElement: {
 				injector: {
@@ -161,19 +156,19 @@ describe("GameNights", () => {
 				});
 		}
 
-		it("should display Show Map toggle button", async () => {
-			localStorage.removeItem("gameNights_showMap");
+		it('should display Show Map toggle button', async () => {
+			localStorage.removeItem('gameNights_showMap');
 			const { fixture } = await render(GameNights, {
 				providers: makeProviders(),
 			});
 			flushHttp(fixture);
 
-			const toggleBtn = screen.getByRole("button", { name: /map/i });
+			const toggleBtn = screen.getByRole('button', { name: /map/i });
 			expect(toggleBtn).toBeTruthy();
 		});
 
-		it("should toggle map visibility when toggle button clicked", async () => {
-			localStorage.setItem("gameNights_showMap", "true");
+		it('should toggle map visibility when toggle button clicked', async () => {
+			localStorage.setItem('gameNights_showMap', 'true');
 			const { fixture, detectChanges } = await render(GameNights, {
 				providers: makeProviders(),
 			});
@@ -182,7 +177,7 @@ describe("GameNights", () => {
 
 			expect(screen.getByText(/hide map/i)).toBeTruthy();
 
-			const toggleBtn = screen.getByRole("button", { name: /hide map/i });
+			const toggleBtn = screen.getByRole('button', { name: /hide map/i });
 			fireEvent.click(toggleBtn);
 			detectChanges();
 

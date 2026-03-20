@@ -3,8 +3,8 @@ export type {
 	Game,
 	GameStatus,
 	WeightLabel,
-} from "@gamenight-hub/shared";
-export { WEIGHT_LABELS } from "@gamenight-hub/shared";
+} from '@gamenight-hub/shared';
+export { WEIGHT_LABELS } from '@gamenight-hub/shared';
 
 export interface GameSearchResult {
 	bggId: number;
@@ -13,7 +13,7 @@ export interface GameSearchResult {
 	rank?: string;
 	avgRating?: string;
 	isExpansion?: boolean;
-	source: "local" | "bgg";
+	source: 'local' | 'bgg';
 }
 
 export interface BggGameDetail {
@@ -34,7 +34,7 @@ export interface BggGameDetail {
 }
 
 export interface PersonalFields {
-	status?: "owned" | "want_to_play" | "want_to_try" | "played";
+	status?: 'owned' | 'want_to_play' | 'want_to_try' | 'played';
 	notes?: string;
 	complexity?: number;
 }

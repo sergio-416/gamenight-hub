@@ -1,8 +1,8 @@
-import { Component, input } from "@angular/core";
+import { Component, input } from '@angular/core';
 
 @Component({
-	selector: "apx-chart",
-	template: "",
+	selector: 'apx-chart',
+	template: '',
 })
 export class ChartComponent {
 	series = input<unknown>();

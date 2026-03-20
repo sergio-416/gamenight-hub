@@ -1,18 +1,13 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	inject,
-	signal,
-} from "@angular/core";
-import { Router, RouterLink } from "@angular/router";
-import { OrganiserService } from "@core/services/organiser.service";
-import { OrganiserRequestSchema } from "@gamenight-hub/shared";
-import { TranslocoDirective } from "@jsverse/transloco";
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { OrganiserService } from '@core/services/organiser.service';
+import { OrganiserRequestSchema } from '@gamenight-hub/shared';
+import { TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
-	selector: "app-register-organiser",
+	selector: 'app-register-organiser',
 	imports: [RouterLink, TranslocoDirective],
-	templateUrl: "./register-organiser.html",
+	templateUrl: './register-organiser.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterOrganiser {
@@ -20,9 +15,9 @@ export class RegisterOrganiser {
 	readonly #router = inject(Router);
 
 	readonly #loading = signal(false);
-	readonly #orgName = signal("");
-	readonly #address = signal("");
-	readonly #email = signal("");
+	readonly #orgName = signal('');
+	readonly #address = signal('');
+	readonly #email = signal('');
 	readonly #error = signal<string | null>(null);
 	readonly #showSuccess = signal(false);
 
@@ -44,7 +39,7 @@ export class RegisterOrganiser {
 		});
 
 		if (!result.success) {
-			this.#error.set(result.error.issues[0]?.message ?? "Invalid input");
+			this.#error.set(result.error.issues[0]?.message ?? 'Invalid input');
 			this.#loading.set(false);
 			return;
 		}
@@ -53,7 +48,7 @@ export class RegisterOrganiser {
 			await this.#organiserService.submitRequest(result.data);
 			this.#showSuccess.set(true);
 		} catch {
-			this.#error.set("Something went wrong. Please try again.");
+			this.#error.set('Something went wrong. Please try again.');
 		} finally {
 			this.#loading.set(false);
 		}
@@ -61,7 +56,7 @@ export class RegisterOrganiser {
 
 	async dismissAndRedirect(): Promise<void> {
 		this.#showSuccess.set(false);
-		await this.#router.navigate(["/home"]);
+		await this.#router.navigate(['/home']);
 	}
 
 	onOrgNameChange(event: Event): void {

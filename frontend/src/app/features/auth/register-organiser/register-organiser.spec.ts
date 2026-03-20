@@ -1,12 +1,12 @@
-import { provideRouter } from "@angular/router";
-import { OrganiserService } from "@core/services/organiser.service";
-import { provideTranslocoTesting } from "@core/testing/transloco-testing";
-import { render, screen, waitFor } from "@testing-library/angular";
-import userEvent from "@testing-library/user-event";
-import { vi } from "vitest";
-import { RegisterOrganiser } from "./register-organiser";
+import { provideRouter } from '@angular/router';
+import { OrganiserService } from '@core/services/organiser.service';
+import { provideTranslocoTesting } from '@core/testing/transloco-testing';
+import { render, screen, waitFor } from '@testing-library/angular';
+import userEvent from '@testing-library/user-event';
+import { vi } from 'vitest';
+import { RegisterOrganiser } from './register-organiser';
 
-describe("RegisterOrganiser", () => {
+describe('RegisterOrganiser', () => {
 	const mockSubmitRequest = vi.fn().mockResolvedValue(undefined);
 
 	const mockOrganiserService = {
@@ -17,7 +17,7 @@ describe("RegisterOrganiser", () => {
 		mockSubmitRequest.mockClear();
 	});
 
-	it("should display organisation registration form", async () => {
+	it('should display organisation registration form', async () => {
 		await render(RegisterOrganiser, {
 			providers: [
 				provideRouter([]),
@@ -31,7 +31,7 @@ describe("RegisterOrganiser", () => {
 		expect(screen.getByLabelText(/your email/i)).toBeTruthy();
 	});
 
-	it("should show validation error for short organisation name", async () => {
+	it('should show validation error for short organisation name', async () => {
 		await render(RegisterOrganiser, {
 			providers: [
 				provideRouter([]),
@@ -40,17 +40,13 @@ describe("RegisterOrganiser", () => {
 			],
 		});
 
-		await userEvent.type(screen.getByLabelText(/organisation name/i), "A");
-		await userEvent.click(
-			screen.getByRole("button", { name: /submit application/i }),
-		);
+		await userEvent.type(screen.getByLabelText(/organisation name/i), 'A');
+		await userEvent.click(screen.getByRole('button', { name: /submit application/i }));
 
-		expect(
-			screen.getByText(/organisation name must be at least 2 characters/i),
-		).toBeTruthy();
+		expect(screen.getByText(/organisation name must be at least 2 characters/i)).toBeTruthy();
 	});
 
-	it("should show validation error for invalid email", async () => {
+	it('should show validation error for invalid email', async () => {
 		await render(RegisterOrganiser, {
 			providers: [
 				provideRouter([]),
@@ -59,20 +55,15 @@ describe("RegisterOrganiser", () => {
 			],
 		});
 
-		await userEvent.type(
-			screen.getByLabelText(/organisation name/i),
-			"Test Org",
-		);
-		await userEvent.type(screen.getByLabelText(/address/i), "123 Test St");
-		await userEvent.type(screen.getByLabelText(/your email/i), "not-an-email");
-		await userEvent.click(
-			screen.getByRole("button", { name: /submit application/i }),
-		);
+		await userEvent.type(screen.getByLabelText(/organisation name/i), 'Test Org');
+		await userEvent.type(screen.getByLabelText(/address/i), '123 Test St');
+		await userEvent.type(screen.getByLabelText(/your email/i), 'not-an-email');
+		await userEvent.click(screen.getByRole('button', { name: /submit application/i }));
 
 		expect(screen.getByText(/please enter a valid email/i)).toBeTruthy();
 	});
 
-	it("should submit request successfully with valid data", async () => {
+	it('should submit request successfully with valid data', async () => {
 		await render(RegisterOrganiser, {
 			providers: [
 				provideRouter([]),
@@ -81,30 +72,22 @@ describe("RegisterOrganiser", () => {
 			],
 		});
 
-		await userEvent.type(
-			screen.getByLabelText(/organisation name/i),
-			"Test Org",
-		);
-		await userEvent.type(screen.getByLabelText(/address/i), "123 Test St");
-		await userEvent.type(
-			screen.getByLabelText(/your email/i),
-			"test@example.com",
-		);
+		await userEvent.type(screen.getByLabelText(/organisation name/i), 'Test Org');
+		await userEvent.type(screen.getByLabelText(/address/i), '123 Test St');
+		await userEvent.type(screen.getByLabelText(/your email/i), 'test@example.com');
 
-		await userEvent.click(
-			screen.getByRole("button", { name: /submit application/i }),
-		);
+		await userEvent.click(screen.getByRole('button', { name: /submit application/i }));
 
 		await waitFor(() => {
 			expect(mockSubmitRequest).toHaveBeenCalledWith({
-				orgName: "Test Org",
-				address: "123 Test St",
-				email: "test@example.com",
+				orgName: 'Test Org',
+				address: '123 Test St',
+				email: 'test@example.com',
 			});
 		});
 	});
 
-	it("should show success modal after successful submission", async () => {
+	it('should show success modal after successful submission', async () => {
 		await render(RegisterOrganiser, {
 			providers: [
 				provideRouter([]),
@@ -113,27 +96,19 @@ describe("RegisterOrganiser", () => {
 			],
 		});
 
-		await userEvent.type(
-			screen.getByLabelText(/organisation name/i),
-			"Test Org",
-		);
-		await userEvent.type(screen.getByLabelText(/address/i), "123 Test St");
-		await userEvent.type(
-			screen.getByLabelText(/your email/i),
-			"test@example.com",
-		);
+		await userEvent.type(screen.getByLabelText(/organisation name/i), 'Test Org');
+		await userEvent.type(screen.getByLabelText(/address/i), '123 Test St');
+		await userEvent.type(screen.getByLabelText(/your email/i), 'test@example.com');
 
-		await userEvent.click(
-			screen.getByRole("button", { name: /submit application/i }),
-		);
+		await userEvent.click(screen.getByRole('button', { name: /submit application/i }));
 
 		await waitFor(() => {
 			expect(screen.getByText(/application received!/i)).toBeTruthy();
 		});
 	});
 
-	it("should show error message on submission failure", async () => {
-		mockSubmitRequest.mockRejectedValue(new Error("Firebase error"));
+	it('should show error message on submission failure', async () => {
+		mockSubmitRequest.mockRejectedValue(new Error('Firebase error'));
 
 		await render(RegisterOrganiser, {
 			providers: [
@@ -143,26 +118,18 @@ describe("RegisterOrganiser", () => {
 			],
 		});
 
-		await userEvent.type(
-			screen.getByLabelText(/organisation name/i),
-			"Test Org",
-		);
-		await userEvent.type(screen.getByLabelText(/address/i), "123 Test St");
-		await userEvent.type(
-			screen.getByLabelText(/your email/i),
-			"test@example.com",
-		);
+		await userEvent.type(screen.getByLabelText(/organisation name/i), 'Test Org');
+		await userEvent.type(screen.getByLabelText(/address/i), '123 Test St');
+		await userEvent.type(screen.getByLabelText(/your email/i), 'test@example.com');
 
-		await userEvent.click(
-			screen.getByRole("button", { name: /submit application/i }),
-		);
+		await userEvent.click(screen.getByRole('button', { name: /submit application/i }));
 
 		await waitFor(() => {
 			expect(screen.getByText(/something went wrong/i)).toBeTruthy();
 		});
 	});
 
-	it("should display pending approval notice", async () => {
+	it('should display pending approval notice', async () => {
 		await render(RegisterOrganiser, {
 			providers: [
 				provideRouter([]),

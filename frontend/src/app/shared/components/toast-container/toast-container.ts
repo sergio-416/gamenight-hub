@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
-import { ToastService } from "@core/services/toast";
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ToastService } from '@core/services/toast';
 
 @Component({
-	selector: "app-toast-container",
+	selector: 'app-toast-container',
 	imports: [],
-	templateUrl: "./toast-container.html",
+	templateUrl: './toast-container.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToastContainer {

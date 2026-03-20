@@ -1,5 +1,5 @@
-import { A11yModule } from "@angular/cdk/a11y";
-import { HttpErrorResponse } from "@angular/common/http";
+import { A11yModule } from '@angular/cdk/a11y';
+import { HttpErrorResponse } from '@angular/common/http';
 import {
 	ChangeDetectionStrategy,
 	Component,
@@ -8,21 +8,18 @@ import {
 	input,
 	linkedSignal,
 	output,
-} from "@angular/core";
-import { Router } from "@angular/router";
-import { ProfileService } from "@core/services/profile.service";
-import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import {
-	faLock,
-	faTriangleExclamation,
-} from "@fortawesome/free-solid-svg-icons";
+} from '@angular/core';
+import { Router } from '@angular/router';
+import { ProfileService } from '@core/services/profile.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faLock, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-	selector: "app-delete-account-dialog",
+	selector: 'app-delete-account-dialog',
 	imports: [A11yModule, FontAwesomeModule],
-	templateUrl: "./delete-account-dialog.html",
+	templateUrl: './delete-account-dialog.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	host: { "(keydown.escape)": "onCancel()" },
+	host: { '(keydown.escape)': 'onCancel()' },
 })
 export class DeleteAccountDialog {
 	readonly #profileService = inject(ProfileService);
@@ -34,9 +31,9 @@ export class DeleteAccountDialog {
 	readonly cancelled = output<void>();
 	readonly accountDeleted = output<void>();
 
-	readonly step = linkedSignal<boolean, "warning" | "confirm">({
+	readonly step = linkedSignal<boolean, 'warning' | 'confirm'>({
 		source: () => this.isOpen(),
-		computation: () => "warning",
+		computation: () => 'warning',
 	});
 	readonly checking = linkedSignal({
 		source: () => this.isOpen(),
@@ -49,7 +46,7 @@ export class DeleteAccountDialog {
 	readonly hasOpenEvents = computed(() => this.openEventsCount() > 0);
 	readonly usernameInput = linkedSignal({
 		source: () => this.isOpen(),
-		computation: () => "",
+		computation: () => '',
 	});
 	readonly deleting = linkedSignal({
 		source: () => this.isOpen(),
@@ -75,7 +72,7 @@ export class DeleteAccountDialog {
 			next: ({ eligible, openEventsCount }) => {
 				this.checking.set(false);
 				if (eligible) {
-					this.step.set("confirm");
+					this.step.set('confirm');
 				} else {
 					this.openEventsCount.set(openEventsCount);
 				}
@@ -99,13 +96,11 @@ export class DeleteAccountDialog {
 			error: (err: unknown) => {
 				this.deleting.set(false);
 				if (err instanceof HttpErrorResponse && err.status === 409) {
-					this.deleteError.set(
-						"You still have open events. Please close them first.",
-					);
-					this.step.set("warning");
+					this.deleteError.set('You still have open events. Please close them first.');
+					this.step.set('warning');
 					this.openEventsCount.set(1);
 				} else {
-					this.deleteError.set("Something went wrong. Please try again.");
+					this.deleteError.set('Something went wrong. Please try again.');
 				}
 			},
 		});
@@ -113,7 +108,7 @@ export class DeleteAccountDialog {
 
 	goToEvents(): void {
 		this.cancelled.emit();
-		void this.#router.navigate(["/game-nights"]);
+		void this.#router.navigate(['/game-nights']);
 	}
 
 	onCancel(): void {

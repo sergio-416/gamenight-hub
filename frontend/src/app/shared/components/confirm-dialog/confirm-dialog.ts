@@ -1,26 +1,21 @@
-import { A11yModule } from "@angular/cdk/a11y";
-import {
-	ChangeDetectionStrategy,
-	Component,
-	input,
-	output,
-} from "@angular/core";
+import { A11yModule } from '@angular/cdk/a11y';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 
 @Component({
-	selector: "app-confirm-dialog",
+	selector: 'app-confirm-dialog',
 	imports: [A11yModule],
-	templateUrl: "./confirm-dialog.html",
+	templateUrl: './confirm-dialog.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
-		"(keydown.escape)": "onCancel()",
+		'(keydown.escape)': 'onCancel()',
 	},
 })
 export class ConfirmDialog {
 	readonly isOpen = input.required<boolean>();
-	readonly title = input<string>("Confirm Action");
+	readonly title = input<string>('Confirm Action');
 	readonly message = input.required<string>();
-	readonly confirmText = input<string>("Confirm");
-	readonly cancelText = input<string>("Cancel");
+	readonly confirmText = input<string>('Confirm');
+	readonly cancelText = input<string>('Cancel');
 	readonly danger = input<boolean>(false);
 
 	readonly confirmed = output<void>();

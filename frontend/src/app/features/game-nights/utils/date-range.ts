@@ -4,15 +4,14 @@ export type DateRange = {
 };
 
 const FILTER_PRESETS = {
-	THIS_WEEK: "this-week",
-	NEXT_7D: "next-7d",
-	NEXT_14D: "next-14d",
-	THIS_MONTH: "this-month",
-	ALL: "all",
+	THIS_WEEK: 'this-week',
+	NEXT_7D: 'next-7d',
+	NEXT_14D: 'next-14d',
+	THIS_MONTH: 'this-month',
+	ALL: 'all',
 } as const;
 
-export type FilterPresetKey =
-	(typeof FILTER_PRESETS)[keyof typeof FILTER_PRESETS];
+export type FilterPresetKey = (typeof FILTER_PRESETS)[keyof typeof FILTER_PRESETS];
 
 export const DEFAULT_PRESET: FilterPresetKey = FILTER_PRESETS.NEXT_14D;
 

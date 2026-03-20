@@ -1,18 +1,11 @@
-import { provideHttpClient } from "@angular/common/http";
-import {
-	HttpTestingController,
-	provideHttpClientTesting,
-} from "@angular/common/http/testing";
-import { TestBed } from "@angular/core/testing";
-import { API_CONFIG } from "@core/config/api.config";
-import type {
-	Game,
-	GameSearchResult,
-	PersonalFields,
-} from "../models/game.model";
-import { GamesService } from "./games";
+import { provideHttpClient } from '@angular/common/http';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
+import { API_CONFIG } from '@core/config/api.config';
+import type { Game, GameSearchResult, PersonalFields } from '../models/game.model';
+import { GamesService } from './games';
 
-describe("GamesService", () => {
+describe('GamesService', () => {
 	let service: GamesService;
 	let httpMock: HttpTestingController;
 
@@ -20,11 +13,7 @@ describe("GamesService", () => {
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			providers: [
-				GamesService,
-				provideHttpClient(),
-				provideHttpClientTesting(),
-			],
+			providers: [GamesService, provideHttpClient(), provideHttpClientTesting()],
 		});
 		service = TestBed.inject(GamesService);
 		httpMock = TestBed.inject(HttpTestingController);
@@ -39,50 +28,48 @@ describe("GamesService", () => {
 		httpMock.verify();
 	});
 
-	describe("ownedBggIds", () => {
-		it("should expose an empty set initially", () => {
+	describe('ownedBggIds', () => {
+		it('should expose an empty set initially', () => {
 			expect(service.ownedBggIds().size).toBe(0);
 		});
 	});
 
-	describe("search", () => {
-		it("should return unified search results", () => {
+	describe('search', () => {
+		it('should return unified search results', () => {
 			const mockResults: GameSearchResult[] = [
 				{
 					bggId: 13,
-					name: "Catan",
+					name: 'Catan',
 					yearPublished: 1995,
-					rank: "1",
-					source: "local",
+					rank: '1',
+					source: 'local',
 				},
 			];
 
-			service.search("catan").subscribe((results: GameSearchResult[]) => {
+			service.search('catan').subscribe((results: GameSearchResult[]) => {
 				expect(results).toEqual(mockResults);
 			});
 
-			const req = httpMock.expectOne(
-				`${apiUrl}${API_CONFIG.endpoints.search}?query=catan`,
-			);
-			expect(req.request.method).toBe("GET");
+			const req = httpMock.expectOne(`${apiUrl}${API_CONFIG.endpoints.search}?query=catan`);
+			expect(req.request.method).toBe('GET');
 			req.flush(mockResults);
 		});
 	});
 
-	describe("importGame", () => {
-		it("should import game from BGG", () => {
+	describe('importGame', () => {
+		it('should import game from BGG', () => {
 			const mockGame: Game = {
-				id: "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+				id: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
 				bggId: 13,
-				name: "Catan",
-				status: "owned",
-				notes: "My favorite!",
+				name: 'Catan',
+				status: 'owned',
+				notes: 'My favorite!',
 				isExpansion: false,
 			};
 
 			const personalFields: PersonalFields = {
-				status: "owned",
-				notes: "My favorite!",
+				status: 'owned',
+				notes: 'My favorite!',
 				complexity: 3,
 			};
 
@@ -92,7 +79,7 @@ describe("GamesService", () => {
 			});
 
 			const req = httpMock.expectOne(`${apiUrl}/games/import/13`);
-			expect(req.request.method).toBe("POST");
+			expect(req.request.method).toBe('POST');
 			expect(req.request.body).toEqual(personalFields);
 			req.flush(mockGame);
 		});

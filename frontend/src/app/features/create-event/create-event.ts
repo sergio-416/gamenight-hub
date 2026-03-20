@@ -1,34 +1,24 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	computed,
-	inject,
-	signal,
-} from "@angular/core";
-import { Router } from "@angular/router";
-import { ToastService } from "@core/services/toast";
-import { CreateCalendarEventSchema } from "@features/calendar/models/event.model";
-import { EventsService } from "@features/calendar/services/events";
-import { TranslocoDirective, TranslocoService } from "@jsverse/transloco";
-import { XpService } from "@shared/services/xp.service";
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastService } from '@core/services/toast';
+import { CreateCalendarEventSchema } from '@features/calendar/models/event.model';
+import { EventsService } from '@features/calendar/services/events';
+import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
+import { XpService } from '@shared/services/xp.service';
 
-import { WizardMapPanel } from "./components/wizard-map-panel/wizard-map-panel";
-import { WizardNavigation } from "./components/wizard-navigation/wizard-navigation";
-import { WizardStepGame } from "./components/wizard-step-game/wizard-step-game";
-import { WizardStepIndicator } from "./components/wizard-step-indicator/wizard-step-indicator";
-import { WizardStepLocation } from "./components/wizard-step-location/wizard-step-location";
-import { WizardStepPlayers } from "./components/wizard-step-players/wizard-step-players";
+import { WizardMapPanel } from './components/wizard-map-panel/wizard-map-panel';
+import { WizardNavigation } from './components/wizard-navigation/wizard-navigation';
+import { WizardStepGame } from './components/wizard-step-game/wizard-step-game';
+import { WizardStepIndicator } from './components/wizard-step-indicator/wizard-step-indicator';
+import { WizardStepLocation } from './components/wizard-step-location/wizard-step-location';
+import { WizardStepPlayers } from './components/wizard-step-players/wizard-step-players';
 import {
 	INITIAL_WIZARD_STATE,
 	type WizardFormData,
 	type WizardState,
 	type WizardStep,
-} from "./models/wizard-state";
-import {
-	StepGameSchema,
-	StepLocationSchema,
-	StepPlayersSchema,
-} from "./schemas/wizard-validation";
+} from './models/wizard-state';
+import { StepGameSchema, StepLocationSchema, StepPlayersSchema } from './schemas/wizard-validation';
 
 interface SelectedGame {
 	id: string;
@@ -38,7 +28,7 @@ interface SelectedGame {
 }
 
 @Component({
-	selector: "app-create-event",
+	selector: 'app-create-event',
 	imports: [
 		TranslocoDirective,
 		WizardMapPanel,
@@ -48,7 +38,7 @@ interface SelectedGame {
 		WizardStepLocation,
 		WizardStepPlayers,
 	],
-	templateUrl: "./create-event.html",
+	templateUrl: './create-event.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateEvent {
@@ -68,16 +58,14 @@ export class CreateEvent {
 	readonly formData = computed(() => this.#state().formData);
 	readonly isSubmitting = computed(() => this.#state().isSubmitting);
 
-	readonly title = computed(() => this.formData().title ?? "");
-	readonly description = computed(() => this.formData().description ?? "");
+	readonly title = computed(() => this.formData().title ?? '');
+	readonly description = computed(() => this.formData().description ?? '');
 	readonly selectedGameId = computed(() => this.formData().gameId);
 	readonly coverImage = computed(() => this.formData().coverImage);
 	readonly category = computed(() => this.formData().category);
-	readonly locationMode = computed(
-		() => this.formData().locationMode ?? "private",
-	);
-	readonly startDate = computed(() => this.formData().startDate ?? "");
-	readonly startTime = computed(() => this.formData().startTime ?? "");
+	readonly locationMode = computed(() => this.formData().locationMode ?? 'private');
+	readonly startDate = computed(() => this.formData().startDate ?? '');
+	readonly startTime = computed(() => this.formData().startTime ?? '');
 	readonly endDate = computed(() => this.formData().endDate);
 	readonly endTime = computed(() => this.formData().endTime);
 	readonly maxPlayers = computed(() => this.formData().maxPlayers ?? 4);
@@ -101,15 +89,10 @@ export class CreateEvent {
 	hasUnsavedChanges(): boolean {
 		if (this.#saved()) return false;
 		const data = this.formData();
-		return (
-			!!data.title || !!data.description || !!data.location || !!data.gameId
-		);
+		return !!data.title || !!data.description || !!data.location || !!data.gameId;
 	}
 
-	updateField<K extends keyof WizardFormData>(
-		field: K,
-		value: Partial<WizardFormData>[K],
-	): void {
+	updateField<K extends keyof WizardFormData>(field: K, value: Partial<WizardFormData>[K]): void {
 		this.#state.update((state) => ({
 			...state,
 			formData: { ...state.formData, [field]: value },
@@ -155,9 +138,7 @@ export class CreateEvent {
 		this.#gamePlayerRange.set({});
 	}
 
-	onLocationSelected(
-		location: NonNullable<Partial<WizardFormData>["location"]>,
-	): void {
+	onLocationSelected(location: NonNullable<Partial<WizardFormData>['location']>): void {
 		this.#state.update((state) => ({
 			...state,
 			formData: {
@@ -168,7 +149,7 @@ export class CreateEvent {
 	}
 
 	close(): void {
-		this.#router.navigate(["/game-nights"]);
+		this.#router.navigate(['/game-nights']);
 	}
 
 	handleSubmit(): void {
@@ -176,7 +157,7 @@ export class CreateEvent {
 
 		const data = this.formData();
 		const payload = {
-			title: data.title ?? "",
+			title: data.title ?? '',
 			startTime: this.#toISOWithOffset(data.startDate, data.startTime),
 			endTime: this.#toISOWithOffset(data.endDate, data.endTime),
 			description: data.description,
@@ -191,7 +172,7 @@ export class CreateEvent {
 		if (!result.success) {
 			this.#toast.error(
 				result.error.issues[0]?.message ??
-					this.#transloco.translate("create-event.toast.invalidEventData"),
+					this.#transloco.translate('create-event.toast.invalidEventData'),
 			);
 			return;
 		}
@@ -202,17 +183,13 @@ export class CreateEvent {
 			next: (created) => {
 				this.#saved.set(true);
 				this.#state.update((state) => ({ ...state, isSubmitting: false }));
-				this.#toast.success(
-					this.#transloco.translate("create-event.toast.eventCreated"),
-				);
+				this.#toast.success(this.#transloco.translate('create-event.toast.eventCreated'));
 				this.#xpService.refreshProfile();
-				this.#router.navigate(["/events", created.id]);
+				this.#router.navigate(['/events', created.id]);
 			},
 			error: () => {
 				this.#state.update((state) => ({ ...state, isSubmitting: false }));
-				this.#toast.error(
-					this.#transloco.translate("create-event.toast.eventFailed"),
-				);
+				this.#toast.error(this.#transloco.translate('create-event.toast.eventFailed'));
 			},
 		});
 	}
@@ -221,10 +198,10 @@ export class CreateEvent {
 		if (!date || !time) return undefined;
 		const local = new Date(`${date}T${time}`);
 		const offsetMinutes = local.getTimezoneOffset();
-		const sign = offsetMinutes <= 0 ? "+" : "-";
+		const sign = offsetMinutes <= 0 ? '+' : '-';
 		const absMinutes = Math.abs(offsetMinutes);
-		const hh = String(Math.floor(absMinutes / 60)).padStart(2, "0");
-		const mm = String(absMinutes % 60).padStart(2, "0");
+		const hh = String(Math.floor(absMinutes / 60)).padStart(2, '0');
+		const mm = String(absMinutes % 60).padStart(2, '0');
 		return `${date}T${time}:00${sign}${hh}:${mm}`;
 	}
 }

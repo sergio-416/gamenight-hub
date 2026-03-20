@@ -1,29 +1,21 @@
-import { HttpClient, httpResource } from "@angular/common/http";
-import { computed, Injectable, inject, signal } from "@angular/core";
-import { API_CONFIG } from "@core/config/api.config";
-import { AuthService } from "@core/services/auth";
-import type {
-	XpAwardFeedback,
-	XpHistoryResponse,
-	XpProfile,
-} from "@shared/models/xp.model";
+import { HttpClient, httpResource } from '@angular/common/http';
+import { computed, Injectable, inject, signal } from '@angular/core';
+import { API_CONFIG } from '@core/config/api.config';
+import { AuthService } from '@core/services/auth';
+import type { XpAwardFeedback, XpHistoryResponse, XpProfile } from '@shared/models/xp.model';
 
-@Injectable({ providedIn: "root" })
+@Injectable({ providedIn: 'root' })
 export class XpService {
 	readonly #http = inject(HttpClient);
 	readonly #auth = inject(AuthService);
 	readonly #base = API_CONFIG.baseUrl;
 
 	readonly #profileResource = httpResource<XpProfile>(() =>
-		this.#auth.isLoggedIn()
-			? `${this.#base}${API_CONFIG.endpoints.xpProfile}`
-			: undefined,
+		this.#auth.isLoggedIn() ? `${this.#base}${API_CONFIG.endpoints.xpProfile}` : undefined,
 	);
 
 	readonly profile = computed(() =>
-		this.#profileResource.hasValue()
-			? this.#profileResource.value()
-			: undefined,
+		this.#profileResource.hasValue() ? this.#profileResource.value() : undefined,
 	);
 	readonly profileLoading = computed(() => this.#profileResource.isLoading());
 	readonly profileError = computed(() => this.#profileResource.error());
@@ -38,12 +30,9 @@ export class XpService {
 	}
 
 	getHistory(page: number, limit: number) {
-		return this.#http.get<XpHistoryResponse>(
-			`${this.#base}${API_CONFIG.endpoints.xpHistory}`,
-			{
-				params: { page, limit },
-			},
-		);
+		return this.#http.get<XpHistoryResponse>(`${this.#base}${API_CONFIG.endpoints.xpHistory}`, {
+			params: { page, limit },
+		});
 	}
 
 	showXpFeedback(feedback: XpAwardFeedback): void {

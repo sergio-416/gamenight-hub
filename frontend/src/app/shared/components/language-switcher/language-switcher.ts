@@ -6,27 +6,27 @@ import {
 	HostListener,
 	inject,
 	signal,
-} from "@angular/core";
-import { toSignal } from "@angular/core/rxjs-interop";
-import { TranslocoDirective, TranslocoService } from "@jsverse/transloco";
+} from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 
 const LANG_LABELS = {
-	en: { code: "EN", native: "English" },
-	es: { code: "ES", native: "Español" },
-	ca: { code: "CA", native: "Català" },
-	fr: { code: "FR", native: "Français" },
-	de: { code: "DE", native: "Deutsch" },
-	pt: { code: "PT", native: "Português" },
-	it: { code: "IT", native: "Italiano" },
+	en: { code: 'EN', native: 'English' },
+	es: { code: 'ES', native: 'Español' },
+	ca: { code: 'CA', native: 'Català' },
+	fr: { code: 'FR', native: 'Français' },
+	de: { code: 'DE', native: 'Deutsch' },
+	pt: { code: 'PT', native: 'Português' },
+	it: { code: 'IT', native: 'Italiano' },
 } as const;
 
 type LangCode = keyof typeof LANG_LABELS;
 
-const STORAGE_KEY = "transloco-lang";
+const STORAGE_KEY = 'transloco-lang';
 
 @Component({
-	selector: "app-language-switcher",
-	host: { class: "relative block" },
+	selector: 'app-language-switcher',
+	host: { class: 'relative block' },
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [TranslocoDirective],
 	template: `
@@ -127,13 +127,10 @@ export class LanguageSwitcher {
 
 	readonly activeLang = computed(() => this.#langChanges());
 	readonly activeLangCode = computed(
-		() =>
-			LANG_LABELS[this.activeLang() as LangCode]?.code ??
-			this.activeLang().toUpperCase(),
+		() => LANG_LABELS[this.activeLang() as LangCode]?.code ?? this.activeLang().toUpperCase(),
 	);
 	readonly activeLangLabel = computed(
-		() =>
-			LANG_LABELS[this.activeLang() as LangCode]?.native ?? this.activeLang(),
+		() => LANG_LABELS[this.activeLang() as LangCode]?.native ?? this.activeLang(),
 	);
 	readonly langs = signal(this.#transloco.getAvailableLangs() as string[]);
 	readonly open = signal(false);
@@ -152,14 +149,14 @@ export class LanguageSwitcher {
 		this.open.set(false);
 	}
 
-	@HostListener("document:click", ["$event.target"])
+	@HostListener('document:click', ['$event.target'])
 	onClickOutside(target: EventTarget | null): void {
 		if (this.open() && !this.#elRef.nativeElement.contains(target as Node)) {
 			this.open.set(false);
 		}
 	}
 
-	@HostListener("document:keydown.escape")
+	@HostListener('document:keydown.escape')
 	onEscape(): void {
 		if (this.open()) {
 			this.open.set(false);

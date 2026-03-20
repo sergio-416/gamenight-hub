@@ -1,22 +1,17 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	inject,
-	signal,
-} from "@angular/core";
-import { Router, RouterLink } from "@angular/router";
-import { AuthService, translateAuthError } from "@core/services/auth";
-import { TranslocoDirective } from "@jsverse/transloco";
-import { z } from "zod";
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService, translateAuthError } from '@core/services/auth';
+import { TranslocoDirective } from '@jsverse/transloco';
+import { z } from 'zod';
 
 const EmailSchema = z.object({
-	email: z.email("Please enter a valid email address."),
+	email: z.email('Please enter a valid email address.'),
 });
 
 @Component({
-	selector: "app-login",
+	selector: 'app-login',
 	imports: [RouterLink, TranslocoDirective],
-	templateUrl: "./login.html",
+	templateUrl: './login.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Login {
@@ -24,7 +19,7 @@ export class Login {
 	readonly #router = inject(Router);
 	readonly #googleLoading = signal(false);
 	readonly #emailLoading = signal(false);
-	readonly #email = signal("");
+	readonly #email = signal('');
 	readonly #error = signal<string | null>(null);
 
 	readonly isGoogleLoading = this.#googleLoading.asReadonly();
@@ -37,7 +32,7 @@ export class Login {
 		this.#error.set(null);
 		try {
 			const { isNewUser } = await this.#authService.login();
-			await this.#router.navigate([isNewUser ? "/profile/setup" : "/home"]);
+			await this.#router.navigate([isNewUser ? '/profile/setup' : '/home']);
 		} catch (error: unknown) {
 			this.#error.set(translateAuthError(error));
 		} finally {
@@ -50,17 +45,14 @@ export class Login {
 
 		const result = EmailSchema.safeParse({ email: this.#email() });
 		if (!result.success) {
-			this.#error.set(
-				result.error.issues[0]?.message ??
-					"Please enter a valid email address.",
-			);
+			this.#error.set(result.error.issues[0]?.message ?? 'Please enter a valid email address.');
 			return;
 		}
 
 		this.#emailLoading.set(true);
 		try {
 			await this.#authService.sendSignInLink(result.data.email);
-			await this.#router.navigate(["/auth/waiting"]);
+			await this.#router.navigate(['/auth/waiting']);
 		} catch (error: unknown) {
 			this.#error.set(translateAuthError(error));
 		} finally {

@@ -1,64 +1,53 @@
-import { NgOptimizedImage } from "@angular/common";
-import { httpResource } from "@angular/common/http";
-import {
-	ChangeDetectionStrategy,
-	Component,
-	computed,
-	inject,
-	signal,
-} from "@angular/core";
-import { ActivatedRoute, RouterLink } from "@angular/router";
-import { API_CONFIG } from "@core/config/api.config";
-import type {
-	PublicProfile,
-	PublicProfileGamesResponse,
-} from "@gamenight-hub/shared";
-import { TranslocoDirective } from "@jsverse/transloco";
+import { NgOptimizedImage } from '@angular/common';
+import { httpResource } from '@angular/common/http';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { API_CONFIG } from '@core/config/api.config';
+import type { PublicProfile, PublicProfileGamesResponse } from '@gamenight-hub/shared';
+import { TranslocoDirective } from '@jsverse/transloco';
 
 const TAB = {
-	ALL: "all",
-	OWNED: "owned",
-	WANT_TO_PLAY: "want_to_play",
-	WANT_TO_TRY: "want_to_try",
+	ALL: 'all',
+	OWNED: 'owned',
+	WANT_TO_PLAY: 'want_to_play',
+	WANT_TO_TRY: 'want_to_try',
 } as const;
 
 type Tab = (typeof TAB)[keyof typeof TAB];
 
 const STATUS_COLORS: Record<string, string> = {
-	owned: "bg-emerald-100 text-emerald-700",
-	want_to_play: "bg-blue-100 text-blue-700",
-	want_to_try: "bg-amber-100 text-amber-700",
-	played: "bg-slate-100 text-slate-600",
+	owned: 'bg-emerald-100 text-emerald-700',
+	want_to_play: 'bg-blue-100 text-blue-700',
+	want_to_try: 'bg-amber-100 text-amber-700',
+	played: 'bg-slate-100 text-slate-600',
 };
 
 const STATUS_LABELS: Record<string, string> = {
-	owned: "Owned",
-	want_to_play: "Want to Play",
-	want_to_try: "Want to Try",
-	played: "Played",
+	owned: 'Owned',
+	want_to_play: 'Want to Play',
+	want_to_try: 'Want to Try',
+	played: 'Played',
 };
 
-type PublicGame = PublicProfileGamesResponse["data"][number];
+type PublicGame = PublicProfileGamesResponse['data'][number];
 
 @Component({
-	selector: "app-profile-public-collection",
+	selector: 'app-profile-public-collection',
 	imports: [NgOptimizedImage, RouterLink, TranslocoDirective],
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	host: { class: "block" },
-	templateUrl: "./profile-public-collection.html",
+	host: { class: 'block' },
+	templateUrl: './profile-public-collection.html',
 })
 export class ProfilePublicCollection {
 	readonly #route = inject(ActivatedRoute);
 	readonly #base = API_CONFIG.baseUrl;
-	readonly username = this.#route.snapshot.params["username"] as string;
+	readonly username = this.#route.snapshot.params['username'] as string;
 
 	readonly #profileResource = httpResource<PublicProfile>(
 		() => `${this.#base}/profile/${this.username}`,
 	);
 	readonly profile = computed(() =>
-		this.#profileResource.hasValue()
-			? this.#profileResource.value()
-			: undefined,
+		this.#profileResource.hasValue() ? this.#profileResource.value() : undefined,
 	);
 	readonly profileLoading = computed(() => this.#profileResource.isLoading());
 	readonly profileError = computed(() => !!this.#profileResource.error());
@@ -67,9 +56,7 @@ export class ProfilePublicCollection {
 		() => `${this.#base}/profile/${this.username}/games?limit=200`,
 	);
 	readonly #allGames = computed<PublicGame[]>(() =>
-		this.#gamesResource.hasValue()
-			? (this.#gamesResource.value()?.data ?? [])
-			: [],
+		this.#gamesResource.hasValue() ? (this.#gamesResource.value()?.data ?? []) : [],
 	);
 	readonly gamesLoading = computed(() => this.#gamesResource.isLoading());
 
@@ -79,16 +66,14 @@ export class ProfilePublicCollection {
 	});
 
 	readonly activeTab = signal<Tab>(TAB.ALL);
-	readonly searchQuery = signal("");
+	readonly searchQuery = signal('');
 
-	readonly ownedGames = computed(() =>
-		this.#allGames().filter((g) => g.status === "owned"),
-	);
+	readonly ownedGames = computed(() => this.#allGames().filter((g) => g.status === 'owned'));
 	readonly wantToPlayGames = computed(() =>
-		this.#allGames().filter((g) => g.status === "want_to_play"),
+		this.#allGames().filter((g) => g.status === 'want_to_play'),
 	);
 	readonly wantToTryGames = computed(() =>
-		this.#allGames().filter((g) => g.status === "want_to_try"),
+		this.#allGames().filter((g) => g.status === 'want_to_try'),
 	);
 
 	readonly totalGames = computed(() => this.#allGames().length);
@@ -121,16 +106,16 @@ export class ProfilePublicCollection {
 	readonly statusLabels = STATUS_LABELS;
 
 	readonly tabs: Array<{ key: Tab; label: string; count: () => number }> = [
-		{ key: TAB.ALL, label: "All", count: () => this.totalGames() },
-		{ key: TAB.OWNED, label: "Owned", count: () => this.ownedCount() },
+		{ key: TAB.ALL, label: 'All', count: () => this.totalGames() },
+		{ key: TAB.OWNED, label: 'Owned', count: () => this.ownedCount() },
 		{
 			key: TAB.WANT_TO_PLAY,
-			label: "Want to Play",
+			label: 'Want to Play',
 			count: () => this.wantToPlayCount(),
 		},
 		{
 			key: TAB.WANT_TO_TRY,
-			label: "Want to Try",
+			label: 'Want to Try',
 			count: () => this.wantToTryCount(),
 		},
 	];
@@ -145,6 +130,6 @@ export class ProfilePublicCollection {
 	}
 
 	clearSearch(): void {
-		this.searchQuery.set("");
+		this.searchQuery.set('');
 	}
 }

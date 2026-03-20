@@ -8,8 +8,8 @@ import {
 	input,
 	output,
 	signal,
-} from "@angular/core";
-import { TranslocoDirective } from "@jsverse/transloco";
+} from '@angular/core';
+import { TranslocoDirective } from '@jsverse/transloco';
 
 interface DayCell {
 	date: Date;
@@ -21,7 +21,7 @@ interface DayCell {
 }
 
 const DAY_BASE =
-	"h-9 w-9 rounded-full text-sm flex items-center justify-center cursor-pointer transition-colors";
+	'h-9 w-9 rounded-full text-sm flex items-center justify-center cursor-pointer transition-colors';
 const DAY_SELECTED = `${DAY_BASE} bg-emerald-500 text-white hover:bg-emerald-600`;
 const DAY_TODAY = `${DAY_BASE} bg-emerald-100 text-emerald-700 font-semibold hover:bg-emerald-200 dark:bg-emerald-500/20 dark:text-emerald-400 dark:hover:bg-emerald-500/30`;
 const DAY_OTHER = `${DAY_BASE} text-slate-300 hover:bg-slate-50 dark:text-slate-600 dark:hover:bg-slate-700`;
@@ -29,46 +29,43 @@ const DAY_NORMAL = `${DAY_BASE} text-slate-700 hover:bg-slate-100 dark:hover:bg-
 const DAY_DISABLED = `${DAY_BASE} text-slate-200 cursor-not-allowed dark:text-slate-700`;
 
 @Component({
-	selector: "app-date-time-picker",
-	templateUrl: "./date-time-picker.html",
+	selector: 'app-date-time-picker',
+	templateUrl: './date-time-picker.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	host: { class: "block" },
+	host: { class: 'block' },
 	imports: [TranslocoDirective],
 })
 export class DateTimePicker {
 	readonly dateTimeChange = output<Date>();
 
-	readonly label = input<string>("");
+	readonly label = input<string>('');
 	readonly initialDate = input<Date | null>(null);
 	readonly minDate = input<Date | null>(null);
 	readonly required = input<boolean>(false);
 
 	readonly monthNames = [
-		"January",
-		"February",
-		"March",
-		"April",
-		"May",
-		"June",
-		"July",
-		"August",
-		"September",
-		"October",
-		"November",
-		"December",
+		'January',
+		'February',
+		'March',
+		'April',
+		'May',
+		'June',
+		'July',
+		'August',
+		'September',
+		'October',
+		'November',
+		'December',
 	];
-	readonly weekdays = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+	readonly weekdays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 
-	readonly hourOptions: { value: number; label: string }[] = Array.from(
-		{ length: 24 },
-		(_, i) => ({
-			value: i,
-			label: String(i).padStart(2, "0"),
-		}),
-	);
+	readonly hourOptions: { value: number; label: string }[] = Array.from({ length: 24 }, (_, i) => ({
+		value: i,
+		label: String(i).padStart(2, '0'),
+	}));
 	readonly minuteOptions: { value: number; label: string }[] = [
 		0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55,
-	].map((m) => ({ value: m, label: String(m).padStart(2, "0") }));
+	].map((m) => ({ value: m, label: String(m).padStart(2, '0') }));
 
 	readonly #el = inject(ElementRef);
 	readonly #open = signal(false);
@@ -89,8 +86,7 @@ export class DateTimePicker {
 	readonly timeOpen = this.#timeOpen.asReadonly();
 
 	readonly selectedTimeLabel = computed(
-		() =>
-			`${String(this.#hour()).padStart(2, "0")}:${String(this.#minute()).padStart(2, "0")}`,
+		() => `${String(this.#hour()).padStart(2, '0')}:${String(this.#minute()).padStart(2, '0')}`,
 	);
 
 	readonly days = computed<DayCell[]>(() => {
@@ -132,12 +128,12 @@ export class DateTimePicker {
 			this.#hour(),
 			this.#minute(),
 		);
-		return new Intl.DateTimeFormat("en", {
-			month: "short",
-			day: "numeric",
-			year: "numeric",
-			hour: "numeric",
-			minute: "2-digit",
+		return new Intl.DateTimeFormat('en', {
+			month: 'short',
+			day: 'numeric',
+			year: 'numeric',
+			hour: 'numeric',
+			minute: '2-digit',
 		}).format(combined);
 	});
 
@@ -150,8 +146,8 @@ export class DateTimePicker {
 					this.#timeOpen.set(false);
 				}
 			};
-			document.addEventListener("click", handler, true);
-			onCleanup(() => document.removeEventListener("click", handler, true));
+			document.addEventListener('click', handler, true);
+			onCleanup(() => document.removeEventListener('click', handler, true));
 		});
 
 		effect(() => {

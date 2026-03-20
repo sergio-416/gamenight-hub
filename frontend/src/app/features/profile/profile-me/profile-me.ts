@@ -1,25 +1,16 @@
-import { CdkTrapFocus } from "@angular/cdk/a11y";
-import { NgOptimizedImage } from "@angular/common";
-import { HttpErrorResponse, httpResource } from "@angular/common/http";
-import {
-	ChangeDetectionStrategy,
-	Component,
-	computed,
-	inject,
-	signal,
-} from "@angular/core";
-import { toSignal } from "@angular/core/rxjs-interop";
-import { Router, RouterLink } from "@angular/router";
-import { API_CONFIG } from "@core/config/api.config";
-import { AuthService } from "@core/services/auth";
-import { ProfileService } from "@core/services/profile.service";
-import { ToastService } from "@core/services/toast";
-import type {
-	Game,
-	GameSearchResult,
-} from "@features/collection/models/game.model";
-import { GamesService } from "@features/collection/services/games";
-import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { CdkTrapFocus } from '@angular/cdk/a11y';
+import { NgOptimizedImage } from '@angular/common';
+import { HttpErrorResponse, httpResource } from '@angular/common/http';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { Router, RouterLink } from '@angular/router';
+import { API_CONFIG } from '@core/config/api.config';
+import { AuthService } from '@core/services/auth';
+import { ProfileService } from '@core/services/profile.service';
+import { ToastService } from '@core/services/toast';
+import type { Game, GameSearchResult } from '@features/collection/models/game.model';
+import { GamesService } from '@features/collection/services/games';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
 	faBullseye,
 	faCakeCandles,
@@ -44,25 +35,25 @@ import {
 	faTrashCan,
 	faWandMagicSparkles,
 	faXmark,
-} from "@fortawesome/free-solid-svg-icons";
+} from '@fortawesome/free-solid-svg-icons';
 import type {
 	GameStatus,
 	PaginatedResponse,
 	Profile,
 	UpdateProfileDto,
-} from "@gamenight-hub/shared";
-import { TranslocoDirective } from "@jsverse/transloco";
-import { ConfirmDialog } from "@shared/components/confirm-dialog/confirm-dialog";
-import { DeleteAccountDialog } from "@shared/components/delete-account-dialog/delete-account-dialog";
-import { XpHistory } from "@shared/components/xp-history/xp-history";
-import { LEVEL_TIERS } from "@shared/models/xp.model";
-import { XpService } from "@shared/services/xp.service";
-import { debounceTime, distinctUntilChanged, Subject } from "rxjs";
+} from '@gamenight-hub/shared';
+import { TranslocoDirective } from '@jsverse/transloco';
+import { ConfirmDialog } from '@shared/components/confirm-dialog/confirm-dialog';
+import { DeleteAccountDialog } from '@shared/components/delete-account-dialog/delete-account-dialog';
+import { XpHistory } from '@shared/components/xp-history/xp-history';
+import { LEVEL_TIERS } from '@shared/models/xp.model';
+import { XpService } from '@shared/services/xp.service';
+import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 
 type PaginatedGames = PaginatedResponse<Game>;
 
 @Component({
-	selector: "app-profile-me",
+	selector: 'app-profile-me',
 	imports: [
 		CdkTrapFocus,
 		FontAwesomeModule,
@@ -73,7 +64,7 @@ type PaginatedGames = PaginatedResponse<Game>;
 		DeleteAccountDialog,
 		XpHistory,
 	],
-	templateUrl: "./profile-me.html",
+	templateUrl: './profile-me.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileMe {
@@ -86,54 +77,48 @@ export class ProfileMe {
 	readonly #base = API_CONFIG.baseUrl;
 
 	readonly xpProfile = computed(() => this.#xpService.profile());
-	readonly tierLabel = computed(
-		() => LEVEL_TIERS[this.xpProfile()?.level ?? 1] ?? "Novice",
-	);
+	readonly tierLabel = computed(() => LEVEL_TIERS[this.xpProfile()?.level ?? 1] ?? 'Novice');
 
 	readonly tierColors = computed(() => {
 		const level = this.xpProfile()?.level ?? 1;
 		if (level >= 10)
 			return {
-				bg: "bg-purple-500",
-				ring: "ring-purple-300",
-				text: "text-purple-600",
-				bar: "bg-purple-500",
-				pill: "bg-purple-100 text-purple-700",
+				bg: 'bg-purple-500',
+				ring: 'ring-purple-300',
+				text: 'text-purple-600',
+				bar: 'bg-purple-500',
+				pill: 'bg-purple-100 text-purple-700',
 			};
 		if (level >= 7)
 			return {
-				bg: "bg-amber-500",
-				ring: "ring-amber-300",
-				text: "text-amber-600",
-				bar: "bg-amber-500",
-				pill: "bg-amber-100 text-amber-700",
+				bg: 'bg-amber-500',
+				ring: 'ring-amber-300',
+				text: 'text-amber-600',
+				bar: 'bg-amber-500',
+				pill: 'bg-amber-100 text-amber-700',
 			};
 		if (level >= 4)
 			return {
-				bg: "bg-indigo-500",
-				ring: "ring-indigo-300",
-				text: "text-indigo-600",
-				bar: "bg-indigo-500",
-				pill: "bg-indigo-100 text-indigo-700",
+				bg: 'bg-indigo-500',
+				ring: 'ring-indigo-300',
+				text: 'text-indigo-600',
+				bar: 'bg-indigo-500',
+				pill: 'bg-indigo-100 text-indigo-700',
 			};
 		return {
-			bg: "bg-emerald-500",
-			ring: "ring-emerald-300",
-			text: "text-emerald-600",
-			bar: "bg-emerald-500",
-			pill: "bg-emerald-100 text-emerald-700",
+			bg: 'bg-emerald-500',
+			ring: 'ring-emerald-300',
+			text: 'text-emerald-600',
+			bar: 'bg-emerald-500',
+			pill: 'bg-emerald-100 text-emerald-700',
 		};
 	});
 
-	readonly #profileResource = httpResource<Profile>(
-		() => `${this.#base}/profile/me`,
-	);
+	readonly #profileResource = httpResource<Profile>(() => `${this.#base}/profile/me`);
 	readonly profile = computed(
 		() =>
 			this.#profileOverride() ??
-			(this.#profileResource.hasValue()
-				? this.#profileResource.value()
-				: undefined),
+			(this.#profileResource.hasValue() ? this.#profileResource.value() : undefined),
 	);
 	readonly #profileOverride = signal<Profile | null>(null);
 	readonly loading = computed(() => this.#profileResource.isLoading());
@@ -148,25 +133,21 @@ export class ProfileMe {
 		() => `${this.#base}${API_CONFIG.endpoints.games}`,
 	);
 	readonly #allGames = computed(() =>
-		this.#gamesResource.hasValue()
-			? (this.#gamesResource.value()?.data ?? [])
-			: [],
+		this.#gamesResource.hasValue() ? (this.#gamesResource.value()?.data ?? []) : [],
 	);
 	readonly gamesLoading = computed(() => this.#gamesResource.isLoading());
 
-	readonly ownedGames = computed(() =>
-		this.#allGames().filter((g) => g.status === "owned"),
-	);
+	readonly ownedGames = computed(() => this.#allGames().filter((g) => g.status === 'owned'));
 	readonly recentGames = computed(() => this.ownedGames().slice(0, 8));
 	readonly wantToPlayGames = computed(() =>
-		this.#allGames().filter((g) => g.status === "want_to_play"),
+		this.#allGames().filter((g) => g.status === 'want_to_play'),
 	);
 	readonly wantToTryGames = computed(() =>
-		this.#allGames().filter((g) => g.status === "want_to_try"),
+		this.#allGames().filter((g) => g.status === 'want_to_try'),
 	);
 
 	readonly showAddGameModal = signal(false);
-	readonly addGameToStatus = signal<GameStatus>("want_to_play");
+	readonly addGameToStatus = signal<GameStatus>('want_to_play');
 
 	readonly showRemoveConfirm = signal(false);
 	readonly gameToRemove = signal<string | null>(null);
@@ -178,7 +159,7 @@ export class ProfileMe {
 	readonly #searchInput$ = new Subject<string>();
 	readonly #debouncedSearch = toSignal(
 		this.#searchInput$.pipe(debounceTime(300), distinctUntilChanged()),
-		{ initialValue: "" },
+		{ initialValue: '' },
 	);
 	readonly #searchResource = httpResource<GameSearchResult[]>(() => {
 		const query = this.#debouncedSearch().trim();
@@ -186,56 +167,47 @@ export class ProfileMe {
 		return `${this.#base}${API_CONFIG.endpoints.search}?query=${query}`;
 	});
 
-	readonly searchQuery = signal("");
+	readonly searchQuery = signal('');
 	readonly searchResults = computed(() =>
-		(this.#searchResource.hasValue()
-			? (this.#searchResource.value() ?? [])
-			: []
-		).slice(0, 8),
+		(this.#searchResource.hasValue() ? (this.#searchResource.value() ?? []) : []).slice(0, 8),
 	);
 	readonly searchLoading = computed(() => this.#searchResource.isLoading());
 	readonly importLoading = signal(false);
 
 	readonly memberSince = computed(() => {
 		const p = this.profile();
-		if (!p?.createdAt) return "";
-		return new Date(p.createdAt).toLocaleDateString("en-GB", {
-			month: "long",
-			year: "numeric",
+		if (!p?.createdAt) return '';
+		return new Date(p.createdAt).toLocaleDateString('en-GB', {
+			month: 'long',
+			year: 'numeric',
 		});
 	});
 
 	readonly nameCooldownDaysRemaining = computed(() => {
 		const p = this.profile();
 		if (!p?.nameChangedAt) return 0;
-		const daysSince =
-			(Date.now() - new Date(p.nameChangedAt).getTime()) /
-			(1000 * 60 * 60 * 24);
+		const daysSince = (Date.now() - new Date(p.nameChangedAt).getTime()) / (1000 * 60 * 60 * 24);
 		return daysSince < 30 ? Math.ceil(30 - daysSince) : 0;
 	});
 
-	readonly nameFieldsLocked = computed(
-		() => this.nameCooldownDaysRemaining() > 0,
-	);
+	readonly nameFieldsLocked = computed(() => this.nameCooldownDaysRemaining() > 0);
 
 	readonly nameUnlockDate = computed(() => {
 		const p = this.profile();
-		if (!p?.nameChangedAt) return "";
+		if (!p?.nameChangedAt) return '';
 		const unlock = new Date(p.nameChangedAt);
 		unlock.setDate(unlock.getDate() + 30);
-		return unlock.toLocaleDateString("en-GB", {
-			day: "numeric",
-			month: "long",
-			year: "numeric",
+		return unlock.toLocaleDateString('en-GB', {
+			day: 'numeric',
+			month: 'long',
+			year: 'numeric',
 		});
 	});
 
 	readonly ownedCount = computed(() => this.ownedGames().length);
 	readonly wantToPlayCount = computed(() => this.wantToPlayGames().length);
 	readonly wantToTryCount = computed(() => this.wantToTryGames().length);
-	readonly selectedPlayedCount = computed(
-		() => this.selectedGamesForPlayed().size,
-	);
+	readonly selectedPlayedCount = computed(() => this.selectedGamesForPlayed().size);
 
 	readonly iconPen = faPen;
 	readonly iconLocation = faLocationDot;
@@ -307,16 +279,12 @@ export class ProfileMe {
 				if (err instanceof HttpErrorResponse && err.status === 400) {
 					const msg = err.error?.message;
 					this.saveError.set(
-						typeof msg === "string"
-							? msg
-							: "Invalid data. Please check your inputs.",
+						typeof msg === 'string' ? msg : 'Invalid data. Please check your inputs.',
 					);
 				} else if (err instanceof HttpErrorResponse && err.status === 409) {
-					this.saveError.set(
-						"That username is already taken. Please choose another.",
-					);
+					this.saveError.set('That username is already taken. Please choose another.');
 				} else {
-					this.saveError.set("Something went wrong. Please try again.");
+					this.saveError.set('Something went wrong. Please try again.');
 				}
 			},
 		});
@@ -335,12 +303,12 @@ export class ProfileMe {
 		if (currentlyPublic) {
 			this.showPrivateProfileModal.set(true);
 		} else {
-			this.updateField("isProfilePublic", true);
+			this.updateField('isProfilePublic', true);
 		}
 	}
 
 	confirmMakePrivate(): void {
-		this.updateField("isProfilePublic", false);
+		this.updateField('isProfilePublic', false);
 		this.showPrivateProfileModal.set(false);
 	}
 
@@ -349,24 +317,24 @@ export class ProfileMe {
 	}
 
 	formatBirthday(birthday: string): string {
-		return new Date(birthday).toLocaleDateString("en-GB", {
-			day: "numeric",
-			month: "long",
-			year: "numeric",
+		return new Date(birthday).toLocaleDateString('en-GB', {
+			day: 'numeric',
+			month: 'long',
+			year: 'numeric',
 		});
 	}
 
 	openAddGameModal(status: GameStatus): void {
 		this.addGameToStatus.set(status);
 		this.showAddGameModal.set(true);
-		this.searchQuery.set("");
-		this.#searchInput$.next("");
+		this.searchQuery.set('');
+		this.#searchInput$.next('');
 	}
 
 	closeAddGameModal(): void {
 		this.showAddGameModal.set(false);
-		this.searchQuery.set("");
-		this.#searchInput$.next("");
+		this.searchQuery.set('');
+		this.#searchInput$.next('');
 	}
 
 	onSearchInput(event: Event): void {
@@ -379,19 +347,17 @@ export class ProfileMe {
 		this.importLoading.set(true);
 		const bggId = game.bggId;
 
-		this.#gamesService
-			.importGame(bggId, { status: this.addGameToStatus() })
-			.subscribe({
-				next: () => {
-					this.importLoading.set(false);
-					this.closeAddGameModal();
-					this.#gamesResource.reload();
-					this.#xpService.refreshProfile();
-				},
-				error: () => {
-					this.importLoading.set(false);
-				},
-			});
+		this.#gamesService.importGame(bggId, { status: this.addGameToStatus() }).subscribe({
+			next: () => {
+				this.importLoading.set(false);
+				this.closeAddGameModal();
+				this.#gamesResource.reload();
+				this.#xpService.refreshProfile();
+			},
+			error: () => {
+				this.importLoading.set(false);
+			},
+		});
 	}
 
 	removeWantToPlay(gameId: string): void {
@@ -459,7 +425,7 @@ export class ProfileMe {
 				},
 				error: () => {
 					remaining--;
-					this.#toastService.error("Failed to mark game as played");
+					this.#toastService.error('Failed to mark game as played');
 					if (remaining === 0) this.#gamesResource.reload();
 				},
 			});
@@ -472,12 +438,12 @@ export class ProfileMe {
 
 	async logout(): Promise<void> {
 		await this.#authService.logout();
-		await this.#router.navigate(["/home"]);
+		await this.#router.navigate(['/home']);
 	}
 
 	onAccountDeleted(): void {
 		void this.#authService.logout().then(() => {
-			void this.#router.navigate(["/home"]);
+			void this.#router.navigate(['/home']);
 		});
 	}
 }

@@ -5,14 +5,14 @@ import {
 	DestroyRef,
 	inject,
 	signal,
-} from "@angular/core";
-import { Router } from "@angular/router";
-import { TranslocoDirective } from "@jsverse/transloco";
+} from '@angular/core';
+import { Router } from '@angular/router';
+import { TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
-	selector: "app-offline-fallback",
+	selector: 'app-offline-fallback',
 	imports: [TranslocoDirective],
-	host: { class: "block" },
+	host: { class: 'block' },
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
 		<div
@@ -67,13 +67,13 @@ export class OfflineFallback {
 		afterNextRender(() => {
 			const handler = () => {
 				this.isOnline.set(true);
-				this.#router.navigateByUrl("/home");
+				this.#router.navigateByUrl('/home');
 			};
 
-			window.addEventListener("online", handler);
+			window.addEventListener('online', handler);
 
 			this.#destroyRef.onDestroy(() => {
-				window.removeEventListener("online", handler);
+				window.removeEventListener('online', handler);
 			});
 		});
 	}

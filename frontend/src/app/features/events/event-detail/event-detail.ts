@@ -1,38 +1,22 @@
-import { NgOptimizedImage } from "@angular/common";
-import { httpResource } from "@angular/common/http";
-import {
-	ChangeDetectionStrategy,
-	Component,
-	computed,
-	inject,
-	signal,
-} from "@angular/core";
-import { toSignal } from "@angular/core/rxjs-interop";
-import { ActivatedRoute, Router, RouterLink } from "@angular/router";
-import { API_CONFIG } from "@core/config/api.config";
-import { AuthService } from "@core/services/auth";
-import {
-	type Participant,
-	ParticipantsService,
-} from "@core/services/participants";
-import { ToastService } from "@core/services/toast";
-import type {
-	Event,
-	UpdateCalendarEvent,
-} from "@features/calendar/models/event.model";
-import { UpdateCalendarEventSchema } from "@features/calendar/models/event.model";
-import { EventsService } from "@features/calendar/services/events";
-import { CoverImagePicker } from "@features/create-event/components/cover-image-picker";
-import type { Location } from "@gamenight-hub/shared";
-import {
-	CATEGORY_META,
-	type EventCoverSlug,
-	getEventCoverPath,
-} from "@gamenight-hub/shared";
-import { TranslocoDirective, TranslocoService } from "@jsverse/transloco";
-import { SimpleMapPreview } from "@shared/components/simple-map-preview/simple-map-preview";
-import { XpService } from "@shared/services/xp.service";
-import { map } from "rxjs";
+import { NgOptimizedImage } from '@angular/common';
+import { httpResource } from '@angular/common/http';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { API_CONFIG } from '@core/config/api.config';
+import { AuthService } from '@core/services/auth';
+import { type Participant, ParticipantsService } from '@core/services/participants';
+import { ToastService } from '@core/services/toast';
+import type { Event, UpdateCalendarEvent } from '@features/calendar/models/event.model';
+import { UpdateCalendarEventSchema } from '@features/calendar/models/event.model';
+import { EventsService } from '@features/calendar/services/events';
+import { CoverImagePicker } from '@features/create-event/components/cover-image-picker';
+import type { Location } from '@gamenight-hub/shared';
+import { CATEGORY_META, type EventCoverSlug, getEventCoverPath } from '@gamenight-hub/shared';
+import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
+import { SimpleMapPreview } from '@shared/components/simple-map-preview/simple-map-preview';
+import { XpService } from '@shared/services/xp.service';
+import { map } from 'rxjs';
 
 interface InfoPill {
 	label: string;
@@ -41,16 +25,10 @@ interface InfoPill {
 }
 
 @Component({
-	selector: "app-event-detail",
-	imports: [
-		RouterLink,
-		CoverImagePicker,
-		SimpleMapPreview,
-		NgOptimizedImage,
-		TranslocoDirective,
-	],
-	templateUrl: "./event-detail.html",
-	host: { class: "block min-h-screen bg-slate-50" },
+	selector: 'app-event-detail',
+	imports: [RouterLink, CoverImagePicker, SimpleMapPreview, NgOptimizedImage, TranslocoDirective],
+	templateUrl: './event-detail.html',
+	host: { class: 'block min-h-screen bg-slate-50' },
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EventDetail {
@@ -62,15 +40,12 @@ export class EventDetail {
 	readonly #toast = inject(ToastService);
 	readonly #xpService = inject(XpService);
 	readonly #transloco = inject(TranslocoService);
-	readonly #lang = toSignal(this.#transloco.langChanges$, { initialValue: "" });
+	readonly #lang = toSignal(this.#transloco.langChanges$, { initialValue: '' });
 	readonly #apiUrl = API_CONFIG.baseUrl;
 
-	readonly #id = toSignal(
-		this.#route.paramMap.pipe(map((params) => params.get("id") ?? "")),
-		{
-			initialValue: "",
-		},
-	);
+	readonly #id = toSignal(this.#route.paramMap.pipe(map((params) => params.get('id') ?? '')), {
+		initialValue: '',
+	});
 
 	readonly eventResource = httpResource<Event>(() =>
 		this.#id() ? `${this.#apiUrl}/events/${this.#id()}` : undefined,
@@ -95,14 +70,10 @@ export class EventDetail {
 	readonly isLoggedIn = this.#auth.isLoggedIn;
 
 	readonly participantsResource = httpResource<Participant[]>(() =>
-		this.#id()
-			? `${this.#apiUrl}/events/${this.#id()}/participants`
-			: undefined,
+		this.#id() ? `${this.#apiUrl}/events/${this.#id()}/participants` : undefined,
 	);
 
-	readonly participants = computed(
-		() => this.participantsResource.value() ?? [],
-	);
+	readonly participants = computed(() => this.participantsResource.value() ?? []);
 	readonly participantCount = computed(() => this.participants().length);
 
 	readonly isJoined = computed(() => {
@@ -120,21 +91,15 @@ export class EventDetail {
 	readonly heroImage = computed(() => {
 		const ev = this.event();
 		if (!ev) return null;
-		const coverPath = ev.coverImage
-			? getEventCoverPath(ev.coverImage as EventCoverSlug)
-			: null;
+		const coverPath = ev.coverImage ? getEventCoverPath(ev.coverImage as EventCoverSlug) : null;
 		return coverPath ?? ev.gameImageUrl ?? ev.gameThumbnailUrl;
 	});
 
-	readonly hostUsername = computed(
-		() => this.event()?.hostUsername ?? "Unknown Host",
-	);
+	readonly hostUsername = computed(() => this.event()?.hostUsername ?? 'Unknown Host');
 
 	readonly hostAvatar = computed(() => this.event()?.hostAvatar ?? null);
 
-	readonly hostInitial = computed(
-		() => this.hostUsername()[0]?.toUpperCase() ?? "?",
-	);
+	readonly hostInitial = computed(() => this.hostUsername()[0]?.toUpperCase() ?? '?');
 
 	readonly categoryMeta = computed(() => {
 		const cat = this.event()?.category;
@@ -150,7 +115,7 @@ export class EventDetail {
 		const meta = this.categoryMeta();
 		if (meta) {
 			pills.push({
-				label: this.#transloco.translate("events.infoPill.category"),
+				label: this.#transloco.translate('events.infoPill.category'),
 				value: meta.label,
 				icon: meta.iconName,
 			});
@@ -158,25 +123,25 @@ export class EventDetail {
 
 		if (ev.gameComplexity != null) {
 			pills.push({
-				label: this.#transloco.translate("events.infoPill.weight"),
+				label: this.#transloco.translate('events.infoPill.weight'),
 				value: `${ev.gameComplexity.toFixed(1)} / 5`,
-				icon: "faWeight",
+				icon: 'faWeight',
 			});
 		}
 
 		if (ev.gamePlayingTime != null) {
 			pills.push({
-				label: this.#transloco.translate("events.infoPill.playingTime"),
-				value: `${ev.gamePlayingTime} ${this.#transloco.translate("events.infoPill.minSuffix")}`,
-				icon: "faClock",
+				label: this.#transloco.translate('events.infoPill.playingTime'),
+				value: `${ev.gamePlayingTime} ${this.#transloco.translate('events.infoPill.minSuffix')}`,
+				icon: 'faClock',
 			});
 		}
 
 		if (ev.gameMinPlayers != null && ev.gameMaxPlayers != null) {
 			pills.push({
-				label: this.#transloco.translate("events.infoPill.players"),
+				label: this.#transloco.translate('events.infoPill.players'),
 				value: `${ev.gameMinPlayers} – ${ev.gameMaxPlayers}`,
-				icon: "faUsers",
+				icon: 'faUsers',
 			});
 		}
 
@@ -193,15 +158,15 @@ export class EventDetail {
 		this.#lang();
 		const spots = this.spotsLeft();
 		if (spots === null)
-			return this.#transloco.translate("events.urgency.joined", {
+			return this.#transloco.translate('events.urgency.joined', {
 				count: this.participantCount(),
 			});
-		if (spots === 0) return this.#transloco.translate("events.urgency.full");
+		if (spots === 0) return this.#transloco.translate('events.urgency.full');
 		return spots === 1
-			? this.#transloco.translate("events.urgency.spotsLeftSingular", {
+			? this.#transloco.translate('events.urgency.spotsLeftSingular', {
 					count: spots,
 				})
-			: this.#transloco.translate("events.urgency.spotsLeftPlural", {
+			: this.#transloco.translate('events.urgency.spotsLeftPlural', {
 					count: spots,
 				});
 	});
@@ -209,10 +174,7 @@ export class EventDetail {
 	readonly capacityPercent = computed(() => {
 		const ev = this.event();
 		if (!ev?.maxPlayers) return 0;
-		return Math.min(
-			100,
-			Math.round((this.participantCount() / ev.maxPlayers) * 100),
-		);
+		return Math.min(100, Math.round((this.participantCount() / ev.maxPlayers) * 100));
 	});
 
 	readonly #joining = signal(false);
@@ -253,16 +215,16 @@ export class EventDetail {
 	readonly #deleteError = signal<string | null>(null);
 	readonly deleteError = this.#deleteError.asReadonly();
 
-	readonly #startDateFormatter = new Intl.DateTimeFormat("en-US", {
-		weekday: "long",
-		month: "long",
-		day: "numeric",
-		year: "numeric",
+	readonly #startDateFormatter = new Intl.DateTimeFormat('en-US', {
+		weekday: 'long',
+		month: 'long',
+		day: 'numeric',
+		year: 'numeric',
 	});
 
-	readonly #timeFormatter = new Intl.DateTimeFormat("en-US", {
-		hour: "numeric",
-		minute: "2-digit",
+	readonly #timeFormatter = new Intl.DateTimeFormat('en-US', {
+		hour: 'numeric',
+		minute: '2-digit',
 	});
 
 	formatStartTime(dateStr: string | Date): string {
@@ -271,18 +233,13 @@ export class EventDetail {
 	}
 
 	formatTime(dateStr: string | Date): string {
-		return this.#timeFormatter.format(
-			dateStr instanceof Date ? dateStr : new Date(dateStr),
-		);
+		return this.#timeFormatter.format(dateStr instanceof Date ? dateStr : new Date(dateStr));
 	}
 
 	readonly isEditValid = computed(() => {
 		const form = this.#editForm();
 		return (
-			!!form.title?.trim() &&
-			!!form.maxPlayers &&
-			form.maxPlayers >= 2 &&
-			form.maxPlayers <= 100
+			!!form.title?.trim() && !!form.maxPlayers && form.maxPlayers >= 2 && form.maxPlayers <= 100
 		);
 	});
 
@@ -292,13 +249,13 @@ export class EventDetail {
 		const current = this.#editForm().maxPlayers;
 		if (!ev || !current) return null;
 		if (ev.gameMaxPlayers && current > ev.gameMaxPlayers) {
-			return this.#transloco.translate("events.editWarning.tooManyPlayers", {
+			return this.#transloco.translate('events.editWarning.tooManyPlayers', {
 				max: ev.gameMaxPlayers,
 				current,
 			});
 		}
 		if (ev.gameMinPlayers && current < ev.gameMinPlayers) {
-			return this.#transloco.translate("events.editWarning.tooFewPlayers", {
+			return this.#transloco.translate('events.editWarning.tooFewPlayers', {
 				min: ev.gameMinPlayers,
 				current,
 			});
@@ -306,13 +263,9 @@ export class EventDetail {
 		return null;
 	});
 
-	readonly startTimeLocal = computed(() =>
-		this.#toDatetimeLocal(this.#editForm().startTime),
-	);
+	readonly startTimeLocal = computed(() => this.#toDatetimeLocal(this.#editForm().startTime));
 
-	readonly endTimeLocal = computed(() =>
-		this.#toDatetimeLocal(this.#editForm().endTime),
-	);
+	readonly endTimeLocal = computed(() => this.#toDatetimeLocal(this.#editForm().endTime));
 
 	startEditing(): void {
 		const event = this.event();
@@ -342,10 +295,7 @@ export class EventDetail {
 		this.#saveError.set(null);
 	}
 
-	updateField<K extends keyof UpdateCalendarEvent>(
-		field: K,
-		value: UpdateCalendarEvent[K],
-	): void {
+	updateField<K extends keyof UpdateCalendarEvent>(field: K, value: UpdateCalendarEvent[K]): void {
 		this.#editForm.update((f) => ({ ...f, [field]: value }));
 	}
 
@@ -357,25 +307,25 @@ export class EventDetail {
 	}
 
 	onTitleInput(e: globalThis.Event): void {
-		this.updateField("title", (e.target as HTMLInputElement).value);
+		this.updateField('title', (e.target as HTMLInputElement).value);
 	}
 
 	onDescriptionInput(e: globalThis.Event): void {
-		this.updateField("description", (e.target as HTMLTextAreaElement).value);
+		this.updateField('description', (e.target as HTMLTextAreaElement).value);
 	}
 
 	onMaxPlayersInput(e: globalThis.Event): void {
-		this.updateField("maxPlayers", +(e.target as HTMLInputElement).value);
+		this.updateField('maxPlayers', +(e.target as HTMLInputElement).value);
 	}
 
 	onStartTimeInput(e: globalThis.Event): void {
 		const raw = (e.target as HTMLInputElement).value;
-		if (raw) this.updateField("startTime", this.#toDate(raw));
+		if (raw) this.updateField('startTime', this.#toDate(raw));
 	}
 
 	onEndTimeInput(e: globalThis.Event): void {
 		const raw = (e.target as HTMLInputElement).value;
-		this.updateField("endTime", raw ? this.#toDate(raw) : undefined);
+		this.updateField('endTime', raw ? this.#toDate(raw) : undefined);
 	}
 
 	openCoverPicker(): void {
@@ -387,12 +337,12 @@ export class EventDetail {
 	}
 
 	onCoverSelected(slug: EventCoverSlug): void {
-		this.updateField("coverImage", slug);
+		this.updateField('coverImage', slug);
 		this.#coverPickerOpen.set(false);
 	}
 
 	preventE(e: KeyboardEvent): void {
-		if (["e", "E", "+", "-"].includes(e.key)) e.preventDefault();
+		if (['e', 'E', '+', '-'].includes(e.key)) e.preventDefault();
 	}
 
 	save(): void {
@@ -405,15 +355,12 @@ export class EventDetail {
 			startTime: this.#toISOString(form.startTime),
 			endTime: this.#toISOString(form.endTime),
 		};
-		const payload = Object.fromEntries(
-			Object.entries(raw).filter(([, v]) => v !== undefined),
-		);
+		const payload = Object.fromEntries(Object.entries(raw).filter(([, v]) => v !== undefined));
 
 		const result = UpdateCalendarEventSchema.safeParse(payload);
 		if (!result.success) {
 			this.#saveError.set(
-				result.error.issues[0]?.message ??
-					this.#transloco.translate("events.toast.invalidInput"),
+				result.error.issues[0]?.message ?? this.#transloco.translate('events.toast.invalidInput'),
 			);
 			return;
 		}
@@ -426,15 +373,11 @@ export class EventDetail {
 				this.#saving.set(false);
 				this.#isEditing.set(false);
 				this.eventResource.reload();
-				this.#toast.success(
-					this.#transloco.translate("events.toast.eventUpdated"),
-				);
+				this.#toast.success(this.#transloco.translate('events.toast.eventUpdated'));
 			},
 			error: () => {
 				this.#saving.set(false);
-				this.#saveError.set(
-					this.#transloco.translate("events.toast.eventUpdateFailed"),
-				);
+				this.#saveError.set(this.#transloco.translate('events.toast.eventUpdateFailed'));
 			},
 		});
 	}
@@ -457,21 +400,15 @@ export class EventDetail {
 
 		this.#eventsService.deleteEvent(event.id).subscribe({
 			next: () => {
-				this.#toast.success(
-					this.#transloco.translate("events.toast.eventDeleted"),
-				);
-				this.#router.navigate(["/game-nights"]);
+				this.#toast.success(this.#transloco.translate('events.toast.eventDeleted'));
+				this.#router.navigate(['/game-nights']);
 			},
 			error: (err: { status?: number }) => {
 				this.#deleting.set(false);
 				if (err?.status === 403) {
-					this.#deleteError.set(
-						this.#transloco.translate("events.toast.eventDeleteForbidden"),
-					);
+					this.#deleteError.set(this.#transloco.translate('events.toast.eventDeleteForbidden'));
 				} else {
-					this.#deleteError.set(
-						this.#transloco.translate("events.toast.eventDeleteFailed"),
-					);
+					this.#deleteError.set(this.#transloco.translate('events.toast.eventDeleteFailed'));
 				}
 			},
 		});
@@ -486,23 +423,19 @@ export class EventDetail {
 			next: () => {
 				this.#joining.set(false);
 				this.participantsResource.reload();
-				this.#toast.success(
-					this.#transloco.translate("events.toast.joinedEvent"),
-				);
+				this.#toast.success(this.#transloco.translate('events.toast.joinedEvent'));
 				this.#xpService.refreshProfile();
 			},
 			error: () => {
 				this.#joining.set(false);
-				this.#toast.error(this.#transloco.translate("events.toast.joinFailed"));
+				this.#toast.error(this.#transloco.translate('events.toast.joinFailed'));
 			},
 		});
 	}
 
 	leaveEvent(): void {
 		if (this.isOwner()) {
-			this.#toast.error(
-				this.#transloco.translate("events.toast.hostCannotLeave"),
-			);
+			this.#toast.error(this.#transloco.translate('events.toast.hostCannotLeave'));
 			return;
 		}
 		const ev = this.event();
@@ -513,15 +446,11 @@ export class EventDetail {
 			next: () => {
 				this.#leaving.set(false);
 				this.participantsResource.reload();
-				this.#toast.success(
-					this.#transloco.translate("events.toast.leftEvent"),
-				);
+				this.#toast.success(this.#transloco.translate('events.toast.leftEvent'));
 			},
 			error: () => {
 				this.#leaving.set(false);
-				this.#toast.error(
-					this.#transloco.translate("events.toast.leaveFailed"),
-				);
+				this.#toast.error(this.#transloco.translate('events.toast.leaveFailed'));
 			},
 		});
 	}
@@ -534,18 +463,18 @@ export class EventDetail {
 	#toDate(datetimeLocalValue: string): string {
 		const date = new Date(datetimeLocalValue);
 		const offsetMinutes = date.getTimezoneOffset();
-		const sign = offsetMinutes <= 0 ? "+" : "-";
+		const sign = offsetMinutes <= 0 ? '+' : '-';
 		const absMinutes = Math.abs(offsetMinutes);
-		const hh = String(Math.floor(absMinutes / 60)).padStart(2, "0");
-		const mm = String(absMinutes % 60).padStart(2, "0");
+		const hh = String(Math.floor(absMinutes / 60)).padStart(2, '0');
+		const mm = String(absMinutes % 60).padStart(2, '0');
 		return `${datetimeLocalValue}:00${sign}${hh}:${mm}`;
 	}
 
 	#toDatetimeLocal(value: string | Date | undefined): string {
-		if (!value) return "";
+		if (!value) return '';
 		const d = value instanceof Date ? value : new Date(value);
-		if (Number.isNaN(d.getTime())) return "";
-		const pad = (n: number) => String(n).padStart(2, "0");
+		if (Number.isNaN(d.getTime())) return '';
+		const pad = (n: number) => String(n).padStart(2, '0');
 		return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
 	}
 }

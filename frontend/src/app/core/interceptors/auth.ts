@@ -1,12 +1,9 @@
-import type {
-	HttpErrorResponse,
-	HttpInterceptorFn,
-} from "@angular/common/http";
-import { inject } from "@angular/core";
-import { Router } from "@angular/router";
-import { AuthService } from "@core/services/auth";
-import { ToastService } from "@core/services/toast";
-import { catchError, switchMap, take, throwError } from "rxjs";
+import type { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
+import { inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '@core/services/auth';
+import { ToastService } from '@core/services/toast';
+import { catchError, switchMap, take, throwError } from 'rxjs';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
 	const authService = inject(AuthService);
@@ -16,20 +13,18 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 	return authService.idToken$.pipe(
 		take(1),
 		switchMap((token) => {
-			const request = token
-				? req.clone({ setHeaders: { Authorization: `Bearer ${token}` } })
-				: req;
+			const request = token ? req.clone({ setHeaders: { Authorization: `Bearer ${token}` } }) : req;
 
 			return next(request).pipe(
 				catchError((error: HttpErrorResponse) => {
 					if (
 						error.status === 404 &&
-						error.error?.code === "PROFILE_NOT_FOUND" &&
-						req.url.includes("/profile/me")
+						error.error?.code === 'PROFILE_NOT_FOUND' &&
+						req.url.includes('/profile/me')
 					) {
 						void authService.logout().then(() => {
-							toast.info("This account has been deleted.");
-							void router.navigate(["/home"]);
+							toast.info('This account has been deleted.');
+							void router.navigate(['/home']);
 						});
 					}
 					return throwError(() => error);

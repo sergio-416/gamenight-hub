@@ -1,17 +1,10 @@
 /// <reference types="vitest/globals" />
 
-import { getTestBed } from "@angular/core/testing";
-import {
-	BrowserTestingModule,
-	platformBrowserTesting,
-} from "@angular/platform-browser/testing";
+import { getTestBed } from '@angular/core/testing';
+import { BrowserTestingModule, platformBrowserTesting } from '@angular/platform-browser/testing';
 
 try {
-	getTestBed().initTestEnvironment(
-		BrowserTestingModule,
-		platformBrowserTesting(),
-		{
-			teardown: { destroyAfterEach: true },
-		},
-	);
+	getTestBed().initTestEnvironment(BrowserTestingModule, platformBrowserTesting(), {
+		teardown: { destroyAfterEach: true },
+	});
 } catch {}

@@ -1,8 +1,8 @@
-import { EventCategorySchema } from "@gamenight-hub/shared";
-import { z } from "zod";
+import { EventCategorySchema } from '@gamenight-hub/shared';
+import { z } from 'zod';
 
 export const StepGameSchema = z.object({
-	title: z.string().min(1, "Title is required").max(100),
+	title: z.string().min(1, 'Title is required').max(100),
 	description: z.string().max(500).optional(),
 	gameId: z.string().uuid().optional(),
 	coverImage: z.string().min(1).max(50).optional(),
@@ -10,7 +10,7 @@ export const StepGameSchema = z.object({
 });
 
 export const StepLocationSchema = z.object({
-	locationMode: z.enum(["public", "private"]),
+	locationMode: z.enum(['public', 'private']),
 	locationId: z.string().uuid().optional(),
 	location: z
 		.object({
@@ -21,8 +21,8 @@ export const StepLocationSchema = z.object({
 			longitude: z.number().min(-180).max(180),
 		})
 		.optional(),
-	startDate: z.string().min(1, "Date is required"),
-	startTime: z.string().min(1, "Time is required"),
+	startDate: z.string().min(1, 'Date is required'),
+	startTime: z.string().min(1, 'Time is required'),
 	endDate: z.string().optional(),
 	endTime: z.string().optional(),
 });

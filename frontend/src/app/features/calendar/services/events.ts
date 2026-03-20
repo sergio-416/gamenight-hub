@@ -1,17 +1,13 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable, inject } from "@angular/core";
-import { API_CONFIG } from "@core/config/api.config";
-import type { Observable } from "rxjs";
-import type {
-	CreateCalendarEvent,
-	Event,
-	UpdateCalendarEvent,
-} from "../models/event.model";
+import { HttpClient } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
+import { API_CONFIG } from '@core/config/api.config';
+import type { Observable } from 'rxjs';
+import type { CreateCalendarEvent, Event, UpdateCalendarEvent } from '../models/event.model';
 
 const API_URL = API_CONFIG.baseUrl;
 
 @Injectable({
-	providedIn: "root",
+	providedIn: 'root',
 })
 export class EventsService {
 	readonly #http = inject(HttpClient);

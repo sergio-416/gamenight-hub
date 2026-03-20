@@ -1,26 +1,18 @@
-import {
-	Injectable,
-	InjectionToken,
-	inject,
-	type OnDestroy,
-} from "@angular/core";
-import { environment } from "@env";
-import type { EventCreatedPayload } from "@gamenight-hub/shared";
-import { TranslocoService } from "@jsverse/transloco";
-import { io, type Socket } from "socket.io-client";
-import { ToastService } from "./toast";
+import { Injectable, InjectionToken, inject, type OnDestroy } from '@angular/core';
+import { environment } from '@env';
+import type { EventCreatedPayload } from '@gamenight-hub/shared';
+import { TranslocoService } from '@jsverse/transloco';
+import { io, type Socket } from 'socket.io-client';
+import { ToastService } from './toast';
 
 export type SocketFactory = typeof io;
 
-export const SOCKET_FACTORY = new InjectionToken<SocketFactory>(
-	"SOCKET_FACTORY",
-	{
-		providedIn: "root",
-		factory: () => io,
-	},
-);
+export const SOCKET_FACTORY = new InjectionToken<SocketFactory>('SOCKET_FACTORY', {
+	providedIn: 'root',
+	factory: () => io,
+});
 
-@Injectable({ providedIn: "root" })
+@Injectable({ providedIn: 'root' })
 export class NotificationsService implements OnDestroy {
 	readonly #toast = inject(ToastService);
 	readonly #transloco = inject(TranslocoService);
@@ -34,16 +26,16 @@ export class NotificationsService implements OnDestroy {
 
 		this.#socket = this.#socketFactory(`${environment.wsUrl}/notifications`, {
 			auth: { token },
-			transports: ["websocket"],
+			transports: ['websocket'],
 			reconnection: true,
 			reconnectionDelay: 2000,
 			reconnectionAttempts: 5,
 		});
 
-		this.#socket.on("event.created", (payload: EventCreatedPayload) => {
+		this.#socket.on('event.created', (payload: EventCreatedPayload) => {
 			if (payload.createdBy === this.#currentUid) return;
 			this.#toast.info(
-				this.#transloco.translate("notifications.newEvent", {
+				this.#transloco.translate('notifications.newEvent', {
 					title: payload.title,
 				}),
 			);

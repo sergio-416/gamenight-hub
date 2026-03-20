@@ -1,8 +1,8 @@
-import { NgOptimizedImage } from "@angular/common";
-import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
-import { RouterLink } from "@angular/router";
-import { AuthService } from "@core/services/auth";
-import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { NgOptimizedImage } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { AuthService } from '@core/services/auth';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
 	faArrowRight,
 	faCalendarCheck,
@@ -14,18 +14,13 @@ import {
 	faScroll,
 	faStar,
 	faTableCellsLarge,
-} from "@fortawesome/free-solid-svg-icons";
-import { TranslocoDirective } from "@jsverse/transloco";
+} from '@fortawesome/free-solid-svg-icons';
+import { TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
-	selector: "app-home",
-	imports: [
-		RouterLink,
-		FontAwesomeModule,
-		NgOptimizedImage,
-		TranslocoDirective,
-	],
-	templateUrl: "./home.html",
+	selector: 'app-home',
+	imports: [RouterLink, FontAwesomeModule, NgOptimizedImage, TranslocoDirective],
+	templateUrl: './home.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Home {

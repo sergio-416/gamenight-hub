@@ -1,22 +1,11 @@
-import { HttpErrorResponse } from "@angular/common/http";
-import {
-	ChangeDetectionStrategy,
-	Component,
-	inject,
-	signal,
-} from "@angular/core";
-import {
-	FormField,
-	form,
-	maxLength,
-	required,
-	submit,
-} from "@angular/forms/signals";
-import { Router } from "@angular/router";
-import { ProfileService } from "@core/services/profile.service";
-import type { UpdateProfileDto } from "@gamenight-hub/shared";
-import { TranslocoDirective } from "@jsverse/transloco";
-import { firstValueFrom } from "rxjs";
+import { HttpErrorResponse } from '@angular/common/http';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { FormField, form, maxLength, required, submit } from '@angular/forms/signals';
+import { Router } from '@angular/router';
+import { ProfileService } from '@core/services/profile.service';
+import type { UpdateProfileDto } from '@gamenight-hub/shared';
+import { TranslocoDirective } from '@jsverse/transloco';
+import { firstValueFrom } from 'rxjs';
 
 interface ProfileFormModel {
 	firstName: string;
@@ -42,9 +31,9 @@ interface ProfileFormModel {
 }
 
 @Component({
-	selector: "app-profile-setup",
+	selector: 'app-profile-setup',
 	imports: [FormField, TranslocoDirective],
-	templateUrl: "./profile-setup.html",
+	templateUrl: './profile-setup.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileSetup {
@@ -55,16 +44,16 @@ export class ProfileSetup {
 	readonly error = signal<string | null>(null);
 
 	readonly #profileModel = signal<ProfileFormModel>({
-		firstName: "",
-		lastName: "",
-		username: "",
+		firstName: '',
+		lastName: '',
+		username: '',
 		useRealNameForContact: false,
-		backupEmail: "",
-		mobilePhone: "",
-		location: "",
-		postalZip: "",
-		birthday: "",
-		bio: "",
+		backupEmail: '',
+		mobilePhone: '',
+		location: '',
+		postalZip: '',
+		birthday: '',
+		bio: '',
 		isProfilePublic: true,
 		showFirstName: true,
 		showLastName: true,
@@ -78,10 +67,10 @@ export class ProfileSetup {
 	});
 
 	readonly profileForm = form(this.#profileModel, (p) => {
-		required(p.firstName, { message: "First name is required" });
-		required(p.lastName, { message: "Last name is required" });
-		required(p.username, { message: "Username is required" });
-		maxLength(p.bio, 300, { message: "Bio must be at most 300 characters" });
+		required(p.firstName, { message: 'First name is required' });
+		required(p.lastName, { message: 'Last name is required' });
+		required(p.username, { message: 'Username is required' });
+		maxLength(p.bio, 300, { message: 'Bio must be at most 300 characters' });
 	});
 
 	async save(event: Event): Promise<void> {
@@ -92,22 +81,18 @@ export class ProfileSetup {
 				this.error.set(null);
 				try {
 					await firstValueFrom(
-						this.#profileService.updateMyProfile(
-							this.#profileModel() as UpdateProfileDto,
-						),
+						this.#profileService.updateMyProfile(this.#profileModel() as UpdateProfileDto),
 					);
-					await this.#router.navigate(["/profile/me"]);
+					await this.#router.navigate(['/profile/me']);
 				} catch (err: unknown) {
 					if (err instanceof HttpErrorResponse && err.status === 400) {
 						const issues = err.error?.message;
 						const first = Array.isArray(issues) ? issues[0]?.message : null;
-						this.error.set(first ?? "Invalid data. Please check your inputs.");
+						this.error.set(first ?? 'Invalid data. Please check your inputs.');
 					} else if (err instanceof HttpErrorResponse && err.status === 409) {
-						this.error.set(
-							"That username is already taken. Please choose another.",
-						);
+						this.error.set('That username is already taken. Please choose another.');
 					} else {
-						this.error.set("Something went wrong. Please try again.");
+						this.error.set('Something went wrong. Please try again.');
 					}
 					this.loading.set(false);
 				}
@@ -116,6 +101,6 @@ export class ProfileSetup {
 	}
 
 	async skip(): Promise<void> {
-		await this.#router.navigate(["/home"]);
+		await this.#router.navigate(['/home']);
 	}
 }
