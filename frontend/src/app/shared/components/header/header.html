@@ -3,11 +3,11 @@
 	class="relative z-20 w-full border-b border-border bg-surface-overlay shadow-lg shadow-shadow/5 after:absolute after:top-full after:left-0 after:z-10 after:block after:h-px after:w-full after:bg-slate-200 lg:border-border lg:backdrop-blur-sm lg:after:hidden"
 >
 	<div
-		class="relative mx-auto max-w-full px-6 lg:max-w-5xl xl:max-w-7xl 2xl:max-w-384"
+		class="relative mx-auto max-w-full px-4 sm:px-6 lg:max-w-5xl xl:max-w-7xl 2xl:max-w-384"
 	>
 		<nav
 			[attr.aria-label]="t('header.nav.gameNights')"
-			class="flex h-22 items-stretch justify-between font-medium text-on-surface-muted"
+			class="flex h-16 items-stretch justify-between font-medium text-on-surface-muted sm:h-22"
 		>
 			<a
 				id="GameNightHub"
@@ -20,7 +20,7 @@
 					[alt]="t('header.logoAlt')"
 					width="80"
 					height="69"
-					class="h-16 w-20"
+					class="h-10 w-auto sm:h-16 sm:w-20"
 					aria-hidden="true"
 					priority
 				/>
@@ -54,7 +54,7 @@
 			</button>
 			<ul
 				[attr.aria-label]="t('header.nav.gameNights')"
-				class="invisible absolute top-0 left-0 z-[-1] ml-auto h-screen w-full justify-center overflow-hidden overflow-y-auto overscroll-contain bg-surface-overlay px-8 pt-28 pb-12 text-lg font-normal opacity-0 transition-[opacity,visibility] duration-300 lg:visible lg:relative lg:top-0 lg:z-0 lg:flex lg:h-full lg:w-auto lg:items-stretch lg:overflow-visible lg:bg-white/0 lg:px-0 lg:py-0 lg:pt-0 lg:opacity-100"
+				class="invisible absolute top-0 left-0 z-[-1] ml-auto h-screen w-full justify-center overflow-hidden overflow-y-auto overscroll-contain bg-surface-overlay px-8 pt-24 pb-12 text-lg font-normal opacity-0 transition-[opacity,visibility] duration-300 lg:visible lg:relative lg:top-0 lg:z-0 lg:flex lg:h-full lg:w-auto lg:items-stretch lg:overflow-visible lg:bg-white/0 lg:px-0 lg:py-0 lg:pt-0 lg:opacity-100"
 				[class.invisible]="!isMobileMenuOpen()"
 				[class.opacity-0]="!isMobileMenuOpen()"
 				[class.visible]="isMobileMenuOpen()"
@@ -170,11 +170,20 @@
 					</a>
 				</li>
 				}
+				<li
+					class="mt-6 flex items-center gap-4 border-t border-border pt-6 lg:hidden"
+				>
+					<app-theme-toggle />
+					<app-cvd-selector />
+					<app-language-switcher />
+				</li>
 			</ul>
-			<div class="ml-auto flex items-center gap-2 px-6 lg:ml-0 lg:gap-3 lg:p-0">
-				<app-theme-toggle />
-				<app-cvd-selector />
-				<app-language-switcher />
+			<div class="ml-auto flex items-center gap-1.5 lg:ml-0 lg:gap-3 lg:p-0">
+				<div class="hidden lg:flex lg:items-center lg:gap-1">
+					<app-theme-toggle />
+					<app-cvd-selector />
+					<app-language-switcher />
+				</div>
 				@if (!isLoggedIn()) {
 				<button
 					class="inline-flex h-10 items-center justify-center gap-2 rounded bg-emerald-500 px-5 text-sm font-medium text-white shadow-md transition duration-300 hover:bg-emerald-600 hover:shadow-sm"
@@ -195,7 +204,7 @@
 							d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
 						/>
 					</svg>
-					<span>{{ t('header.login') }}</span>
+					<span class="hidden sm:inline">{{ t('header.login') }}</span>
 				</button>
 				} @else {
 				<a
@@ -207,7 +216,7 @@
 				</a>
 				<a
 					routerLink="/profile/me"
-					class="relative inline-flex h-12 w-12 items-center justify-center rounded-full text-white"
+					class="relative inline-flex h-10 w-10 items-center justify-center rounded-full text-white sm:h-12 sm:w-12"
 					[attr.aria-label]="t('header.ariaProfile')"
 				>
 					@if (userAvatar()) {
@@ -216,11 +225,11 @@
 						[alt]="t('header.avatarAlt')"
 						width="44"
 						height="44"
-						class="max-w-full rounded-full border-2 border-emerald-500"
+						class="h-9 w-9 rounded-full border-2 border-emerald-500 sm:h-11 sm:w-11"
 					/>
 					} @else {
 					<div
-						class="flex h-11 w-11 items-center justify-center rounded-full bg-emerald-100 text-emerald-600"
+						class="flex h-9 w-9 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 sm:h-11 sm:w-11"
 					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -228,7 +237,7 @@
 							viewBox="0 0 24 24"
 							stroke-width="1.5"
 							stroke="currentColor"
-							class="h-6 w-6"
+							class="h-5 w-5 sm:h-6 sm:w-6"
 							aria-hidden="true"
 						>
 							<path

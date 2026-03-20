@@ -45,6 +45,7 @@ services:
       RESEND_API_KEY: ${RESEND_API_KEY}
       EMAIL_FROM: ${EMAIL_FROM}
       FRONTEND_URL: https://gamenight-hub.com
+      BGG_API_TOKEN: ${BGG_API_TOKEN}
     depends_on:
       postgres:
         condition: service_healthy
