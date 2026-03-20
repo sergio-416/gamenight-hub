@@ -19,7 +19,7 @@ export async function setup() {
   process.env.POSTGRES_URL = url;
 
   const client = postgres(url, { max: 1 });
-  const db = drizzle(client);
+  const db = drizzle({ client });
   await migrate(db, { migrationsFolder: "./src/database/migrations" });
   await client.end();
 }

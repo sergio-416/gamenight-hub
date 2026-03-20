@@ -70,7 +70,7 @@ export const handlers = [
 	),
 	http.get(`${BASE_URL}/games/:id`, ({ params }) =>
 		HttpResponse.json(
-			mockGames.find((g) => g.id === params.id) ?? mockGames[0],
+			mockGames.find((g) => g.id === params["id"]) ?? mockGames[0],
 		),
 	),
 	http.post(`${BASE_URL}/games/import/:bggId`, () =>
@@ -78,7 +78,7 @@ export const handlers = [
 	),
 	http.delete(`${BASE_URL}/games/:id`, ({ params }) =>
 		HttpResponse.json(
-			mockGames.find((g) => g.id === params.id) ?? mockGames[0],
+			mockGames.find((g) => g.id === params["id"]) ?? mockGames[0],
 		),
 	),
 	http.get(`${BASE_URL}/locations`, () =>
@@ -93,7 +93,7 @@ export const handlers = [
 	}),
 	http.delete(`${BASE_URL}/locations/:id`, ({ params }) =>
 		HttpResponse.json(
-			mockLocations.find((l) => l.id === params.id) ?? mockLocations[0],
+			mockLocations.find((l) => l.id === params["id"]) ?? mockLocations[0],
 		),
 	),
 	http.get(`${BASE_URL}/events`, () =>
@@ -105,12 +105,13 @@ export const handlers = [
 	}),
 	http.patch(`${BASE_URL}/events/:id`, async ({ params, request }) => {
 		const body = (await request.json()) as Partial<Event>;
-		const event = mockEvents.find((e) => e.id === params.id) ?? mockEvents[0];
+		const event =
+			mockEvents.find((e) => e.id === params["id"]) ?? mockEvents[0];
 		return HttpResponse.json({ ...event, ...body });
 	}),
 	http.delete(`${BASE_URL}/events/:id`, ({ params }) =>
 		HttpResponse.json(
-			mockEvents.find((e) => e.id === params.id) ?? mockEvents[0],
+			mockEvents.find((e) => e.id === params["id"]) ?? mockEvents[0],
 		),
 	),
 ];

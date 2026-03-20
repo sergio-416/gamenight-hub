@@ -19,7 +19,7 @@ import { TranslocoDirective } from "@jsverse/transloco";
 					>
 						<div class="flex items-center gap-3 min-w-0">
 							<div
-								class="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-xl bg-emerald-500/15"
+								class="shrink-0 flex items-center justify-center w-10 h-10 rounded-xl bg-emerald-500/15"
 							>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -40,7 +40,7 @@ import { TranslocoDirective } from "@jsverse/transloco";
 								{{ t("pwa.install.message") }}
 							</p>
 						</div>
-						<div class="flex items-center gap-2 flex-shrink-0">
+						<div class="flex items-center gap-2 shrink-0">
 							<button
 								data-testid="install-dismiss-btn"
 								type="button"
