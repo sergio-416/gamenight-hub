@@ -11,8 +11,6 @@ cd "${DEPLOY_ROOT}"
 docker pull "${IMAGE}:${IMAGE_TAG}"
 docker tag "${IMAGE}:${IMAGE_TAG}" "${IMAGE}:latest"
 
-docker compose -f docker-compose.prod.yml --profile migrate run --rm backend-migrate
-
 docker compose -f docker-compose.prod.yml up -d --no-deps backend
 
 SECONDS_WAITED=0
