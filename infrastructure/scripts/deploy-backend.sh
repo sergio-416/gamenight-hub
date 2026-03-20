@@ -3,7 +3,7 @@ set -euo pipefail
 
 IMAGE_TAG="${1:?Usage: deploy-backend.sh <image-tag>}"
 DEPLOY_ROOT="/opt/gamenight-hub"
-IMAGE="ghcr.io/gamenight-hub/backend"
+IMAGE="ghcr.io/sergio-416/gamenight-hub/backend"
 CONTAINER="gamenight-hub-backend-1"
 
 cd "${DEPLOY_ROOT}"
