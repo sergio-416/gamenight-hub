@@ -1,30 +1,35 @@
 import { type INestApplication, VersioningType } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
 import { Test, type TestingModule } from '@nestjs/testing';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import request from 'supertest';
 import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { AuthService } from '../src/modules/auth/application/auth.service.js';
 import { AuthController } from '../src/modules/auth/presentation/auth.controller.js';
-
-const mockAuthUser = {
-	uid: 'user-uid-123',
-	email: 'test@example.com',
-	emailVerified: true,
-	role: 'user',
-	userType: 'regular',
-};
+import { EmailService } from '../src/modules/email/application/email.service.js';
 
 describe('Auth API (e2e)', () => {
 	let app: INestApplication;
 
 	const mockAuthService = {
-		verifyToken: vi.fn().mockResolvedValue(mockAuthUser),
+		generateMagicLink: vi.fn().mockResolvedValue('https://magic-link.test/abc123'),
+		verifyToken: vi.fn(),
 		extractTokenFromHeader: vi.fn(),
+	};
+
+	const mockEmailService = {
+		sendMagicLink: vi.fn().mockResolvedValue(undefined),
 	};
 
 	beforeAll(async () => {
 		const moduleFixture: TestingModule = await Test.createTestingModule({
+			imports: [ThrottlerModule.forRoot([{ ttl: 60000, limit: 100 }])],
 			controllers: [AuthController],
-			providers: [{ provide: AuthService, useValue: mockAuthService }],
+			providers: [
+				{ provide: AuthService, useValue: mockAuthService },
+				{ provide: EmailService, useValue: mockEmailService },
+				{ provide: APP_GUARD, useClass: ThrottlerGuard },
+			],
 		}).compile();
 
 		app = moduleFixture.createNestApplication();
@@ -39,35 +44,45 @@ describe('Auth API (e2e)', () => {
 
 	beforeEach(() => {
 		vi.clearAllMocks();
-		mockAuthService.verifyToken.mockResolvedValue(mockAuthUser);
+		mockAuthService.generateMagicLink.mockResolvedValue('https://magic-link.test/abc123');
+		mockEmailService.sendMagicLink.mockResolvedValue(undefined);
 	});
 
-	describe('POST /api/v1/auth/verify', () => {
-		it('should return a user when token is valid', async () => {
+	describe('POST /api/v1/auth/magic-link', () => {
+		it('should return 202 when email is valid', async () => {
 			const res = await request(app.getHttpServer())
-				.post('/api/v1/auth/verify')
-				.send({ token: 'valid-firebase-token' })
-				.expect(201);
+				.post('/api/v1/auth/magic-link')
+				.send({ email: 'test@example.com' })
+				.expect(202);
 
-			expect(res.body.uid).toBe('user-uid-123');
-			expect(res.body.email).toBe('test@example.com');
-			expect(mockAuthService.verifyToken).toHaveBeenCalledWith('valid-firebase-token');
+			expect(res.body.message).toBe('If this email is registered, a sign-in link has been sent.');
+			expect(mockAuthService.generateMagicLink).toHaveBeenCalledWith('test@example.com');
+			expect(mockEmailService.sendMagicLink).toHaveBeenCalledWith(
+				'test@example.com',
+				'https://magic-link.test/abc123',
+			);
 		});
 
-		it('should return 401 when token is invalid', async () => {
-			const { UnauthorizedException } = await import('@nestjs/common');
-			mockAuthService.verifyToken.mockRejectedValue(new UnauthorizedException('Invalid token'));
+		it('should still return 202 when magic link generation fails', async () => {
+			mockAuthService.generateMagicLink.mockRejectedValue(new Error('Firebase error'));
 
 			const res = await request(app.getHttpServer())
-				.post('/api/v1/auth/verify')
-				.send({ token: 'invalid-firebase-token' })
-				.expect(401);
+				.post('/api/v1/auth/magic-link')
+				.send({ email: 'fail@example.com' })
+				.expect(202);
 
-			expect(res.body.message).toBe('Invalid token');
+			expect(res.body.message).toBe('If this email is registered, a sign-in link has been sent.');
 		});
 
-		it('should return 400 when token is missing', async () => {
-			await request(app.getHttpServer()).post('/api/v1/auth/verify').send({}).expect(400);
+		it('should return 400 when email is missing', async () => {
+			await request(app.getHttpServer()).post('/api/v1/auth/magic-link').send({}).expect(400);
+		});
+
+		it('should return 400 when email is invalid', async () => {
+			await request(app.getHttpServer())
+				.post('/api/v1/auth/magic-link')
+				.send({ email: 'not-an-email' })
+				.expect(400);
 		});
 	});
 });

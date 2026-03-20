@@ -129,10 +129,10 @@ export class AuthService {
 					user.getIdToken(),
 					user.getIdTokenResult(),
 				]);
-				// biome-ignore lint/complexity/useLiteralKeys: claims is an index signature
+
 				const rawRole = tokenResult.claims['role'];
 				this.#userRole.set(isUserRole(rawRole) ? rawRole : 'user');
-				// biome-ignore lint/complexity/useLiteralKeys: claims is an index signature
+
 				const rawUserType = tokenResult.claims['userType'];
 				this.#userType.set(isUserType(rawUserType) ? rawUserType : 'regular');
 				this.#notifications.connect(token, user.uid);

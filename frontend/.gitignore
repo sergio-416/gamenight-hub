@@ -37,4 +37,4 @@ __screenshots__/
 # ===========================================
 # Environment files
 # ===========================================
-src/environments
+src/environments/environment.prod.ts

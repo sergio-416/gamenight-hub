@@ -1,5 +1,5 @@
 {
-	"$schema": "https://biomejs.dev/schemas/2.4.7/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.4.8/schema.json",
 	"assist": { "actions": { "source": { "organizeImports": "on" } } },
 	"linter": {
 		"enabled": true,
@@ -14,13 +14,16 @@
 				"noExplicitAny": "error",
 				"noConsole": {
 					"level": "warn",
-					"options": { "allow": [ "warn", "error" ] }
+					"options": { "allow": ["warn", "error"] }
 				}
 			},
 			"style": {
 				"useConst": "error",
 				"noNonNullAssertion": "warn",
 				"useImportType": "warn"
+			},
+			"complexity": {
+				"useLiteralKeys": "off"
 			}
 		}
 	},
@@ -41,7 +44,7 @@
 	},
 	"overrides": [
 		{
-			"includes": [ "backend/src/database/seed.ts" ],
+			"includes": ["backend/src/database/seed.ts"],
 			"linter": {
 				"rules": {
 					"suspicious": {
