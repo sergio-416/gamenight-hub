@@ -10,21 +10,15 @@ import type {
   GameStatus,
 } from "@gamenight-hub/shared";
 import { ConflictException, Inject, Injectable, Logger } from "@nestjs/common";
-// biome-ignore lint/style/useImportType: DI token needed at runtime
 import { EventEmitter2 } from "@nestjs/event-emitter";
 import { GameAddedEvent } from "../../xp/domain/xp-events.js";
-import type { UpdatePersonalFieldsDto } from "../presentation/dto/update-personal-fields.dto.js";
-// biome-ignore lint/style/useImportType: DI tokens needed at runtime
-import { BggCsvService } from "./bgg-csv.service.js";
-// biome-ignore lint/style/useImportType: DI tokens needed at runtime
-import { BggIntegrationService } from "./bgg-integration.service.js";
-// biome-ignore lint/style/useImportType: DI token needed at runtime
-import { GamesAnalyticsService } from "./games-analytics.service.js";
-// biome-ignore lint/style/useImportType: DI token needed at runtime
-import { GamesCrudService } from "./games-crud.service.js";
-// biome-ignore lint/style/useImportType: DI token needed at runtime
-import { UserPlayedGamesService } from "./user-played-games.service.js";
 import type { GameSearchResult } from "../domain/entities/game-search-result.entity.js";
+import type { UpdatePersonalFieldsDto } from "../presentation/dto/update-personal-fields.dto.js";
+import { BggCsvService } from "./bgg-csv.service.js";
+import { BggIntegrationService } from "./bgg-integration.service.js";
+import { GamesAnalyticsService } from "./games-analytics.service.js";
+import { GamesCrudService } from "./games-crud.service.js";
+import { UserPlayedGamesService } from "./user-played-games.service.js";
 
 @Injectable()
 export class GamesService {

@@ -6,8 +6,8 @@ import {
 	inject,
 	signal,
 } from "@angular/core";
-import { TranslocoDirective } from "@jsverse/transloco";
 import { type CvdMode, ThemeService } from "@core/services/theme.service";
+import { TranslocoDirective } from "@jsverse/transloco";
 
 const CVD_OPTIONS: { value: CvdMode; labelKey: string }[] = [
 	{ value: "none", labelKey: "cvdSelector.normal" },

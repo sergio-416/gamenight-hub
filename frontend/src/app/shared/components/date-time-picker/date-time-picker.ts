@@ -1,8 +1,8 @@
 import {
 	ChangeDetectionStrategy,
 	Component,
-	ElementRef,
 	computed,
+	ElementRef,
 	effect,
 	inject,
 	input,
@@ -61,7 +61,10 @@ export class DateTimePicker {
 
 	readonly hourOptions: { value: number; label: string }[] = Array.from(
 		{ length: 24 },
-		(_, i) => ({ value: i, label: String(i).padStart(2, "0") }),
+		(_, i) => ({
+			value: i,
+			label: String(i).padStart(2, "0"),
+		}),
 	);
 	readonly minuteOptions: { value: number; label: string }[] = [
 		0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55,

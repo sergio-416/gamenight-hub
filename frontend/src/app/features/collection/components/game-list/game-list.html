@@ -46,7 +46,8 @@
 				viewBox="0 0 24 24"
 				stroke="currentColor"
 				stroke-width="1"
-			 aria-hidden="true">
+				aria-hidden="true"
+			>
 				<path
 					stroke-linecap="round"
 					stroke-linejoin="round"
@@ -57,12 +58,16 @@
 			<h3 class="mt-4 text-lg font-semibold text-on-surface">
 				{{ t('empty.noGamesFound') }}
 			</h3>
-			<p class="mt-1 text-sm text-on-surface-muted">{{ t('empty.tryAdjusting') }}</p>
+			<p class="mt-1 text-sm text-on-surface-muted">
+				{{ t('empty.tryAdjusting') }}
+			</p>
 			} @else {
 			<h3 class="mt-4 text-lg font-semibold text-on-surface">
 				{{ t('empty.collectionEmpty') }}
 			</h3>
-			<p class="mt-1 text-sm text-on-surface-muted">{{ t('empty.startBuilding') }}</p>
+			<p class="mt-1 text-sm text-on-surface-muted">
+				{{ t('empty.startBuilding') }}
+			</p>
 			@if (isLoggedIn()) {
 			<button
 				type="button"
@@ -78,10 +83,7 @@
 			class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
 		>
 			@for (game of displayedGames(); track game.id) {
-			<app-game-card
-				[game]="game"
-				(gameClick)="onGameClick($event)"
-			/>
+			<app-game-card [game]="game" (gameClick)="onGameClick($event)" />
 			} @if (isLoggedIn()) {
 			<app-add-to-library-cta (addClick)="onImportGame()" />
 			}
@@ -145,7 +147,8 @@
 						viewBox="0 0 24 24"
 						stroke="currentColor"
 						stroke-width="2"
-					 aria-hidden="true">
+						aria-hidden="true"
+					>
 						<path
 							stroke-linecap="round"
 							stroke-linejoin="round"

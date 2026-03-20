@@ -1,5 +1,4 @@
 import { Inject, Injectable, Logger, type OnModuleInit } from "@nestjs/common";
-// biome-ignore lint/style/useImportType: DI token needed at runtime
 import { ConfigService } from "@nestjs/config";
 import admin from "firebase-admin";
 

@@ -1,9 +1,12 @@
-import { HttpErrorResponse, type HttpInterceptorFn } from "@angular/common/http";
+import type {
+	HttpErrorResponse,
+	HttpInterceptorFn,
+} from "@angular/common/http";
 import { inject } from "@angular/core";
 import { Router } from "@angular/router";
-import { catchError, switchMap, take, throwError } from "rxjs";
 import { AuthService } from "@core/services/auth";
 import { ToastService } from "@core/services/toast";
+import { catchError, switchMap, take, throwError } from "rxjs";
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
 	const authService = inject(AuthService);

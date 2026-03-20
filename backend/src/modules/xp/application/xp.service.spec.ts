@@ -34,12 +34,8 @@ const makeTransaction = (overrides = {}) => ({
   ...overrides,
 });
 
-function buildTxMockDb(
-  values: {
-    select?: unknown[];
-    insert?: unknown;
-    update?: unknown;
-  } = {}
+function _buildTxMockDb(
+  values: { select?: unknown[]; insert?: unknown; update?: unknown } = {}
 ) {
   const selectValues = values.select ?? [];
   let selectCallIndex = 0;
@@ -66,7 +62,7 @@ describe("XpService", () => {
     transaction: ReturnType<typeof vi.fn>;
   };
   let mockEventEmitter: { emit: ReturnType<typeof vi.fn> };
-  let calculator: XpCalculatorService;
+  let _calculator: XpCalculatorService;
 
   beforeEach(async () => {
     vi.clearAllMocks();
@@ -91,7 +87,7 @@ describe("XpService", () => {
     }).compile();
 
     service = module.get<XpService>(XpService);
-    calculator = module.get<XpCalculatorService>(XpCalculatorService);
+    _calculator = module.get<XpCalculatorService>(XpCalculatorService);
   });
 
   describe("createProfile", () => {
@@ -126,11 +122,11 @@ describe("XpService", () => {
       const result = await service.getProfile(USER_ID);
 
       expect(result).not.toBeNull();
-      expect(result!.userId).toBe(USER_ID);
-      expect(result!.xpTotal).toBe(300);
-      expect(result!.levelTitle).toBe("Curious Collector");
-      expect(result!.progressPercent).toBeDefined();
-      expect(result!.xpToNextLevel).toBeDefined();
+      expect(result?.userId).toBe(USER_ID);
+      expect(result?.xpTotal).toBe(300);
+      expect(result?.levelTitle).toBe("Curious Collector");
+      expect(result?.progressPercent).toBeDefined();
+      expect(result?.xpToNextLevel).toBeDefined();
     });
 
     it("should return null for non-existent user", async () => {
@@ -321,7 +317,7 @@ describe("XpService", () => {
       });
       const tx = makeTransaction({ baseXp: 75, finalXp: 75 });
 
-      const txDb = setupTxMock(
+      const _txDb = setupTxMock(
         [[profile], [{ value: 0 }], [{ value: 0 }]],
         [tx]
       );

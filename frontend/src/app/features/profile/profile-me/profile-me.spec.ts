@@ -78,7 +78,9 @@ function flushInitialRequests(
 ) {
 	httpMock
 		.match((req) => req.url.includes("owned-bgg-ids"))
-		.forEach((r) => r.flush([]));
+		.forEach((r) => {
+			r.flush([]);
+		});
 	httpMock
 		.expectOne(`${baseUrl}/profile/me`)
 		.flush(makeProfile(profileOverrides));
@@ -91,7 +93,7 @@ function flushInitialRequests(
 function flushXpRequests(httpMock: HttpTestingController) {
 	httpMock
 		.match((r) => r.url === `${baseUrl}/xp/me`)
-		.forEach((r) =>
+		.forEach((r) => {
 			r.flush({
 				userId: "user-uid-123",
 				xpTotal: 0,
@@ -102,11 +104,11 @@ function flushXpRequests(httpMock: HttpTestingController) {
 				nextLevelXp: 100,
 				xpToNextLevel: 100,
 				progressPercent: 0,
-			}),
-		);
+			});
+		});
 	httpMock
 		.match((r) => r.url.includes("/xp/me/stats"))
-		.forEach((r) =>
+		.forEach((r) => {
 			r.flush({
 				monthlyXp: 0,
 				weeklyXp: 0,
@@ -114,13 +116,13 @@ function flushXpRequests(httpMock: HttpTestingController) {
 				currentStreak: 0,
 				longestStreak: 0,
 				topAction: null,
-			}),
-		);
+			});
+		});
 	httpMock
 		.match((r) => r.url.includes("/xp/me/history"))
-		.forEach((r) =>
-			r.flush({ data: [], total: 0, page: 1, limit: 10, totalPages: 0 }),
-		);
+		.forEach((r) => {
+			r.flush({ data: [], total: 0, page: 1, limit: 10, totalPages: 0 });
+		});
 }
 
 describe("ProfileMe", () => {

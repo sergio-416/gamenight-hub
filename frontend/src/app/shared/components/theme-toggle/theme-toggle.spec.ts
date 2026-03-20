@@ -1,5 +1,5 @@
-import { provideTranslocoTesting } from "@core/testing/transloco-testing";
 import { ThemeService } from "@core/services/theme.service";
+import { provideTranslocoTesting } from "@core/testing/transloco-testing";
 import { fireEvent, render, screen } from "@testing-library/angular";
 import { ThemeToggle } from "./theme-toggle";
 
@@ -37,8 +37,8 @@ describe("ThemeToggle", () => {
 		const button = screen.getByRole("button");
 		const svg = button.querySelector("svg");
 		expect(svg).toBeTruthy();
-		const path = svg!.querySelector("path");
-		expect(path!.getAttribute("d")).toContain("21.752");
+		const path = svg?.querySelector("path");
+		expect(path?.getAttribute("d")).toContain("21.752");
 	});
 
 	it("renders sun icon when in dark mode", async () => {
@@ -48,8 +48,8 @@ describe("ThemeToggle", () => {
 		const button = screen.getByRole("button");
 		const svg = button.querySelector("svg");
 		expect(svg).toBeTruthy();
-		const path = svg!.querySelector("path");
-		expect(path!.getAttribute("d")).toContain("M12 3v2.25");
+		const path = svg?.querySelector("path");
+		expect(path?.getAttribute("d")).toContain("M12 3v2.25");
 	});
 
 	it("calls toggle on button click", async () => {

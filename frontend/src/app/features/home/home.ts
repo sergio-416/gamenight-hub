@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { NgOptimizedImage } from "@angular/common";
+import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { RouterLink } from "@angular/router";
-import { TranslocoDirective } from "@jsverse/transloco";
+import { AuthService } from "@core/services/auth";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import {
 	faArrowRight,
@@ -15,7 +15,7 @@ import {
 	faStar,
 	faTableCellsLarge,
 } from "@fortawesome/free-solid-svg-icons";
-import { AuthService } from "@core/services/auth";
+import { TranslocoDirective } from "@jsverse/transloco";
 
 @Component({
 	selector: "app-home",

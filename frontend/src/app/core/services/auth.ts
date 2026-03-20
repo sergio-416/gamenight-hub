@@ -21,7 +21,7 @@ import {
 	type User,
 } from "@angular/fire/auth";
 import type { UserRole, UserType } from "@gamenight-hub/shared";
-import { type Observable, ReplaySubject, firstValueFrom } from "rxjs";
+import { firstValueFrom, type Observable, ReplaySubject } from "rxjs";
 import { API_CONFIG } from "../config/api.config";
 import { NotificationsService } from "./notifications.service";
 

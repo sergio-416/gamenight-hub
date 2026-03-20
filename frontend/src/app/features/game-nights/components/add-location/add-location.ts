@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-	selector: "app-add-location",
-	template: "",
+	selector: 'app-add-location',
+	template: '',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddLocation {}

@@ -1,10 +1,9 @@
-// biome-ignore lint/style/useImportType: DI token needed at runtime
-
 import type { PaginationDto } from "@common/dto/pagination.dto.js";
 import {
   type PaginatedResponse,
   paginate,
 } from "@common/dto/pagination.dto.js";
+import { ERROR_CODE } from "@common/error-codes";
 import { DB_TOKEN, type DrizzleDb } from "@database/database.module.js";
 import { events } from "@database/schema/events.js";
 import {
@@ -12,7 +11,6 @@ import {
   locations,
   type SelectLocation,
 } from "@database/schema/locations.js";
-import { ERROR_CODE } from "@common/error-codes";
 import { HttpService } from "@nestjs/axios";
 import {
   ForbiddenException,
@@ -21,7 +19,6 @@ import {
   Logger,
   NotFoundException,
 } from "@nestjs/common";
-// biome-ignore lint/style/useImportType: DI token needed at runtime
 import { EventEmitter2 } from "@nestjs/event-emitter";
 import {
   and,

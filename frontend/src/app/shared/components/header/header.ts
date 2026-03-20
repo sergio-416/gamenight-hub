@@ -7,10 +7,10 @@ import {
 	signal,
 } from "@angular/core";
 import { Router, RouterLink, RouterLinkActive } from "@angular/router";
+import { AuthService } from "@core/services/auth";
 import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 import { faBell } from "@fortawesome/free-solid-svg-icons";
 import { TranslocoDirective } from "@jsverse/transloco";
-import { AuthService } from "@core/services/auth";
 import { CvdSelector } from "@shared/components/cvd-selector/cvd-selector";
 import { LanguageSwitcher } from "@shared/components/language-switcher/language-switcher";
 import { ThemeToggle } from "@shared/components/theme-toggle/theme-toggle";

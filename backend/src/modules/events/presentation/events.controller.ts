@@ -1,7 +1,5 @@
 import { FirebaseAuthGuard } from "@auth/infrastructure/guards/firebase-auth.guard.js";
 import { CurrentUser } from "@common/decorators/current-user.decorator.js";
-import type { FindEventsDto } from "./dto/event-filter.dto.js";
-import { FindEventsSchema } from "./dto/event-filter.dto.js";
 import { ParseUuidPipe } from "@common/pipes/parse-uuid.pipe.js";
 import { ZodValidationPipe } from "@common/pipes/zod-validation.pipe.js";
 import {
@@ -19,13 +17,14 @@ import {
   UseGuards,
 } from "@nestjs/common";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
-// biome-ignore lint/style/useImportType: DI token needed at runtime
 import { EventsService } from "../application/events.service.js";
 import type { CreateEventDto, UpdateEventDto } from "./dto/create-event.dto.js";
 import {
   CreateEventSchema,
   UpdateEventSchema,
 } from "./dto/create-event.dto.js";
+import type { FindEventsDto } from "./dto/event-filter.dto.js";
+import { FindEventsSchema } from "./dto/event-filter.dto.js";
 
 @ApiTags("Events")
 @Controller({ path: "events", version: "1" })

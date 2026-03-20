@@ -1,1 +1,1 @@
-export { WizardMapPanel } from "./wizard-map-panel";
+export { WizardMapPanel } from './wizard-map-panel';

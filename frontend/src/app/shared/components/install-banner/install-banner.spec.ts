@@ -1,6 +1,6 @@
 import { signal } from "@angular/core";
-import { provideTranslocoTesting } from "@core/testing/transloco-testing";
 import { PwaInstallService } from "@core/services/pwa-install.service";
+import { provideTranslocoTesting } from "@core/testing/transloco-testing";
 import { fireEvent, render, screen } from "@testing-library/angular";
 import { InstallBanner } from "./install-banner";
 

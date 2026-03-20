@@ -1,15 +1,13 @@
 import { ERROR_CODE } from "@common/error-codes";
+import { ResendProvider } from "@modules/email/infrastructure/resend.provider";
+import { renderMagicLinkEmail } from "@modules/email/templates/magic-link.template";
 import {
   Inject,
   Injectable,
   InternalServerErrorException,
   Logger,
 } from "@nestjs/common";
-// biome-ignore lint/style/useImportType: DI token needed at runtime
 import { ConfigService } from "@nestjs/config";
-// biome-ignore lint/style/useImportType: DI token needed at runtime
-import { ResendProvider } from "@modules/email/infrastructure/resend.provider";
-import { renderMagicLinkEmail } from "@modules/email/templates/magic-link.template";
 
 @Injectable()
 export class EmailService {

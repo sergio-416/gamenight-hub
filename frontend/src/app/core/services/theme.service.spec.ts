@@ -94,24 +94,24 @@ describe("ThemeService", () => {
 		const service = createService();
 		service.setCvdMode("protanopia");
 		TestBed.flushEffects();
-		expect(
-			document.documentElement.classList.contains("cvd-protanopia"),
-		).toBe(true);
+		expect(document.documentElement.classList.contains("cvd-protanopia")).toBe(
+			true,
+		);
 	});
 
 	it("setCvdMode deuteranopia removes previous cvd class and applies new one", () => {
 		const service = createService();
 		service.setCvdMode("protanopia");
 		TestBed.flushEffects();
-		expect(
-			document.documentElement.classList.contains("cvd-protanopia"),
-		).toBe(true);
+		expect(document.documentElement.classList.contains("cvd-protanopia")).toBe(
+			true,
+		);
 
 		service.setCvdMode("deuteranopia");
 		TestBed.flushEffects();
-		expect(
-			document.documentElement.classList.contains("cvd-protanopia"),
-		).toBe(false);
+		expect(document.documentElement.classList.contains("cvd-protanopia")).toBe(
+			false,
+		);
 		expect(
 			document.documentElement.classList.contains("cvd-deuteranopia"),
 		).toBe(true);
@@ -121,15 +121,15 @@ describe("ThemeService", () => {
 		const service = createService();
 		service.setCvdMode("tritanopia");
 		TestBed.flushEffects();
-		expect(
-			document.documentElement.classList.contains("cvd-tritanopia"),
-		).toBe(true);
+		expect(document.documentElement.classList.contains("cvd-tritanopia")).toBe(
+			true,
+		);
 
 		service.setCvdMode("none");
 		TestBed.flushEffects();
-		expect(
-			document.documentElement.classList.contains("cvd-tritanopia"),
-		).toBe(false);
+		expect(document.documentElement.classList.contains("cvd-tritanopia")).toBe(
+			false,
+		);
 	});
 
 	it("cvdMode persists to localStorage", () => {
@@ -157,15 +157,15 @@ describe("ThemeService", () => {
 		service.setCvdMode("protanopia");
 		TestBed.flushEffects();
 		expect(document.documentElement.classList.contains("dark")).toBe(true);
-		expect(
-			document.documentElement.classList.contains("cvd-protanopia"),
-		).toBe(true);
+		expect(document.documentElement.classList.contains("cvd-protanopia")).toBe(
+			true,
+		);
 
 		service.setTheme("light");
 		TestBed.flushEffects();
 		expect(document.documentElement.classList.contains("dark")).toBe(false);
-		expect(
-			document.documentElement.classList.contains("cvd-protanopia"),
-		).toBe(true);
+		expect(document.documentElement.classList.contains("cvd-protanopia")).toBe(
+			true,
+		);
 	});
 });

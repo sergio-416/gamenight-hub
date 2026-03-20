@@ -1,9 +1,9 @@
-import { signal } from "@angular/core";
-import { provideRouter } from "@angular/router";
-import { provideTranslocoTesting } from "@core/testing/transloco-testing";
-import { render, screen } from "@testing-library/angular";
-import { XpService } from "@shared/services/xp.service";
-import { XpBadge } from "./xp-badge";
+import { signal } from '@angular/core';
+import { provideRouter } from '@angular/router';
+import { provideTranslocoTesting } from '@core/testing/transloco-testing';
+import { XpService } from '@shared/services/xp.service';
+import { render, screen } from '@testing-library/angular';
+import { XpBadge } from './xp-badge';
 
 function makeXpService(
 	overrides: {
@@ -33,14 +33,14 @@ async function renderBadge(xpService: ReturnType<typeof makeXpService>) {
 	});
 }
 
-describe("XpBadge", () => {
-	it("should not render anything when profile is null", async () => {
+describe('XpBadge', () => {
+	it('should not render anything when profile is null', async () => {
 		await renderBadge(makeXpService({ profile: null }));
 
 		expect(screen.queryByText(/Lv\./)).toBeNull();
 	});
 
-	it("should render the level when profile is loaded", async () => {
+	it('should render the level when profile is loaded', async () => {
 		await renderBadge(
 			makeXpService({
 				profile: {
@@ -52,10 +52,10 @@ describe("XpBadge", () => {
 			}),
 		);
 
-		expect(screen.getByText("Lv.3")).toBeTruthy();
+		expect(screen.getByText('Lv.3')).toBeTruthy();
 	});
 
-	it("should render the progress bar", async () => {
+	it('should render the progress bar', async () => {
 		await renderBadge(
 			makeXpService({
 				profile: {
@@ -67,10 +67,10 @@ describe("XpBadge", () => {
 			}),
 		);
 
-		expect(screen.getByLabelText("XP Level")).toBeTruthy();
+		expect(screen.getByLabelText('XP Level')).toBeTruthy();
 	});
 
-	it("should include tooltip text with level details", async () => {
+	it('should include tooltip text with level details', async () => {
 		await renderBadge(
 			makeXpService({
 				profile: {
@@ -82,13 +82,13 @@ describe("XpBadge", () => {
 			}),
 		);
 
-		const link = screen.getByLabelText("XP Level");
-		expect(link.getAttribute("title")).toContain("Level 3");
-		expect(link.getAttribute("title")).toContain("Apprentice Archivist");
-		expect(link.getAttribute("title")).toContain("750/2000 XP");
+		const link = screen.getByLabelText('XP Level');
+		expect(link.getAttribute('title')).toContain('Level 3');
+		expect(link.getAttribute('title')).toContain('Apprentice Archivist');
+		expect(link.getAttribute('title')).toContain('750/2000 XP');
 	});
 
-	it("should link to the profile page", async () => {
+	it('should link to the profile page', async () => {
 		await renderBadge(
 			makeXpService({
 				profile: {
@@ -100,7 +100,7 @@ describe("XpBadge", () => {
 			}),
 		);
 
-		const link = screen.getByLabelText("XP Level");
-		expect(link.getAttribute("href")).toBe("/profile/me#xp");
+		const link = screen.getByLabelText('XP Level');
+		expect(link.getAttribute('href')).toBe('/profile/me#xp');
 	});
 });

@@ -1,20 +1,12 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	computed,
-	effect,
-	input,
-	output,
-	signal,
-} from "@angular/core";
-import { toSignal } from "@angular/core/rxjs-interop";
-import { httpResource } from "@angular/common/http";
-import { API_CONFIG } from "@core/config/api.config";
-import { Subject, debounceTime, distinctUntilChanged, map } from "rxjs";
-import { TranslocoDirective } from "@jsverse/transloco";
-import { FaIconComponent } from "@fortawesome/angular-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { DateTimePicker } from "@shared/components/date-time-picker/date-time-picker";
+import { httpResource } from '@angular/common/http';
+import { ChangeDetectionStrategy, Component, computed, input, output, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { API_CONFIG } from '@core/config/api.config';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { TranslocoDirective } from '@jsverse/transloco';
+import { DateTimePicker } from '@shared/components/date-time-picker/date-time-picker';
+import { debounceTime, distinctUntilChanged, map, Subject } from 'rxjs';
 
 export interface NominatimResult {
 	place_id: number;
@@ -33,22 +25,22 @@ interface SelectedLocation {
 }
 
 @Component({
-	selector: "app-wizard-step-location",
+	selector: 'app-wizard-step-location',
 	imports: [FaIconComponent, TranslocoDirective, DateTimePicker],
-	templateUrl: "./wizard-step-location.html",
+	templateUrl: './wizard-step-location.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WizardStepLocation {
-	readonly locationMode = input<"public" | "private">("private");
-	readonly address = input<string>("");
+	readonly locationMode = input<'public' | 'private'>('private');
+	readonly address = input<string>('');
 	readonly selectedLocation = input<SelectedLocation | undefined>();
-	readonly startDate = input<string>("");
-	readonly startTime = input<string>("");
+	readonly startDate = input<string>('');
+	readonly startTime = input<string>('');
 	readonly endDate = input<string | undefined>();
 	readonly endTime = input<string | undefined>();
 	readonly showEndTime = input<boolean>(false);
 
-	readonly locationModeChange = output<"public" | "private">();
+	readonly locationModeChange = output<'public' | 'private'>();
 	readonly addressInput = output<string>();
 	readonly locationSelected = output<SelectedLocation>();
 	readonly startDateChange = output<string>();
@@ -65,7 +57,7 @@ export class WizardStepLocation {
 			distinctUntilChanged(),
 			map((q) => q.trim()),
 		),
-		{ initialValue: "" },
+		{ initialValue: '' },
 	);
 
 	readonly #geocodeResource = httpResource<NominatimResult[]>(() => {
@@ -73,11 +65,11 @@ export class WizardStepLocation {
 		if (!query || query.length < 3) return undefined;
 		return {
 			url: `${API_CONFIG.baseUrl}/locations/geocode`,
-			params: { q: query, limit: "5" },
+			params: { q: query, limit: '5' },
 		};
 	});
 
-	readonly #internalAddress = signal("");
+	readonly #internalAddress = signal('');
 	readonly #showSuggestions = signal(false);
 	readonly #showEndTimeInternal = signal(false);
 
@@ -94,8 +86,8 @@ export class WizardStepLocation {
 		const d = this.startDate();
 		const t = this.startTime();
 		if (!d) return null;
-		const [y, m, day] = d.split("-").map(Number);
-		const [h, min] = t ? t.split(":").map(Number) : [12, 0];
+		const [y, m, day] = d.split('-').map(Number);
+		const [h, min] = t ? t.split(':').map(Number) : [12, 0];
 		return new Date(y, m - 1, day, h, min);
 	});
 
@@ -103,20 +95,15 @@ export class WizardStepLocation {
 		const d = this.endDate();
 		const t = this.endTime();
 		if (!d) return null;
-		const [y, m, day] = d.split("-").map(Number);
-		const [h, min] = t ? t.split(":").map(Number) : [12, 0];
+		const [y, m, day] = d.split('-').map(Number);
+		const [h, min] = t ? t.split(':').map(Number) : [12, 0];
 		return new Date(y, m - 1, day, h, min);
 	});
 
 	readonly selectedLocationDisplay = computed(() => {
 		const loc = this.selectedLocation();
-		if (!loc) return "";
+		if (!loc) return '';
 		return loc.address ?? loc.name;
-	});
-
-	readonly #syncSuggestions = effect(() => {
-		const results = this.suggestions();
-		this.#showSuggestions.set(results.length > 0);
 	});
 
 	onAddressInput(event: globalThis.Event): void {
@@ -137,7 +124,7 @@ export class WizardStepLocation {
 	}
 
 	selectSuggestion(suggestion: NominatimResult): void {
-		const autoName = suggestion.display_name.split(",")[0].trim();
+		const autoName = suggestion.display_name.split(',')[0].trim();
 		const location: SelectedLocation = {
 			name: autoName,
 			address: suggestion.display_name,
@@ -167,10 +154,10 @@ export class WizardStepLocation {
 	}
 
 	#formatDate(d: Date): string {
-		return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+		return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 	}
 
 	#formatTime(d: Date): string {
-		return `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
+		return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
 	}
 }

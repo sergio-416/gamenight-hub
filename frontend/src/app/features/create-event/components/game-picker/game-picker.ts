@@ -1,17 +1,10 @@
-import { httpResource } from "@angular/common/http";
-import {
-	ChangeDetectionStrategy,
-	Component,
-	computed,
-	input,
-	output,
-	signal,
-} from "@angular/core";
-import { API_CONFIG } from "@core/config/api.config";
-import type { Game, PaginatedResponse } from "@gamenight-hub/shared";
-import { NgOptimizedImage } from "@angular/common";
-import { TranslocoDirective } from "@jsverse/transloco";
-import { SearchInput } from "@shared/components/search-input/search-input";
+import { NgOptimizedImage } from '@angular/common';
+import { httpResource } from '@angular/common/http';
+import { ChangeDetectionStrategy, Component, computed, input, output, signal } from '@angular/core';
+import { API_CONFIG } from '@core/config/api.config';
+import type { Game, PaginatedResponse } from '@gamenight-hub/shared';
+import { TranslocoDirective } from '@jsverse/transloco';
+import { SearchInput } from '@shared/components/search-input/search-input';
 
 interface GameSelection {
 	id: string;
@@ -23,9 +16,9 @@ interface GameSelection {
 }
 
 @Component({
-	selector: "app-game-picker",
+	selector: 'app-game-picker',
 	imports: [NgOptimizedImage, SearchInput, TranslocoDirective],
-	templateUrl: "./game-picker.html",
+	templateUrl: './game-picker.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GamePicker {
@@ -34,7 +27,7 @@ export class GamePicker {
 	readonly gameSelected = output<GameSelection>();
 	readonly gameCleared = output<void>();
 
-	readonly #searchText = signal("");
+	readonly #searchText = signal('');
 	readonly #showDropdown = signal(false);
 	readonly #selectedGame = signal<GameSelection | undefined>(undefined);
 
@@ -84,13 +77,13 @@ export class GamePicker {
 		};
 		this.#selectedGame.set(selection);
 		this.#showDropdown.set(false);
-		this.#searchText.set("");
+		this.#searchText.set('');
 		this.gameSelected.emit(selection);
 	}
 
 	clearSelection(): void {
 		this.#selectedGame.set(undefined);
-		this.#searchText.set("");
+		this.#searchText.set('');
 		this.gameCleared.emit();
 	}
 
@@ -102,6 +95,6 @@ export class GamePicker {
 		}
 		if (game.minPlayers) return `${game.minPlayers}+ players`;
 		if (game.maxPlayers) return `Up to ${game.maxPlayers} players`;
-		return "";
+		return '';
 	}
 }

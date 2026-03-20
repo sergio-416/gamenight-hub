@@ -1,9 +1,9 @@
 import { FirebaseAuthGuard } from "@auth/infrastructure/guards/firebase-auth.guard.js";
 import { NotFoundException } from "@nestjs/common";
 import { Test, type TestingModule } from "@nestjs/testing";
-import { ProfileService } from "../application/profile.service.js";
 import { GamesService } from "../../games/application/games.service.js";
 import { XpService } from "../../xp/application/xp.service.js";
+import { ProfileService } from "../application/profile.service.js";
 import { ProfileController } from "./profile.controller.js";
 
 const MOCK_UID = "user-uid-123";

@@ -49,9 +49,9 @@ describe("XpController", () => {
 
       const result = await controller.getMyProfile(MOCK_UID);
 
-      expect(result!.userId).toBe(MOCK_UID);
-      expect(result!.xpTotal).toBe(500);
-      expect(result!.levelTitle).toBe("Curious Collector");
+      expect(result?.userId).toBe(MOCK_UID);
+      expect(result?.xpTotal).toBe(500);
+      expect(result?.levelTitle).toBe("Curious Collector");
       expect(mockXpService.getProfile).toHaveBeenCalledWith(MOCK_UID);
     });
 
@@ -65,7 +65,7 @@ describe("XpController", () => {
       const result = await controller.getMyProfile(MOCK_UID);
 
       expect(mockXpService.createProfile).toHaveBeenCalledWith(MOCK_UID);
-      expect(result!.userId).toBe(MOCK_UID);
+      expect(result?.userId).toBe(MOCK_UID);
     });
   });
 

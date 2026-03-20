@@ -5,8 +5,8 @@ import {
 	signal,
 } from "@angular/core";
 import { Router, RouterLink } from "@angular/router";
-import { TranslocoDirective } from "@jsverse/transloco";
 import { AuthService, translateAuthError } from "@core/services/auth";
+import { TranslocoDirective } from "@jsverse/transloco";
 import { z } from "zod";
 
 const EmailSchema = z.object({

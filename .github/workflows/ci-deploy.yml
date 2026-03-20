@@ -119,7 +119,7 @@ jobs:
 
       - name: Run frontend unit tests
         working-directory: frontend
-        run: bunx ng test --watch=false --browsers=ChromeHeadless
+        run: bun run test --watch=false
 
   build:
     name: Build & Push

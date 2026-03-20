@@ -42,10 +42,10 @@ import { render, screen } from "@testing-library/angular";
 import { ChartComponent } from "ng-apexcharts";
 import { Stats } from "./stats";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-vi.spyOn(ChartComponent.prototype as any, "createElement").mockResolvedValue(
-	undefined,
-);
+vi.spyOn(
+	ChartComponent.prototype as unknown as { createElement: () => Promise<void> },
+	"createElement",
+).mockResolvedValue(undefined);
 
 describe("Stats", () => {
 	let httpMock: HttpTestingController;

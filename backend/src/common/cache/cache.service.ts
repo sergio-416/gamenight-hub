@@ -5,7 +5,6 @@ import {
   type OnModuleDestroy,
   type OnModuleInit,
 } from "@nestjs/common";
-// biome-ignore lint/style/useImportType: DI token needed at runtime
 import { ConfigService } from "@nestjs/config";
 import type { Redis as RedisClient } from "ioredis";
 import Redis from "ioredis";

@@ -1,4 +1,3 @@
-// biome-ignore lint/style/useImportType: DI token needed at runtime
 import { AuthService } from "@auth/application/auth.service";
 import type { AuthRequest } from "@auth/domain/types/auth-request.type";
 import { ERROR_CODE } from "@common/error-codes";

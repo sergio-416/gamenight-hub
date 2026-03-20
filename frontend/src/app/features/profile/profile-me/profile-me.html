@@ -360,7 +360,9 @@
 									/>
 									}
 									<div class="min-w-0 flex-1">
-										<p class="line-clamp-1 text-sm font-medium text-on-surface-strong">
+										<p
+											class="line-clamp-1 text-sm font-medium text-on-surface-strong"
+										>
 											{{ game.name }}
 										</p>
 										@if (game.yearPublished) {
@@ -485,7 +487,9 @@
 									/>
 									}
 									<div class="min-w-0 flex-1">
-										<p class="line-clamp-1 text-sm font-medium text-on-surface-strong">
+										<p
+											class="line-clamp-1 text-sm font-medium text-on-surface-strong"
+										>
 											{{ game.name }}
 										</p>
 										@if (game.yearPublished) {
@@ -530,7 +534,9 @@
 						}
 						<div class="space-y-3">
 							@if (p.showEmail && p.email) {
-							<div class="flex items-center gap-3 text-sm text-on-surface-medium">
+							<div
+								class="flex items-center gap-3 text-sm text-on-surface-medium"
+							>
 								<fa-icon
 									[icon]="iconEnvelope"
 									class="w-4 shrink-0 text-emerald-500"
@@ -538,7 +544,9 @@
 								<span class="min-w-0 truncate">{{ p.email }}</span>
 							</div>
 							} @if (p.showMobilePhone && p.mobilePhone) {
-							<div class="flex items-center gap-3 text-sm text-on-surface-medium">
+							<div
+								class="flex items-center gap-3 text-sm text-on-surface-medium"
+							>
 								<fa-icon
 									[icon]="iconPhone"
 									class="w-4 shrink-0 text-emerald-500"
@@ -546,7 +554,9 @@
 								<span>{{ p.mobilePhone }}</span>
 							</div>
 							} @if (p.showBirthday && p.birthday) {
-							<div class="flex items-center gap-3 text-sm text-on-surface-medium">
+							<div
+								class="flex items-center gap-3 text-sm text-on-surface-medium"
+							>
 								<fa-icon
 									[icon]="iconBirthday"
 									class="w-4 shrink-0 text-emerald-500"
@@ -659,7 +669,9 @@
 				{{ t('settings.title') }}
 			</h1>
 
-			<div class="rounded-2xl border border-border bg-surface-raised p-6 shadow-sm">
+			<div
+				class="rounded-2xl border border-border bg-surface-raised p-6 shadow-sm"
+			>
 				<div class="mb-6 flex items-center justify-between">
 					<h2 class="text-lg font-semibold text-on-surface">
 						{{ t('settings.editProfile') }}
@@ -750,7 +762,9 @@
 
 					<div>
 						<div class="mb-1.5 flex items-center justify-between">
-							<span class="text-sm font-medium text-on-surface-strong">Name</span>
+							<span class="text-sm font-medium text-on-surface-strong"
+								>Name</span
+							>
 							@if (nameFieldsLocked()) {
 							<span class="flex items-center gap-1 text-xs text-amber-600">
 								<fa-icon [icon]="iconLock" class="text-[10px]"></fa-icon>
@@ -861,7 +875,9 @@
 
 					<div>
 						<div class="mb-1.5 flex items-center justify-between">
-							<label for="birthday" class="text-sm font-medium text-on-surface-strong"
+							<label
+								for="birthday"
+								class="text-sm font-medium text-on-surface-strong"
 								>Birthday</label
 							>
 							<div class="flex items-center gap-2">
@@ -983,8 +999,12 @@
 
 							<div class="flex items-center justify-between">
 								<div>
-									<p class="text-sm text-on-surface-strong">Show account email</p>
-									<p class="text-xs text-on-surface-dim">Your main login email</p>
+									<p class="text-sm text-on-surface-strong">
+										Show account email
+									</p>
+									<p class="text-xs text-on-surface-dim">
+										Your main login email
+									</p>
 								</div>
 								<button
 									type="button"
@@ -1003,7 +1023,9 @@
 							</div>
 
 							<div class="flex items-center justify-between">
-								<p class="text-sm text-on-surface-strong">Show game collection</p>
+								<p class="text-sm text-on-surface-strong">
+									Show game collection
+								</p>
 								<button
 									type="button"
 									role="switch"
@@ -1028,7 +1050,9 @@
 				<h2 class="mb-4 text-base font-semibold text-on-surface">
 					{{ t('xpHistory.title') }}
 				</h2>
-				<div class="rounded-2xl border border-border bg-surface-raised p-6 shadow-sm">
+				<div
+					class="rounded-2xl border border-border bg-surface-raised p-6 shadow-sm"
+				>
 					<app-xp-history />
 				</div>
 			</section>
@@ -1037,7 +1061,9 @@
 				<h2 class="mb-4 text-base font-semibold text-on-surface">
 					{{ t('account.title') }}
 				</h2>
-				<div class="rounded-2xl border border-border bg-surface-raised p-6 shadow-sm">
+				<div
+					class="rounded-2xl border border-border bg-surface-raised p-6 shadow-sm"
+				>
 					<div class="flex items-start justify-between gap-4">
 						<div>
 							<p class="text-sm font-semibold text-on-surface">

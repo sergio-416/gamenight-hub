@@ -4,7 +4,6 @@ import {
 	Component,
 	computed,
 	type ElementRef,
-	effect,
 	InjectionToken,
 	inject,
 	input,
@@ -12,22 +11,22 @@ import {
 	output,
 	signal,
 	viewChild,
-} from "@angular/core";
-import { environment } from "@env";
-import * as L from "leaflet";
-import type { EventWithParticipants } from "@game-nights/models/event-with-participants";
-import type { Location } from "@game-nights/models/location.model";
-import { TranslocoDirective } from "@jsverse/transloco";
-import { LocationsService } from "@game-nights/services/locations";
+} from '@angular/core';
+import { environment } from '@env';
+import type { EventWithParticipants } from '@game-nights/models/event-with-participants';
+import type { Location } from '@game-nights/models/location.model';
+import { LocationsService } from '@game-nights/services/locations';
+import { TranslocoDirective } from '@jsverse/transloco';
+import * as L from 'leaflet';
 
-export const LEAFLET = new InjectionToken<typeof L>("leaflet", {
+export const LEAFLET = new InjectionToken<typeof L>('leaflet', {
 	factory: () => L,
 });
 
 @Component({
-	selector: "app-map",
+	selector: 'app-map',
 	imports: [TranslocoDirective],
-	templateUrl: "./map.html",
+	templateUrl: './map.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GameNightsMap implements AfterViewInit, OnDestroy {
@@ -54,7 +53,7 @@ export class GameNightsMap implements AfterViewInit, OnDestroy {
 	readonly loading = this.#loading.asReadonly();
 	readonly error = this.#error.asReadonly();
 
-	readonly mapContainer = viewChild.required<ElementRef>("mapContainer");
+	readonly mapContainer = viewChild.required<ElementRef>('mapContainer');
 
 	readonly #locationsService = inject(LocationsService);
 	readonly #L = inject(LEAFLET);
@@ -62,22 +61,6 @@ export class GameNightsMap implements AfterViewInit, OnDestroy {
 
 	#map?: L.Map;
 	#markers: L.Marker[] = [];
-
-	readonly #reloadEffect = effect(() => {
-		this.reloadTrigger();
-
-		if (this.#map) {
-			this.#loadLocationsInBounds();
-		}
-	});
-
-	readonly #filterEffect = effect(() => {
-		this.activeLocationIds();
-
-		if (this.#map) {
-			this.#loadLocationsInBounds();
-		}
-	});
 
 	ngAfterViewInit(): void {
 		this.#initializeMap();
@@ -117,7 +100,7 @@ export class GameNightsMap implements AfterViewInit, OnDestroy {
 			)
 			.addTo(this.#map);
 
-		this.#map.on("moveend", () => this.#loadLocationsInBounds());
+		this.#map.on('moveend', () => this.#loadLocationsInBounds());
 	}
 
 	#loadLocationsInBounds(): void {
@@ -130,18 +113,16 @@ export class GameNightsMap implements AfterViewInit, OnDestroy {
 		this.#loading.set(true);
 		this.#error.set(null);
 
-		this.#locationsService
-			.findInBounds(sw.lat, sw.lng, ne.lat, ne.lng)
-			.subscribe({
-				next: (locations) => {
-					this.#addMarkers(locations);
-					this.#loading.set(false);
-				},
-				error: () => {
-					this.#error.set("Failed to load locations");
-					this.#loading.set(false);
-				},
-			});
+		this.#locationsService.findInBounds(sw.lat, sw.lng, ne.lat, ne.lng).subscribe({
+			next: (locations) => {
+				this.#addMarkers(locations);
+				this.#loading.set(false);
+			},
+			error: () => {
+				this.#error.set('Failed to load locations');
+				this.#loading.set(false);
+			},
+		});
 	}
 
 	#addMarkers(locations: Location[]): void {
@@ -150,9 +131,7 @@ export class GameNightsMap implements AfterViewInit, OnDestroy {
 		this.#clearMarkers();
 
 		const activeIds = this.activeLocationIds();
-		const filtered = activeIds
-			? locations.filter((loc) => activeIds.has(loc.id))
-			: locations;
+		const filtered = activeIds ? locations.filter((loc) => activeIds.has(loc.id)) : locations;
 
 		filtered.forEach((location) => {
 			const locationEvents = this.#eventsByLocationId().get(location.id) ?? [];
@@ -170,38 +149,38 @@ export class GameNightsMap implements AfterViewInit, OnDestroy {
 
 			const badgeHtml =
 				hasEvents && firstEvent.maxPlayers
-					? `<div style="position:absolute;top:-8px;right:-8px;background:${isFull ? "#ef4444" : "#10b981"};color:white;font-size:10px;font-weight:600;padding:1px 4px;border-radius:9999px;white-space:nowrap;line-height:1.4;min-width:16px;text-align:center;">${firstEvent.participantCount ?? 0}/${firstEvent.maxPlayers}</div>`
-					: "";
+					? `<div style="position:absolute;top:-8px;right:-8px;background:${isFull ? '#ef4444' : '#10b981'};color:white;font-size:10px;font-weight:600;padding:1px 4px;border-radius:9999px;white-space:nowrap;line-height:1.4;min-width:16px;text-align:center;">${firstEvent.participantCount ?? 0}/${firstEvent.maxPlayers}</div>`
+					: '';
 
 			const customIcon = this.#L.divIcon({
-				className: "custom-marker",
+				className: 'custom-marker',
 				html: `<div style="position:relative;">${svgPin}${badgeHtml}</div>`,
 				iconSize: [32, 32],
 				iconAnchor: [16, 32],
 				popupAnchor: [0, -32],
 			});
 
-			const popupContent = document.createElement("div");
-			popupContent.className = "marker-popup";
+			const popupContent = document.createElement('div');
+			popupContent.className = 'marker-popup';
 
-			const title = document.createElement("h3");
+			const title = document.createElement('h3');
 			title.textContent = location.name;
 			popupContent.appendChild(title);
 
-			const venueType = document.createElement("p");
-			venueType.textContent = location.venueType || "Venue";
+			const venueType = document.createElement('p');
+			venueType.textContent = location.venueType || 'Venue';
 			popupContent.appendChild(venueType);
 
 			if (location.address) {
-				const address = document.createElement("p");
+				const address = document.createElement('p');
 				address.textContent = location.address;
 				popupContent.appendChild(address);
 			}
 
 			if (this.isLoggedIn()) {
-				const deleteButton = document.createElement("button");
-				deleteButton.textContent = "Delete";
-				deleteButton.className = "delete-btn";
+				const deleteButton = document.createElement('button');
+				deleteButton.textContent = 'Delete';
+				deleteButton.className = 'delete-btn';
 				deleteButton.style.cssText = `
 					background: var(--color-danger);
 					color: white;
@@ -212,7 +191,7 @@ export class GameNightsMap implements AfterViewInit, OnDestroy {
 					margin-top: 8px;
 				`;
 
-				this.#L.DomEvent.on(deleteButton, "click", (e) => {
+				this.#L.DomEvent.on(deleteButton, 'click', (e) => {
 					this.#L.DomEvent.stopPropagation(e);
 					this.requestDeleteLocation(location.id);
 				});
@@ -227,7 +206,7 @@ export class GameNightsMap implements AfterViewInit, OnDestroy {
 				.bindPopup(popupContent)
 				.addTo(this.#map!);
 
-			marker.on("click", () => {
+			marker.on('click', () => {
 				if (locationEvents.length > 0) {
 					this.markerClick.emit(locationEvents[0].id);
 				}

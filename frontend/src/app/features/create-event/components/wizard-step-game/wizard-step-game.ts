@@ -1,22 +1,15 @@
+import { NgOptimizedImage } from '@angular/common';
+import { ChangeDetectionStrategy, Component, computed, input, output, signal } from '@angular/core';
 import {
-	ChangeDetectionStrategy,
-	Component,
-	computed,
-	input,
-	output,
-	signal,
-} from "@angular/core";
-import { NgOptimizedImage } from "@angular/common";
-import { TranslocoDirective } from "@jsverse/transloco";
-import {
-	getEventCoverPath,
-	EVENT_CATEGORY_LIST,
 	CATEGORY_META,
-	type EventCoverSlug,
+	EVENT_CATEGORY_LIST,
 	type EventCategory,
-} from "@gamenight-hub/shared";
-import { GamePicker } from "../game-picker/game-picker";
-import { CoverImagePicker } from "../cover-image-picker/cover-image-picker";
+	type EventCoverSlug,
+	getEventCoverPath,
+} from '@gamenight-hub/shared';
+import { TranslocoDirective } from '@jsverse/transloco';
+import { CoverImagePicker } from '../cover-image-picker/cover-image-picker';
+import { GamePicker } from '../game-picker/game-picker';
 
 interface GameSelection {
 	id: string;
@@ -26,14 +19,14 @@ interface GameSelection {
 }
 
 @Component({
-	selector: "app-wizard-step-game",
+	selector: 'app-wizard-step-game',
 	imports: [GamePicker, CoverImagePicker, NgOptimizedImage, TranslocoDirective],
-	templateUrl: "./wizard-step-game.html",
+	templateUrl: './wizard-step-game.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WizardStepGame {
-	readonly title = input<string>("");
-	readonly description = input<string>("");
+	readonly title = input<string>('');
+	readonly description = input<string>('');
 	readonly selectedGameId = input<string | undefined>();
 	readonly coverImage = input<string | undefined>();
 	readonly category = input<EventCategory | undefined>();
@@ -53,7 +46,7 @@ export class WizardStepGame {
 
 	readonly coverImagePath = computed(() => {
 		const slug = this.coverImage();
-		return slug ? getEventCoverPath(slug as EventCoverSlug) : "";
+		return slug ? getEventCoverPath(slug as EventCoverSlug) : '';
 	});
 
 	onTitleInput(event: globalThis.Event): void {

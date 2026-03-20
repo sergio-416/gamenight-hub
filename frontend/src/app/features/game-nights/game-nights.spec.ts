@@ -7,8 +7,8 @@ import { signal } from "@angular/core";
 import { API_CONFIG } from "@core/config/api.config";
 import { AuthService } from "@core/services/auth";
 import { ToastService } from "@core/services/toast";
-import { provideTranslocoScope } from "@jsverse/transloco";
 import { provideTranslocoTesting } from "@core/testing/transloco-testing";
+import { provideTranslocoScope } from "@jsverse/transloco";
 import { fireEvent, render, screen } from "@testing-library/angular";
 import { of } from "rxjs";
 import { LEAFLET } from "./components/map/map";
@@ -121,21 +121,17 @@ describe("GameNights", () => {
 			});
 
 			const httpMock = fixture.debugElement.injector.get(HttpTestingController);
-			httpMock
-				.match(`${API_CONFIG.baseUrl}/locations`)
-				.forEach((req) =>
-					req.flush({ data: [], total: 0, page: 1, limit: 20, totalPages: 0 }),
-				);
-			httpMock
-				.match(`${API_CONFIG.baseUrl}/events`)
-				.forEach((req) =>
-					req.flush({ data: [], total: 0, page: 1, limit: 20, totalPages: 0 }),
-				);
+			httpMock.match(`${API_CONFIG.baseUrl}/locations`).forEach((req) => {
+				req.flush({ data: [], total: 0, page: 1, limit: 20, totalPages: 0 });
+			});
+			httpMock.match(`${API_CONFIG.baseUrl}/events`).forEach((req) => {
+				req.flush({ data: [], total: 0, page: 1, limit: 20, totalPages: 0 });
+			});
 			httpMock
 				.match(() => true)
-				.forEach((req) =>
-					req.flush({ data: [], total: 0, page: 1, limit: 20, totalPages: 0 }),
-				);
+				.forEach((req) => {
+					req.flush({ data: [], total: 0, page: 1, limit: 20, totalPages: 0 });
+				});
 			await fixture.whenStable();
 			detectChanges();
 
@@ -152,21 +148,17 @@ describe("GameNights", () => {
 			};
 		}) {
 			const httpMock = fixture.debugElement.injector.get(HttpTestingController);
-			httpMock
-				.match(`${API_CONFIG.baseUrl}/locations`)
-				.forEach((req) =>
-					req.flush({ data: [], total: 0, page: 1, limit: 20, totalPages: 0 }),
-				);
-			httpMock
-				.match(`${API_CONFIG.baseUrl}/events`)
-				.forEach((req) =>
-					req.flush({ data: [], total: 0, page: 1, limit: 20, totalPages: 0 }),
-				);
+			httpMock.match(`${API_CONFIG.baseUrl}/locations`).forEach((req) => {
+				req.flush({ data: [], total: 0, page: 1, limit: 20, totalPages: 0 });
+			});
+			httpMock.match(`${API_CONFIG.baseUrl}/events`).forEach((req) => {
+				req.flush({ data: [], total: 0, page: 1, limit: 20, totalPages: 0 });
+			});
 			httpMock
 				.match(() => true)
-				.forEach((req) =>
-					req.flush({ data: [], total: 0, page: 1, limit: 20, totalPages: 0 }),
-				);
+				.forEach((req) => {
+					req.flush({ data: [], total: 0, page: 1, limit: 20, totalPages: 0 });
+				});
 		}
 
 		it("should display Show Map toggle button", async () => {

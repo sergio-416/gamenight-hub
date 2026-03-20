@@ -1,7 +1,5 @@
-// biome-ignore lint/style/useImportType: DI token needed at runtime
 import { CacheService } from "@common/cache/cache.service.js";
 import { ERROR_CODE } from "@common/error-codes";
-// biome-ignore lint/style/useImportType: DI token needed at runtime
 import { HttpService } from "@nestjs/axios";
 import {
   HttpException,

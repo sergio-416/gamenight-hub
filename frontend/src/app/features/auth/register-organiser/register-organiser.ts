@@ -5,9 +5,9 @@ import {
 	signal,
 } from "@angular/core";
 import { Router, RouterLink } from "@angular/router";
-import { TranslocoDirective } from "@jsverse/transloco";
 import { OrganiserService } from "@core/services/organiser.service";
 import { OrganiserRequestSchema } from "@gamenight-hub/shared";
+import { TranslocoDirective } from "@jsverse/transloco";
 
 @Component({
 	selector: "app-register-organiser",

@@ -1,19 +1,9 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	computed,
-	inject,
-	signal,
-} from "@angular/core";
-import { FaIconComponent } from "@fortawesome/angular-fontawesome";
-import {
-	faCalendarPlus,
-	faDiceD6,
-	faUserPlus,
-} from "@fortawesome/free-solid-svg-icons";
-import { TranslocoDirective, TranslocoService } from "@jsverse/transloco";
-import type { XpAction, XpTransaction } from "@shared/models/xp.model";
-import { XpService } from "@shared/services/xp.service";
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { faCalendarPlus, faDiceD6, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
+import type { XpAction, XpTransaction } from '@shared/models/xp.model';
+import { XpService } from '@shared/services/xp.service';
 
 const ACTION_ICONS: Record<XpAction, typeof faDiceD6> = {
 	game_added: faDiceD6,
@@ -22,16 +12,16 @@ const ACTION_ICONS: Record<XpAction, typeof faDiceD6> = {
 };
 
 const ACTION_KEYS: Record<XpAction, string> = {
-	game_added: "xp.history.actions.gameAdded",
-	event_created: "xp.history.actions.eventCreated",
-	participant_joined: "xp.history.actions.participantJoined",
+	game_added: 'xp.history.actions.gameAdded',
+	event_created: 'xp.history.actions.eventCreated',
+	participant_joined: 'xp.history.actions.participantJoined',
 };
 
 @Component({
-	selector: "app-xp-history",
-	host: { class: "block" },
+	selector: 'app-xp-history',
+	host: { class: 'block' },
 	imports: [FaIconComponent, TranslocoDirective],
-	templateUrl: "./xp-history.html",
+	templateUrl: './xp-history.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class XpHistory {
@@ -66,24 +56,23 @@ export class XpHistory {
 		const diffMs = now - then;
 		const diffMin = Math.floor(diffMs / 60_000);
 
-		if (diffMin < 1)
-			return this.#transloco.translate("xp.history.timeAgo.justNow");
+		if (diffMin < 1) return this.#transloco.translate('xp.history.timeAgo.justNow');
 		if (diffMin < 60)
-			return this.#transloco.translate("xp.history.timeAgo.minutesAgo", {
+			return this.#transloco.translate('xp.history.timeAgo.minutesAgo', {
 				count: diffMin,
 			});
 		const diffHr = Math.floor(diffMin / 60);
 		if (diffHr < 24)
-			return this.#transloco.translate("xp.history.timeAgo.hoursAgo", {
+			return this.#transloco.translate('xp.history.timeAgo.hoursAgo', {
 				count: diffHr,
 			});
 		const diffDay = Math.floor(diffHr / 24);
 		if (diffDay < 30)
-			return this.#transloco.translate("xp.history.timeAgo.daysAgo", {
+			return this.#transloco.translate('xp.history.timeAgo.daysAgo', {
 				count: diffDay,
 			});
 		const diffMonth = Math.floor(diffDay / 30);
-		return this.#transloco.translate("xp.history.timeAgo.monthsAgo", {
+		return this.#transloco.translate('xp.history.timeAgo.monthsAgo', {
 			count: diffMonth,
 		});
 	}

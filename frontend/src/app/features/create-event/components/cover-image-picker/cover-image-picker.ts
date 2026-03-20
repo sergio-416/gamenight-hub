@@ -1,28 +1,16 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	effect,
-	input,
-	output,
-	signal,
-	untracked,
-} from "@angular/core";
-import { CdkTrapFocus } from "@angular/cdk/a11y";
-import { NgOptimizedImage } from "@angular/common";
-import { TranslocoDirective } from "@jsverse/transloco";
-import {
-	EVENT_COVERS,
-	getEventCoverPath,
-	type EventCoverSlug,
-} from "@gamenight-hub/shared";
+import { CdkTrapFocus } from '@angular/cdk/a11y';
+import { NgOptimizedImage } from '@angular/common';
+import { ChangeDetectionStrategy, Component, input, output, signal } from '@angular/core';
+import { EVENT_COVERS, type EventCoverSlug, getEventCoverPath } from '@gamenight-hub/shared';
+import { TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
-	selector: "app-cover-image-picker",
+	selector: 'app-cover-image-picker',
 	imports: [CdkTrapFocus, NgOptimizedImage, TranslocoDirective],
-	templateUrl: "./cover-image-picker.html",
+	templateUrl: './cover-image-picker.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
-		"(keydown.escape)": "close()",
+		'(keydown.escape)': 'close()',
 	},
 })
 export class CoverImagePicker {
@@ -37,17 +25,6 @@ export class CoverImagePicker {
 
 	readonly allCovers = EVENT_COVERS;
 	readonly getCoverPath = getEventCoverPath;
-
-	readonly #resetEffect = effect(() => {
-		const open = this.isOpen();
-		untracked(() => {
-			if (open) {
-				this.#internalSelection.set(
-					this.selectedSlug() as EventCoverSlug | undefined,
-				);
-			}
-		});
-	});
 
 	selectCover(slug: EventCoverSlug): void {
 		this.#internalSelection.set(slug);

@@ -1,1 +1,1 @@
-export { GamePicker } from "./game-picker";
+export { GamePicker } from './game-picker';

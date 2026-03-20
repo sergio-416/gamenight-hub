@@ -1,5 +1,5 @@
-import { pgTable } from "drizzle-orm/pg-core";
 import * as t from "drizzle-orm/pg-core";
+import { pgTable } from "drizzle-orm/pg-core";
 import { profiles } from "./profiles.js";
 import { xpActionEnum } from "./xp-profiles.js";
 

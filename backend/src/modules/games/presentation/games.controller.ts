@@ -20,10 +20,9 @@ import {
   Query,
   UseGuards,
 } from "@nestjs/common";
-import { z } from "zod";
 import { ApiOperation, ApiQuery, ApiTags } from "@nestjs/swagger";
 import { Throttle } from "@nestjs/throttler";
-// biome-ignore lint/style/useImportType: DI token needed at runtime
+import { z } from "zod";
 import { GamesService } from "../application/games.service.js";
 import type { UpdatePersonalFieldsDto } from "./dto/update-personal-fields.dto.js";
 import { UpdatePersonalFieldsSchema } from "./dto/update-personal-fields.dto.js";

@@ -12,27 +12,27 @@ import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { API_CONFIG } from "@core/config/api.config";
 import { AuthService } from "@core/services/auth";
 import {
-	ParticipantsService,
 	type Participant,
+	ParticipantsService,
 } from "@core/services/participants";
 import { ToastService } from "@core/services/toast";
-import { CoverImagePicker } from "@features/create-event/components/cover-image-picker";
-import { SimpleMapPreview } from "@shared/components/simple-map-preview/simple-map-preview";
 import type {
 	Event,
 	UpdateCalendarEvent,
 } from "@features/calendar/models/event.model";
 import { UpdateCalendarEventSchema } from "@features/calendar/models/event.model";
 import { EventsService } from "@features/calendar/services/events";
+import { CoverImagePicker } from "@features/create-event/components/cover-image-picker";
 import type { Location } from "@gamenight-hub/shared";
 import {
 	CATEGORY_META,
-	getEventCoverPath,
 	type EventCoverSlug,
+	getEventCoverPath,
 } from "@gamenight-hub/shared";
 import { TranslocoDirective, TranslocoService } from "@jsverse/transloco";
-import { map } from "rxjs";
+import { SimpleMapPreview } from "@shared/components/simple-map-preview/simple-map-preview";
 import { XpService } from "@shared/services/xp.service";
+import { map } from "rxjs";
 
 interface InfoPill {
 	label: string;
@@ -67,7 +67,9 @@ export class EventDetail {
 
 	readonly #id = toSignal(
 		this.#route.paramMap.pipe(map((params) => params.get("id") ?? "")),
-		{ initialValue: "" },
+		{
+			initialValue: "",
+		},
 	);
 
 	readonly eventResource = httpResource<Event>(() =>

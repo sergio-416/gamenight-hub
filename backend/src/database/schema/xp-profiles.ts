@@ -1,5 +1,5 @@
-import { pgEnum, pgTable } from "drizzle-orm/pg-core";
 import * as t from "drizzle-orm/pg-core";
+import { pgEnum, pgTable } from "drizzle-orm/pg-core";
 import { profiles } from "./profiles.js";
 
 export const xpActionEnum = pgEnum("xp_action", [

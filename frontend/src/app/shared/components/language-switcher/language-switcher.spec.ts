@@ -87,7 +87,7 @@ describe("LanguageSwitcher", () => {
 			(opt) => opt.getAttribute("aria-selected") === "true",
 		);
 		expect(active).toBeTruthy();
-		expect(active!.textContent).toContain("English");
+		expect(active?.textContent).toContain("English");
 	});
 
 	it("should switch language on option click", async () => {

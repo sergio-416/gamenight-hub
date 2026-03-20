@@ -1,5 +1,5 @@
-import { provideTranslocoTesting } from "@core/testing/transloco-testing";
 import { ThemeService } from "@core/services/theme.service";
+import { provideTranslocoTesting } from "@core/testing/transloco-testing";
 import { fireEvent, render, screen } from "@testing-library/angular";
 import { CvdSelector } from "./cvd-selector";
 
@@ -86,7 +86,7 @@ describe("CvdSelector", () => {
 			(opt) => opt.getAttribute("aria-selected") === "true",
 		);
 		expect(active).toBeTruthy();
-		expect(active!.classList.contains("text-emerald-400")).toBe(true);
+		expect(active?.classList.contains("text-emerald-400")).toBe(true);
 	});
 
 	it("should call setCvdMode on option click", async () => {

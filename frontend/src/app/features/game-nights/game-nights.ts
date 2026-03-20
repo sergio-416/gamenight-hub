@@ -3,7 +3,6 @@ import {
 	ChangeDetectionStrategy,
 	Component,
 	computed,
-	effect,
 	inject,
 	signal,
 	viewChild,
@@ -13,12 +12,6 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { API_CONFIG } from "@core/config/api.config";
 import { AuthService } from "@core/services/auth";
 import { ToastService } from "@core/services/toast";
-import {
-	EVENT_CATEGORIES,
-	type EventCategory,
-	type PaginatedResponse,
-} from "@gamenight-hub/shared";
-import { TranslocoDirective, TranslocoService } from "@jsverse/transloco";
 import { CategoryFilterBar } from "@game-nights/components/category-filter-bar/category-filter-bar";
 import { EventCard } from "@game-nights/components/event-card/event-card";
 import { GameNightsMap } from "@game-nights/components/map/map";
@@ -28,10 +21,17 @@ import type { EventWithParticipants } from "@game-nights/models/event-with-parti
 import type { Location } from "@game-nights/models/location.model";
 import { LocationsService } from "@game-nights/services/locations";
 import {
-	type FilterPresetKey,
 	computeDateRange,
+	type FilterPresetKey,
 	resolvePreset,
 } from "@game-nights/utils/date-range";
+import {
+	EVENT_CATEGORIES,
+	type EventCategory,
+	type PaginatedResponse,
+} from "@gamenight-hub/shared";
+import { TranslocoDirective, TranslocoService } from "@jsverse/transloco";
+
 type PaginatedLocations = PaginatedResponse<Location>;
 type PaginatedEvents = PaginatedResponse<EventWithParticipants>;
 
@@ -138,18 +138,6 @@ export class GameNights {
 		const id = this.selectedEventId();
 		if (!id) return null;
 		return this.events().find((e) => e.id === id) ?? null;
-	});
-
-	readonly #persistShowMap = effect(() => {
-		const value = this.showMap();
-		try {
-			localStorage.setItem("gameNights_showMap", String(value));
-		} catch {}
-	});
-
-	readonly #clearSelectionOnFilterChange = effect(() => {
-		this.events();
-		this.selectedEventId.set(null);
 	});
 
 	onMarkerClick(eventId: string): void {

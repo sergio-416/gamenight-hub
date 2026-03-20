@@ -9,11 +9,11 @@ import {
 } from "@angular/core";
 import { ActivatedRoute, RouterLink } from "@angular/router";
 import { API_CONFIG } from "@core/config/api.config";
-import { TranslocoDirective } from "@jsverse/transloco";
 import type {
 	PublicProfile,
 	PublicProfileGamesResponse,
 } from "@gamenight-hub/shared";
+import { TranslocoDirective } from "@jsverse/transloco";
 
 const TAB = {
 	ALL: "all",

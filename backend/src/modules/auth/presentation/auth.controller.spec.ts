@@ -1,5 +1,5 @@
-import { AuthController } from "@auth/presentation/auth.controller";
 import { AuthService } from "@auth/application/auth.service";
+import { AuthController } from "@auth/presentation/auth.controller";
 import { EmailService } from "@modules/email/application/email.service";
 import { Test, type TestingModule } from "@nestjs/testing";
 

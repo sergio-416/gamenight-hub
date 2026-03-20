@@ -4,6 +4,7 @@ import { DB_TOKEN, type DrizzleDb } from "@database/database.module.js";
 import { events } from "@database/schema/events.js";
 import { games } from "@database/schema/games.js";
 import { locations } from "@database/schema/locations.js";
+import type { SelectProfile } from "@database/schema/profiles.js";
 import { profiles } from "@database/schema/profiles.js";
 import type { UpdateProfileDto } from "@gamenight-hub/shared";
 import {
@@ -15,10 +16,8 @@ import {
   Logger,
   NotFoundException,
 } from "@nestjs/common";
-// biome-ignore lint/style/useImportType: DI token needed at runtime
 import { EventEmitter2 } from "@nestjs/event-emitter";
 import { and, count, eq, isNull, ne } from "drizzle-orm";
-import type { SelectProfile } from "@database/schema/profiles.js";
 
 const NAME_CHANGE_COOLDOWN_DAYS = 30;
 

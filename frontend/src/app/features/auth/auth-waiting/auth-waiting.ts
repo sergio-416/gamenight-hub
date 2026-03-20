@@ -7,8 +7,8 @@ import {
 	signal,
 } from "@angular/core";
 import { RouterLink } from "@angular/router";
-import { TranslocoDirective } from "@jsverse/transloco";
 import { AuthService } from "@core/services/auth";
+import { TranslocoDirective } from "@jsverse/transloco";
 
 @Component({
 	selector: "app-auth-waiting",

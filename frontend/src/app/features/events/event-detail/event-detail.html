@@ -1,7 +1,9 @@
 <ng-container *transloco="let t; read: 'events'">
 	@if (loading()) {
 	<div class="flex justify-center py-20">
-		<p class="text-sm text-on-surface-dim" aria-live="polite">{{ t('loading') }}</p>
+		<p class="text-sm text-on-surface-dim" aria-live="polite">
+			{{ t('loading') }}
+		</p>
 	</div>
 	} @else if (eventResource.error()) {
 	<div class="mx-auto max-w-2xl px-4 py-10">
@@ -216,7 +218,9 @@
 					</p>
 				</div>
 				} @if (isOwner()) {
-				<div class="rounded-xl border border-border bg-surface-raised p-6 shadow-sm">
+				<div
+					class="rounded-xl border border-border bg-surface-raised p-6 shadow-sm"
+				>
 					<div class="mb-4 flex items-center gap-2">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -322,7 +326,9 @@
 						</div>
 
 						<div>
-							<label class="mb-1 block text-sm font-medium text-on-surface-strong">
+							<label
+								class="mb-1 block text-sm font-medium text-on-surface-strong"
+							>
 								{{ t('edit.coverImageLabel') }}
 							</label>
 							<div class="flex items-center gap-3">
@@ -557,9 +563,13 @@
 								{{ t('location') }}
 							</h3>
 						</div>
-						<p class="text-sm font-medium text-on-surface-strong">{{ loc.name }}</p>
+						<p class="text-sm font-medium text-on-surface-strong">
+							{{ loc.name }}
+						</p>
 						@if (loc.address) {
-						<p class="mt-0.5 text-sm text-on-surface-muted">{{ loc.address }}</p>
+						<p class="mt-0.5 text-sm text-on-surface-muted">
+							{{ loc.address }}
+						</p>
 						} @if (loc.postalCode) {
 						<p class="mt-0.5 text-xs text-on-surface-dim">
 							{{ t('postalCode', { code: loc.postalCode }) }}
@@ -573,7 +583,9 @@
 					}
 				</div>
 
-				<div class="rounded-xl border border-border bg-surface-raised p-5 shadow-sm">
+				<div
+					class="rounded-xl border border-border bg-surface-raised p-5 shadow-sm"
+				>
 					<h2 class="mb-4 text-sm font-semibold text-on-surface-strong">
 						{{ t('playersJoined') }} @if (event()?.maxPlayers) {
 						<span class="text-on-surface-dim"

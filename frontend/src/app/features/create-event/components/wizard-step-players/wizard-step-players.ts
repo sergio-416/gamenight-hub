@@ -1,18 +1,12 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	computed,
-	input,
-	output,
-} from "@angular/core";
-import { TranslocoDirective } from "@jsverse/transloco";
-import { PlayerStepper } from "../player-stepper/player-stepper";
-import { InfoTooltip } from "@shared/components/info-tooltip/info-tooltip";
+import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
+import { TranslocoDirective } from '@jsverse/transloco';
+import { InfoTooltip } from '@shared/components/info-tooltip/info-tooltip';
+import { PlayerStepper } from '../player-stepper/player-stepper';
 
 @Component({
-	selector: "app-wizard-step-players",
+	selector: 'app-wizard-step-players',
 	imports: [PlayerStepper, InfoTooltip, TranslocoDirective],
-	templateUrl: "./wizard-step-players.html",
+	templateUrl: './wizard-step-players.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WizardStepPlayers {

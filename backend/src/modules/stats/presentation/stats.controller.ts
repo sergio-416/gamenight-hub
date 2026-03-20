@@ -4,7 +4,6 @@ import { StoreOrganiserGuard } from "@auth/infrastructure/guards/store-organiser
 import { CurrentUser } from "@common/decorators/current-user.decorator.js";
 import { Controller, Get, Inject, UseGuards } from "@nestjs/common";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
-// biome-ignore lint/style/useImportType: DI token needed at runtime
 import { StatsService } from "../application/stats.service.js";
 
 @ApiTags("Stats")

@@ -61,7 +61,7 @@ async function bootstrap() {
     credentials: true,
   });
 
-  if (process.env["ENABLE_SWAGGER"] === "true") {
+  if (process.env.ENABLE_SWAGGER === "true") {
     const config = new DocumentBuilder()
       .setTitle("GameNight Hub API")
       .setDescription("REST API for the GameNight Hub application")

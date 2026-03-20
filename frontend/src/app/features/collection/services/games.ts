@@ -1,5 +1,5 @@
 import { HttpClient, httpResource } from "@angular/common/http";
-import { Injectable, computed, inject } from "@angular/core";
+import { computed, Injectable, inject } from "@angular/core";
 import { API_CONFIG } from "@core/config/api.config";
 import type { Observable } from "rxjs";
 import type {
@@ -33,7 +33,9 @@ export class GamesService {
 	search(query: string): Observable<GameSearchResult[]> {
 		return this.#http.get<GameSearchResult[]>(
 			`${API_URL}${API_CONFIG.endpoints.search}`,
-			{ params: { query } },
+			{
+				params: { query },
+			},
 		);
 	}
 

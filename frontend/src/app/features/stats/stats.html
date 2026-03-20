@@ -139,7 +139,9 @@
 		} @if (!statsResource.isLoading() && !statsResource.error() &&
 		statsResource.hasValue() && totalGames() === 0) {
 		<div class="empty-state py-8 text-center">
-			<p class="text-on-surface-medium">{{ t('collection.emptyState.title') }}</p>
+			<p class="text-on-surface-medium">
+				{{ t('collection.emptyState.title') }}
+			</p>
 			<p class="text-sm text-on-surface-muted">
 				{{ t('collection.emptyState.subtitle') }}
 			</p>

@@ -1,17 +1,12 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	input,
-	output,
-} from "@angular/core";
-import { TranslocoDirective } from "@jsverse/transloco";
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
-	selector: "app-collection-header",
+	selector: 'app-collection-header',
 	imports: [TranslocoDirective],
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	host: { class: "block" },
-	templateUrl: "./collection-header.html",
+	host: { class: 'block' },
+	templateUrl: './collection-header.html',
 })
 export class CollectionHeader {
 	totalGames = input(0);

@@ -1,8 +1,8 @@
 import {
+	afterNextRender,
 	ChangeDetectionStrategy,
 	Component,
 	DestroyRef,
-	afterNextRender,
 	inject,
 	signal,
 } from "@angular/core";
@@ -40,11 +40,11 @@ import { TranslocoDirective } from "@jsverse/transloco";
 			</svg>
 
 			<h1 class="text-2xl font-bold text-on-surface-strong">
-				{{ t('pwa.offline.title') }}
+				{{ t("pwa.offline.title") }}
 			</h1>
 
 			<p class="text-center text-on-surface-muted max-w-md">
-				{{ t('pwa.offline.message') }}
+				{{ t("pwa.offline.message") }}
 			</p>
 
 			<button
@@ -53,7 +53,7 @@ import { TranslocoDirective } from "@jsverse/transloco";
 				(click)="retry()"
 				class="rounded-lg bg-emerald-500 px-6 py-3 font-semibold text-white transition-colors hover:bg-emerald-600 active:bg-emerald-700"
 			>
-				{{ t('pwa.offline.retry') }}
+				{{ t("pwa.offline.retry") }}
 			</button>
 		</div>
 	`,

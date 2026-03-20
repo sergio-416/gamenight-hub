@@ -1,5 +1,6 @@
 import { FirebaseAuthGuard } from "@auth/infrastructure/guards/firebase-auth.guard.js";
 import { CurrentUser } from "@common/decorators/current-user.decorator.js";
+import { ERROR_CODE } from "@common/error-codes";
 import { ZodValidationPipe } from "@common/pipes/zod-validation.pipe.js";
 import {
   Body,
@@ -16,14 +17,10 @@ import {
   UseGuards,
 } from "@nestjs/common";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
-import { ERROR_CODE } from "@common/error-codes";
-// biome-ignore lint/style/useImportType: DI token needed at runtime
-import { ProfileService } from "../application/profile.service.js";
-// biome-ignore lint/style/useImportType: DI token needed at runtime
 import { GamesService } from "../../games/application/games.service.js";
-// biome-ignore lint/style/useImportType: DI token needed at runtime
 import { XpService } from "../../xp/application/xp.service.js";
 import { toPublicProfile } from "../application/profile.sanitiser.js";
+import { ProfileService } from "../application/profile.service.js";
 import type { UpdateProfileDto } from "./dto/update-profile.dto.js";
 import { UpdateProfileSchema } from "./dto/update-profile.dto.js";
 

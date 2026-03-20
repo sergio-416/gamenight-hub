@@ -5,9 +5,9 @@ import {
 	viewChild,
 } from "@angular/core";
 import { Router } from "@angular/router";
+import { GamesService } from "@collection/services/games";
 import { AuthService } from "@core/services/auth";
 import { ToastService } from "@core/services/toast";
-import { GamesService } from "@collection/services/games";
 import { CollectionUnauthenticated } from "./components/collection-unauthenticated/collection-unauthenticated";
 import { GameList } from "./components/game-list/game-list";
 

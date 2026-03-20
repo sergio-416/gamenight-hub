@@ -1,12 +1,10 @@
-// biome-ignore lint/style/useImportType: DI token needed at runtime
 import { AuthService } from "@auth/application/auth.service.js";
+import { WebSocketAuthGuard } from "@auth/infrastructure/guards/websocket-auth.guard.js";
 import type {
   EventCreatedPayload,
   LocationCreatedPayload,
 } from "@gamenight-hub/shared";
 import { Inject, Logger, UseGuards } from "@nestjs/common";
-// biome-ignore lint/style/useImportType: DI token needed at runtime
-import { WebSocketAuthGuard } from "@auth/infrastructure/guards/websocket-auth.guard.js";
 import { OnEvent } from "@nestjs/event-emitter";
 import {
   MessageBody,
@@ -25,7 +23,7 @@ import type { Server, Socket } from "socket.io";
       origin: string | undefined,
       callback: (err: Error | null, allow?: boolean) => void
     ) => {
-      const allowed = (process.env["FRONTEND_URL"] ?? "http://localhost:4200")
+      const allowed = (process.env.FRONTEND_URL ?? "http://localhost:4200")
         .split(",")
         .map((s) => s.trim());
       callback(null, !origin || allowed.includes(origin));
@@ -48,7 +46,7 @@ export class NotificationsGateway
   }
 
   async handleConnection(client: Socket) {
-    const frontendUrl = process.env["FRONTEND_URL"] ?? "http://localhost:4200";
+    const frontendUrl = process.env.FRONTEND_URL ?? "http://localhost:4200";
     const origin = client.handshake.headers.origin;
     if (origin && origin !== frontendUrl) {
       this.#logger.warn(

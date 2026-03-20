@@ -1,5 +1,4 @@
 import type { AuthUser } from "@auth/domain/interfaces/auth-user.interface";
-// biome-ignore lint/style/useImportType: DI token needed at runtime
 import { FirebaseAdminProvider } from "@auth/infrastructure/firebase/firebase-admin.provider";
 import { ERROR_CODE } from "@common/error-codes";
 import {
@@ -8,7 +7,6 @@ import {
   Logger,
   UnauthorizedException,
 } from "@nestjs/common";
-// biome-ignore lint/style/useImportType: DI token needed at runtime
 import { ConfigService } from "@nestjs/config";
 
 @Injectable()
@@ -56,8 +54,8 @@ export class AuthService {
         uid: decoded.uid,
         email: decoded.email || "",
         emailVerified: decoded.email_verified ?? false,
-        role: decoded["role"] ?? "user",
-        userType: decoded["userType"] ?? "regular",
+        role: decoded.role ?? "user",
+        userType: decoded.userType ?? "regular",
       };
     } catch (error) {
       this.#logger.error("Token verification failed", error);

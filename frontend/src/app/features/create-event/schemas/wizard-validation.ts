@@ -1,5 +1,5 @@
-import { z } from "zod";
 import { EventCategorySchema } from "@gamenight-hub/shared";
+import { z } from "zod";
 
 export const StepGameSchema = z.object({
 	title: z.string().min(1, "Title is required").max(100),

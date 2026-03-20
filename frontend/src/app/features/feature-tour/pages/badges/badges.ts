@@ -1,18 +1,13 @@
-import { ChangeDetectionStrategy, Component } from "@angular/core";
-import { TranslocoDirective } from "@jsverse/transloco";
-import { FaIconComponent } from "@fortawesome/angular-fontawesome";
-import {
-	faMedal,
-	faRocket,
-	faDice,
-	faBoxOpen,
-} from "@fortawesome/free-solid-svg-icons";
-import { FeaturePageLayout } from "../../components/feature-page-layout/feature-page-layout";
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { faBoxOpen, faDice, faMedal, faRocket } from '@fortawesome/free-solid-svg-icons';
+import { TranslocoDirective } from '@jsverse/transloco';
+import { FeaturePageLayout } from '../../components/feature-page-layout/feature-page-layout';
 
 @Component({
-	selector: "app-badges",
+	selector: 'app-badges',
 	imports: [FeaturePageLayout, FaIconComponent, TranslocoDirective],
-	templateUrl: "./badges.html",
+	templateUrl: './badges.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Badges {

@@ -1,5 +1,5 @@
 import { HttpClient, httpResource } from "@angular/common/http";
-import { Injectable, computed, inject, signal } from "@angular/core";
+import { computed, Injectable, inject, signal } from "@angular/core";
 import { API_CONFIG } from "@core/config/api.config";
 import { AuthService } from "@core/services/auth";
 import type {
@@ -40,7 +40,9 @@ export class XpService {
 	getHistory(page: number, limit: number) {
 		return this.#http.get<XpHistoryResponse>(
 			`${this.#base}${API_CONFIG.endpoints.xpHistory}`,
-			{ params: { page, limit } },
+			{
+				params: { page, limit },
+			},
 		);
 	}
 

@@ -22,7 +22,9 @@
 		</div>
 		}
 		<div class="min-w-0 flex-1">
-			<p class="truncate text-sm font-medium text-on-surface">{{ game.name }}</p>
+			<p class="truncate text-sm font-medium text-on-surface">
+				{{ game.name }}
+			</p>
 			@if (game.categories?.length) {
 			<div class="flex flex-wrap gap-1 mt-0.5">
 				@for (cat of game.categories!.slice(0, 3); track cat) {

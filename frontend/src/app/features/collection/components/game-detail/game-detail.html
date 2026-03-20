@@ -15,7 +15,8 @@
 			viewBox="0 0 24 24"
 			stroke="currentColor"
 			stroke-width="2"
-		 aria-hidden="true">
+			aria-hidden="true"
+		>
 			<path
 				stroke-linecap="round"
 				stroke-linejoin="round"
@@ -84,7 +85,8 @@
 						viewBox="0 0 24 24"
 						stroke="currentColor"
 						stroke-width="1.5"
-					 aria-hidden="true">
+						aria-hidden="true"
+					>
 						<path
 							stroke-linecap="round"
 							stroke-linejoin="round"
@@ -111,7 +113,8 @@
 					viewBox="0 0 24 24"
 					stroke="currentColor"
 					stroke-width="2"
-				 aria-hidden="true">
+					aria-hidden="true"
+				>
 					<path
 						stroke-linecap="round"
 						stroke-linejoin="round"
@@ -146,7 +149,8 @@
 					viewBox="0 0 24 24"
 					stroke="currentColor"
 					stroke-width="2"
-				 aria-hidden="true">
+					aria-hidden="true"
+				>
 					<path
 						stroke-linecap="round"
 						stroke-linejoin="round"
@@ -161,7 +165,9 @@
 		<div class="flex flex-col gap-5">
 			<h1 class="text-3xl font-extrabold text-on-surface">{{ game.name }}</h1>
 
-			<div class="flex flex-wrap items-center gap-2 text-sm text-on-surface-muted">
+			<div
+				class="flex flex-wrap items-center gap-2 text-sm text-on-surface-muted"
+			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					class="h-4 w-4"
@@ -169,7 +175,8 @@
 					viewBox="0 0 24 24"
 					stroke="currentColor"
 					stroke-width="2"
-				 aria-hidden="true">
+					aria-hidden="true"
+				>
 					<path
 						stroke-linecap="round"
 						stroke-linejoin="round"
@@ -186,7 +193,8 @@
 					viewBox="0 0 24 24"
 					stroke="currentColor"
 					stroke-width="2"
-				 aria-hidden="true">
+					aria-hidden="true"
+				>
 					<path
 						stroke-linecap="round"
 						stroke-linejoin="round"
@@ -202,7 +210,8 @@
 					viewBox="0 0 24 24"
 					stroke="currentColor"
 					stroke-width="2"
-				 aria-hidden="true">
+					aria-hidden="true"
+				>
 					<path
 						stroke-linecap="round"
 						stroke-linejoin="round"
@@ -232,7 +241,9 @@
 		<h2 class="mb-4 text-xl font-bold text-on-surface">
 			{{ t('gameDetail.aboutTheGame') }}
 		</h2>
-		<p class="whitespace-pre-wrap text-sm leading-relaxed text-on-surface-muted">
+		<p
+			class="whitespace-pre-wrap text-sm leading-relaxed text-on-surface-muted"
+		>
 			{{ game.description }}
 		</p>
 	</section>
@@ -243,13 +254,17 @@
 	>
 		@if (game.publisher) {
 		<span
-			><strong class="text-on-surface-strong">{{ t('gameDetail.publisher') }}</strong>
+			><strong class="text-on-surface-strong"
+				>{{ t('gameDetail.publisher') }}</strong
+			>
 			{{ game.publisher }}</span
 		>
 		} @if (game.yearPublished) {
 		<span
-			><strong class="text-on-surface-strong">{{ t('gameDetail.year') }}</strong> {{
-			game.yearPublished }}</span
+			><strong class="text-on-surface-strong"
+				>{{ t('gameDetail.year') }}</strong
+			>
+			{{ game.yearPublished }}</span
 		>
 		}
 		<span

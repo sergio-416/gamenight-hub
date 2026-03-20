@@ -2,7 +2,6 @@ import type { LocationCreatedEvent } from "@locations/domain/events/location-cre
 import { Inject, Injectable } from "@nestjs/common";
 import { OnEvent } from "@nestjs/event-emitter";
 import { EVENT_COLORS } from "../constants/event-colors.js";
-// biome-ignore lint/style/useImportType: DI token needed at runtime
 import { EventsService } from "../events.service.js";
 
 @Injectable()

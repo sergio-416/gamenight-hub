@@ -1,1 +1,1 @@
-export { CoverImagePicker } from "./cover-image-picker";
+export { CoverImagePicker } from './cover-image-picker';

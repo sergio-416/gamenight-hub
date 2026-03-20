@@ -10,27 +10,26 @@ import {
 } from "@angular/core";
 import { toSignal } from "@angular/core/rxjs-interop";
 import { Router, RouterLink } from "@angular/router";
-import { AuthService } from "@core/services/auth";
 import { API_CONFIG } from "@core/config/api.config";
+import { AuthService } from "@core/services/auth";
 import { ProfileService } from "@core/services/profile.service";
 import { ToastService } from "@core/services/toast";
 import type {
-	GameSearchResult,
 	Game,
+	GameSearchResult,
 } from "@features/collection/models/game.model";
-import { LEVEL_TIERS } from "@shared/models/xp.model";
 import { GamesService } from "@features/collection/services/games";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import {
 	faBullseye,
 	faCakeCandles,
-	faFire,
 	faCalendarDays,
 	faCheck,
 	faCheckSquare,
 	faChessKnight,
 	faDiceD6,
 	faEnvelope,
+	faFire,
 	faGlobe,
 	faLocationDot,
 	faLock,
@@ -56,8 +55,9 @@ import { TranslocoDirective } from "@jsverse/transloco";
 import { ConfirmDialog } from "@shared/components/confirm-dialog/confirm-dialog";
 import { DeleteAccountDialog } from "@shared/components/delete-account-dialog/delete-account-dialog";
 import { XpHistory } from "@shared/components/xp-history/xp-history";
+import { LEVEL_TIERS } from "@shared/models/xp.model";
 import { XpService } from "@shared/services/xp.service";
-import { Subject, debounceTime, distinctUntilChanged } from "rxjs";
+import { debounceTime, distinctUntilChanged, Subject } from "rxjs";
 
 type PaginatedGames = PaginatedResponse<Game>;
 

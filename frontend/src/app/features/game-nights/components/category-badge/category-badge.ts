@@ -1,16 +1,11 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	computed,
-	input,
-} from "@angular/core";
-import { CATEGORY_META, type EventCategory } from "@gamenight-hub/shared";
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { CATEGORY_META, type EventCategory } from '@gamenight-hub/shared';
 
 @Component({
-	selector: "app-category-badge",
-	host: { class: "block" },
+	selector: 'app-category-badge',
+	host: { class: 'block' },
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	templateUrl: "./category-badge.html",
+	templateUrl: './category-badge.html',
 })
 export class CategoryBadge {
 	readonly category = input.required<EventCategory | null | undefined>();

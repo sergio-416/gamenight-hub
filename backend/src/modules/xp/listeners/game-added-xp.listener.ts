@@ -1,6 +1,5 @@
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { OnEvent } from "@nestjs/event-emitter";
-// biome-ignore lint/style/useImportType: DI token needed at runtime
 import { XpService } from "../application/xp.service.js";
 import type { GameAddedEvent } from "../domain/xp-events.js";
 

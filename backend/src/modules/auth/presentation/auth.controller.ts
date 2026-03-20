@@ -1,8 +1,8 @@
-import { ZodValidationPipe } from "@common/pipes/zod-validation.pipe";
 import { AuthService } from "@auth/application/auth.service";
-import { EmailService } from "@modules/email/application/email.service";
+import { ZodValidationPipe } from "@common/pipes/zod-validation.pipe";
 import type { MagicLinkRequest } from "@gamenight-hub/shared";
 import { MagicLinkRequestSchema } from "@gamenight-hub/shared";
+import { EmailService } from "@modules/email/application/email.service";
 import {
   Body,
   Controller,

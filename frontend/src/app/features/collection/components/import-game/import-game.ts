@@ -5,20 +5,20 @@ import {
 	effect,
 	inject,
 	signal,
-} from "@angular/core";
-import { toSignal } from "@angular/core/rxjs-interop";
-import { ActivatedRoute, Router, RouterLink } from "@angular/router";
-import type { GameSearchResult } from "@collection/models/game.model";
-import { GamesService } from "@collection/services/games";
-import { ToastService } from "@core/services/toast";
-import { TranslocoDirective } from "@jsverse/transloco";
-import { SearchInput } from "@shared/components/search-input/search-input";
-import { XpService } from "@shared/services/xp.service";
+} from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import type { GameSearchResult } from '@collection/models/game.model';
+import { GamesService } from '@collection/services/games';
+import { ToastService } from '@core/services/toast';
+import { TranslocoDirective } from '@jsverse/transloco';
+import { SearchInput } from '@shared/components/search-input/search-input';
+import { XpService } from '@shared/services/xp.service';
 
 @Component({
-	selector: "app-import-game",
+	selector: 'app-import-game',
 	imports: [RouterLink, SearchInput, TranslocoDirective],
-	templateUrl: "./import-game.html",
+	templateUrl: './import-game.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ImportGame {
@@ -31,9 +31,9 @@ export class ImportGame {
 	readonly #queryParams = toSignal(this.#route.queryParams, {
 		initialValue: {} as Record<string, string>,
 	});
-	readonly #initialQ = computed(() => this.#queryParams()["q"] ?? "");
+	readonly #initialQ = computed(() => this.#queryParams()['q'] ?? '');
 
-	readonly #searchQuery = signal("");
+	readonly #searchQuery = signal('');
 	readonly #searchResults = signal<GameSearchResult[]>([]);
 	readonly #loading = signal(false);
 	readonly #importingBggId = signal<number | null>(null);
@@ -66,7 +66,7 @@ export class ImportGame {
 	}
 
 	goBack(): void {
-		this.#router.navigate(["/collection"]);
+		this.#router.navigate(['/collection']);
 	}
 
 	search(): void {
@@ -78,7 +78,7 @@ export class ImportGame {
 
 		this.#router.navigate([], {
 			queryParams: { q: this.#searchQuery() },
-			queryParamsHandling: "merge",
+			queryParamsHandling: 'merge',
 		});
 
 		this.#gamesService.search(this.#searchQuery()).subscribe({
@@ -87,7 +87,7 @@ export class ImportGame {
 				this.#loading.set(false);
 			},
 			error: () => {
-				this.#error.set("Failed to search games. Please try again.");
+				this.#error.set('Failed to search games. Please try again.');
 				this.#loading.set(false);
 			},
 		});
@@ -97,15 +97,15 @@ export class ImportGame {
 		this.#importingBggId.set(bggId);
 		this.#error.set(null);
 
-		this.#gamesService.importGame(bggId, { status: "owned" }).subscribe({
+		this.#gamesService.importGame(bggId, { status: 'owned' }).subscribe({
 			next: () => {
-				this.#toastService.success("Game imported successfully!");
+				this.#toastService.success('Game imported successfully!');
 				this.#gamesService.reloadOwnedBggIds();
 				this.#importingBggId.set(null);
 				this.#xpService.refreshProfile();
 			},
 			error: () => {
-				this.#error.set("Failed to import game. Please try again.");
+				this.#error.set('Failed to import game. Please try again.');
 				this.#importingBggId.set(null);
 			},
 		});

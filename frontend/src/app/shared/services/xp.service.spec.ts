@@ -3,10 +3,10 @@ import {
 	HttpTestingController,
 	provideHttpClientTesting,
 } from "@angular/common/http/testing";
+import { signal } from "@angular/core";
 import { TestBed } from "@angular/core/testing";
 import { API_CONFIG } from "@core/config/api.config";
 import { AuthService } from "@core/services/auth";
-import { signal } from "@angular/core";
 import { XpService } from "./xp.service";
 
 const baseUrl = API_CONFIG.baseUrl;
@@ -36,7 +36,11 @@ describe("XpService", () => {
 	});
 
 	afterEach(() => {
-		httpMock.match(() => true).forEach((r) => r.flush({}));
+		httpMock
+			.match(() => true)
+			.forEach((r) => {
+				r.flush({});
+			});
 		vi.clearAllMocks();
 	});
 

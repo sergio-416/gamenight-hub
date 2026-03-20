@@ -1,1 +1,1 @@
-export { WizardStepIndicator } from "./wizard-step-indicator";
+export { WizardStepIndicator } from './wizard-step-indicator';

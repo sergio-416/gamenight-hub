@@ -1,8 +1,5 @@
-import type { FindEventsDto } from "../presentation/dto/event-filter.dto.js";
-import {
-  type PaginatedResponse,
-  paginate,
-} from "@common/dto/pagination.dto.js";
+import { paginate } from "@common/dto/pagination.dto.js";
+import { ERROR_CODE } from "@common/error-codes";
 import { DB_TOKEN, type DrizzleDb } from "@database/database.module.js";
 import {
   events,
@@ -13,7 +10,6 @@ import { games } from "@database/schema/games.js";
 import { locations } from "@database/schema/locations.js";
 import { participants } from "@database/schema/participants.js";
 import { profiles } from "@database/schema/profiles.js";
-import { ERROR_CODE } from "@common/error-codes";
 import {
   BadRequestException,
   ForbiddenException,
@@ -22,7 +18,6 @@ import {
   Logger,
   NotFoundException,
 } from "@nestjs/common";
-// biome-ignore lint/style/useImportType: DI token needed at runtime
 import { EventEmitter2 } from "@nestjs/event-emitter";
 import {
   and,
@@ -35,13 +30,13 @@ import {
   lte,
   sql,
 } from "drizzle-orm";
-// biome-ignore lint/style/useImportType: DI token needed at runtime
 import { LocationsService } from "../../locations/application/locations.service.js";
 import { EventCreatedEvent } from "../domain/events/event-created.event.js";
 import type {
   CreateEventDto,
   UpdateEventDto,
 } from "../presentation/dto/create-event.dto.js";
+import type { FindEventsDto } from "../presentation/dto/event-filter.dto.js";
 
 @Injectable()
 export class EventsService {

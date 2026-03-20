@@ -1,10 +1,10 @@
 import {
 	ChangeDetectionStrategy,
 	Component,
+	type ElementRef,
 	input,
 	output,
 	viewChild,
-	type ElementRef,
 } from "@angular/core";
 
 @Component({

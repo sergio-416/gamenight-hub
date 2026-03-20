@@ -5,4 +5,4 @@ export type {
 export {
   CreateCalendarEventSchema as CreateEventSchema,
   UpdateCalendarEventSchema as UpdateEventSchema,
-} from "@gamenight-hub/shared";
+} from "@gamenight-hub/shared";

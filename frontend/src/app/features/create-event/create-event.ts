@@ -6,12 +6,11 @@ import {
 	signal,
 } from "@angular/core";
 import { Router } from "@angular/router";
-import { TranslocoDirective, TranslocoService } from "@jsverse/transloco";
-
 import { ToastService } from "@core/services/toast";
-import { XpService } from "@shared/services/xp.service";
 import { CreateCalendarEventSchema } from "@features/calendar/models/event.model";
 import { EventsService } from "@features/calendar/services/events";
+import { TranslocoDirective, TranslocoService } from "@jsverse/transloco";
+import { XpService } from "@shared/services/xp.service";
 
 import { WizardMapPanel } from "./components/wizard-map-panel/wizard-map-panel";
 import { WizardNavigation } from "./components/wizard-navigation/wizard-navigation";

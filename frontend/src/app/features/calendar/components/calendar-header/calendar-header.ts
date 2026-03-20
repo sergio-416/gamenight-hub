@@ -1,19 +1,12 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	computed,
-	inject,
-	input,
-	output,
-} from "@angular/core";
-import { TranslocoDirective, TranslocoService } from "@jsverse/transloco";
-import { toSignal } from "@angular/core/rxjs-interop";
+import { ChangeDetectionStrategy, Component, computed, inject, input, output } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 
 @Component({
-	selector: "app-calendar-header",
-	host: { class: "block" },
+	selector: 'app-calendar-header',
+	host: { class: 'block' },
 	imports: [TranslocoDirective],
-	templateUrl: "./calendar-header.html",
+	templateUrl: './calendar-header.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalendarHeader {
@@ -31,11 +24,9 @@ export class CalendarHeader {
 	readonly subtitle = computed(() => {
 		this.#lang();
 		const count = this.eventCount();
-		if (count === 0)
-			return this.#transloco.translate("calendar.header.noEvents");
-		if (count === 1)
-			return this.#transloco.translate("calendar.header.eventCount", { count });
-		return this.#transloco.translate("calendar.header.eventCountPlural", {
+		if (count === 0) return this.#transloco.translate('calendar.header.noEvents');
+		if (count === 1) return this.#transloco.translate('calendar.header.eventCount', { count });
+		return this.#transloco.translate('calendar.header.eventCountPlural', {
 			count,
 		});
 	});

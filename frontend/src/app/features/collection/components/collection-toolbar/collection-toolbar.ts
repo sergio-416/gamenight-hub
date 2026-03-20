@@ -1,30 +1,25 @@
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { CategoryFilterPill } from '@collection/components/category-filter-pill/category-filter-pill';
+import { PlayerCountFilterPill } from '@collection/components/player-count-filter-pill/player-count-filter-pill';
+import { SortPill } from '@collection/components/sort-pill/sort-pill';
 import {
-	ChangeDetectionStrategy,
-	Component,
-	input,
-	output,
-} from "@angular/core";
-import {
-	VIEW_MODE,
-	type ViewMode,
 	type PlayerCountFilter,
 	type SortMode,
-} from "@collection/models/collection.types";
-import { SearchInput } from "@shared/components/search-input/search-input";
-import { PlayerCountFilterPill } from "@collection/components/player-count-filter-pill/player-count-filter-pill";
-import { CategoryFilterPill } from "@collection/components/category-filter-pill/category-filter-pill";
-import { SortPill } from "@collection/components/sort-pill/sort-pill";
+	VIEW_MODE,
+	type ViewMode,
+} from '@collection/models/collection.types';
+import { SearchInput } from '@shared/components/search-input/search-input';
 
 @Component({
-	selector: "app-collection-toolbar",
+	selector: 'app-collection-toolbar',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	host: { class: "block" },
+	host: { class: 'block' },
 	imports: [SearchInput, PlayerCountFilterPill, CategoryFilterPill, SortPill],
-	templateUrl: "./collection-toolbar.html",
+	templateUrl: './collection-toolbar.html',
 })
 export class CollectionToolbar {
 	viewMode = input<ViewMode>(VIEW_MODE.GRID);
-	searchQuery = input("");
+	searchQuery = input('');
 	playerFilter = input.required<PlayerCountFilter>();
 	categoryFilter = input.required<string>();
 	sortMode = input.required<SortMode>();

@@ -1,7 +1,7 @@
-import { inject } from "@angular/core";
-import { type CanActivateFn, Router } from "@angular/router";
-import { AuthService } from "@core/services/auth";
-import type { UserRole } from "@gamenight-hub/shared";
+import { inject } from '@angular/core';
+import { type CanActivateFn, Router } from '@angular/router';
+import { AuthService } from '@core/services/auth';
+import type { UserRole } from '@gamenight-hub/shared';
 
 export const roleGuard = (requiredRole: UserRole): CanActivateFn => {
 	return () => {
@@ -9,15 +9,15 @@ export const roleGuard = (requiredRole: UserRole): CanActivateFn => {
 		const router = inject(Router);
 
 		if (!authService.isLoggedIn()) {
-			return router.createUrlTree(["/login"]);
+			return router.createUrlTree(['/login']);
 		}
 
 		const role = authService.userRole();
 
-		if (role === "admin" || role === requiredRole) {
+		if (role === 'admin' || role === requiredRole) {
 			return true;
 		}
 
-		return router.createUrlTree(["/home"]);
+		return router.createUrlTree(['/home']);
 	};
 };

@@ -4,10 +4,9 @@ import { ZodValidationPipe } from "@common/pipes/zod-validation.pipe.js";
 import { Controller, Get, Inject, Query, UseGuards } from "@nestjs/common";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
 import {
-  xpHistoryQuerySchema,
   type XpHistoryQuery,
+  xpHistoryQuerySchema,
 } from "../../../shared/schemas/xp.schema.js";
-// biome-ignore lint/style/useImportType: DI token needed at runtime
 import { XpService } from "../application/xp.service.js";
 
 @ApiTags("XP")

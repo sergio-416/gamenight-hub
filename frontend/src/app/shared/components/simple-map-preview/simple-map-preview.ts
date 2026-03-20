@@ -4,7 +4,6 @@ import {
 	Component,
 	computed,
 	type ElementRef,
-	effect,
 	InjectionToken,
 	inject,
 	input,
@@ -54,22 +53,6 @@ export class SimpleMapPreview implements AfterViewInit, OnDestroy {
 	readonly hasLocation = computed(
 		() => this.latitude() != null && this.longitude() != null,
 	);
-
-	readonly #locationEffect = effect(() => {
-		const lat = this.latitude();
-		const lng = this.longitude();
-		const name = this.locationName();
-
-		if (!this.#map) return;
-
-		if (lat != null && lng != null) {
-			this.#map.setView([lat, lng], PIN_ZOOM);
-			this.#updateMarker(lat, lng, name);
-		} else {
-			this.#removeMarker();
-			this.#map.setView(DEFAULT_CENTER, DEFAULT_ZOOM);
-		}
-	});
 
 	ngAfterViewInit(): void {
 		this.#initMap();

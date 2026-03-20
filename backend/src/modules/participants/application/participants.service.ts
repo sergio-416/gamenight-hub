@@ -10,7 +10,6 @@ import {
   Logger,
   NotFoundException,
 } from "@nestjs/common";
-// biome-ignore lint/style/useImportType: DI token needed at runtime
 import { EventEmitter2 } from "@nestjs/event-emitter";
 import { and, count, eq, isNull } from "drizzle-orm";
 import { ParticipantJoinedEvent } from "../../xp/domain/xp-events.js";

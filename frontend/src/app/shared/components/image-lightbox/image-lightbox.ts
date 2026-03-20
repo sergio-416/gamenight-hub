@@ -1,11 +1,11 @@
 import { A11yModule } from "@angular/cdk/a11y";
+import { NgOptimizedImage } from "@angular/common";
 import {
 	ChangeDetectionStrategy,
 	Component,
 	input,
 	output,
 } from "@angular/core";
-import { NgOptimizedImage } from "@angular/common";
 
 @Component({
 	selector: "app-image-lightbox",

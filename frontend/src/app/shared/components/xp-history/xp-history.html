@@ -1,12 +1,16 @@
 <ng-container *transloco="let t">
 	@if (transactions().length === 0 && !loading()) {
-	<div class="rounded-xl border border-border bg-surface-raised p-8 text-center">
+	<div
+		class="rounded-xl border border-border bg-surface-raised p-8 text-center"
+	>
 		<p class="text-sm text-on-surface-dim" data-testid="xp-empty-state">
 			{{ t('xp.history.emptyState') }}
 		</p>
 	</div>
 	} @else {
-	<div class="overflow-hidden rounded-xl border border-border bg-surface-raised">
+	<div
+		class="overflow-hidden rounded-xl border border-border bg-surface-raised"
+	>
 		<div class="divide-y divide-slate-100">
 			@for (tx of transactions(); track tx.id) {
 			<div

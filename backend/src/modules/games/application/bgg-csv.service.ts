@@ -1,3 +1,4 @@
+import { existsSync } from "node:fs";
 import * as fs from "node:fs/promises";
 import * as path from "node:path";
 import { DB_TOKEN, type DrizzleDb } from "@database/database.module.js";
@@ -66,8 +67,8 @@ export class BggCsvService implements OnModuleInit {
             _term: string,
             storedFields: Record<string, unknown>
           ) => {
-            const rank = parseInt(storedFields["rank"] as string, 10);
-            if (isNaN(rank) || rank <= 0) return 0.5;
+            const rank = parseInt(storedFields.rank as string, 10);
+            if (Number.isNaN(rank) || rank <= 0) return 0.5;
             return 1 + 10 / Math.log2(rank + 2);
           },
         },
@@ -123,13 +124,13 @@ export class BggCsvService implements OnModuleInit {
     }
   }
 
-  #getCsvPath(): string {
+  #getCsvPath(): string | undefined {
     const candidates = [
       path.resolve(process.cwd(), "data", "bgg_ranks_02_26.csv"),
       path.resolve(process.cwd(), "backend", "data", "bgg_ranks_02_26.csv"),
     ];
 
-    return candidates[0];
+    return candidates.find((c) => existsSync(c));
   }
 
   #mapCsvRecordToBggGameRank(
@@ -194,6 +195,11 @@ export class BggCsvService implements OnModuleInit {
 
   async #loadCsvData(): Promise<void> {
     const csvPath = this.#getCsvPath();
+
+    if (!csvPath) {
+      this.#logger.warn("BGG CSV file not found in any candidate path");
+      return;
+    }
 
     try {
       const csvContent = await fs.readFile(csvPath, "utf-8");

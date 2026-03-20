@@ -113,7 +113,9 @@
 								<span class="text-2xl font-bold">{{ xp.level }}</span>
 							</div>
 							<div class="min-w-0 flex-1">
-								<p class="font-semibold text-on-surface-strong">{{ xp.levelTitle }}</p>
+								<p class="font-semibold text-on-surface-strong">
+									{{ xp.levelTitle }}
+								</p>
 								<p class="text-xs text-on-surface-dim">
 									{{ t('xpProgress', { current: xp.xpTotal, next: xp.nextLevelXp
 									}) }}
@@ -336,7 +338,9 @@
 									/>
 									}
 									<div class="min-w-0 flex-1">
-										<p class="line-clamp-1 text-sm font-medium text-on-surface-strong">
+										<p
+											class="line-clamp-1 text-sm font-medium text-on-surface-strong"
+										>
 											{{ game.name }}
 										</p>
 										@if (game.yearPublished) {
@@ -402,7 +406,9 @@
 									/>
 									}
 									<div class="min-w-0 flex-1">
-										<p class="line-clamp-1 text-sm font-medium text-on-surface-strong">
+										<p
+											class="line-clamp-1 text-sm font-medium text-on-surface-strong"
+										>
 											{{ game.name }}
 										</p>
 										@if (game.yearPublished) {
@@ -437,7 +443,9 @@
 						}
 						<div class="space-y-3">
 							@if (p.email) {
-							<div class="flex items-center gap-3 text-sm text-on-surface-medium">
+							<div
+								class="flex items-center gap-3 text-sm text-on-surface-medium"
+							>
 								<fa-icon
 									[icon]="iconEnvelope"
 									class="w-4 shrink-0 text-emerald-500"
@@ -445,7 +453,9 @@
 								<span class="min-w-0 truncate">{{ p.email }}</span>
 							</div>
 							} @if (p.mobilePhone) {
-							<div class="flex items-center gap-3 text-sm text-on-surface-medium">
+							<div
+								class="flex items-center gap-3 text-sm text-on-surface-medium"
+							>
 								<fa-icon
 									[icon]="iconPhone"
 									class="w-4 shrink-0 text-emerald-500"
@@ -453,7 +463,9 @@
 								<span>{{ p.mobilePhone }}</span>
 							</div>
 							} @if (p.birthday) {
-							<div class="flex items-center gap-3 text-sm text-on-surface-medium">
+							<div
+								class="flex items-center gap-3 text-sm text-on-surface-medium"
+							>
 								<fa-icon
 									[icon]="iconBirthday"
 									class="w-4 shrink-0 text-emerald-500"

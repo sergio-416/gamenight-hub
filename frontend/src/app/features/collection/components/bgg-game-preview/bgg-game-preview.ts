@@ -1,35 +1,23 @@
-import { NgOptimizedImage } from "@angular/common";
-import { HttpErrorResponse, httpResource } from "@angular/common/http";
-import {
-	ChangeDetectionStrategy,
-	Component,
-	computed,
-	inject,
-	signal,
-} from "@angular/core";
-import { toSignal } from "@angular/core/rxjs-interop";
-import { ActivatedRoute, RouterLink } from "@angular/router";
-import type { BggGameDetail } from "@collection/models/game.model";
-import { GamesService } from "@collection/services/games";
-import { API_CONFIG } from "@core/config/api.config";
-import { ToastService } from "@core/services/toast";
-import { ImageLightbox } from "@shared/components/image-lightbox";
-import { map } from "rxjs";
-import { TranslocoDirective } from "@jsverse/transloco";
-import { GameTagSection } from "../game-tag-section/game-tag-section";
+import { NgOptimizedImage } from '@angular/common';
+import { HttpErrorResponse, httpResource } from '@angular/common/http';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import type { BggGameDetail } from '@collection/models/game.model';
+import { GamesService } from '@collection/services/games';
+import { API_CONFIG } from '@core/config/api.config';
+import { ToastService } from '@core/services/toast';
+import { TranslocoDirective } from '@jsverse/transloco';
+import { ImageLightbox } from '@shared/components/image-lightbox';
+import { map } from 'rxjs';
+import { GameTagSection } from '../game-tag-section/game-tag-section';
 
 @Component({
-	selector: "app-bgg-game-preview",
-	host: { class: "block" },
-	templateUrl: "./bgg-game-preview.html",
+	selector: 'app-bgg-game-preview',
+	host: { class: 'block' },
+	templateUrl: './bgg-game-preview.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	imports: [
-		NgOptimizedImage,
-		RouterLink,
-		ImageLightbox,
-		GameTagSection,
-		TranslocoDirective,
-	],
+	imports: [NgOptimizedImage, RouterLink, ImageLightbox, GameTagSection, TranslocoDirective],
 })
 export class BggGamePreview {
 	readonly #route = inject(ActivatedRoute);
@@ -40,12 +28,12 @@ export class BggGamePreview {
 	readonly #queryParams = toSignal(this.#route.queryParams, {
 		initialValue: {} as Record<string, string>,
 	});
-	readonly backQuery = computed(() => this.#queryParams()["q"] ?? "");
+	readonly backQuery = computed(() => this.#queryParams()['q'] ?? '');
 
 	readonly #bggId = toSignal(
-		this.#route.paramMap.pipe(map((params) => params.get("bggId") ?? "")),
+		this.#route.paramMap.pipe(map((params) => params.get('bggId') ?? '')),
 		{
-			initialValue: "",
+			initialValue: '',
 		},
 	);
 
@@ -62,9 +50,7 @@ export class BggGamePreview {
 	readonly error = computed(() => this.gameResource.error());
 
 	readonly lightboxOpen = signal(false);
-	readonly heroSrc = computed(
-		() => this.game()?.imageUrl ?? this.game()?.thumbnailUrl ?? null,
-	);
+	readonly heroSrc = computed(() => this.game()?.imageUrl ?? this.game()?.thumbnailUrl ?? null);
 
 	readonly #manuallyImported = signal(false);
 	readonly imported = computed(() => {
@@ -88,21 +74,21 @@ export class BggGamePreview {
 
 		this.importing.set(true);
 
-		this.#gamesService.importGame(game.bggId, { status: "owned" }).subscribe({
+		this.#gamesService.importGame(game.bggId, { status: 'owned' }).subscribe({
 			next: () => {
 				this.#manuallyImported.set(true);
 				this.importing.set(false);
-				this.#toastService.success("Game added to your collection!");
+				this.#toastService.success('Game added to your collection!');
 			},
 			error: (err: unknown) => {
 				if (err instanceof HttpErrorResponse && err.status === 409) {
 					this.#manuallyImported.set(true);
 					this.importing.set(false);
-					this.#toastService.info("Game is already in your collection.");
+					this.#toastService.info('Game is already in your collection.');
 					return;
 				}
 				this.importing.set(false);
-				this.#toastService.error("Failed to import game. Please try again.");
+				this.#toastService.error('Failed to import game. Please try again.');
 			},
 		});
 	}

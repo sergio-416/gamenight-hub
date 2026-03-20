@@ -4,10 +4,10 @@ import {
 	inject,
 	type OnDestroy,
 } from "@angular/core";
+import { environment } from "@env";
 import type { EventCreatedPayload } from "@gamenight-hub/shared";
-import { io, type Socket } from "socket.io-client";
-import { environment } from "../../../environments/environment";
 import { TranslocoService } from "@jsverse/transloco";
+import { io, type Socket } from "socket.io-client";
 import { ToastService } from "./toast";
 
 export type SocketFactory = typeof io;

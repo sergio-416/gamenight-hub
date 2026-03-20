@@ -16,8 +16,8 @@
 		"format": "biome format --write ."
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.4.7",
-		"@oxc-project/runtime": "^0.120.0"
+		"@biomejs/biome": "^2.4.8",
+		"@oxc-project/runtime": "^0.121.0"
 	},
 	"overrides": {
 		"vite": "^8.0.0"

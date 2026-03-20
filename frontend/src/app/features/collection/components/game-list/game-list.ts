@@ -1,36 +1,29 @@
-import { NgOptimizedImage } from "@angular/common";
-import { httpResource } from "@angular/common/http";
-import {
-	ChangeDetectionStrategy,
-	Component,
-	computed,
-	input,
-	output,
-	signal,
-} from "@angular/core";
-import { API_CONFIG } from "@core/config/api.config";
-import { TranslocoDirective } from "@jsverse/transloco";
-import type { PaginatedResponse } from "@gamenight-hub/shared";
-import { ConfirmDialog } from "@shared/components/confirm-dialog/confirm-dialog";
-import type { Game } from "@collection/models/game.model";
-import { CollectionHeader } from "@collection/components/collection-header/collection-header";
-import { CollectionToolbar } from "@collection/components/collection-toolbar/collection-toolbar";
-import { GameCard } from "@collection/components/game-card/game-card";
-import { AddToLibraryCta } from "@collection/components/add-to-library-cta/add-to-library-cta";
+import { NgOptimizedImage } from '@angular/common';
+import { httpResource } from '@angular/common/http';
+import { ChangeDetectionStrategy, Component, computed, input, output, signal } from '@angular/core';
+import { AddToLibraryCta } from '@collection/components/add-to-library-cta/add-to-library-cta';
+import { CollectionHeader } from '@collection/components/collection-header/collection-header';
+import { CollectionToolbar } from '@collection/components/collection-toolbar/collection-toolbar';
+import { GameCard } from '@collection/components/game-card/game-card';
 import {
 	PLAYER_COUNT_FILTER,
+	type PlayerCountFilter,
 	SORT_MODE,
-	VIEW_MODE,
+	type SortMode,
 	STATUS_COLORS,
 	STATUS_LABELS,
-	type PlayerCountFilter,
-	type SortMode,
+	VIEW_MODE,
 	type ViewMode,
-} from "@collection/models/collection.types";
+} from '@collection/models/collection.types';
+import type { Game } from '@collection/models/game.model';
+import { API_CONFIG } from '@core/config/api.config';
+import type { PaginatedResponse } from '@gamenight-hub/shared';
+import { TranslocoDirective } from '@jsverse/transloco';
+import { ConfirmDialog } from '@shared/components/confirm-dialog/confirm-dialog';
 
 type PaginatedGames = PaginatedResponse<Game>;
 
-const VIEW_MODE_STORAGE_KEY = "collection-view-mode";
+const VIEW_MODE_STORAGE_KEY = 'collection-view-mode';
 const PAGE_SIZE = 12;
 
 function readViewMode(): ViewMode {
@@ -46,8 +39,8 @@ function readViewMode(): ViewMode {
 }
 
 @Component({
-	selector: "app-game-list",
-	host: { class: "block" },
+	selector: 'app-game-list',
+	host: { class: 'block' },
 	imports: [
 		NgOptimizedImage,
 		TranslocoDirective,
@@ -58,7 +51,7 @@ function readViewMode(): ViewMode {
 		AddToLibraryCta,
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	templateUrl: "./game-list.html",
+	templateUrl: './game-list.html',
 })
 export class GameList {
 	readonly #apiUrl = API_CONFIG.baseUrl;
@@ -77,9 +70,9 @@ export class GameList {
 	readonly totalGames = computed(() => this.games().length);
 
 	readonly #playerFilter = signal<PlayerCountFilter>(PLAYER_COUNT_FILTER.ANY);
-	readonly #categoryFilter = signal<string>("all");
+	readonly #categoryFilter = signal<string>('all');
 	readonly #sortMode = signal<SortMode>(SORT_MODE.NAME_ASC);
-	readonly #searchQuery = signal("");
+	readonly #searchQuery = signal('');
 	readonly #viewMode = signal<ViewMode>(readViewMode());
 	readonly #displayedCount = signal(PAGE_SIZE);
 
@@ -104,16 +97,16 @@ export class GameList {
 
 		const pf = this.#playerFilter();
 		if (pf !== PLAYER_COUNT_FILTER.ANY) {
-			const count = pf === "6+" ? 6 : Number(pf);
+			const count = pf === '6+' ? 6 : Number(pf);
 			result = result.filter((g) => {
 				const min = g.minPlayers ?? 1;
 				const max = g.maxPlayers ?? 99;
-				return pf === "6+" ? max >= 6 : count >= min && count <= max;
+				return pf === '6+' ? max >= 6 : count >= min && count <= max;
 			});
 		}
 
 		const cf = this.#categoryFilter();
-		if (cf !== "all") {
+		if (cf !== 'all') {
 			result = result.filter((g) => g.categories?.includes(cf));
 		}
 
@@ -150,18 +143,14 @@ export class GameList {
 		return result;
 	});
 
-	readonly displayedGames = computed(() =>
-		this.filteredGames().slice(0, this.#displayedCount()),
-	);
+	readonly displayedGames = computed(() => this.filteredGames().slice(0, this.#displayedCount()));
 
-	readonly hasMore = computed(
-		() => this.filteredGames().length > this.#displayedCount(),
-	);
+	readonly hasMore = computed(() => this.filteredGames().length > this.#displayedCount());
 
 	readonly hasActiveFilters = computed(
 		() =>
 			this.#playerFilter() !== PLAYER_COUNT_FILTER.ANY ||
-			this.#categoryFilter() !== "all" ||
+			this.#categoryFilter() !== 'all' ||
 			this.#sortMode() !== SORT_MODE.NAME_ASC ||
 			this.#searchQuery().trim().length > 0,
 	);

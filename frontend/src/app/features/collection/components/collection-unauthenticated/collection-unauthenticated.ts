@@ -1,17 +1,13 @@
-import { ChangeDetectionStrategy, Component } from "@angular/core";
-import { RouterLink } from "@angular/router";
-import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import { TranslocoDirective } from "@jsverse/transloco";
-import {
-	faChartBar,
-	faDiceD20,
-	faRobot,
-} from "@fortawesome/free-solid-svg-icons";
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faChartBar, faDiceD20, faRobot } from '@fortawesome/free-solid-svg-icons';
+import { TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
-	selector: "app-collection-unauthenticated",
+	selector: 'app-collection-unauthenticated',
 	imports: [RouterLink, FontAwesomeModule, TranslocoDirective],
-	templateUrl: "./collection-unauthenticated.html",
+	templateUrl: './collection-unauthenticated.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CollectionUnauthenticated {

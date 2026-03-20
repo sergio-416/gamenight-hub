@@ -173,8 +173,20 @@ describe("LocationsController", () => {
   describe("GET /locations/bounds", () => {
     it("should return locations within bounds without createdBy", async () => {
       const locationsInBounds = [
-        { id: "1", name: "Cafe Inside", latitude: 41.38, longitude: 2.15, createdBy: "user-1" },
-        { id: "2", name: "Store Inside", latitude: 41.4, longitude: 2.18, createdBy: "user-2" },
+        {
+          id: "1",
+          name: "Cafe Inside",
+          latitude: 41.38,
+          longitude: 2.15,
+          createdBy: "user-1",
+        },
+        {
+          id: "2",
+          name: "Store Inside",
+          latitude: 41.4,
+          longitude: 2.18,
+          createdBy: "user-2",
+        },
       ];
       mockLocationsService.findInBounds.mockResolvedValue(locationsInBounds);
 

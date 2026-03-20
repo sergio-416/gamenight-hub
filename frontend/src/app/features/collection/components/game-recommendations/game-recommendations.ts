@@ -1,19 +1,14 @@
-import { NgOptimizedImage } from "@angular/common";
-import {
-	ChangeDetectionStrategy,
-	Component,
-	input,
-	output,
-} from "@angular/core";
-import { TranslocoDirective } from "@jsverse/transloco";
-import type { Game } from "../../models/game.model";
+import { NgOptimizedImage } from '@angular/common';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { TranslocoDirective } from '@jsverse/transloco';
+import type { Game } from '../../models/game.model';
 
 @Component({
-	selector: "app-game-recommendations",
-	host: { class: "block" },
+	selector: 'app-game-recommendations',
+	host: { class: 'block' },
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [NgOptimizedImage, TranslocoDirective],
-	templateUrl: "./game-recommendations.html",
+	templateUrl: './game-recommendations.html',
 })
 export class GameRecommendations {
 	recommendations = input<Game[]>([]);

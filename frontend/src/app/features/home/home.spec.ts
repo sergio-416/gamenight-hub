@@ -1,9 +1,9 @@
-import { provideRouter } from "@angular/router";
-import { render, screen } from "@testing-library/angular";
-import { provideTranslocoTesting } from "@core/testing/transloco-testing";
-import { Home } from "./home";
-import { AuthService } from "@core/services/auth";
 import { signal } from "@angular/core";
+import { provideRouter } from "@angular/router";
+import { AuthService } from "@core/services/auth";
+import { provideTranslocoTesting } from "@core/testing/transloco-testing";
+import { render, screen } from "@testing-library/angular";
+import { Home } from "./home";
 
 function createMockAuthService(loggedIn = false) {
 	return {

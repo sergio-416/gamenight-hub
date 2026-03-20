@@ -8,7 +8,6 @@ import {
 } from "@angular/core";
 import { ActivatedRoute, RouterLink } from "@angular/router";
 import { API_CONFIG } from "@core/config/api.config";
-import { LEVEL_TIERS } from "@shared/models/xp.model";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import {
 	faBullseye,
@@ -28,6 +27,7 @@ import type {
 	PublicXpResponse,
 } from "@gamenight-hub/shared";
 import { TranslocoDirective } from "@jsverse/transloco";
+import { LEVEL_TIERS } from "@shared/models/xp.model";
 
 @Component({
 	selector: "app-profile-public",

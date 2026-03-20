@@ -1,17 +1,11 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	computed,
-	input,
-	output,
-} from "@angular/core";
-import { TranslocoDirective } from "@jsverse/transloco";
+import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
+import { TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
-	selector: "app-player-stepper",
-	host: { class: "block" },
+	selector: 'app-player-stepper',
+	host: { class: 'block' },
 	imports: [TranslocoDirective],
-	templateUrl: "./player-stepper.html",
+	templateUrl: './player-stepper.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlayerStepper {

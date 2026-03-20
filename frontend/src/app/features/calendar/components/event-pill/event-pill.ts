@@ -1,15 +1,10 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	input,
-	output,
-} from "@angular/core";
-import type { CalendarEvent } from "@gamenight-hub/shared";
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import type { CalendarEvent } from '@gamenight-hub/shared';
 
 @Component({
-	selector: "app-event-pill",
-	host: { class: "block" },
-	templateUrl: "./event-pill.html",
+	selector: 'app-event-pill',
+	host: { class: 'block' },
+	templateUrl: './event-pill.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EventPill {

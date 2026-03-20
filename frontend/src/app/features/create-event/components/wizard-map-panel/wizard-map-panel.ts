@@ -1,16 +1,11 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	computed,
-	input,
-} from "@angular/core";
-import { TranslocoDirective } from "@jsverse/transloco";
-import { SimpleMapPreview } from "@shared/components/simple-map-preview/simple-map-preview";
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { TranslocoDirective } from '@jsverse/transloco';
+import { SimpleMapPreview } from '@shared/components/simple-map-preview/simple-map-preview';
 
 @Component({
-	selector: "app-wizard-map-panel",
+	selector: 'app-wizard-map-panel',
 	imports: [SimpleMapPreview, TranslocoDirective],
-	templateUrl: "./wizard-map-panel.html",
+	templateUrl: './wizard-map-panel.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WizardMapPanel {

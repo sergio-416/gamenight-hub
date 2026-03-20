@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
-import { TranslocoDirective } from "@jsverse/transloco";
-import { PwaUpdateService } from "@core/services/pwa-update.service";
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { PwaUpdateService } from '@core/services/pwa-update.service';
+import { TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
-	selector: "app-update-banner",
-	host: { class: "block" },
+	selector: 'app-update-banner',
+	host: { class: 'block' },
 	imports: [TranslocoDirective],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `

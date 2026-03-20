@@ -1,1 +1,1 @@
-export { WizardNavigation } from "./wizard-navigation";
+export { WizardNavigation } from './wizard-navigation';

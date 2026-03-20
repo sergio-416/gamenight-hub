@@ -1,20 +1,18 @@
 import { DB_TOKEN, type DrizzleDb } from "@database/database.module.js";
 import {
-  xpProfiles,
   type SelectXpProfile,
+  xpProfiles,
 } from "@database/schema/xp-profiles.js";
 import { xpTransactions } from "@database/schema/xp-transactions.js";
+import { Inject, Injectable, Logger } from "@nestjs/common";
+import { EventEmitter2 } from "@nestjs/event-emitter";
+import { and, count, desc, eq, gte, sql } from "drizzle-orm";
 import type {
   XpAction,
   XpAwardResult,
   XpEventPayload,
   XpProfile,
 } from "../../../shared/types/xp.types.js";
-import { Inject, Injectable, Logger } from "@nestjs/common";
-// biome-ignore lint/style/useImportType: DI token needed at runtime
-import { EventEmitter2 } from "@nestjs/event-emitter";
-import { and, count, eq, gte, sql, desc } from "drizzle-orm";
-// biome-ignore lint/style/useImportType: DI token needed at runtime
 import { XpCalculatorService } from "../xp-calculator.service.js";
 
 function startOfDayUTC(date: Date): Date {

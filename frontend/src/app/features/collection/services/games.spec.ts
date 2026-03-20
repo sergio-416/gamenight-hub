@@ -31,7 +31,11 @@ describe("GamesService", () => {
 	});
 
 	afterEach(() => {
-		httpMock.match(() => true).forEach((r) => r.flush([]));
+		httpMock
+			.match(() => true)
+			.forEach((r) => {
+				r.flush([]);
+			});
 		httpMock.verify();
 	});
 

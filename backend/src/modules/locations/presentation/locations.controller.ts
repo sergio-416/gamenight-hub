@@ -20,7 +20,6 @@ import {
 } from "@nestjs/common";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
 import type { NominatimResult } from "../application/locations.service.js";
-// biome-ignore lint/style/useImportType: DI token needed at runtime
 import { LocationsService } from "../application/locations.service.js";
 import type {
   CreateLocationWithEventDto,

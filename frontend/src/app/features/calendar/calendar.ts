@@ -7,7 +7,6 @@ import {
 	signal,
 } from "@angular/core";
 import { Router } from "@angular/router";
-import { TranslocoDirective, translateSignal } from "@jsverse/transloco";
 import { CalendarGrid } from "@calendar/components/calendar-grid/calendar-grid";
 import { CalendarHeader } from "@calendar/components/calendar-header/calendar-header";
 import { EventDetailsStrip } from "@calendar/components/event-details-strip/event-details-strip";
@@ -20,6 +19,7 @@ import {
 } from "@calendar/utils/calendar-dates";
 import { API_CONFIG } from "@core/config/api.config";
 import type { CalendarEvent, PaginatedResponse } from "@gamenight-hub/shared";
+import { TranslocoDirective, translateSignal } from "@jsverse/transloco";
 
 @Component({
 	selector: "app-calendar",

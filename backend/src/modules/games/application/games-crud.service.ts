@@ -1,12 +1,12 @@
 import type { PaginationDto } from "@common/dto/pagination.dto.js";
 import { ERROR_CODE } from "@common/error-codes";
 import { DB_TOKEN, type DrizzleDb } from "@database/database.module.js";
+import { bggGames } from "@database/schema/bgg-games.js";
 import {
   games,
   type InsertGame,
   type SelectGame,
 } from "@database/schema/games.js";
-import { bggGames } from "@database/schema/bgg-games.js";
 import type { GameStatus } from "@gamenight-hub/shared";
 import { Inject, Injectable, NotFoundException } from "@nestjs/common";
 import { and, count, eq, isNull } from "drizzle-orm";

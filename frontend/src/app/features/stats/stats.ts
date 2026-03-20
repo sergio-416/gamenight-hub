@@ -9,9 +9,9 @@ import { API_CONFIG } from "@core/config/api.config";
 import { AuthService } from "@core/services/auth";
 import type { AdminStatsDto, OrganiserStatsDto } from "@gamenight-hub/shared";
 import { TranslocoDirective, TranslocoService } from "@jsverse/transloco";
-import { ChartComponent } from "ng-apexcharts";
 import { StatsUnauthenticated } from "@stats/components/stats-unauthenticated/stats-unauthenticated";
 import type { ChartOptions, StatsData } from "@stats/stats.types";
+import { ChartComponent } from "ng-apexcharts";
 
 @Component({
 	selector: "app-stats",
