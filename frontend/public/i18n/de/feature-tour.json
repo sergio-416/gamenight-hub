@@ -41,15 +41,15 @@
 			"title": "So verdienst du XP",
 			"hostGameNight": {
 				"title": "Veranstalte einen Spieleabend",
-				"description": "Organisiere ein Event und bringe Spieler zusammen — verdiene <1>+50 XP</1> für jeden Abend, den du veranstaltest"
+				"description": "Organisiere ein Event und bringe Spieler zusammen — verdiene <strong>+50 XP</strong> für jeden Abend, den du veranstaltest"
 			},
 			"rsvp": {
 				"title": "Melde dich für ein Event an",
-				"description": "Zeig dich und spiel mit — jede bestätigte Teilnahme bringt dir <1>+10 XP</1>"
+				"description": "Zeig dich und spiel mit — jede bestätigte Teilnahme bringt dir <strong>+10 XP</strong>"
 			},
 			"completeProfile": {
 				"title": "Vervollständige dein Profil",
-				"description": "Trage deine Vorlieben, Sammlung und Standort einmalig ein und erhalte <1>+25 XP</1>"
+				"description": "Trage deine Vorlieben, Sammlung und Standort einmalig ein und erhalte <strong>+25 XP</strong>"
 			}
 		},
 		"milestones": {

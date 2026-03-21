@@ -41,15 +41,15 @@
 			"title": "Com guanyes XP",
 			"hostGameNight": {
 				"title": "Organitza una nit de joc",
-				"description": "Organitza un esdeveniment i reuneix jugadors — guanya <1>+50 XP</1> per cada nit que organitzis"
+				"description": "Organitza un esdeveniment i reuneix jugadors — guanya <strong>+50 XP</strong> per cada nit que organitzis"
 			},
 			"rsvp": {
 				"title": "Confirma assistència a un esdeveniment",
-				"description": "Vine i juga — cada assistència confirmada suma <1>+10 XP</1> al teu total"
+				"description": "Vine i juga — cada assistència confirmada suma <strong>+10 XP</strong> al teu total"
 			},
 			"completeProfile": {
 				"title": "Completa el teu perfil",
-				"description": "Omple les teves preferències, col·lecció i ubicació un cop i embutxaca't <1>+25 XP</1>"
+				"description": "Omple les teves preferències, col·lecció i ubicació un cop i embutxaca't <strong>+25 XP</strong>"
 			}
 		},
 		"milestones": {
