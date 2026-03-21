@@ -41,15 +41,15 @@
 			"title": "How you earn XP",
 			"hostGameNight": {
 				"title": "Host a game night",
-				"description": "Organise an event and bring players together — earn <strong>+50 XP</strong> for every night you host"
+				"description": "Organise an event and bring players together — earn {{xpAmount}} for every night you host"
 			},
 			"rsvp": {
 				"title": "RSVP to an event",
-				"description": "Show up and play — every confirmed attendance adds <strong>+10 XP</strong> to your total"
+				"description": "Show up and play — every confirmed attendance adds {{xpAmount}} to your total"
 			},
 			"completeProfile": {
 				"title": "Complete your profile",
-				"description": "Fill in your preferences, collection, and location once and pocket <strong>+25 XP</strong>"
+				"description": "Fill in your preferences, collection, and location once and pocket {{xpAmount}}"
 			}
 		},
 		"milestones": {
