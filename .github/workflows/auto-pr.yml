@@ -36,7 +36,7 @@ jobs:
         run: |
 
           # Check if a PR already exists for this branch
-          EXISTING=$(gh pr list --head "$BRANCH" --state open --json number --jq '.[0].number' 2>/dev/null || echo "")
+          EXISTING=$(gh pr list --head "$BRANCH" --state open --json number --jq '.[0].number // empty' 2>/dev/null || echo "")
 
           if [ -n "$EXISTING" ]; then
             echo "PR #$EXISTING already exists for $BRANCH — skipping creation."
