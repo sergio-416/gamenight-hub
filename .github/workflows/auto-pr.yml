@@ -48,12 +48,15 @@ jobs:
 
           # Build PR body from commit log
           COMMITS=$(git log origin/main..HEAD --pretty='- %s' --reverse)
-          BODY="## Changes
+          BODY=$(cat <<EOF
+## Changes
 
-          ${COMMITS}
+${COMMITS}
 
-          ---
-          *Auto-created from Claude Code session.*"
+---
+*Auto-created from Claude Code session.*
+EOF
+          )
 
           gh pr create \
             --title "$TITLE" \
