@@ -20,111 +20,14 @@ env:
   IMAGE_NAME: ${{ github.repository }}/backend
 
 jobs:
-  lint:
-    name: Lint & Format Check
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: ${{ env.BUN_VERSION }}
-
-      - uses: actions/cache@v4
-        with:
-          path: ~/.bun/install/cache
-          key: bun-${{ runner.os }}-${{ hashFiles('bun.lock') }}
-          restore-keys: bun-${{ runner.os }}-
-
-      - run: bun install --frozen-lockfile
-
-      - run: bun run lint
-
-  backend-test:
-    name: Backend Tests
-    runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:17-alpine
-        env:
-          POSTGRES_USER: gamenight
-          POSTGRES_PASSWORD: gamenight_test
-          POSTGRES_DB: gamenight_hub_test
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: ${{ env.BUN_VERSION }}
-
-      - uses: actions/cache@v4
-        with:
-          path: ~/.bun/install/cache
-          key: bun-${{ runner.os }}-${{ hashFiles('bun.lock') }}
-          restore-keys: bun-${{ runner.os }}-
-
-      - run: bun install --frozen-lockfile
-
-      - name: Run backend unit tests
-        working-directory: backend
-        env:
-          NODE_ENV: test
-          PORT: 3000
-          POSTGRES_URL: postgresql://gamenight:gamenight_test@localhost:5432/gamenight_hub_test
-          REDIS_URL: redis://localhost:6379
-          FIREBASE_PROJECT_ID: test-project
-          FIREBASE_CLIENT_EMAIL: test@test.iam.gserviceaccount.com
-          FIREBASE_PRIVATE_KEY: "-----BEGIN RSA PRIVATE KEY-----\nMIIEowIBAAKCAQEA\n-----END RSA PRIVATE KEY-----"
-          FRONTEND_URL: http://localhost:4200
-        run: bun run test
-
-      - name: Run backend E2E tests
-        working-directory: backend
-        env:
-          NODE_ENV: test
-          PORT: 3000
-          POSTGRES_URL: postgresql://gamenight:gamenight_test@localhost:5432/gamenight_hub_test
-          REDIS_URL: redis://localhost:6379
-          FIREBASE_PROJECT_ID: test-project
-          FIREBASE_CLIENT_EMAIL: test@test.iam.gserviceaccount.com
-          FIREBASE_PRIVATE_KEY: "-----BEGIN RSA PRIVATE KEY-----\nMIIEowIBAAKCAQEA\n-----END RSA PRIVATE KEY-----"
-          FRONTEND_URL: http://localhost:4200
-        run: bun run test:e2e
-
-  frontend-test:
-    name: Frontend Tests
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: ${{ env.BUN_VERSION }}
-
-      - uses: actions/cache@v4
-        with:
-          path: ~/.bun/install/cache
-          key: bun-${{ runner.os }}-${{ hashFiles('bun.lock') }}
-          restore-keys: bun-${{ runner.os }}-
-
-      - run: bun install --frozen-lockfile
-
-      - name: Run frontend unit tests
-        working-directory: frontend
-        run: bun run test --watch=false
+  ci:
+    name: CI
+    uses: ./.github/workflows/ci.yml
 
   build:
     name: Build & Push
     runs-on: ubuntu-latest
-    needs: [lint, backend-test, frontend-test]
+    needs: [ci]
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     permissions:
       contents: read
