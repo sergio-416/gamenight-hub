@@ -1,0 +1,163 @@
+name: Auto PR (Claude branches)
+
+on:
+  push:
+    branches: ["claude/**"]
+    paths-ignore:
+      - "**.md"
+      - "docs/**"
+      - ".vscode/**"
+
+concurrency:
+  group: auto-pr-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  BUN_VERSION: "1.3.9"
+
+jobs:
+  lint:
+    name: Lint & Format Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - uses: actions/cache@v4
+        with:
+          path: ~/.bun/install/cache
+          key: bun-${{ runner.os }}-${{ hashFiles('bun.lock') }}
+          restore-keys: bun-${{ runner.os }}-
+
+      - run: bun install --frozen-lockfile
+
+      - run: bun run lint
+
+  backend-test:
+    name: Backend Tests
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_USER: gamenight
+          POSTGRES_PASSWORD: gamenight_test
+          POSTGRES_DB: gamenight_hub_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - uses: actions/cache@v4
+        with:
+          path: ~/.bun/install/cache
+          key: bun-${{ runner.os }}-${{ hashFiles('bun.lock') }}
+          restore-keys: bun-${{ runner.os }}-
+
+      - run: bun install --frozen-lockfile
+
+      - name: Run backend unit tests
+        working-directory: backend
+        env:
+          NODE_ENV: test
+          PORT: 3000
+          POSTGRES_URL: postgresql://gamenight:gamenight_test@localhost:5432/gamenight_hub_test
+          REDIS_URL: redis://localhost:6379
+          FIREBASE_PROJECT_ID: test-project
+          FIREBASE_CLIENT_EMAIL: test@test.iam.gserviceaccount.com
+          FIREBASE_PRIVATE_KEY: "-----BEGIN RSA PRIVATE KEY-----\nMIIEowIBAAKCAQEA\n-----END RSA PRIVATE KEY-----"
+          FRONTEND_URL: http://localhost:4200
+        run: bun run test
+
+      - name: Run backend E2E tests
+        working-directory: backend
+        env:
+          NODE_ENV: test
+          PORT: 3000
+          POSTGRES_URL: postgresql://gamenight:gamenight_test@localhost:5432/gamenight_hub_test
+          REDIS_URL: redis://localhost:6379
+          FIREBASE_PROJECT_ID: test-project
+          FIREBASE_CLIENT_EMAIL: test@test.iam.gserviceaccount.com
+          FIREBASE_PRIVATE_KEY: "-----BEGIN RSA PRIVATE KEY-----\nMIIEowIBAAKCAQEA\n-----END RSA PRIVATE KEY-----"
+          FRONTEND_URL: http://localhost:4200
+        run: bun run test:e2e
+
+  frontend-test:
+    name: Frontend Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - uses: actions/cache@v4
+        with:
+          path: ~/.bun/install/cache
+          key: bun-${{ runner.os }}-${{ hashFiles('bun.lock') }}
+          restore-keys: bun-${{ runner.os }}-
+
+      - run: bun install --frozen-lockfile
+
+      - name: Run frontend unit tests
+        working-directory: frontend
+        run: bun run test --watch=false
+
+  create-pr:
+    name: Create Pull Request
+    runs-on: ubuntu-latest
+    needs: [lint, backend-test, frontend-test]
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create PR if none exists
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BRANCH="${{ github.ref_name }}"
+
+          # Check if a PR already exists for this branch
+          EXISTING=$(gh pr list --head "$BRANCH" --state open --json number --jq '.[0].number' 2>/dev/null || echo "")
+
+          if [ -n "$EXISTING" ]; then
+            echo "PR #$EXISTING already exists for $BRANCH — skipping creation."
+            echo "pr_url=$(gh pr view "$EXISTING" --json url --jq '.url')" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # Build PR title from latest commit
+          TITLE=$(git log -1 --pretty='%s')
+
+          # Build PR body from commit log
+          COMMITS=$(git log origin/main..HEAD --pretty='- %s' --reverse)
+          BODY="## Changes
+
+          ${COMMITS}
+
+          ---
+          *Auto-created from Claude Code session.*"
+
+          gh pr create \
+            --title "$TITLE" \
+            --body "$BODY" \
+            --base main \
+            --head "$BRANCH"
