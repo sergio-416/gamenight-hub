@@ -35,7 +35,6 @@ jobs:
           BRANCH: ${{ github.ref_name }}
         run: |
 
-          # Check if a PR already exists for this branch
           EXISTING=$(gh pr list --head "$BRANCH" --state open --json number --jq '.[0].number // empty' 2>/dev/null || echo "")
 
           if [ -n "$EXISTING" ]; then
@@ -43,10 +42,7 @@ jobs:
             exit 0
           fi
 
-          # Build PR title from latest commit
           TITLE=$(git log -1 --pretty='%s')
-
-          # Build PR body from commit log
           COMMITS=$(git log origin/main..HEAD --pretty='- %s' --reverse)
           BODY=$(cat <<EOF
 ## Changes
