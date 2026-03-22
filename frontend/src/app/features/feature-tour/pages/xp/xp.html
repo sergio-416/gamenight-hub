@@ -38,7 +38,8 @@
 							<h3 class="mb-4 text-xl font-medium text-on-surface-strong">
 								{{ t('xp.howYouEarn.hostGameNight.title') }}
 							</h3>
-							<p>{{ t('xp.howYouEarn.hostGameNight.description') }}</p>
+							@let hostParts = t('xp.howYouEarn.hostGameNight.description', { xpAmount: '||' }).split('||');
+							<p>{{ hostParts[0] }}<strong>+50 XP</strong>{{ hostParts[1] }}</p>
 						</div>
 					</div>
 					<div
@@ -55,7 +56,8 @@
 							<h3 class="mb-4 text-xl font-medium text-on-surface-strong">
 								{{ t('xp.howYouEarn.rsvp.title') }}
 							</h3>
-							<p>{{ t('xp.howYouEarn.rsvp.description') }}</p>
+							@let rsvpParts = t('xp.howYouEarn.rsvp.description', { xpAmount: '||' }).split('||');
+							<p>{{ rsvpParts[0] }}<strong>+10 XP</strong>{{ rsvpParts[1] }}</p>
 						</div>
 					</div>
 					<div
@@ -72,7 +74,8 @@
 							<h3 class="mb-4 text-xl font-medium text-on-surface-strong">
 								{{ t('xp.howYouEarn.completeProfile.title') }}
 							</h3>
-							<p>{{ t('xp.howYouEarn.completeProfile.description') }}</p>
+							@let profileParts = t('xp.howYouEarn.completeProfile.description', { xpAmount: '||' }).split('||');
+							<p>{{ profileParts[0] }}<strong>+25 XP</strong>{{ profileParts[1] }}</p>
 						</div>
 					</div>
 				</div>

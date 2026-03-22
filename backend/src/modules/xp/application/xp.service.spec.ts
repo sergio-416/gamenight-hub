@@ -62,7 +62,12 @@ describe('XpService', () => {
 	let mockEventEmitter: { emit: ReturnType<typeof vi.fn> };
 	let _calculator: XpCalculatorService;
 
+	afterEach(() => {
+		vi.useRealTimers();
+	});
+
 	beforeEach(async () => {
+		vi.useFakeTimers({ now: new Date('2026-03-17T12:00:00Z') });
 		vi.clearAllMocks();
 		const baseMockDb = buildMockDb({
 			select: [makeProfile()],
