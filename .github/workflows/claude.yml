@@ -23,11 +23,11 @@ jobs:
       )
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       pull-requests: write
       issues: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
       # Pin claude-code-action to v1 commit SHA for supply-chain safety
       # To update: git ls-remote https://github.com/anthropics/claude-code-action.git refs/tags/v1
