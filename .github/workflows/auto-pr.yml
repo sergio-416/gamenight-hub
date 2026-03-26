@@ -44,15 +44,13 @@ jobs:
 
           TITLE=$(git log -1 --pretty='%s')
           COMMITS=$(git log origin/main..HEAD --pretty='- %s' --reverse)
-          BODY=$(cat <<EOF
-## Changes
 
-${COMMITS}
+          BODY="## Changes
 
----
-*Auto-created from Claude Code session.*
-EOF
-          )
+          ${COMMITS}
+
+          ---
+          *Auto-created from Claude Code session.*"
 
           gh pr create \
             --title "$TITLE" \
