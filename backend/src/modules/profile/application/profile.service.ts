@@ -112,9 +112,8 @@ export class ProfileService {
 			}
 		}
 
-		let nameChangedAt: Date | undefined;
-
 		const isSubmittingName = dto.firstName !== undefined || dto.lastName !== undefined;
+		let nameChangedAt: Date | undefined;
 
 		if (isSubmittingName) {
 			const current = await this.getMyProfile(uid);

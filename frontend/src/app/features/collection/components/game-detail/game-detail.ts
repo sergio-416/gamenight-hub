@@ -81,6 +81,16 @@ export class GameDetail {
 		return status !== 'owned' && status !== 'want_to_play';
 	});
 
+	readonly removeDialogOpen = signal(false);
+
+	readonly removeDialogMessage = computed(() => {
+		const game = this.game();
+		if (!game) return '';
+		return this.#transloco.translate('collection.removeConfirmMessage', {
+			name: game.name,
+		});
+	});
+
 	readonly statusLabel = computed(() => {
 		this.#lang();
 		const status = this.game()?.status ?? '';
@@ -113,16 +123,6 @@ export class GameDetail {
 	onAddClick(): void {
 		this.#router.navigate(['/collection/import']);
 	}
-
-	readonly removeDialogOpen = signal(false);
-
-	readonly removeDialogMessage = computed(() => {
-		const game = this.game();
-		if (!game) return '';
-		return this.#transloco.translate('collection.removeConfirmMessage', {
-			name: game.name,
-		});
-	});
 
 	requestRemove(): void {
 		if (!this.game()) return;

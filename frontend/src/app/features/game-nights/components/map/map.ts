@@ -30,12 +30,18 @@ export const LEAFLET = new InjectionToken<typeof L>('leaflet', {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GameNightsMap implements AfterViewInit, OnDestroy {
+	readonly #locationsService = inject(LocationsService);
+	readonly #L = inject(LEAFLET);
+
 	readonly reloadTrigger = input<number>(0);
 	readonly activeLocationIds = input<ReadonlySet<string>>();
 	readonly events = input<EventWithParticipants[]>([]);
+	readonly isLoggedIn = input(false);
 	readonly deleteLocation = output<string>();
 	readonly addLocation = output<void>();
 	readonly markerClick = output<string>();
+
+	readonly mapContainer = viewChild.required<ElementRef>('mapContainer');
 
 	readonly #eventsByLocationId = computed(() => {
 		const map = new Map<string, EventWithParticipants[]>();
@@ -52,12 +58,6 @@ export class GameNightsMap implements AfterViewInit, OnDestroy {
 
 	readonly loading = this.#loading.asReadonly();
 	readonly error = this.#error.asReadonly();
-
-	readonly mapContainer = viewChild.required<ElementRef>('mapContainer');
-
-	readonly #locationsService = inject(LocationsService);
-	readonly #L = inject(LEAFLET);
-	readonly isLoggedIn = input(false);
 
 	#map?: L.Map;
 	#markers: L.Marker[] = [];
