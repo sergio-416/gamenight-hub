@@ -20,9 +20,7 @@ export class ParticipantsService {
 	}
 
 	async join(eventId: string, userId: string) {
-		let hostId: string | null = null;
-
-		const result = await this.#db.transaction(async (tx) => {
+		const { participant, hostId } = await this.#db.transaction(async (tx) => {
 			const [event] = await tx
 				.select()
 				.from(events)
@@ -34,8 +32,6 @@ export class ParticipantsService {
 					code: ERROR_CODE.EVENT_NOT_FOUND,
 					message: `Event with id ${eventId} not found`,
 				});
-
-			hostId = event.createdBy;
 
 			const [existing] = await tx
 				.select()
@@ -75,7 +71,7 @@ export class ParticipantsService {
 					.where(eq(participants.id, existing.id))
 					.returning();
 
-				return updated;
+				return { participant: updated, hostId: event.createdBy };
 			}
 
 			const [created] = await tx
@@ -87,7 +83,7 @@ export class ParticipantsService {
 				})
 				.returning();
 
-			return created;
+			return { participant: created, hostId: event.createdBy };
 		});
 
 		if (hostId) {
@@ -101,7 +97,7 @@ export class ParticipantsService {
 			}
 		}
 
-		return result;
+		return participant;
 	}
 
 	async leave(eventId: string, userId: string) {

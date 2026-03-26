@@ -119,9 +119,8 @@ export class GameNights {
 		return new Set(this.events().map((e) => e.locationId));
 	});
 
-	readonly isLoggedIn = this.#authService.isLoggedIn;
-
 	readonly showMap = signal(this.#readShowMapPref());
+	readonly isLoggedIn = this.#authService.isLoggedIn;
 
 	readonly mapRef = viewChild<GameNightsMap>('gameMap');
 
@@ -155,11 +154,6 @@ export class GameNights {
 		}
 	}
 
-	readonly #dateFormatter = new Intl.DateTimeFormat('en-US', {
-		dateStyle: 'medium',
-		timeStyle: 'short',
-	});
-
 	onDeleteLocation(locationId: string): void {
 		this.#locationsService.deleteLocation(locationId).subscribe({
 			next: () => {
@@ -173,6 +167,11 @@ export class GameNights {
 			},
 		});
 	}
+
+	readonly #dateFormatter = new Intl.DateTimeFormat('en-US', {
+		dateStyle: 'medium',
+		timeStyle: 'short',
+	});
 
 	formatDate(dateStr: string | Date): string {
 		return this.#dateFormatter.format(dateStr instanceof Date ? dateStr : new Date(dateStr));

@@ -217,15 +217,6 @@ export class XpService {
 			}
 
 			const now = new Date();
-			let monthlyGameAdds = profile.monthlyGameAdds;
-			const resetAt = profile.monthlyGameAddsResetAt;
-			if (
-				resetAt.getUTCFullYear() < now.getUTCFullYear() ||
-				resetAt.getUTCMonth() < now.getUTCMonth()
-			) {
-				monthlyGameAdds = 0;
-			}
-
 			const todayStart = startOfDayUTC(now);
 
 			const [{ value: dailyActionSpent }] = await tx
@@ -248,26 +239,13 @@ export class XpService {
 				.from(xpTransactions)
 				.where(and(eq(xpTransactions.userId, userId), gte(xpTransactions.createdAt, todayStart)));
 
-			let baseXp: number;
-			switch (action) {
-				case 'game_added':
-					baseXp = this.#calculator.calculateGameXp(monthlyGameAdds);
-					break;
-				case 'event_created':
-					baseXp = 75;
-					break;
-				case 'participant_joined':
-					baseXp = 40;
-					break;
-				default:
-					baseXp = 0;
-			}
+			const monthlyGameAdds = this.#resolveMonthlyGameAdds(profile, now);
+
+			const baseXp = this.#resolveBaseXp(action, monthlyGameAdds);
 
 			const cappedBase = this.#calculator.applyDailyCap(baseXp, dailyActionSpent, dailyGrandSpent);
-
-			const finalXp = this.#calculator.calculateFinalXp(cappedBase, profile.streakWeeks, now);
-
 			const multiplier = this.#calculator.getCombinedMultiplier(profile.streakWeeks, now);
+			const finalXp = this.#calculator.calculateFinalXp(cappedBase, profile.streakWeeks, now);
 
 			const [transaction] = await tx
 				.insert(xpTransactions)
@@ -286,9 +264,7 @@ export class XpService {
 			const newXpTotal = profile.xpTotal + finalXp;
 			const oldLevel = profile.level;
 			const newLevelInfo = this.#calculator.calculateLevel(newXpTotal);
-
 			const streakResult = this.#updateStreak(profile, now);
-
 			const newMonthlyGameAdds = action === 'game_added' ? monthlyGameAdds + 1 : monthlyGameAdds;
 
 			await tx
@@ -341,6 +317,30 @@ export class XpService {
 				xpAwarded: finalXp,
 			};
 		});
+	}
+
+	#resolveMonthlyGameAdds(profile: SelectXpProfile, now: Date): number {
+		const resetAt = profile.monthlyGameAddsResetAt;
+		if (
+			resetAt.getUTCFullYear() < now.getUTCFullYear() ||
+			resetAt.getUTCMonth() < now.getUTCMonth()
+		) {
+			return 0;
+		}
+		return profile.monthlyGameAdds;
+	}
+
+	#resolveBaseXp(action: XpAction, monthlyGameAdds: number): number {
+		switch (action) {
+			case 'game_added':
+				return this.#calculator.calculateGameXp(monthlyGameAdds);
+			case 'event_created':
+				return 75;
+			case 'participant_joined':
+				return 40;
+			default:
+				return 0;
+		}
 	}
 
 	#updateStreak(

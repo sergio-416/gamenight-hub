@@ -115,12 +115,12 @@ export class ProfileMe {
 	});
 
 	readonly #profileResource = httpResource<Profile>(() => `${this.#base}/profile/me`);
+	readonly #profileOverride = signal<Profile | null>(null);
 	readonly profile = computed(
 		() =>
 			this.#profileOverride() ??
 			(this.#profileResource.hasValue() ? this.#profileResource.value() : undefined),
 	);
-	readonly #profileOverride = signal<Profile | null>(null);
 	readonly loading = computed(() => this.#profileResource.isLoading());
 	readonly editing = signal(false);
 	readonly saving = signal(false);
@@ -128,51 +128,6 @@ export class ProfileMe {
 	readonly editForm = signal<UpdateProfileDto>({});
 	readonly showPrivateProfileModal = signal(false);
 	readonly showDeleteAccountDialog = signal(false);
-
-	readonly #gamesResource = httpResource<PaginatedGames>(
-		() => `${this.#base}${API_CONFIG.endpoints.games}`,
-	);
-	readonly #allGames = computed(() =>
-		this.#gamesResource.hasValue() ? (this.#gamesResource.value()?.data ?? []) : [],
-	);
-	readonly gamesLoading = computed(() => this.#gamesResource.isLoading());
-
-	readonly ownedGames = computed(() => this.#allGames().filter((g) => g.status === 'owned'));
-	readonly recentGames = computed(() => this.ownedGames().slice(0, 8));
-	readonly wantToPlayGames = computed(() =>
-		this.#allGames().filter((g) => g.status === 'want_to_play'),
-	);
-	readonly wantToTryGames = computed(() =>
-		this.#allGames().filter((g) => g.status === 'want_to_try'),
-	);
-
-	readonly showAddGameModal = signal(false);
-	readonly addGameToStatus = signal<GameStatus>('want_to_play');
-
-	readonly showRemoveConfirm = signal(false);
-	readonly gameToRemove = signal<string | null>(null);
-
-	readonly showMarkPlayedMode = signal(false);
-	readonly selectedGamesForPlayed = signal<Set<string>>(new Set());
-	readonly showMarkPlayedConfirm = signal(false);
-
-	readonly #searchInput$ = new Subject<string>();
-	readonly #debouncedSearch = toSignal(
-		this.#searchInput$.pipe(debounceTime(300), distinctUntilChanged()),
-		{ initialValue: '' },
-	);
-	readonly #searchResource = httpResource<GameSearchResult[]>(() => {
-		const query = this.#debouncedSearch().trim();
-		if (query.length < 2) return undefined;
-		return `${this.#base}${API_CONFIG.endpoints.search}?query=${query}`;
-	});
-
-	readonly searchQuery = signal('');
-	readonly searchResults = computed(() =>
-		(this.#searchResource.hasValue() ? (this.#searchResource.value() ?? []) : []).slice(0, 8),
-	);
-	readonly searchLoading = computed(() => this.#searchResource.isLoading());
-	readonly importLoading = signal(false);
 
 	readonly memberSince = computed(() => {
 		const p = this.profile();
@@ -204,10 +159,54 @@ export class ProfileMe {
 		});
 	});
 
+	readonly #gamesResource = httpResource<PaginatedGames>(
+		() => `${this.#base}${API_CONFIG.endpoints.games}`,
+	);
+	readonly #allGames = computed(() =>
+		this.#gamesResource.hasValue() ? (this.#gamesResource.value()?.data ?? []) : [],
+	);
+	readonly gamesLoading = computed(() => this.#gamesResource.isLoading());
+
+	readonly ownedGames = computed(() => this.#allGames().filter((g) => g.status === 'owned'));
 	readonly ownedCount = computed(() => this.ownedGames().length);
+	readonly recentGames = computed(() => this.ownedGames().slice(0, 8));
+	readonly wantToPlayGames = computed(() =>
+		this.#allGames().filter((g) => g.status === 'want_to_play'),
+	);
 	readonly wantToPlayCount = computed(() => this.wantToPlayGames().length);
+	readonly wantToTryGames = computed(() =>
+		this.#allGames().filter((g) => g.status === 'want_to_try'),
+	);
 	readonly wantToTryCount = computed(() => this.wantToTryGames().length);
+
+	readonly showAddGameModal = signal(false);
+	readonly addGameToStatus = signal<GameStatus>('want_to_play');
+
+	readonly showRemoveConfirm = signal(false);
+	readonly gameToRemove = signal<string | null>(null);
+
+	readonly showMarkPlayedMode = signal(false);
+	readonly selectedGamesForPlayed = signal<Set<string>>(new Set());
 	readonly selectedPlayedCount = computed(() => this.selectedGamesForPlayed().size);
+	readonly showMarkPlayedConfirm = signal(false);
+
+	readonly #searchInput$ = new Subject<string>();
+	readonly #debouncedSearch = toSignal(
+		this.#searchInput$.pipe(debounceTime(300), distinctUntilChanged()),
+		{ initialValue: '' },
+	);
+	readonly #searchResource = httpResource<GameSearchResult[]>(() => {
+		const query = this.#debouncedSearch().trim();
+		if (query.length < 2) return undefined;
+		return `${this.#base}${API_CONFIG.endpoints.search}?query=${query}`;
+	});
+
+	readonly searchQuery = signal('');
+	readonly searchResults = computed(() =>
+		(this.#searchResource.hasValue() ? (this.#searchResource.value() ?? []) : []).slice(0, 8),
+	);
+	readonly searchLoading = computed(() => this.#searchResource.isLoading());
+	readonly importLoading = signal(false);
 
 	readonly iconPen = faPen;
 	readonly iconLocation = faLocationDot;

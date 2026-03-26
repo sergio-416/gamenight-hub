@@ -206,36 +206,6 @@ export class EventDetail {
 		return slug ? getEventCoverPath(slug as EventCoverSlug) : null;
 	});
 
-	readonly #confirmingDelete = signal(false);
-	readonly confirmingDelete = this.#confirmingDelete.asReadonly();
-
-	readonly #deleting = signal(false);
-	readonly deleting = this.#deleting.asReadonly();
-
-	readonly #deleteError = signal<string | null>(null);
-	readonly deleteError = this.#deleteError.asReadonly();
-
-	readonly #startDateFormatter = new Intl.DateTimeFormat('en-US', {
-		weekday: 'long',
-		month: 'long',
-		day: 'numeric',
-		year: 'numeric',
-	});
-
-	readonly #timeFormatter = new Intl.DateTimeFormat('en-US', {
-		hour: 'numeric',
-		minute: '2-digit',
-	});
-
-	formatStartTime(dateStr: string | Date): string {
-		const d = dateStr instanceof Date ? dateStr : new Date(dateStr);
-		return `${this.#startDateFormatter.format(d)} · ${this.#timeFormatter.format(d)}`;
-	}
-
-	formatTime(dateStr: string | Date): string {
-		return this.#timeFormatter.format(dateStr instanceof Date ? dateStr : new Date(dateStr));
-	}
-
 	readonly isEditValid = computed(() => {
 		const form = this.#editForm();
 		return (
@@ -266,6 +236,36 @@ export class EventDetail {
 	readonly startTimeLocal = computed(() => this.#toDatetimeLocal(this.#editForm().startTime));
 
 	readonly endTimeLocal = computed(() => this.#toDatetimeLocal(this.#editForm().endTime));
+
+	readonly #confirmingDelete = signal(false);
+	readonly confirmingDelete = this.#confirmingDelete.asReadonly();
+
+	readonly #deleting = signal(false);
+	readonly deleting = this.#deleting.asReadonly();
+
+	readonly #deleteError = signal<string | null>(null);
+	readonly deleteError = this.#deleteError.asReadonly();
+
+	readonly #startDateFormatter = new Intl.DateTimeFormat('en-US', {
+		weekday: 'long',
+		month: 'long',
+		day: 'numeric',
+		year: 'numeric',
+	});
+
+	readonly #timeFormatter = new Intl.DateTimeFormat('en-US', {
+		hour: 'numeric',
+		minute: '2-digit',
+	});
+
+	formatStartTime(dateStr: string | Date): string {
+		const d = dateStr instanceof Date ? dateStr : new Date(dateStr);
+		return `${this.#startDateFormatter.format(d)} · ${this.#timeFormatter.format(d)}`;
+	}
+
+	formatTime(dateStr: string | Date): string {
+		return this.#timeFormatter.format(dateStr instanceof Date ? dateStr : new Date(dateStr));
+	}
 
 	startEditing(): void {
 		const event = this.event();

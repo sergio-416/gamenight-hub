@@ -51,7 +51,6 @@ const ONE_TIME_BONUSES: Record<string, number> = {
 	participant_joined: 100,
 };
 
-const _FOUNDING_COLLECTION_BONUS = 150;
 const FOUNDING_COLLECTION_THRESHOLD = 10;
 const FOUNDING_COLLECTION_WINDOW_MS = 24 * 60 * 60 * 1000;
 
