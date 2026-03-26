@@ -8,6 +8,8 @@ on:
       - "docs/**"
       - ".vscode/**"
 
+permissions: {}
+
 concurrency:
   group: auto-pr-${{ github.ref }}
   cancel-in-progress: true
@@ -16,6 +18,8 @@ jobs:
   ci:
     name: CI
     uses: ./.github/workflows/ci.yml
+    permissions:
+      contents: read
 
   create-pr:
     name: Create Pull Request
