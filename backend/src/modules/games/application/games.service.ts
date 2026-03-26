@@ -33,6 +33,14 @@ export class GamesService {
 		this.#eventEmitter = eventEmitter;
 	}
 
+	async checkIfPlayed(userId: string, gameId: string): Promise<CheckPlayedGameResponse> {
+		return this.playedGamesService.checkIfPlayed(userId, gameId);
+	}
+
+	async checkIfPlayedByBggId(userId: string, bggId: number): Promise<CheckPlayedGameResponse> {
+		return this.playedGamesService.checkIfPlayedByBggId(userId, bggId);
+	}
+
 	async importFromBgg(
 		bggId: number,
 		personalFields: UpdatePersonalFieldsDto,
@@ -149,11 +157,4 @@ export class GamesService {
 		return this.playedGamesService.markAsPlayed(userId, gameId);
 	}
 
-	async checkIfPlayed(userId: string, gameId: string): Promise<CheckPlayedGameResponse> {
-		return this.playedGamesService.checkIfPlayed(userId, gameId);
-	}
-
-	async checkIfPlayedByBggId(userId: string, bggId: number): Promise<CheckPlayedGameResponse> {
-		return this.playedGamesService.checkIfPlayedByBggId(userId, bggId);
-	}
 }
