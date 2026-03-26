@@ -156,5 +156,4 @@ export class GamesService {
 	async markAsPlayed(userId: string, gameId: string) {
 		return this.playedGamesService.markAsPlayed(userId, gameId);
 	}
-
 }
