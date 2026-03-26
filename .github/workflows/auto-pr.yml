@@ -8,6 +8,8 @@ on:
       - "docs/**"
       - ".vscode/**"
 
+permissions: {}
+
 concurrency:
   group: auto-pr-${{ github.ref }}
   cancel-in-progress: true

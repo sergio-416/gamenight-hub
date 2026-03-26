@@ -3,6 +3,9 @@ name: CI
 on:
   workflow_call:
 
+permissions:
+  contents: read
+
 env:
   BUN_VERSION: "1.3.10"
 
