@@ -2,8 +2,7 @@ export const environment = {
 	production: true,
 	apiUrl: "https://gamenight-hub.com/api/v1",
 	wsUrl: "wss://gamenight-hub.com",
-	jawgAccessToken:
-		"LZyuZmdwTZNFKXat5W3QtATikq6H4t2SKemDVdAPmsDUhl1zoviX2QIcpVEsaYkJ",
+	jawgAccessToken: "__JAWG_ACCESS_TOKEN__",
 	firebase: {
 		apiKey: "AIzaSyCqYnNOmnimAvlxXIGFz_FGKkN-8uRi3x0",
 		authDomain: "gamenight-hub.firebaseapp.com",

@@ -55,6 +55,8 @@ jobs:
 
       - name: Build frontend
         working-directory: frontend
+        env:
+          JAWG_ACCESS_TOKEN: ${{ secrets.JAWG_ACCESS_TOKEN }}
         run: bun run build
 
       - name: Upload frontend dist
