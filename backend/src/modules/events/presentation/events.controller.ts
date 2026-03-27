@@ -41,12 +41,8 @@ export class EventsController {
 
 	@ApiOperation({ summary: 'List all events' })
 	@Get()
-	async findAll(@Query(new ZodValidationPipe(FindEventsSchema)) dto: FindEventsDto) {
-		const result = await this.eventsService.findAll(dto);
-		return {
-			...result,
-			data: result.data.map(({ createdBy: _, ...event }) => event),
-		};
+	findAll(@Query(new ZodValidationPipe(FindEventsSchema)) dto: FindEventsDto) {
+		return this.eventsService.findAll(dto);
 	}
 
 	@ApiOperation({ summary: 'Get an event by ID' })

@@ -1,8 +1,8 @@
 import { PAGINATION } from '@gamenight-hub/shared';
-import { paginate } from '@common/dto/pagination.dto.js';
+import { type PaginatedResponse, paginate } from '@common/dto/pagination.dto.js';
 import { ERROR_CODE } from '@common/error-codes';
 import { DB_TOKEN, type DrizzleDb } from '@database/database.module.js';
-import { events, type InsertEvent, type SelectEvent } from '@database/schema/events.js';
+import { events, type InsertEvent } from '@database/schema/events.js';
 import { games } from '@database/schema/games.js';
 import { locations } from '@database/schema/locations.js';
 import { participants } from '@database/schema/participants.js';
@@ -21,7 +21,7 @@ import { LocationsService } from '../../locations/application/locations.service.
 import { EventCreatedEvent } from '../domain/events/event-created.event.js';
 import type { CreateEventDto, UpdateEventDto } from '../presentation/dto/create-event.dto.js';
 import type { FindEventsDto } from '../presentation/dto/event-filter.dto.js';
-import { type EventListResponse, toEventListResponse, toEventDetailResponse } from './event.sanitiser.js';
+import { type EventDetailResponse, type EventListResponse, toEventDetailResponse, toEventListResponse } from './event.sanitiser.js';
 
 @Injectable()
 export class EventsService {
@@ -40,7 +40,7 @@ export class EventsService {
 		this.#locationsService = locationsService;
 	}
 
-	async create(dto: CreateEventDto, createdBy: string): Promise<SelectEvent> {
+	async create(dto: CreateEventDto, createdBy: string) {
 		let resolvedLocationId = dto.locationId;
 
 		if (dto.location) {
@@ -92,7 +92,7 @@ export class EventsService {
 		return response;
 	}
 
-	async findAll(dto?: FindEventsDto) {
+	async findAll(dto?: FindEventsDto): Promise<PaginatedResponse<EventListResponse>> {
 		const page = dto?.page ?? PAGINATION.DEFAULT_PAGE;
 		const limit = dto?.limit ?? PAGINATION.DEFAULT_LIMIT;
 		const offset = (page - 1) * limit;
@@ -126,10 +126,10 @@ export class EventsService {
 				.where(where),
 		]);
 
-		return paginate(data, total, page, limit);
+		return paginate(data.map(toEventListResponse), total, page, limit);
 	}
 
-	async findOne(id: string) {
+	async findOne(id: string, requestingUserId?: string): Promise<EventDetailResponse> {
 		const [event] = await this.#db
 			.select({
 				...getTableColumns(events),
@@ -155,11 +155,11 @@ export class EventsService {
 				message: `Event with id ${id} not found`,
 			});
 
-		return event;
+		return toEventDetailResponse(event, requestingUserId ?? '');
 	}
 
-	async update(id: string, dto: UpdateEventDto, createdBy: string): Promise<SelectEvent> {
-		const existing = await this.findOne(id);
+	async update(id: string, dto: UpdateEventDto, createdBy: string) {
+		const existing = await this.findOne(id, createdBy);
 		if (existing.createdBy !== createdBy)
 			throw new ForbiddenException({
 				code: ERROR_CODE.NOT_EVENT_OWNER,
@@ -177,11 +177,12 @@ export class EventsService {
 			.where(and(eq(events.id, id), eq(events.createdBy, createdBy)))
 			.returning();
 
-		return updated;
+		const { deletedAt, createdAt, updatedAt, ...response } = updated;
+		return response;
 	}
 
-	async remove(id: string, createdBy: string): Promise<SelectEvent> {
-		const existing = await this.findOne(id);
+	async remove(id: string, createdBy: string) {
+		const existing = await this.findOne(id, createdBy);
 		if (existing.createdBy !== createdBy)
 			throw new ForbiddenException({
 				code: ERROR_CODE.NOT_EVENT_OWNER,
