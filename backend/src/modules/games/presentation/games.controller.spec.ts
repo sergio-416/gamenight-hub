@@ -45,7 +45,6 @@ describe('GamesController', () => {
 				status: 'owned' as const,
 				notes: 'My favorite game!',
 				complexity: 3,
-				createdBy: MOCK_UID,
 			};
 
 			mockGamesService.importFromBgg.mockResolvedValue(createdGame);
@@ -58,6 +57,9 @@ describe('GamesController', () => {
 
 			expect(result.bggId).toBe(13);
 			expect(result.name).toBe('Catan');
+			expect(result).not.toHaveProperty('createdBy');
+			expect(result).not.toHaveProperty('updatedAt');
+			expect(result).not.toHaveProperty('deletedAt');
 			expect(mockGamesService.importFromBgg).toHaveBeenCalledWith(13, expect.any(Object), MOCK_UID);
 		});
 	});
