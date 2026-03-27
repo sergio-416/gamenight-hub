@@ -3,6 +3,7 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { ApplicationRef, provideZonelessChangeDetection } from '@angular/core';
 import { API_CONFIG } from '@core/config/api.config';
 import { provideTranslocoTesting } from '@core/testing/transloco-testing';
+import { PAGINATION, UI } from '@gamenight-hub/shared';
 import { fireEvent, type RenderResult, render, screen } from '@testing-library/angular';
 import type { Game } from '../../models/game.model';
 import { GameList } from './game-list';
@@ -71,8 +72,8 @@ describe('GameList', () => {
 		return {
 			data: games,
 			total: games.length,
-			page: 1,
-			limit: 20,
+			page: PAGINATION.DEFAULT_PAGE,
+			limit: PAGINATION.DEFAULT_LIMIT,
 			totalPages: 1,
 		};
 	}
@@ -91,7 +92,7 @@ describe('GameList', () => {
 			fixture.detectChanges();
 
 			const skeletons = document.querySelectorAll('.animate-pulse');
-			expect(skeletons.length).toBe(8);
+			expect(skeletons.length).toBe(UI.RECENT_GAMES_LIMIT);
 
 			const req = httpTesting.expectOne(gamesUrl);
 			req.flush(paginateGames([]));

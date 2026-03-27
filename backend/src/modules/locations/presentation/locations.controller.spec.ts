@@ -1,3 +1,4 @@
+import { PAGINATION } from '@gamenight-hub/shared';
 import { FirebaseAuthGuard } from '@auth/infrastructure/guards/firebase-auth.guard.js';
 import { Test, type TestingModule } from '@nestjs/testing';
 import { LocationsService } from '../application/locations.service.js';
@@ -76,13 +77,13 @@ describe('LocationsController', () => {
 					},
 				],
 				total: 2,
-				page: 1,
-				limit: 20,
+				page: PAGINATION.DEFAULT_PAGE,
+				limit: PAGINATION.DEFAULT_LIMIT,
 				totalPages: 1,
 			};
 			mockLocationsService.findAll.mockResolvedValue(mockLocations);
 
-			const result = await controller.findAll({ page: 1, limit: 20 });
+			const result = await controller.findAll({ page: PAGINATION.DEFAULT_PAGE, limit: PAGINATION.DEFAULT_LIMIT });
 
 			expect(result.data).toHaveLength(2);
 			for (const location of result.data) {
@@ -95,12 +96,12 @@ describe('LocationsController', () => {
 			mockLocationsService.findAll.mockResolvedValue({
 				data: [],
 				total: 0,
-				page: 1,
-				limit: 20,
+				page: PAGINATION.DEFAULT_PAGE,
+				limit: PAGINATION.DEFAULT_LIMIT,
 				totalPages: 0,
 			});
 
-			const result = await controller.findAll({ page: 1, limit: 20 });
+			const result = await controller.findAll({ page: PAGINATION.DEFAULT_PAGE, limit: PAGINATION.DEFAULT_LIMIT });
 
 			expect(result.data).toEqual([]);
 		});

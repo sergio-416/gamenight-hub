@@ -5,6 +5,7 @@ import { provideRouter } from '@angular/router';
 import { API_CONFIG } from '@core/config/api.config';
 import { AuthService } from '@core/services/auth';
 import { provideTranslocoTesting } from '@core/testing/transloco-testing';
+import { PAGINATION } from '@gamenight-hub/shared';
 import { render, screen, waitFor } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
 import { ProfileMe } from './profile-me';
@@ -76,7 +77,7 @@ function flushInitialRequests(httpMock: HttpTestingController, profileOverrides 
 	httpMock.expectOne(`${baseUrl}/profile/me`).flush(makeProfile(profileOverrides));
 	httpMock
 		.expectOne(`${baseUrl}/games`)
-		.flush({ data: [], total: 0, page: 1, limit: 20, totalPages: 0 });
+		.flush({ data: [], total: 0, page: PAGINATION.DEFAULT_PAGE, limit: PAGINATION.DEFAULT_LIMIT, totalPages: 0 });
 	flushXpRequests(httpMock);
 }
 

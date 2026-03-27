@@ -237,7 +237,7 @@ describe('XpService', () => {
 
 		it('should award XP for game_added with tier calculation', async () => {
 			const profile = makeProfile({ monthlyGameAdds: 2 });
-			const tx = makeTransaction({ baseXp: 75, finalXp: 75 });
+			const tx = makeTransaction({ baseXp: XP_GAME_REWARDS.FIRST_GAMES_BONUS, finalXp: XP_GAME_REWARDS.FIRST_GAMES_BONUS });
 
 			setupTxMock([[profile], [{ value: 0 }], [{ value: 0 }]], [tx]);
 
@@ -246,19 +246,19 @@ describe('XpService', () => {
 			});
 
 			expect(result.awarded).toBe(true);
-			expect(result.xpAwarded).toBe(75);
+			expect(result.xpAwarded).toBe(XP_GAME_REWARDS.FIRST_GAMES_BONUS);
 			expect(mockEventEmitter.emit).toHaveBeenCalledWith(
 				'xp.awarded',
 				expect.objectContaining({ userId: USER_ID, action: 'game_added' }),
 			);
 		});
 
-		it('should award flat 75 XP for event_created', async () => {
+		it('should award flat XP for event_created', async () => {
 			const profile = makeProfile();
 			const tx = makeTransaction({
 				action: 'event_created',
-				baseXp: 75,
-				finalXp: 75,
+				baseXp: XP_GAME_REWARDS.FIRST_GAMES_BONUS,
+				finalXp: XP_GAME_REWARDS.FIRST_GAMES_BONUS,
 			});
 
 			setupTxMock([[profile], [{ value: 0 }], [{ value: 0 }]], [tx]);
@@ -266,7 +266,7 @@ describe('XpService', () => {
 			const result = await service.awardXp(USER_ID, 'event_created', {});
 
 			expect(result.awarded).toBe(true);
-			expect(result.xpAwarded).toBe(75);
+			expect(result.xpAwarded).toBe(XP_GAME_REWARDS.FIRST_GAMES_BONUS);
 		});
 
 		it('should award flat 40 XP for participant_joined', async () => {
@@ -289,7 +289,7 @@ describe('XpService', () => {
 			const profile = makeProfile();
 			const tx = makeTransaction({ baseXp: 0, finalXp: 0 });
 
-			setupTxMock([[profile], [{ value: 500 }], [{ value: 500 }]], [tx]);
+			setupTxMock([[profile], [{ value: XP_CAPS.ACTION_CAP }], [{ value: XP_CAPS.ACTION_CAP }]], [tx]);
 
 			const result = await service.awardXp(USER_ID, 'game_added', {});
 
@@ -301,7 +301,7 @@ describe('XpService', () => {
 			const profile = makeProfile();
 			const tx = makeTransaction({ baseXp: 0, finalXp: 0 });
 
-			setupTxMock([[profile], [{ value: 0 }], [{ value: 1500 }]], [tx]);
+			setupTxMock([[profile], [{ value: 0 }], [{ value: XP_CAPS.GRAND_CAP }]], [tx]);
 
 			const result = await service.awardXp(USER_ID, 'game_added', {});
 
@@ -315,13 +315,13 @@ describe('XpService', () => {
 				monthlyGameAdds: 20,
 				monthlyGameAddsResetAt: oldResetDate,
 			});
-			const tx = makeTransaction({ baseXp: 75, finalXp: 75 });
+			const tx = makeTransaction({ baseXp: XP_GAME_REWARDS.FIRST_GAMES_BONUS, finalXp: XP_GAME_REWARDS.FIRST_GAMES_BONUS });
 
 			const _txDb = setupTxMock([[profile], [{ value: 0 }], [{ value: 0 }]], [tx]);
 
 			const result = await service.awardXp(USER_ID, 'game_added', {});
 
-			expect(result.xpAwarded).toBe(75);
+			expect(result.xpAwarded).toBe(XP_GAME_REWARDS.FIRST_GAMES_BONUS);
 		});
 
 		it('should update streak when activity is in consecutive week', async () => {
@@ -332,7 +332,7 @@ describe('XpService', () => {
 				streakWeeks: 3,
 				lastActivityAt: lastMonday,
 			});
-			const tx = makeTransaction({ finalXp: 75 });
+			const tx = makeTransaction({ finalXp: XP_GAME_REWARDS.FIRST_GAMES_BONUS });
 
 			setupTxMock([[profile], [{ value: 0 }], [{ value: 0 }]], [tx]);
 
@@ -343,7 +343,7 @@ describe('XpService', () => {
 
 		it('should detect level-up and emit xp.level-up event', async () => {
 			const profile = makeProfile({ xpTotal: 240, level: 1 });
-			const tx = makeTransaction({ finalXp: 75 });
+			const tx = makeTransaction({ finalXp: XP_GAME_REWARDS.FIRST_GAMES_BONUS });
 
 			setupTxMock([[profile], [{ value: 0 }], [{ value: 0 }]], [tx]);
 
@@ -359,7 +359,7 @@ describe('XpService', () => {
 
 		it('should not emit level-up when level unchanged', async () => {
 			const profile = makeProfile({ xpTotal: 0, level: 1 });
-			const tx = makeTransaction({ finalXp: 75 });
+			const tx = makeTransaction({ finalXp: XP_GAME_REWARDS.FIRST_GAMES_BONUS });
 
 			setupTxMock([[profile], [{ value: 0 }], [{ value: 0 }]], [tx]);
 
@@ -373,7 +373,7 @@ describe('XpService', () => {
 
 		it('should create profile defensively if none exists during award', async () => {
 			const newProfile = makeProfile();
-			const tx = makeTransaction({ finalXp: 75 });
+			const tx = makeTransaction({ finalXp: XP_GAME_REWARDS.FIRST_GAMES_BONUS });
 
 			let selectCall = 0;
 			const txDb = {
@@ -400,7 +400,7 @@ describe('XpService', () => {
 			const profile = makeProfile();
 			const tx = makeTransaction({ baseXp: 0, finalXp: 0 });
 
-			const txDb = setupTxMock([[profile], [{ value: 500 }], [{ value: 1500 }]], [tx]);
+			const txDb = setupTxMock([[profile], [{ value: XP_CAPS.ACTION_CAP }], [{ value: XP_CAPS.GRAND_CAP }]], [tx]);
 
 			await service.awardXp(USER_ID, 'game_added', {});
 

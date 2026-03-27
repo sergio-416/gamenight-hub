@@ -1,3 +1,4 @@
+import { PAGINATION } from '@gamenight-hub/shared';
 import { FirebaseAuthGuard } from '@auth/infrastructure/guards/firebase-auth.guard.js';
 import { Test, type TestingModule } from '@nestjs/testing';
 import { XpService } from '../application/xp.service.js';
@@ -86,16 +87,16 @@ describe('XpController', () => {
 			mockXpService.getHistory.mockResolvedValue(historyResult);
 
 			const result = await controller.getMyHistory(MOCK_UID, {
-				page: 1,
-				limit: 20,
+				page: PAGINATION.DEFAULT_PAGE,
+				limit: PAGINATION.DEFAULT_LIMIT,
 			});
 
 			expect(result.data).toHaveLength(1);
 			expect(result.total).toBe(1);
-			expect(result.page).toBe(1);
-			expect(result.limit).toBe(20);
+			expect(result.page).toBe(PAGINATION.DEFAULT_PAGE);
+			expect(result.limit).toBe(PAGINATION.DEFAULT_LIMIT);
 			expect(result.totalPages).toBe(1);
-			expect(mockXpService.getHistory).toHaveBeenCalledWith(MOCK_UID, 1, 20);
+			expect(mockXpService.getHistory).toHaveBeenCalledWith(MOCK_UID, PAGINATION.DEFAULT_PAGE, PAGINATION.DEFAULT_LIMIT);
 		});
 
 		it('should return empty history for user with no transactions', async () => {
@@ -105,8 +106,8 @@ describe('XpController', () => {
 			});
 
 			const result = await controller.getMyHistory(MOCK_UID, {
-				page: 1,
-				limit: 20,
+				page: PAGINATION.DEFAULT_PAGE,
+				limit: PAGINATION.DEFAULT_LIMIT,
 			});
 
 			expect(result.data).toHaveLength(0);

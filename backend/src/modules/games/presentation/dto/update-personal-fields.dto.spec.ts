@@ -1,3 +1,4 @@
+import { GAME_CONSTRAINTS } from '@gamenight-hub/shared';
 import { UpdatePersonalFieldsSchema } from './update-personal-fields.dto';
 
 describe('UpdatePersonalFieldsSchema', () => {
@@ -48,8 +49,8 @@ describe('UpdatePersonalFieldsSchema', () => {
 			}
 		});
 
-		it('should reject complexity less than 1', () => {
-			const result = UpdatePersonalFieldsSchema.safeParse({ complexity: 0 });
+		it('should reject complexity less than COMPLEXITY_MIN', () => {
+			const result = UpdatePersonalFieldsSchema.safeParse({ complexity: GAME_CONSTRAINTS.COMPLEXITY_MIN - 1 });
 
 			expect(result.success).toBe(false);
 			if (!result.success) {
@@ -57,8 +58,8 @@ describe('UpdatePersonalFieldsSchema', () => {
 			}
 		});
 
-		it('should reject complexity greater than 5', () => {
-			const result = UpdatePersonalFieldsSchema.safeParse({ complexity: 6 });
+		it('should reject complexity greater than COMPLEXITY_MAX', () => {
+			const result = UpdatePersonalFieldsSchema.safeParse({ complexity: GAME_CONSTRAINTS.COMPLEXITY_MAX + 1 });
 
 			expect(result.success).toBe(false);
 			if (!result.success) {

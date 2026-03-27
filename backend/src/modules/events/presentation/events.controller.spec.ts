@@ -1,3 +1,4 @@
+import { PAGINATION } from '@gamenight-hub/shared';
 import { FirebaseAuthGuard } from '@auth/infrastructure/guards/firebase-auth.guard.js';
 import { Test, type TestingModule } from '@nestjs/testing';
 import { EventsService } from '../application/events.service.js';
@@ -78,7 +79,7 @@ describe('EventsController', () => {
 				total: 2,
 			});
 
-			const result = await controller.findAll({ page: 1, limit: 20 });
+			const result = await controller.findAll({ page: PAGINATION.DEFAULT_PAGE, limit: PAGINATION.DEFAULT_LIMIT });
 
 			expect(result.data).toHaveLength(2);
 			expect(result.data[0]).not.toHaveProperty('createdBy');
@@ -88,7 +89,7 @@ describe('EventsController', () => {
 		it('should return empty array when no events exist', async () => {
 			mockEventsService.findAll.mockResolvedValue({ data: [], total: 0 });
 
-			const result = await controller.findAll({ page: 1, limit: 20 });
+			const result = await controller.findAll({ page: PAGINATION.DEFAULT_PAGE, limit: PAGINATION.DEFAULT_LIMIT });
 
 			expect(result.data).toEqual([]);
 		});

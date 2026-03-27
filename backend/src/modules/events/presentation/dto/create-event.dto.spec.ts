@@ -1,3 +1,4 @@
+import { GAME_CONSTRAINTS } from '@gamenight-hub/shared';
 import { CreateEventSchema, UpdateEventSchema } from './create-event.dto';
 
 const VALID_UUID_1 = '123e4567-e89b-12d3-a456-426614174000';
@@ -110,12 +111,12 @@ describe('CreateEventSchema', () => {
 			}
 		});
 
-		it('should reject maxPlayers greater than 100', () => {
+		it('should reject maxPlayers greater than MAX_PLAYERS_LIMIT', () => {
 			const result = CreateEventSchema.safeParse({
 				title: 'Game Night',
 				locationId: VALID_UUID_1,
 				startTime: VALID_DATETIME,
-				maxPlayers: 101,
+				maxPlayers: GAME_CONSTRAINTS.MAX_PLAYERS_LIMIT + 1,
 			});
 
 			expect(result.success).toBe(false);
