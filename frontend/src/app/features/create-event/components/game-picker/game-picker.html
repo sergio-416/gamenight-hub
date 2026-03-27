@@ -27,7 +27,7 @@
 			</p>
 			@if (game.categories?.length) {
 			<div class="flex flex-wrap gap-1 mt-0.5">
-				@for (cat of game.categories!.slice(0, 3); track cat) {
+				@for (cat of game.categories!.slice(0, CATEGORY_TAGS_LIMIT); track cat) {
 				<span
 					class="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-medium text-on-surface-muted"
 					>{{ cat }}</span
@@ -109,7 +109,7 @@
 					</div>
 					@if (game.categories?.length) {
 					<div class="mt-0.5 flex flex-wrap gap-1">
-						@for (cat of game.categories!.slice(0, 3); track cat) {
+						@for (cat of game.categories!.slice(0, CATEGORY_TAGS_LIMIT); track cat) {
 						<span
 							class="rounded-full bg-slate-100 px-1.5 py-0.5 text-[10px] font-medium text-on-surface-muted"
 							>{{ cat }}</span

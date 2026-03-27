@@ -3,7 +3,7 @@ import { httpResource } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { API_CONFIG } from '@core/config/api.config';
-import type { PublicProfile, PublicProfileGamesResponse } from '@gamenight-hub/shared';
+import { PAGINATION, type PublicProfile, type PublicProfileGamesResponse } from '@gamenight-hub/shared';
 import { TranslocoDirective } from '@jsverse/transloco';
 
 const TAB = {
@@ -53,7 +53,7 @@ export class ProfilePublicCollection {
 	readonly profileError = computed(() => !!this.#profileResource.error());
 
 	readonly #gamesResource = httpResource<PublicProfileGamesResponse>(
-		() => `${this.#base}/profile/${this.username}/games?limit=200`,
+		() => `${this.#base}/profile/${this.username}/games?limit=${PAGINATION.PUBLIC_COLLECTION_MAX}`,
 	);
 	readonly #allGames = computed<PublicGame[]>(() =>
 		this.#gamesResource.hasValue() ? (this.#gamesResource.value()?.data ?? []) : [],

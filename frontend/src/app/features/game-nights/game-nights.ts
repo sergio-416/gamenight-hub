@@ -29,6 +29,7 @@ import {
 	EVENT_CATEGORIES,
 	type EventCategory,
 	type PaginatedResponse,
+	UI,
 } from '@gamenight-hub/shared';
 import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 
@@ -142,7 +143,7 @@ export class GameNights {
 
 	toggleMap(): void {
 		this.showMap.update((v) => !v);
-		setTimeout(() => this.mapRef()?.invalidateSize(), 100);
+		setTimeout(() => this.mapRef()?.invalidateSize(), UI.MAP_INVALIDATE_DELAY_MS);
 	}
 
 	#readShowMapPref(): boolean {

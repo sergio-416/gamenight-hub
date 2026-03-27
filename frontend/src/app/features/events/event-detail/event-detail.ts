@@ -12,7 +12,7 @@ import { UpdateCalendarEventSchema } from '@features/calendar/models/event.model
 import { EventsService } from '@features/calendar/services/events';
 import { CoverImagePicker } from '@features/create-event/components/cover-image-picker';
 import type { Location } from '@gamenight-hub/shared';
-import { CATEGORY_META, type EventCoverSlug, getEventCoverPath } from '@gamenight-hub/shared';
+import { CATEGORY_META, type EventCoverSlug, GAME_CONSTRAINTS, getEventCoverPath, UI } from '@gamenight-hub/shared';
 import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 import { SimpleMapPreview } from '@shared/components/simple-map-preview/simple-map-preview';
 import { XpService } from '@shared/services/xp.service';
@@ -32,6 +32,7 @@ interface InfoPill {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EventDetail {
+	readonly PARTICIPANTS_PREVIEW_LIMIT = UI.PARTICIPANTS_PREVIEW_LIMIT;
 	readonly #route = inject(ActivatedRoute);
 	readonly #router = inject(Router);
 	readonly #auth = inject(AuthService);
@@ -209,7 +210,7 @@ export class EventDetail {
 	readonly isEditValid = computed(() => {
 		const form = this.#editForm();
 		return (
-			!!form.title?.trim() && !!form.maxPlayers && form.maxPlayers >= 2 && form.maxPlayers <= 100
+			!!form.title?.trim() && !!form.maxPlayers && form.maxPlayers >= GAME_CONSTRAINTS.MIN_PLAYERS_EVENT && form.maxPlayers <= GAME_CONSTRAINTS.MAX_PLAYERS_LIMIT
 		);
 	});
 

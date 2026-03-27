@@ -70,7 +70,7 @@ export class CalendarGrid {
 
 	getOverflowCount(day: CalendarDay): number {
 		const total = this.getEventsForCell(day).length;
-		return total > 3 ? total - 3 : 0;
+		return total > UI.CALENDAR_DAY_EVENTS_LIMIT ? total - UI.CALENDAR_DAY_EVENTS_LIMIT : 0;
 	}
 
 	isSelected(day: CalendarDay): boolean {
