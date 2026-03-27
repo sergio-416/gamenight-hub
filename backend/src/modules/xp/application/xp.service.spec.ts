@@ -1,3 +1,4 @@
+import { XP_CAPS, XP_GAME_REWARDS } from '@gamenight-hub/shared';
 import { DB_TOKEN } from '@database/database.module.js';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { Test, type TestingModule } from '@nestjs/testing';
@@ -24,12 +25,12 @@ const makeTransaction = (overrides = {}) => ({
 	id: 'tx-uuid-1',
 	userId: USER_ID,
 	action: 'game_added',
-	baseXp: 75,
+	baseXp: XP_GAME_REWARDS.FIRST_GAMES_BONUS,
 	multiplier: '1.0000',
-	finalXp: 75,
+	finalXp: XP_GAME_REWARDS.FIRST_GAMES_BONUS,
 	metadata: {},
-	dailyActionTotal: 75,
-	dailyGrandTotal: 75,
+	dailyActionTotal: XP_GAME_REWARDS.FIRST_GAMES_BONUS,
+	dailyGrandTotal: XP_GAME_REWARDS.FIRST_GAMES_BONUS,
 	createdAt: new Date('2026-03-17T12:00:00Z'),
 	...overrides,
 });
