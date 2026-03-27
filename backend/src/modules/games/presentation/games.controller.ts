@@ -5,7 +5,7 @@ import { PaginationSchema } from '@common/dto/pagination.dto.js';
 import { ParseIntPipe } from '@common/pipes/parse-int.pipe.js';
 import { ParseUuidPipe } from '@common/pipes/parse-uuid.pipe.js';
 import { ZodValidationPipe } from '@common/pipes/zod-validation.pipe.js';
-import type { GameStatus } from '@gamenight-hub/shared';
+import { SEARCH_CONSTRAINTS, THROTTLE, type GameStatus } from '@gamenight-hub/shared';
 import {
 	Body,
 	Controller,
@@ -37,9 +37,9 @@ export class GamesController {
 	})
 	@Get('search')
 	@UseGuards(FirebaseAuthGuard)
-	@Throttle({ default: { ttl: 60000, limit: 30 } })
+	@Throttle({ default: { ttl: THROTTLE.WINDOW_MS, limit: THROTTLE.SEARCH_LIMIT } })
 	async searchLocal(
-		@Query('query', new ZodValidationPipe(z.string().min(1).max(200)))
+		@Query('query', new ZodValidationPipe(z.string().min(SEARCH_CONSTRAINTS.QUERY_MIN).max(SEARCH_CONSTRAINTS.QUERY_MAX)))
 		query: string,
 	) {
 		return this.gamesService.searchLocal(query);
@@ -48,9 +48,9 @@ export class GamesController {
 	@ApiOperation({ summary: 'Search games on BoardGameGeek' })
 	@Get('bgg/search')
 	@UseGuards(FirebaseAuthGuard)
-	@Throttle({ default: { ttl: 60000, limit: 20 } })
+	@Throttle({ default: { ttl: THROTTLE.WINDOW_MS, limit: THROTTLE.BGG_LIMIT } })
 	async searchBgg(
-		@Query('query', new ZodValidationPipe(z.string().min(1).max(200)))
+		@Query('query', new ZodValidationPipe(z.string().min(SEARCH_CONSTRAINTS.QUERY_MIN).max(SEARCH_CONSTRAINTS.QUERY_MAX)))
 		query: string,
 	) {
 		return this.gamesService.searchBgg(query);
@@ -59,7 +59,7 @@ export class GamesController {
 	@ApiOperation({ summary: 'Get full game details from BoardGameGeek' })
 	@Get('bgg/game/:bggId')
 	@UseGuards(FirebaseAuthGuard)
-	@Throttle({ default: { ttl: 60000, limit: 20 } })
+	@Throttle({ default: { ttl: THROTTLE.WINDOW_MS, limit: THROTTLE.BGG_LIMIT } })
 	async getBggGameDetails(@Param('bggId', ParseIntPipe) bggId: number) {
 		return this.gamesService.getBggGameDetails(bggId);
 	}

@@ -16,17 +16,18 @@ import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { EVENT_EMITTER, THROTTLE } from '@gamenight-hub/shared';
 
 @Module({
 	imports: [
 		ConfigModule.forRoot({ isGlobal: true }),
-		ThrottlerModule.forRoot([{ name: 'default', ttl: 60000, limit: 100 }]),
+		ThrottlerModule.forRoot([{ name: 'default', ttl: THROTTLE.WINDOW_MS, limit: THROTTLE.GLOBAL_LIMIT }]),
 		EventEmitterModule.forRoot({
 			wildcard: false,
 			delimiter: '.',
 			newListener: false,
 			removeListener: false,
-			maxListeners: 10,
+			maxListeners: EVENT_EMITTER.MAX_LISTENERS,
 			verboseMemoryLeak: false,
 			ignoreErrors: false,
 		}),

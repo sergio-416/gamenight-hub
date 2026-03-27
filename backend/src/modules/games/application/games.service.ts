@@ -2,7 +2,7 @@ import type { PaginatedResponse, PaginationDto } from '@common/dto/pagination.dt
 import { paginate } from '@common/dto/pagination.dto.js';
 import { ERROR_CODE } from '@common/error-codes';
 import type { SelectGame } from '@database/schema/games.js';
-import type { CheckPlayedGameResponse, GameStatus } from '@gamenight-hub/shared';
+import { PAGINATION, UI, type CheckPlayedGameResponse, type GameStatus } from '@gamenight-hub/shared';
 import { ConflictException, Inject, Injectable, Logger } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { GameAddedEvent } from '../../xp/domain/xp-events.js';
@@ -91,7 +91,7 @@ export class GamesService {
 		status?: GameStatus,
 	): Promise<PaginatedResponse<SelectGame>> {
 		const { data, total } = await this.crudService.findAll(createdBy, pagination, status);
-		return paginate(data, total, pagination?.page ?? 1, pagination?.limit ?? 20);
+		return paginate(data, total, pagination?.page ?? PAGINATION.DEFAULT_PAGE, pagination?.limit ?? PAGINATION.DEFAULT_LIMIT);
 	}
 
 	async findOne(id: string, createdBy: string): Promise<SelectGame> {
@@ -131,7 +131,7 @@ export class GamesService {
 
 		try {
 			const bggResults = await this.bggService.searchGames(query);
-			return bggResults.slice(0, 50).map((result) => ({
+			return bggResults.slice(0, UI.BGG_SEARCH_FALLBACK_LIMIT).map((result) => ({
 				bggId: result.bggId,
 				name: result.name,
 				yearPublished: result.yearPublished,

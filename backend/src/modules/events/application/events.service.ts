@@ -1,3 +1,4 @@
+import { PAGINATION } from '@gamenight-hub/shared';
 import { paginate } from '@common/dto/pagination.dto.js';
 import { ERROR_CODE } from '@common/error-codes';
 import { DB_TOKEN, type DrizzleDb } from '@database/database.module.js';
@@ -90,8 +91,8 @@ export class EventsService {
 	}
 
 	async findAll(dto?: FindEventsDto) {
-		const page = dto?.page ?? 1;
-		const limit = dto?.limit ?? 20;
+		const page = dto?.page ?? PAGINATION.DEFAULT_PAGE;
+		const limit = dto?.limit ?? PAGINATION.DEFAULT_LIMIT;
 		const offset = (page - 1) * limit;
 		const where = and(
 			isNull(events.deletedAt),

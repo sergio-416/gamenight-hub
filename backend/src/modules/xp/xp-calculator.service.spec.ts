@@ -1,3 +1,4 @@
+import { XP_CAPS, XP_FOUNDING, XP_GAME_REWARDS, XP_GAME_THRESHOLDS, XP_ONE_TIME_BONUSES, XP_SOLO_BONUS, XP_STREAK, XP_WEEKEND_MULTIPLIER } from '@gamenight-hub/shared';
 import { XpCalculatorService } from './xp-calculator.service.js';
 
 describe('XpCalculatorService', () => {

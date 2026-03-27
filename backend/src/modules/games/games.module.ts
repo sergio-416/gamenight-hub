@@ -1,3 +1,4 @@
+import { HTTP_TIMEOUTS } from '@gamenight-hub/shared';
 import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -32,7 +33,7 @@ import { GamesController } from './presentation/games.controller.js';
 						Accept: 'application/xml, text/xml, */*',
 						...(token ? { Authorization: `Bearer ${token}` } : {}),
 					},
-					timeout: 10000,
+					timeout: HTTP_TIMEOUTS.BGG_API,
 				};
 			},
 		}),

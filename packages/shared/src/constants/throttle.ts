@@ -1,0 +1,7 @@
+export const THROTTLE = {
+	WINDOW_MS: 60_000,
+	GLOBAL_LIMIT: 100,
+	SEARCH_LIMIT: 30,
+	BGG_LIMIT: 20,
+	MAGIC_LINK_LIMIT: 3,
+} as const;

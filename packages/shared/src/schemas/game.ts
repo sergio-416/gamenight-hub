@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { GAME_CONSTRAINTS } from '../constants/validation.js';
 
 export const GameStatusSchema = z.enum(['owned', 'want_to_play', 'want_to_try', 'played']);
 
@@ -21,7 +22,7 @@ export const GameSchema = z.object({
 	imageUrl: z.url().optional().nullable(),
 	status: GameStatusSchema.default('want_to_try'),
 	notes: z.string().optional(),
-	complexity: z.number().int().min(1).max(5).optional(),
+	complexity: z.number().int().min(GAME_CONSTRAINTS.COMPLEXITY_MIN).max(GAME_CONSTRAINTS.COMPLEXITY_MAX).optional(),
 	isExpansion: z.boolean().optional(),
 	createdBy: z.string().optional(),
 	createdAt: z.coerce.date().optional(),
@@ -50,13 +51,13 @@ export const CreateGameSchema = z.object({
 	bggId: z.number().int().positive(),
 	status: GameStatusSchema.optional(),
 	notes: z.string().optional(),
-	complexity: z.number().int().min(1).max(5).optional(),
+	complexity: z.number().int().min(GAME_CONSTRAINTS.COMPLEXITY_MIN).max(GAME_CONSTRAINTS.COMPLEXITY_MAX).optional(),
 });
 
 export const UpdateGameSchema = z.object({
 	status: GameStatusSchema.optional(),
 	notes: z.string().optional(),
-	complexity: z.number().int().min(1).max(5).optional(),
+	complexity: z.number().int().min(GAME_CONSTRAINTS.COMPLEXITY_MIN).max(GAME_CONSTRAINTS.COMPLEXITY_MAX).optional(),
 });
 
 export type Game = z.infer<typeof GameSchema>;

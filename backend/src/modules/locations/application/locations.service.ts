@@ -1,3 +1,4 @@
+import { PAGINATION } from '@gamenight-hub/shared';
 import type { PaginationDto } from '@common/dto/pagination.dto.js';
 import { type PaginatedResponse, paginate } from '@common/dto/pagination.dto.js';
 import { ERROR_CODE } from '@common/error-codes';
@@ -73,8 +74,8 @@ export class LocationsService {
 	}
 
 	async findAll(pagination?: PaginationDto): Promise<PaginatedResponse<SelectLocation>> {
-		const page = pagination?.page ?? 1;
-		const limit = pagination?.limit ?? 20;
+		const page = pagination?.page ?? PAGINATION.DEFAULT_PAGE;
+		const limit = pagination?.limit ?? PAGINATION.DEFAULT_LIMIT;
 		const offset = (page - 1) * limit;
 		const where = isNull(locations.deletedAt);
 
