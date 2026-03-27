@@ -150,6 +150,9 @@ describe('GamesService', () => {
 				name: 'Ticket to Ride',
 				status: 'want_to_try' as const,
 			});
+			expect(result).not.toHaveProperty('createdBy');
+			expect(result).not.toHaveProperty('updatedAt');
+			expect(result).not.toHaveProperty('deletedAt');
 		});
 	});
 

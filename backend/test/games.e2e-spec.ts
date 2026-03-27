@@ -16,7 +16,7 @@ const mockGame = {
 	name: 'Catan',
 	status: 'owned',
 	yearPublished: 1995,
-	createdBy: 'user-uid-123',
+	createdAt: new Date(),
 };
 
 describe('Games API (e2e)', () => {
@@ -100,6 +100,9 @@ describe('Games API (e2e)', () => {
 
 			expect(res.body.id).toBe(GAME_ID);
 			expect(res.body.name).toBe('Catan');
+			expect(res.body).not.toHaveProperty('createdBy');
+			expect(res.body).not.toHaveProperty('updatedAt');
+			expect(res.body).not.toHaveProperty('deletedAt');
 			expect(mockGamesService.importFromBgg).toHaveBeenCalledWith(
 				13,
 				{ status: 'owned' },
@@ -114,6 +117,9 @@ describe('Games API (e2e)', () => {
 
 			expect(Array.isArray(res.body)).toBe(true);
 			expect(res.body[0].id).toBe(GAME_ID);
+			expect(res.body[0]).not.toHaveProperty('createdBy');
+			expect(res.body[0]).not.toHaveProperty('updatedAt');
+			expect(res.body[0]).not.toHaveProperty('deletedAt');
 			expect(mockGamesService.findAll).toHaveBeenCalledWith(
 				'user-uid-123',
 				{ page: 1, limit: 20 },
@@ -127,6 +133,9 @@ describe('Games API (e2e)', () => {
 			const res = await request(app.getHttpServer()).get(`/api/v1/games/${GAME_ID}`).expect(200);
 
 			expect(res.body.id).toBe(GAME_ID);
+			expect(res.body).not.toHaveProperty('createdBy');
+			expect(res.body).not.toHaveProperty('updatedAt');
+			expect(res.body).not.toHaveProperty('deletedAt');
 			expect(mockGamesService.findOne).toHaveBeenCalledWith(GAME_ID, 'user-uid-123');
 		});
 	});

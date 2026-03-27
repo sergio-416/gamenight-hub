@@ -236,10 +236,9 @@ describe('EventsService', () => {
 			const result = await service.findOne(event.id);
 
 			expect(result.id).toBe(event.id);
-			expect(result).not.toHaveProperty('deletedAt');
-			expect(result).not.toHaveProperty('updatedAt');
 			expect(result).toHaveProperty('createdBy');
-			expect(result).toHaveProperty('isOwner');
+			expect(result).toHaveProperty('hostUsername');
+			expect(result).toHaveProperty('gameName');
 		});
 
 		it('should throw NotFoundException when event id not found', async () => {

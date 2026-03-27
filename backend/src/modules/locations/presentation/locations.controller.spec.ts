@@ -181,6 +181,9 @@ describe('LocationsController', () => {
 					name: 'Cafe Inside',
 					latitude: 41.38,
 					longitude: 2.15,
+					address: '1 Cafe St',
+					postalCode: null,
+					venueType: 'cafe',
 					createdBy: 'user-1',
 				},
 				{
@@ -188,6 +191,9 @@ describe('LocationsController', () => {
 					name: 'Store Inside',
 					latitude: 41.4,
 					longitude: 2.18,
+					address: '2 Store St',
+					postalCode: null,
+					venueType: 'store',
 					createdBy: 'user-2',
 				},
 			];
@@ -203,6 +209,9 @@ describe('LocationsController', () => {
 			expect(result).toHaveLength(2);
 			for (const location of result) {
 				expect(location).not.toHaveProperty('createdBy');
+				expect(location).not.toHaveProperty('deletedAt');
+				expect(location).not.toHaveProperty('updatedAt');
+				expect(location).not.toHaveProperty('createdAt');
 			}
 			expect(mockLocationsService.findInBounds).toHaveBeenCalledWith(41.3, 2.1, 41.5, 2.2, []);
 		});
