@@ -1,7 +1,6 @@
 import type { PaginatedResponse, PaginationDto } from '@common/dto/pagination.dto.js';
 import { paginate } from '@common/dto/pagination.dto.js';
 import { ERROR_CODE } from '@common/error-codes';
-import type { SelectGame } from '@database/schema/games.js';
 import { PAGINATION, UI, type CheckPlayedGameResponse, type GameStatus } from '@gamenight-hub/shared';
 import { ConflictException, Inject, Injectable, Logger } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
@@ -12,6 +11,7 @@ import { BggCsvService } from './bgg-csv.service.js';
 import { BggIntegrationService } from './bgg-integration.service.js';
 import { GamesAnalyticsService } from './games-analytics.service.js';
 import { GamesCrudService } from './games-crud.service.js';
+import { type GameResponse, toGameResponse, toEnrichedGameResponse } from './game.sanitiser.js';
 import { UserPlayedGamesService } from './user-played-games.service.js';
 
 @Injectable()
@@ -45,7 +45,7 @@ export class GamesService {
 		bggId: number,
 		personalFields: UpdatePersonalFieldsDto,
 		createdBy: string,
-	): Promise<SelectGame> {
+	): Promise<GameResponse> {
 		const ownedBggIds = await this.crudService.findOwnedBggIds(createdBy);
 		if (ownedBggIds.includes(bggId)) {
 			throw new ConflictException({
@@ -82,38 +82,38 @@ export class GamesService {
 			this.#logger.error('Failed to emit game.added event', err);
 		}
 
-		return created;
+		return toGameResponse(created);
 	}
 
 	async findAll(
 		createdBy: string,
 		pagination?: PaginationDto,
 		status?: GameStatus,
-	): Promise<PaginatedResponse<SelectGame>> {
+	): Promise<PaginatedResponse<GameResponse>> {
 		const { data, total } = await this.crudService.findAll(createdBy, pagination, status);
-		return paginate(data, total, pagination?.page ?? PAGINATION.DEFAULT_PAGE, pagination?.limit ?? PAGINATION.DEFAULT_LIMIT);
+		return paginate(data.map(toGameResponse), total, pagination?.page ?? PAGINATION.DEFAULT_PAGE, pagination?.limit ?? PAGINATION.DEFAULT_LIMIT);
 	}
 
-	async findOne(id: string, createdBy: string): Promise<SelectGame> {
-		return this.crudService.findOne(id, createdBy);
+	async findOne(id: string, createdBy: string): Promise<GameResponse> {
+		return toGameResponse(await this.crudService.findOne(id, createdBy));
 	}
 
 	async findOneEnriched(id: string, createdBy: string) {
 		const enriched = await this.crudService.findOneEnriched(id, createdBy);
 		const recommendations = await this.crudService.findCollectionRecommendations(id, createdBy);
-		return { ...enriched, recommendations };
+		return toEnrichedGameResponse(enriched, recommendations);
 	}
 
 	async update(
 		id: string,
 		personalFields: UpdatePersonalFieldsDto,
 		createdBy: string,
-	): Promise<SelectGame> {
-		return this.crudService.update(id, personalFields, createdBy);
+	): Promise<GameResponse> {
+		return toGameResponse(await this.crudService.update(id, personalFields, createdBy));
 	}
 
-	async remove(id: string, createdBy: string): Promise<SelectGame> {
-		return this.crudService.remove(id, createdBy);
+	async remove(id: string, createdBy: string): Promise<GameResponse> {
+		return toGameResponse(await this.crudService.remove(id, createdBy));
 	}
 
 	async getStats(createdBy: string) {

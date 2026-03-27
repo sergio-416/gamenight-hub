@@ -21,6 +21,7 @@ import { LocationsService } from '../../locations/application/locations.service.
 import { EventCreatedEvent } from '../domain/events/event-created.event.js';
 import type { CreateEventDto, UpdateEventDto } from '../presentation/dto/create-event.dto.js';
 import type { FindEventsDto } from '../presentation/dto/event-filter.dto.js';
+import { type EventListResponse, toEventListResponse, toEventDetailResponse } from './event.sanitiser.js';
 
 @Injectable()
 export class EventsService {
@@ -87,7 +88,8 @@ export class EventsService {
 			this.#logger.error('Failed to emit event.created event', err);
 		}
 
-		return created;
+		const { deletedAt, createdAt, updatedAt, ...response } = created;
+		return response;
 	}
 
 	async findAll(dto?: FindEventsDto) {

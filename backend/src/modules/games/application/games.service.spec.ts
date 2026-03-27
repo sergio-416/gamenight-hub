@@ -85,10 +85,7 @@ describe('GamesService', () => {
 				status: 'owned' as const,
 				notes: 'My favorite game!',
 				complexity: 3,
-				createdBy: OWNER_UID,
 				createdAt: new Date(),
-				updatedAt: new Date(),
-				deletedAt: null,
 			};
 
 			mockBggService.getGameDetails.mockResolvedValue(bggDetails);
@@ -111,8 +108,10 @@ describe('GamesService', () => {
 				status: 'owned' as const,
 				notes: 'My favorite game!',
 				complexity: 3,
-				createdBy: OWNER_UID,
 			});
+			expect(result).not.toHaveProperty('createdBy');
+			expect(result).not.toHaveProperty('updatedAt');
+			expect(result).not.toHaveProperty('deletedAt');
 		});
 
 		it('should return game with default values when personal fields not provided', async () => {

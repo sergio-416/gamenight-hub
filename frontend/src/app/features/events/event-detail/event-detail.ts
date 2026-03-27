@@ -7,7 +7,7 @@ import { API_CONFIG } from '@core/config/api.config';
 import { AuthService } from '@core/services/auth';
 import { type Participant, ParticipantsService } from '@core/services/participants';
 import { ToastService } from '@core/services/toast';
-import type { Event, UpdateCalendarEvent } from '@features/calendar/models/event.model';
+import type { Event as CalendarEvent, UpdateCalendarEvent } from '@features/calendar/models/event.model';
 import { UpdateCalendarEventSchema } from '@features/calendar/models/event.model';
 import { EventsService } from '@features/calendar/services/events';
 import { CoverImagePicker } from '@features/create-event/components/cover-image-picker';
@@ -17,6 +17,8 @@ import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 import { SimpleMapPreview } from '@shared/components/simple-map-preview/simple-map-preview';
 import { XpService } from '@shared/services/xp.service';
 import { map } from 'rxjs';
+
+type EventDetail = CalendarEvent & { isOwner?: boolean };
 
 interface InfoPill {
 	label: string;
@@ -48,7 +50,7 @@ export class EventDetail {
 		initialValue: '',
 	});
 
-	readonly eventResource = httpResource<Event>(() =>
+	readonly eventResource = httpResource<EventDetail>(() =>
 		this.#id() ? `${this.#apiUrl}/events/${this.#id()}` : undefined,
 	);
 
@@ -62,11 +64,7 @@ export class EventDetail {
 	readonly location = computed(() => this.locationResource.value());
 	readonly loading = computed(() => this.eventResource.isLoading());
 
-	readonly isOwner = computed(() => {
-		const uid = this.#auth.currentUser()?.uid;
-		const event = this.event();
-		return !!uid && !!event && uid === event.createdBy;
-	});
+	readonly isOwner = computed(() => this.event()?.isOwner ?? false);
 
 	readonly isLoggedIn = this.#auth.isLoggedIn;
 
