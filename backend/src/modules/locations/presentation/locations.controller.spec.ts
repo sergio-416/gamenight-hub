@@ -66,6 +66,9 @@ describe('LocationsController', () => {
 						name: 'Board Game Cafe',
 						latitude: 41.3851,
 						longitude: 2.1734,
+						address: '123 Game Street',
+						postalCode: null,
+						venueType: 'cafe',
 						createdBy: 'user-123',
 					},
 					{
@@ -73,6 +76,9 @@ describe('LocationsController', () => {
 						name: 'Game Store Central',
 						latitude: 41.4,
 						longitude: 2.18,
+						address: '456 Main St',
+						postalCode: null,
+						venueType: 'store',
 						createdBy: 'user-456',
 					},
 				],
@@ -88,6 +94,9 @@ describe('LocationsController', () => {
 			expect(result.data).toHaveLength(2);
 			for (const location of result.data) {
 				expect(location).not.toHaveProperty('createdBy');
+				expect(location).not.toHaveProperty('deletedAt');
+				expect(location).not.toHaveProperty('updatedAt');
+				expect(location).not.toHaveProperty('createdAt');
 			}
 			expect(mockLocationsService.findAll).toHaveBeenCalledTimes(1);
 		});
@@ -114,12 +123,20 @@ describe('LocationsController', () => {
 				name: 'Board Game Cafe',
 				latitude: 41.3851,
 				longitude: 2.1734,
+				address: '123 Game Street',
+				postalCode: null,
+				venueType: 'cafe',
+				createdBy: 'user-123',
 			};
 			mockLocationsService.findOne.mockResolvedValue(mockLocation);
 
 			const result = await controller.findOne('uuid-123');
 
 			expect(result.id).toBe('uuid-123');
+			expect(result).not.toHaveProperty('createdBy');
+			expect(result).not.toHaveProperty('deletedAt');
+			expect(result).not.toHaveProperty('updatedAt');
+			expect(result).not.toHaveProperty('createdAt');
 			expect(mockLocationsService.findOne).toHaveBeenCalledWith('uuid-123');
 		});
 	});

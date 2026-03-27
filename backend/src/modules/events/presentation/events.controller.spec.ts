@@ -46,12 +46,20 @@ describe('EventsController', () => {
 				id: 'uuid-123',
 				...createDto,
 				createdBy: MOCK_UID,
+				endTime: null,
+				description: null,
+				color: null,
+				coverImage: null,
+				category: null,
 			};
 			mockEventsService.create.mockResolvedValue(expectedEvent);
 
 			const result = await controller.create(createDto, MOCK_UID);
 
 			expect(result.title).toBe('Catan Night at the Cafe');
+			expect(result).not.toHaveProperty('deletedAt');
+			expect(result).not.toHaveProperty('updatedAt');
+			expect(result).not.toHaveProperty('createdAt');
 			expect(mockEventsService.create).toHaveBeenCalledWith(createDto, MOCK_UID);
 		});
 	});
@@ -64,14 +72,28 @@ describe('EventsController', () => {
 					title: 'Catan Night',
 					locationId: 'loc-1',
 					startTime: new Date(),
-					createdBy: 'uid-1',
+					endTime: null,
+					maxPlayers: null,
+					description: null,
+					coverImage: null,
+					category: null,
+					participantCount: 0,
+					gameThumbnailUrl: null,
+					gameImageUrl: null,
 				},
 				{
 					id: '2',
 					title: 'Ticket Night',
 					locationId: 'loc-1',
 					startTime: new Date(),
-					createdBy: 'uid-2',
+					endTime: null,
+					maxPlayers: null,
+					description: null,
+					coverImage: null,
+					category: null,
+					participantCount: 0,
+					gameThumbnailUrl: null,
+					gameImageUrl: null,
 				},
 			];
 			mockEventsService.findAll.mockResolvedValue({
@@ -83,6 +105,9 @@ describe('EventsController', () => {
 
 			expect(result.data).toHaveLength(2);
 			expect(result.data[0]).not.toHaveProperty('createdBy');
+			expect(result.data[0]).not.toHaveProperty('deletedAt');
+			expect(result.data[0]).not.toHaveProperty('updatedAt');
+			expect(result.data[0]).not.toHaveProperty('createdAt');
 			expect(mockEventsService.findAll).toHaveBeenCalledTimes(1);
 		});
 
@@ -102,12 +127,33 @@ describe('EventsController', () => {
 				title: 'Catan Night',
 				locationId: 'loc-1',
 				startTime: new Date(),
+				endTime: null,
+				maxPlayers: null,
+				description: null,
+				coverImage: null,
+				category: null,
+				participantCount: 0,
+				gameThumbnailUrl: null,
+				gameImageUrl: null,
+				createdBy: MOCK_UID,
+				isOwner: true,
+				hostUsername: null,
+				hostAvatar: null,
+				gameName: null,
+				gameComplexity: null,
+				gamePlayingTime: null,
+				gameMinPlayers: null,
+				gameMaxPlayers: null,
 			};
 			mockEventsService.findOne.mockResolvedValue(mockEvent);
 
 			const result = await controller.findOne('uuid-123');
 
 			expect(result.id).toBe('uuid-123');
+			expect(result).toHaveProperty('isOwner');
+			expect(result).toHaveProperty('createdBy');
+			expect(result).not.toHaveProperty('deletedAt');
+			expect(result).not.toHaveProperty('updatedAt');
 			expect(mockEventsService.findOne).toHaveBeenCalledWith('uuid-123');
 		});
 	});
