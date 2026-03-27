@@ -5,6 +5,7 @@ import { API_CONFIG } from '@core/config/api.config';
 import { AuthService } from '@core/services/auth';
 import { ToastService } from '@core/services/toast';
 import { provideTranslocoTesting } from '@core/testing/transloco-testing';
+import { PAGINATION } from '@gamenight-hub/shared';
 import { provideTranslocoScope } from '@jsverse/transloco';
 import { fireEvent, render, screen } from '@testing-library/angular';
 import { of } from 'rxjs';
@@ -82,8 +83,8 @@ describe('GameNights', () => {
 			httpMock.expectOne(`${API_CONFIG.baseUrl}/locations`).flush({
 				data: [],
 				total: 0,
-				page: 1,
-				limit: 20,
+				page: PAGINATION.DEFAULT_PAGE,
+				limit: PAGINATION.DEFAULT_LIMIT,
 				totalPages: 0,
 			});
 
@@ -99,8 +100,8 @@ describe('GameNights', () => {
 			httpMock.expectOne(`${API_CONFIG.baseUrl}/locations`).flush({
 				data: [],
 				total: 0,
-				page: 1,
-				limit: 20,
+				page: PAGINATION.DEFAULT_PAGE,
+				limit: PAGINATION.DEFAULT_LIMIT,
 				totalPages: 0,
 			});
 
@@ -117,15 +118,33 @@ describe('GameNights', () => {
 
 			const httpMock = fixture.debugElement.injector.get(HttpTestingController);
 			httpMock.match(`${API_CONFIG.baseUrl}/locations`).forEach((req) => {
-				req.flush({ data: [], total: 0, page: 1, limit: 20, totalPages: 0 });
+				req.flush({
+					data: [],
+					total: 0,
+					page: PAGINATION.DEFAULT_PAGE,
+					limit: PAGINATION.DEFAULT_LIMIT,
+					totalPages: 0,
+				});
 			});
 			httpMock.match(`${API_CONFIG.baseUrl}/events`).forEach((req) => {
-				req.flush({ data: [], total: 0, page: 1, limit: 20, totalPages: 0 });
+				req.flush({
+					data: [],
+					total: 0,
+					page: PAGINATION.DEFAULT_PAGE,
+					limit: PAGINATION.DEFAULT_LIMIT,
+					totalPages: 0,
+				});
 			});
 			httpMock
 				.match(() => true)
 				.forEach((req) => {
-					req.flush({ data: [], total: 0, page: 1, limit: 20, totalPages: 0 });
+					req.flush({
+						data: [],
+						total: 0,
+						page: PAGINATION.DEFAULT_PAGE,
+						limit: PAGINATION.DEFAULT_LIMIT,
+						totalPages: 0,
+					});
 				});
 			await fixture.whenStable();
 			detectChanges();
@@ -144,15 +163,33 @@ describe('GameNights', () => {
 		}) {
 			const httpMock = fixture.debugElement.injector.get(HttpTestingController);
 			httpMock.match(`${API_CONFIG.baseUrl}/locations`).forEach((req) => {
-				req.flush({ data: [], total: 0, page: 1, limit: 20, totalPages: 0 });
+				req.flush({
+					data: [],
+					total: 0,
+					page: PAGINATION.DEFAULT_PAGE,
+					limit: PAGINATION.DEFAULT_LIMIT,
+					totalPages: 0,
+				});
 			});
 			httpMock.match(`${API_CONFIG.baseUrl}/events`).forEach((req) => {
-				req.flush({ data: [], total: 0, page: 1, limit: 20, totalPages: 0 });
+				req.flush({
+					data: [],
+					total: 0,
+					page: PAGINATION.DEFAULT_PAGE,
+					limit: PAGINATION.DEFAULT_LIMIT,
+					totalPages: 0,
+				});
 			});
 			httpMock
 				.match(() => true)
 				.forEach((req) => {
-					req.flush({ data: [], total: 0, page: 1, limit: 20, totalPages: 0 });
+					req.flush({
+						data: [],
+						total: 0,
+						page: PAGINATION.DEFAULT_PAGE,
+						limit: PAGINATION.DEFAULT_LIMIT,
+						totalPages: 0,
+					});
 				});
 		}
 

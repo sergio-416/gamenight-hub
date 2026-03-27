@@ -1,3 +1,14 @@
+import {
+	DAY,
+	XP_CAPS,
+	XP_FOUNDING,
+	XP_GAME_REWARDS,
+	XP_GAME_THRESHOLDS,
+	XP_ONE_TIME_BONUSES,
+	XP_SOLO_BONUS,
+	XP_STREAK,
+	XP_WEEKEND_MULTIPLIER,
+} from '@gamenight-hub/shared';
 import { Injectable } from '@nestjs/common';
 
 export interface LevelInfo {
@@ -42,31 +53,22 @@ const LEVEL_TABLE: readonly LevelInfo[] = [
 	},
 ] as const;
 
-const ACTION_CAP = 500;
-const GRAND_CAP = 1500;
-
-const ONE_TIME_BONUSES: Record<string, number> = {
-	game_added: 100,
-	event_created: 150,
-	participant_joined: 100,
-};
-
-const FOUNDING_COLLECTION_THRESHOLD = 10;
-const FOUNDING_COLLECTION_WINDOW_MS = 24 * 60 * 60 * 1000;
-
 @Injectable()
 export class XpCalculatorService {
 	static readonly LEVEL_TABLE = LEVEL_TABLE;
 
 	calculateGameXp(monthlyCount: number): number {
-		if (monthlyCount < 5) return 75;
-		if (monthlyCount < 15) return 20;
-		if (monthlyCount < 30) return 10;
-		return 5;
+		if (monthlyCount < XP_GAME_THRESHOLDS.SMALL_COLLECTION)
+			return XP_GAME_REWARDS.FIRST_GAMES_BONUS;
+		if (monthlyCount < XP_GAME_THRESHOLDS.MEDIUM_COLLECTION)
+			return XP_GAME_REWARDS.SMALL_COLLECTION_BONUS;
+		if (monthlyCount < XP_GAME_THRESHOLDS.LARGE_COLLECTION)
+			return XP_GAME_REWARDS.MEDIUM_COLLECTION_BONUS;
+		return XP_GAME_REWARDS.LARGE_COLLECTION_BONUS;
 	}
 
 	calculateSoloBonus(monthlyCount: number, batchSize: number): number {
-		return monthlyCount === 0 && batchSize === 1 ? 25 : 0;
+		return monthlyCount === 0 && batchSize === 1 ? XP_SOLO_BONUS : 0;
 	}
 
 	calculateBatchGameXp(monthlyCount: number, batchSize: number): number[] {
@@ -80,15 +82,17 @@ export class XpCalculatorService {
 	}
 
 	getStreakMultiplier(streakWeeks: number): number {
-		if (streakWeeks >= 30) return 2.0;
-		if (streakWeeks >= 7) return 1.5;
-		if (streakWeeks >= 3) return 1.25;
-		return 1.0;
+		if (streakWeeks >= XP_STREAK.LEGENDARY_WEEKS) return XP_STREAK.LEGENDARY_MULTIPLIER;
+		if (streakWeeks >= XP_STREAK.VETERAN_WEEKS) return XP_STREAK.VETERAN_MULTIPLIER;
+		if (streakWeeks >= XP_STREAK.APPRENTICE_WEEKS) return XP_STREAK.APPRENTICE_MULTIPLIER;
+		return XP_STREAK.BASE_MULTIPLIER;
 	}
 
 	getWeekendMultiplier(date: Date): number {
 		const day = date.getUTCDay();
-		return day === 0 || day === 6 ? 1.1 : 1.0;
+		return day === DAY.SUNDAY || day === DAY.SATURDAY
+			? XP_WEEKEND_MULTIPLIER
+			: XP_STREAK.BASE_MULTIPLIER;
 	}
 
 	getCombinedMultiplier(streakWeeks: number, date: Date): number {
@@ -99,8 +103,8 @@ export class XpCalculatorService {
 		baseXp: number,
 		dailyActionSpent: number,
 		dailyGrandSpent: number,
-		actionCap: number = ACTION_CAP,
-		grandCap: number = GRAND_CAP,
+		actionCap: number = XP_CAPS.ACTION_CAP,
+		grandCap: number = XP_CAPS.GRAND_CAP,
 	): number {
 		const remainingAction = Math.max(0, actionCap - dailyActionSpent);
 		const remainingGrand = Math.max(0, grandCap - dailyGrandSpent);
@@ -138,12 +142,12 @@ export class XpCalculatorService {
 
 	checkOneTimeBonus(action: string, isFirst: boolean): number {
 		if (!isFirst) return 0;
-		return ONE_TIME_BONUSES[action] ?? 0;
+		return XP_ONE_TIME_BONUSES[action] ?? 0;
 	}
 
 	isFoundingCollectionEligible(accountCreatedAt: Date, gameCount: number, now: Date): boolean {
-		if (gameCount < FOUNDING_COLLECTION_THRESHOLD) return false;
+		if (gameCount < XP_FOUNDING.COLLECTION_THRESHOLD) return false;
 		const elapsed = now.getTime() - accountCreatedAt.getTime();
-		return elapsed <= FOUNDING_COLLECTION_WINDOW_MS;
+		return elapsed <= XP_FOUNDING.WINDOW_MS;
 	}
 }

@@ -19,6 +19,7 @@ import {
 	UseGuards,
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { toLocationResponse } from '../application/location.sanitiser.js';
 import type { NominatimResult } from '../application/locations.service.js';
 import { LocationsService } from '../application/locations.service.js';
 import type { CreateLocationWithEventDto, UpdateLocationDto } from './dto/create-location.dto.js';
@@ -41,12 +42,12 @@ export class LocationsController {
 	@Post()
 	@HttpCode(HttpStatus.CREATED)
 	@UseGuards(FirebaseAuthGuard)
-	create(
+	async create(
 		@Body(new ZodValidationPipe(CreateLocationWithEventSchema))
 		dto: CreateLocationWithEventDto,
 		@CurrentUser('uid') uid: string,
 	) {
-		return this.#locationsService.create(dto, uid);
+		return toLocationResponse(await this.#locationsService.create(dto, uid));
 	}
 
 	@ApiOperation({ summary: 'List all locations' })
@@ -55,7 +56,7 @@ export class LocationsController {
 		const result = await this.#locationsService.findAll(pagination);
 		return {
 			...result,
-			data: result.data.map(({ createdBy: _, ...location }) => location),
+			data: result.data.map(toLocationResponse),
 		};
 	}
 
@@ -82,31 +83,30 @@ export class LocationsController {
 			types,
 		);
 
-		return data.map(({ createdBy: _, ...location }) => location);
+		return data.map(toLocationResponse);
 	}
 
 	@ApiOperation({ summary: 'Get a location by ID' })
 	@Get(':id')
 	async findOne(@Param('id', ParseUuidPipe) id: string) {
-		const { createdBy: _createdBy, ...publicLocation } = await this.#locationsService.findOne(id);
-		return publicLocation;
+		return toLocationResponse(await this.#locationsService.findOne(id));
 	}
 
 	@ApiOperation({ summary: 'Update a location' })
 	@Patch(':id')
 	@UseGuards(FirebaseAuthGuard)
-	update(
+	async update(
 		@Param('id', ParseUuidPipe) id: string,
 		@Body(new ZodValidationPipe(UpdateLocationSchema)) dto: UpdateLocationDto,
 		@CurrentUser('uid') uid: string,
 	) {
-		return this.#locationsService.update(id, dto, uid);
+		return toLocationResponse(await this.#locationsService.update(id, dto, uid));
 	}
 
 	@ApiOperation({ summary: 'Soft-delete a location' })
 	@Delete(':id')
 	@UseGuards(FirebaseAuthGuard)
-	remove(@Param('id', ParseUuidPipe) id: string, @CurrentUser('uid') uid: string) {
-		return this.#locationsService.remove(id, uid);
+	async remove(@Param('id', ParseUuidPipe) id: string, @CurrentUser('uid') uid: string) {
+		return toLocationResponse(await this.#locationsService.remove(id, uid));
 	}
 }

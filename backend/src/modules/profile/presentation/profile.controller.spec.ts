@@ -1,4 +1,5 @@
 import { FirebaseAuthGuard } from '@auth/infrastructure/guards/firebase-auth.guard.js';
+import { PAGINATION } from '@gamenight-hub/shared';
 import { NotFoundException } from '@nestjs/common';
 import { Test, type TestingModule } from '@nestjs/testing';
 import { GamesService } from '../../games/application/games.service.js';
@@ -153,19 +154,23 @@ describe('ProfileController', () => {
 			const gamesResponse = {
 				data: [{ id: 'g1', name: 'Catan' }],
 				total: 1,
-				page: 1,
-				limit: 50,
+				page: PAGINATION.DEFAULT_PAGE,
+				limit: PAGINATION.PUBLIC_COLLECTION_LIMIT,
 				totalPages: 1,
 			};
 			mockProfileService.getPublicProfile.mockResolvedValue(profile);
 			mockGamesService.findAll.mockResolvedValue(gamesResponse);
 
-			const result = await controller.getPublicGames('john_doe', 1, 50);
+			const result = await controller.getPublicGames(
+				'john_doe',
+				PAGINATION.DEFAULT_PAGE,
+				PAGINATION.PUBLIC_COLLECTION_LIMIT,
+			);
 
 			expect(result.data).toHaveLength(1);
 			expect(mockGamesService.findAll).toHaveBeenCalledWith(MOCK_UID, {
-				page: 1,
-				limit: 50,
+				page: PAGINATION.DEFAULT_PAGE,
+				limit: PAGINATION.PUBLIC_COLLECTION_LIMIT,
 			});
 		});
 
@@ -176,7 +181,13 @@ describe('ProfileController', () => {
 			});
 			mockProfileService.getPublicProfile.mockResolvedValue(profile);
 
-			await expect(controller.getPublicGames('john_doe', 1, 50)).rejects.toThrow(NotFoundException);
+			await expect(
+				controller.getPublicGames(
+					'john_doe',
+					PAGINATION.DEFAULT_PAGE,
+					PAGINATION.PUBLIC_COLLECTION_LIMIT,
+				),
+			).rejects.toThrow(NotFoundException);
 		});
 	});
 

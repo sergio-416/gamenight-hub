@@ -2,6 +2,7 @@ import { FirebaseAuthGuard } from '@auth/infrastructure/guards/firebase-auth.gua
 import { CurrentUser } from '@common/decorators/current-user.decorator.js';
 import { ERROR_CODE } from '@common/error-codes';
 import { ZodValidationPipe } from '@common/pipes/zod-validation.pipe.js';
+import { PAGINATION } from '@gamenight-hub/shared';
 import {
 	Body,
 	Controller,
@@ -62,7 +63,8 @@ export class ProfileController {
 	async getPublicGames(
 		@Param('username') username: string,
 		@Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
-		@Query('limit', new DefaultValuePipe(50), ParseIntPipe) limit: number,
+		@Query('limit', new DefaultValuePipe(PAGINATION.PUBLIC_COLLECTION_LIMIT), ParseIntPipe)
+		limit: number,
 	) {
 		const profile = await this.profileService.getPublicProfile(username);
 

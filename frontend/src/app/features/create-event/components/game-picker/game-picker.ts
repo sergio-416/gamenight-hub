@@ -2,7 +2,7 @@ import { NgOptimizedImage } from '@angular/common';
 import { httpResource } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, computed, input, output, signal } from '@angular/core';
 import { API_CONFIG } from '@core/config/api.config';
-import type { Game, PaginatedResponse } from '@gamenight-hub/shared';
+import { type Game, type PaginatedResponse, UI } from '@gamenight-hub/shared';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { SearchInput } from '@shared/components/search-input/search-input';
 
@@ -22,6 +22,7 @@ interface GameSelection {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GamePicker {
+	readonly CATEGORY_TAGS_LIMIT = UI.CATEGORY_TAGS_LIMIT;
 	readonly selectedGameId = input<string | undefined>();
 
 	readonly gameSelected = output<GameSelection>();

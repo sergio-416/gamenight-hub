@@ -1,4 +1,5 @@
 import { DB_TOKEN } from '@database/database.module.js';
+import { UI } from '@gamenight-hub/shared';
 import { NotFoundException } from '@nestjs/common';
 import { Test, type TestingModule } from '@nestjs/testing';
 import { buildMockDb, chainResolving } from '@test/db-mock.js';
@@ -232,7 +233,7 @@ describe('GamesCrudService', () => {
 
 			const result = await service.findCollectionRecommendations(current.id, OWNER_UID);
 
-			expect(result.length).toBeLessThanOrEqual(5);
+			expect(result.length).toBeLessThanOrEqual(UI.RECOMMENDATIONS_TOTAL);
 			expect(result.every((g) => g.id !== current.id)).toBe(true);
 		});
 
@@ -272,7 +273,7 @@ describe('GamesCrudService', () => {
 
 			const ids = result.map((g) => g.id);
 			expect(new Set(ids).size).toBe(ids.length);
-			expect(result.length).toBeLessThanOrEqual(5);
+			expect(result.length).toBeLessThanOrEqual(UI.RECOMMENDATIONS_TOTAL);
 		});
 	});
 });

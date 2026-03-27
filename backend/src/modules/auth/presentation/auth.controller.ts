@@ -1,7 +1,7 @@
 import { AuthService } from '@auth/application/auth.service';
 import { ZodValidationPipe } from '@common/pipes/zod-validation.pipe';
 import type { MagicLinkRequest } from '@gamenight-hub/shared';
-import { MagicLinkRequestSchema } from '@gamenight-hub/shared';
+import { MagicLinkRequestSchema, THROTTLE } from '@gamenight-hub/shared';
 import { EmailService } from '@modules/email/application/email.service';
 import {
 	Body,
@@ -34,7 +34,7 @@ export class AuthController {
 	}
 
 	@Post('magic-link')
-	@Throttle({ default: { ttl: 60000, limit: 3 } })
+	@Throttle({ default: { ttl: THROTTLE.WINDOW_MS, limit: THROTTLE.MAGIC_LINK_LIMIT } })
 	@HttpCode(HttpStatus.ACCEPTED)
 	@UsePipes(new ZodValidationPipe(MagicLinkRequestSchema))
 	async requestMagicLink(@Body() body: MagicLinkRequest) {

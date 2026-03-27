@@ -3,7 +3,7 @@ import { ERROR_CODE } from '@common/error-codes';
 import { DB_TOKEN, type DrizzleDb } from '@database/database.module.js';
 import { bggGames } from '@database/schema/bgg-games.js';
 import { games, type InsertGame, type SelectGame } from '@database/schema/games.js';
-import type { GameStatus } from '@gamenight-hub/shared';
+import { type GameStatus, PAGINATION, UI } from '@gamenight-hub/shared';
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { and, count, eq, isNull } from 'drizzle-orm';
 import type { UpdatePersonalFieldsDto } from '../presentation/dto/update-personal-fields.dto.js';
@@ -34,8 +34,8 @@ export class GamesCrudService {
 		pagination?: PaginationDto,
 		status?: GameStatus,
 	): Promise<PaginatedGames> {
-		const page = pagination?.page ?? 1;
-		const limit = pagination?.limit ?? 20;
+		const page = pagination?.page ?? PAGINATION.DEFAULT_PAGE;
+		const limit = pagination?.limit ?? PAGINATION.DEFAULT_LIMIT;
 		const offset = (page - 1) * limit;
 
 		const conditions = [isNull(games.deletedAt), eq(games.createdBy, createdBy)];
@@ -127,16 +127,16 @@ export class GamesCrudService {
 				.sort((a, b) => a.sort - b.sort)
 				.map(({ g }) => g);
 
-		const first3 = shuffled(categoryMatches).slice(0, 3);
-		const remaining = 3 - first3.length;
+		const first3 = shuffled(categoryMatches).slice(0, UI.RECOMMENDATIONS_FIRST);
+		const remaining = UI.RECOMMENDATIONS_FIRST - first3.length;
 		const fillers = shuffled(nonMatches).slice(0, remaining);
 		const slot1to3 = [...first3, ...fillers];
 
 		const usedIds = new Set(slot1to3.map((g) => g.id));
 		const pool = others.filter((g) => !usedIds.has(g.id));
-		const slot4to5 = shuffled(pool).slice(0, 2);
+		const slot4to5 = shuffled(pool).slice(0, UI.RECOMMENDATIONS_EXTRA);
 
-		return [...slot1to3, ...slot4to5].slice(0, 5);
+		return [...slot1to3, ...slot4to5].slice(0, UI.RECOMMENDATIONS_TOTAL);
 	}
 
 	async update(

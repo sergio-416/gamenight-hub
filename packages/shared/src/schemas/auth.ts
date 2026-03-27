@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { ORGANISER_CONSTRAINTS } from '../constants/validation.js';
 
 export const VerifyTokenSchema = z.object({
 	token: z.string().min(1),
@@ -91,8 +92,10 @@ export interface UserClaims {
 }
 
 export const OrganiserRequestSchema = z.object({
-	orgName: z.string().min(2, 'Organisation name must be at least 2 characters'),
-	address: z.string().min(5, 'Please enter a valid address'),
+	orgName: z
+		.string()
+		.min(ORGANISER_CONSTRAINTS.ORG_NAME_MIN, 'Organisation name must be at least 2 characters'),
+	address: z.string().min(ORGANISER_CONSTRAINTS.ADDRESS_MIN, 'Please enter a valid address'),
 	email: z.email('Please enter a valid email'),
 });
 

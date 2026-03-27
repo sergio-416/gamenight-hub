@@ -184,7 +184,15 @@ describe('EventsService', () => {
 
 	describe('find all events', () => {
 		it('should return all persisted events from database', async () => {
-			const mockEvents = [makeEvent(), makeEvent({ id: 'uuid-2', title: 'Ticket Night' })];
+			const mockEvents = [
+				{ ...makeEvent(), participantCount: 0, gameThumbnailUrl: null, gameImageUrl: null },
+				{
+					...makeEvent({ id: 'uuid-2', title: 'Ticket Night' }),
+					participantCount: 0,
+					gameThumbnailUrl: null,
+					gameImageUrl: null,
+				},
+			];
 			mockDb.select
 				.mockReturnValueOnce(chainResolving(mockEvents))
 				.mockReturnValueOnce(chainResolving([{ value: 2 }]));
@@ -193,6 +201,11 @@ describe('EventsService', () => {
 
 			expect(result.data).toHaveLength(2);
 			expect(result.total).toBe(2);
+			expect(result.data[0]).not.toHaveProperty('deletedAt');
+			expect(result.data[0]).not.toHaveProperty('createdAt');
+			expect(result.data[0]).not.toHaveProperty('updatedAt');
+			expect(result.data[0]).not.toHaveProperty('createdBy');
+			expect(result.data[0]).toHaveProperty('participantCount');
 			expect(mockDb.select).toHaveBeenCalled();
 		});
 
@@ -210,12 +223,27 @@ describe('EventsService', () => {
 
 	describe('find one event', () => {
 		it('should return event by id from database', async () => {
-			const event = makeEvent();
+			const event = {
+				...makeEvent(),
+				participantCount: 0,
+				gameThumbnailUrl: null,
+				gameImageUrl: null,
+				gameName: null,
+				gameComplexity: null,
+				gamePlayingTime: null,
+				gameMinPlayers: null,
+				gameMaxPlayers: null,
+				hostUsername: null,
+				hostAvatar: null,
+			};
 			mockDb.select.mockReturnValue(chainResolving([event]));
 
 			const result = await service.findOne(event.id);
 
 			expect(result.id).toBe(event.id);
+			expect(result).toHaveProperty('createdBy');
+			expect(result).toHaveProperty('hostUsername');
+			expect(result).toHaveProperty('gameName');
 		});
 
 		it('should throw NotFoundException when event id not found', async () => {

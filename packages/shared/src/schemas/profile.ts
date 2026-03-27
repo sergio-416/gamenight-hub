@@ -1,21 +1,22 @@
 import { z } from 'zod';
+import { PROFILE_CONSTRAINTS } from '../constants/validation.js';
 
 export const UpdateProfileSchema = z.object({
 	firstName: z
 		.string()
-		.min(1, 'First name is required')
-		.max(50, 'First name must be at most 50 characters')
+		.min(PROFILE_CONSTRAINTS.FIRST_NAME_MIN, 'First name is required')
+		.max(PROFILE_CONSTRAINTS.FIRST_NAME_MAX, 'First name must be at most 50 characters')
 		.optional(),
 	lastName: z
 		.string()
-		.min(1, 'Last name is required')
-		.max(50, 'Last name must be at most 50 characters')
+		.min(PROFILE_CONSTRAINTS.LAST_NAME_MIN, 'Last name is required')
+		.max(PROFILE_CONSTRAINTS.LAST_NAME_MAX, 'Last name must be at most 50 characters')
 		.optional(),
 
 	username: z
 		.string()
-		.min(3, 'Username must be at least 3 characters')
-		.max(30, 'Username must be at most 30 characters')
+		.min(PROFILE_CONSTRAINTS.USERNAME_MIN, 'Username must be at least 3 characters')
+		.max(PROFILE_CONSTRAINTS.USERNAME_MAX, 'Username must be at most 30 characters')
 		.optional(),
 
 	email: z.email('Must be a valid email').optional().or(z.literal('')),
@@ -26,7 +27,10 @@ export const UpdateProfileSchema = z.object({
 		.optional()
 		.or(z.literal('')),
 
-	location: z.string().max(100, 'Location must be at most 100 characters').optional(),
+	location: z
+		.string()
+		.max(PROFILE_CONSTRAINTS.LOCATION_MAX, 'Location must be at most 100 characters')
+		.optional(),
 	postalZip: z
 		.string()
 		.regex(/^[0-9]{4,10}$/, 'Must be a valid postal code')
@@ -34,7 +38,7 @@ export const UpdateProfileSchema = z.object({
 		.or(z.literal('')),
 
 	birthday: z.string().optional(),
-	bio: z.string().max(300, 'Bio must be at most 300 characters').optional(),
+	bio: z.string().max(PROFILE_CONSTRAINTS.BIO_MAX, 'Bio must be at most 300 characters').optional(),
 
 	avatar: z.url({ message: 'Avatar must be a valid URL' }).optional(),
 

@@ -85,10 +85,7 @@ describe('GamesService', () => {
 				status: 'owned' as const,
 				notes: 'My favorite game!',
 				complexity: 3,
-				createdBy: OWNER_UID,
 				createdAt: new Date(),
-				updatedAt: new Date(),
-				deletedAt: null,
 			};
 
 			mockBggService.getGameDetails.mockResolvedValue(bggDetails);
@@ -111,8 +108,10 @@ describe('GamesService', () => {
 				status: 'owned' as const,
 				notes: 'My favorite game!',
 				complexity: 3,
-				createdBy: OWNER_UID,
 			});
+			expect(result).not.toHaveProperty('createdBy');
+			expect(result).not.toHaveProperty('updatedAt');
+			expect(result).not.toHaveProperty('deletedAt');
 		});
 
 		it('should return game with default values when personal fields not provided', async () => {
@@ -151,14 +150,17 @@ describe('GamesService', () => {
 				name: 'Ticket to Ride',
 				status: 'want_to_try' as const,
 			});
+			expect(result).not.toHaveProperty('createdBy');
+			expect(result).not.toHaveProperty('updatedAt');
+			expect(result).not.toHaveProperty('deletedAt');
 		});
 	});
 
 	describe('findAll', () => {
 		it('should return array of games from collection', async () => {
 			const gamesData = [
-				{ id: '1', name: 'Game 1', createdBy: OWNER_UID },
-				{ id: '2', name: 'Game 2', createdBy: OWNER_UID },
+				{ id: '1', name: 'Game 1', createdBy: OWNER_UID, updatedAt: new Date(), deletedAt: null },
+				{ id: '2', name: 'Game 2', createdBy: OWNER_UID, updatedAt: new Date(), deletedAt: null },
 			];
 			mockCrudService.findAll.mockResolvedValue({ data: gamesData, total: 2 });
 
@@ -167,6 +169,9 @@ describe('GamesService', () => {
 			expect(Array.isArray(result.data)).toBe(true);
 			expect(result.total).toBe(2);
 			expect(result.data[0]).toHaveProperty('name');
+			expect(result.data[0]).not.toHaveProperty('createdBy');
+			expect(result.data[0]).not.toHaveProperty('updatedAt');
+			expect(result.data[0]).not.toHaveProperty('deletedAt');
 			expect(result.totalPages).toBe(1);
 		});
 	});
@@ -177,12 +182,17 @@ describe('GamesService', () => {
 				id: 'valid-id',
 				name: 'Catan',
 				createdBy: OWNER_UID,
+				updatedAt: new Date(),
+				deletedAt: null,
 			});
 
 			const result = await service.findOne('valid-id', OWNER_UID);
 
 			expect(result).not.toBeNull();
 			expect(result.name).toBe('Catan');
+			expect(result).not.toHaveProperty('createdBy');
+			expect(result).not.toHaveProperty('updatedAt');
+			expect(result).not.toHaveProperty('deletedAt');
 		});
 
 		it('should throw NotFoundException (not ForbiddenException) when game belongs to another user', async () => {
@@ -220,6 +230,9 @@ describe('GamesService', () => {
 			expect(result.status).toBe('owned');
 			expect(result.notes).toBe('Updated notes!');
 			expect(result.complexity).toBe(4);
+			expect(result).not.toHaveProperty('createdBy');
+			expect(result).not.toHaveProperty('updatedAt');
+			expect(result).not.toHaveProperty('deletedAt');
 		});
 	});
 
@@ -229,12 +242,17 @@ describe('GamesService', () => {
 				id: 'uuid-123',
 				name: 'Catan',
 				createdBy: OWNER_UID,
+				updatedAt: new Date(),
+				deletedAt: null,
 			});
 
 			const result = await service.remove('uuid-123', OWNER_UID);
 
 			expect(result).not.toBeNull();
 			expect(result.id).toBe('uuid-123');
+			expect(result).not.toHaveProperty('createdBy');
+			expect(result).not.toHaveProperty('updatedAt');
+			expect(result).not.toHaveProperty('deletedAt');
 		});
 	});
 

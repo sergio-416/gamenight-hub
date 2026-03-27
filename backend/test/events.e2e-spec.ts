@@ -19,11 +19,11 @@ const mockEvent = {
 	endTime: new Date('2026-03-01T22:00:00.000Z'),
 	maxPlayers: 6,
 	description: 'Weekly Catan session',
-	color: '#ff5733',
-	createdBy: 'user-uid-123',
-	createdAt: new Date(),
-	updatedAt: new Date(),
-	deletedAt: null,
+	coverImage: null,
+	category: null,
+	participantCount: 0,
+	gameThumbnailUrl: null,
+	gameImageUrl: null,
 };
 
 const mockPaginatedResponse = {
@@ -40,7 +40,7 @@ describe('Events API (e2e)', () => {
 	const mockEventsService = {
 		create: vi.fn().mockResolvedValue(mockEvent),
 		findAll: vi.fn().mockResolvedValue(mockPaginatedResponse),
-		findOne: vi.fn().mockResolvedValue(mockEvent),
+		findOne: vi.fn(),
 		update: vi.fn().mockResolvedValue({ ...mockEvent, title: 'Updated Game Night' }),
 		remove: vi.fn().mockResolvedValue(mockEvent),
 	};
@@ -70,11 +70,24 @@ describe('Events API (e2e)', () => {
 		await app.close();
 	});
 
+	const mockDetailEvent = {
+		...mockEvent,
+		createdBy: 'user-uid-123',
+		isOwner: true,
+		hostUsername: null,
+		hostAvatar: null,
+		gameName: null,
+		gameComplexity: null,
+		gamePlayingTime: null,
+		gameMinPlayers: null,
+		gameMaxPlayers: null,
+	};
+
 	beforeEach(() => {
 		vi.clearAllMocks();
 		mockEventsService.create.mockResolvedValue(mockEvent);
 		mockEventsService.findAll.mockResolvedValue(mockPaginatedResponse);
-		mockEventsService.findOne.mockResolvedValue(mockEvent);
+		mockEventsService.findOne.mockResolvedValue(mockDetailEvent);
 		mockEventsService.update.mockResolvedValue({
 			...mockEvent,
 			title: 'Updated Game Night',
@@ -111,6 +124,10 @@ describe('Events API (e2e)', () => {
 			expect(res.body.data).toBeDefined();
 			expect(Array.isArray(res.body.data)).toBe(true);
 			expect(res.body.data[0].id).toBe(EVENT_ID);
+			expect(res.body.data[0]).not.toHaveProperty('createdBy');
+			expect(res.body.data[0]).not.toHaveProperty('deletedAt');
+			expect(res.body.data[0]).not.toHaveProperty('updatedAt');
+			expect(res.body.data[0]).not.toHaveProperty('createdAt');
 			expect(res.body.total).toBe(1);
 			expect(mockEventsService.findAll).toHaveBeenCalled();
 		});

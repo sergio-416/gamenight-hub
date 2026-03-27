@@ -6,6 +6,7 @@ import { API_CONFIG } from '@core/config/api.config';
 import { AuthService } from '@core/services/auth';
 import { ToastService } from '@core/services/toast';
 import { provideTranslocoTesting } from '@core/testing/transloco-testing';
+import { PAGINATION } from '@gamenight-hub/shared';
 import { render, screen } from '@testing-library/angular';
 import { Collection } from './collection';
 import { GamesService } from './services/games';
@@ -43,9 +44,13 @@ describe('Collection', () => {
 			});
 
 			const httpMock = fixture.debugElement.injector.get(HttpTestingController);
-			httpMock
-				.expectOne(`${API_CONFIG.baseUrl}${API_CONFIG.endpoints.games}`)
-				.flush({ data: [], total: 0, page: 1, limit: 20, totalPages: 0 });
+			httpMock.expectOne(`${API_CONFIG.baseUrl}${API_CONFIG.endpoints.games}`).flush({
+				data: [],
+				total: 0,
+				page: PAGINATION.DEFAULT_PAGE,
+				limit: PAGINATION.DEFAULT_LIMIT,
+				totalPages: 0,
+			});
 
 			await fixture.debugElement.injector.get(ApplicationRef).whenStable();
 			fixture.detectChanges();
@@ -59,9 +64,13 @@ describe('Collection', () => {
 			});
 
 			const httpMock = fixture.debugElement.injector.get(HttpTestingController);
-			httpMock
-				.expectOne(`${API_CONFIG.baseUrl}${API_CONFIG.endpoints.games}`)
-				.flush({ data: [], total: 0, page: 1, limit: 20, totalPages: 0 });
+			httpMock.expectOne(`${API_CONFIG.baseUrl}${API_CONFIG.endpoints.games}`).flush({
+				data: [],
+				total: 0,
+				page: PAGINATION.DEFAULT_PAGE,
+				limit: PAGINATION.DEFAULT_LIMIT,
+				totalPages: 0,
+			});
 
 			await fixture.debugElement.injector.get(ApplicationRef).whenStable();
 			fixture.detectChanges();

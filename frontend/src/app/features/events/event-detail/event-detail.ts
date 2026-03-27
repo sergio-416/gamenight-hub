@@ -7,16 +7,27 @@ import { API_CONFIG } from '@core/config/api.config';
 import { AuthService } from '@core/services/auth';
 import { type Participant, ParticipantsService } from '@core/services/participants';
 import { ToastService } from '@core/services/toast';
-import type { Event, UpdateCalendarEvent } from '@features/calendar/models/event.model';
+import type {
+	Event as CalendarEvent,
+	UpdateCalendarEvent,
+} from '@features/calendar/models/event.model';
 import { UpdateCalendarEventSchema } from '@features/calendar/models/event.model';
 import { EventsService } from '@features/calendar/services/events';
 import { CoverImagePicker } from '@features/create-event/components/cover-image-picker';
 import type { Location } from '@gamenight-hub/shared';
-import { CATEGORY_META, type EventCoverSlug, getEventCoverPath } from '@gamenight-hub/shared';
+import {
+	CATEGORY_META,
+	type EventCoverSlug,
+	GAME_CONSTRAINTS,
+	getEventCoverPath,
+	UI,
+} from '@gamenight-hub/shared';
 import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 import { SimpleMapPreview } from '@shared/components/simple-map-preview/simple-map-preview';
 import { XpService } from '@shared/services/xp.service';
 import { map } from 'rxjs';
+
+type EventDetailData = CalendarEvent & { isOwner?: boolean };
 
 interface InfoPill {
 	label: string;
@@ -32,6 +43,7 @@ interface InfoPill {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EventDetail {
+	readonly PARTICIPANTS_PREVIEW_LIMIT = UI.PARTICIPANTS_PREVIEW_LIMIT;
 	readonly #route = inject(ActivatedRoute);
 	readonly #router = inject(Router);
 	readonly #auth = inject(AuthService);
@@ -47,7 +59,7 @@ export class EventDetail {
 		initialValue: '',
 	});
 
-	readonly eventResource = httpResource<Event>(() =>
+	readonly eventResource = httpResource<EventDetailData>(() =>
 		this.#id() ? `${this.#apiUrl}/events/${this.#id()}` : undefined,
 	);
 
@@ -61,11 +73,7 @@ export class EventDetail {
 	readonly location = computed(() => this.locationResource.value());
 	readonly loading = computed(() => this.eventResource.isLoading());
 
-	readonly isOwner = computed(() => {
-		const uid = this.#auth.currentUser()?.uid;
-		const event = this.event();
-		return !!uid && !!event && uid === event.createdBy;
-	});
+	readonly isOwner = computed(() => this.event()?.isOwner ?? false);
 
 	readonly isLoggedIn = this.#auth.isLoggedIn;
 
@@ -209,7 +217,10 @@ export class EventDetail {
 	readonly isEditValid = computed(() => {
 		const form = this.#editForm();
 		return (
-			!!form.title?.trim() && !!form.maxPlayers && form.maxPlayers >= 2 && form.maxPlayers <= 100
+			!!form.title?.trim() &&
+			!!form.maxPlayers &&
+			form.maxPlayers >= GAME_CONSTRAINTS.MIN_PLAYERS_EVENT &&
+			form.maxPlayers <= GAME_CONSTRAINTS.MAX_PLAYERS_LIMIT
 		);
 	});
 

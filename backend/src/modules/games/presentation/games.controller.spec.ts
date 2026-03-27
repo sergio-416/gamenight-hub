@@ -1,4 +1,5 @@
 import { FirebaseAuthGuard } from '@auth/infrastructure/guards/firebase-auth.guard.js';
+import { PAGINATION } from '@gamenight-hub/shared';
 import { Test, type TestingModule } from '@nestjs/testing';
 import { GamesService } from '../application/games.service.js';
 import { GamesController } from './games.controller.js';
@@ -44,7 +45,6 @@ describe('GamesController', () => {
 				status: 'owned' as const,
 				notes: 'My favorite game!',
 				complexity: 3,
-				createdBy: MOCK_UID,
 			};
 
 			mockGamesService.importFromBgg.mockResolvedValue(createdGame);
@@ -57,6 +57,9 @@ describe('GamesController', () => {
 
 			expect(result.bggId).toBe(13);
 			expect(result.name).toBe('Catan');
+			expect(result).not.toHaveProperty('createdBy');
+			expect(result).not.toHaveProperty('updatedAt');
+			expect(result).not.toHaveProperty('deletedAt');
 			expect(mockGamesService.importFromBgg).toHaveBeenCalledWith(13, expect.any(Object), MOCK_UID);
 		});
 	});
@@ -69,21 +72,24 @@ describe('GamesController', () => {
 					{ id: '2', name: 'Ticket to Ride', bggId: 42 },
 				],
 				total: 2,
-				page: 1,
-				limit: 20,
+				page: PAGINATION.DEFAULT_PAGE,
+				limit: PAGINATION.DEFAULT_LIMIT,
 				totalPages: 1,
 			};
 			mockGamesService.findAll.mockResolvedValue(paginatedGames);
 
-			const result = await controller.findAll(MOCK_UID, { page: 1, limit: 20 });
+			const result = await controller.findAll(MOCK_UID, {
+				page: PAGINATION.DEFAULT_PAGE,
+				limit: PAGINATION.DEFAULT_LIMIT,
+			});
 
 			expect(Array.isArray(result.data)).toBe(true);
 			expect(result.total).toBe(2);
 			expect(mockGamesService.findAll).toHaveBeenCalledWith(
 				MOCK_UID,
 				{
-					page: 1,
-					limit: 20,
+					page: PAGINATION.DEFAULT_PAGE,
+					limit: PAGINATION.DEFAULT_LIMIT,
 				},
 				undefined,
 			);

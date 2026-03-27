@@ -14,6 +14,7 @@ const mockLocation = {
 	latitude: 40.7128,
 	longitude: -74.006,
 	address: '123 Main St',
+	postalCode: null,
 	venueType: 'cafe',
 	capacity: 30,
 	amenities: ['wifi', 'snacks'],
@@ -112,6 +113,10 @@ describe('Locations API (e2e)', () => {
 			expect(res.body.data).toBeDefined();
 			expect(Array.isArray(res.body.data)).toBe(true);
 			expect(res.body.data[0].id).toBe(LOC_ID);
+			expect(res.body.data[0]).not.toHaveProperty('createdBy');
+			expect(res.body.data[0]).not.toHaveProperty('deletedAt');
+			expect(res.body.data[0]).not.toHaveProperty('updatedAt');
+			expect(res.body.data[0]).not.toHaveProperty('createdAt');
 			expect(res.body.total).toBe(1);
 			expect(res.body.page).toBe(1);
 			expect(mockLocationsService.findAll).toHaveBeenCalled();
@@ -124,6 +129,10 @@ describe('Locations API (e2e)', () => {
 
 			expect(res.body.id).toBe(LOC_ID);
 			expect(res.body.name).toBe('Board Game Cafe');
+			expect(res.body).not.toHaveProperty('createdBy');
+			expect(res.body).not.toHaveProperty('deletedAt');
+			expect(res.body).not.toHaveProperty('updatedAt');
+			expect(res.body).not.toHaveProperty('createdAt');
 			expect(mockLocationsService.findOne).toHaveBeenCalledWith(LOC_ID);
 		});
 	});

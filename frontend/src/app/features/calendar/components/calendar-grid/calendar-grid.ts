@@ -4,6 +4,7 @@ import type { CalendarDay } from '@calendar/models/calendar-day.model';
 import { dateToKey } from '@calendar/utils/calendar-dates';
 import { CATEGORY_DOT_CLASSES } from '@calendar/utils/category-colours';
 import type { CalendarEvent, EventCategory } from '@gamenight-hub/shared';
+import { UI } from '@gamenight-hub/shared';
 import { TranslocoDirective, translateSignal } from '@jsverse/transloco';
 
 const _WEEKDAY_KEYS = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'] as const;
@@ -64,12 +65,12 @@ export class CalendarGrid {
 	}
 
 	getVisibleEvents(day: CalendarDay): CalendarEvent[] {
-		return this.getEventsForCell(day).slice(0, 3);
+		return this.getEventsForCell(day).slice(0, UI.CALENDAR_DAY_EVENTS_LIMIT);
 	}
 
 	getOverflowCount(day: CalendarDay): number {
 		const total = this.getEventsForCell(day).length;
-		return total > 3 ? total - 3 : 0;
+		return total > UI.CALENDAR_DAY_EVENTS_LIMIT ? total - UI.CALENDAR_DAY_EVENTS_LIMIT : 0;
 	}
 
 	isSelected(day: CalendarDay): boolean {

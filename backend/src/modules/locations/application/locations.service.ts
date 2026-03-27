@@ -4,6 +4,7 @@ import { ERROR_CODE } from '@common/error-codes';
 import { DB_TOKEN, type DrizzleDb } from '@database/database.module.js';
 import { events } from '@database/schema/events.js';
 import { type InsertLocation, locations, type SelectLocation } from '@database/schema/locations.js';
+import { PAGINATION } from '@gamenight-hub/shared';
 import { HttpService } from '@nestjs/axios';
 import { ForbiddenException, Inject, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
@@ -73,8 +74,8 @@ export class LocationsService {
 	}
 
 	async findAll(pagination?: PaginationDto): Promise<PaginatedResponse<SelectLocation>> {
-		const page = pagination?.page ?? 1;
-		const limit = pagination?.limit ?? 20;
+		const page = pagination?.page ?? PAGINATION.DEFAULT_PAGE;
+		const limit = pagination?.limit ?? PAGINATION.DEFAULT_LIMIT;
 		const offset = (page - 1) * limit;
 		const where = isNull(locations.deletedAt);
 

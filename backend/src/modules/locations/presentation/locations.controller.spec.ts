@@ -1,4 +1,5 @@
 import { FirebaseAuthGuard } from '@auth/infrastructure/guards/firebase-auth.guard.js';
+import { PAGINATION } from '@gamenight-hub/shared';
 import { Test, type TestingModule } from '@nestjs/testing';
 import { LocationsService } from '../application/locations.service.js';
 import type { CreateLocationWithEventDto, UpdateLocationDto } from './dto/create-location.dto.js';
@@ -65,6 +66,9 @@ describe('LocationsController', () => {
 						name: 'Board Game Cafe',
 						latitude: 41.3851,
 						longitude: 2.1734,
+						address: '123 Game Street',
+						postalCode: null,
+						venueType: 'cafe',
 						createdBy: 'user-123',
 					},
 					{
@@ -72,21 +76,30 @@ describe('LocationsController', () => {
 						name: 'Game Store Central',
 						latitude: 41.4,
 						longitude: 2.18,
+						address: '456 Main St',
+						postalCode: null,
+						venueType: 'store',
 						createdBy: 'user-456',
 					},
 				],
 				total: 2,
-				page: 1,
-				limit: 20,
+				page: PAGINATION.DEFAULT_PAGE,
+				limit: PAGINATION.DEFAULT_LIMIT,
 				totalPages: 1,
 			};
 			mockLocationsService.findAll.mockResolvedValue(mockLocations);
 
-			const result = await controller.findAll({ page: 1, limit: 20 });
+			const result = await controller.findAll({
+				page: PAGINATION.DEFAULT_PAGE,
+				limit: PAGINATION.DEFAULT_LIMIT,
+			});
 
 			expect(result.data).toHaveLength(2);
 			for (const location of result.data) {
 				expect(location).not.toHaveProperty('createdBy');
+				expect(location).not.toHaveProperty('deletedAt');
+				expect(location).not.toHaveProperty('updatedAt');
+				expect(location).not.toHaveProperty('createdAt');
 			}
 			expect(mockLocationsService.findAll).toHaveBeenCalledTimes(1);
 		});
@@ -95,12 +108,15 @@ describe('LocationsController', () => {
 			mockLocationsService.findAll.mockResolvedValue({
 				data: [],
 				total: 0,
-				page: 1,
-				limit: 20,
+				page: PAGINATION.DEFAULT_PAGE,
+				limit: PAGINATION.DEFAULT_LIMIT,
 				totalPages: 0,
 			});
 
-			const result = await controller.findAll({ page: 1, limit: 20 });
+			const result = await controller.findAll({
+				page: PAGINATION.DEFAULT_PAGE,
+				limit: PAGINATION.DEFAULT_LIMIT,
+			});
 
 			expect(result.data).toEqual([]);
 		});
@@ -113,12 +129,20 @@ describe('LocationsController', () => {
 				name: 'Board Game Cafe',
 				latitude: 41.3851,
 				longitude: 2.1734,
+				address: '123 Game Street',
+				postalCode: null,
+				venueType: 'cafe',
+				createdBy: 'user-123',
 			};
 			mockLocationsService.findOne.mockResolvedValue(mockLocation);
 
 			const result = await controller.findOne('uuid-123');
 
 			expect(result.id).toBe('uuid-123');
+			expect(result).not.toHaveProperty('createdBy');
+			expect(result).not.toHaveProperty('deletedAt');
+			expect(result).not.toHaveProperty('updatedAt');
+			expect(result).not.toHaveProperty('createdAt');
 			expect(mockLocationsService.findOne).toHaveBeenCalledWith('uuid-123');
 		});
 	});
@@ -163,6 +187,9 @@ describe('LocationsController', () => {
 					name: 'Cafe Inside',
 					latitude: 41.38,
 					longitude: 2.15,
+					address: '1 Cafe St',
+					postalCode: null,
+					venueType: 'cafe',
 					createdBy: 'user-1',
 				},
 				{
@@ -170,6 +197,9 @@ describe('LocationsController', () => {
 					name: 'Store Inside',
 					latitude: 41.4,
 					longitude: 2.18,
+					address: '2 Store St',
+					postalCode: null,
+					venueType: 'store',
 					createdBy: 'user-2',
 				},
 			];
@@ -185,6 +215,9 @@ describe('LocationsController', () => {
 			expect(result).toHaveLength(2);
 			for (const location of result) {
 				expect(location).not.toHaveProperty('createdBy');
+				expect(location).not.toHaveProperty('deletedAt');
+				expect(location).not.toHaveProperty('updatedAt');
+				expect(location).not.toHaveProperty('createdAt');
 			}
 			expect(mockLocationsService.findInBounds).toHaveBeenCalledWith(41.3, 2.1, 41.5, 2.2, []);
 		});

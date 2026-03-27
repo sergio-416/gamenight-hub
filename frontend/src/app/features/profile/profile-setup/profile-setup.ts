@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { FormField, form, maxLength, required, submit } from '@angular/forms/signals';
 import { Router } from '@angular/router';
 import { ProfileService } from '@core/services/profile.service';
-import type { UpdateProfileDto } from '@gamenight-hub/shared';
+import { PROFILE_CONSTRAINTS, type UpdateProfileDto } from '@gamenight-hub/shared';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { firstValueFrom } from 'rxjs';
 
@@ -70,7 +70,9 @@ export class ProfileSetup {
 		required(p.firstName, { message: 'First name is required' });
 		required(p.lastName, { message: 'Last name is required' });
 		required(p.username, { message: 'Username is required' });
-		maxLength(p.bio, 300, { message: 'Bio must be at most 300 characters' });
+		maxLength(p.bio, PROFILE_CONSTRAINTS.BIO_MAX, {
+			message: 'Bio must be at most 300 characters',
+		});
 	});
 
 	async save(event: Event): Promise<void> {
