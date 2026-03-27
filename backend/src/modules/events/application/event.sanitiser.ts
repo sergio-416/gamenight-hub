@@ -28,7 +28,11 @@ export interface EventDetailResponse extends EventListResponse {
 }
 
 export function toEventListResponse(
-	event: SelectEvent & { participantCount: number; gameThumbnailUrl: string | null; gameImageUrl: string | null },
+	event: SelectEvent & {
+		participantCount: number;
+		gameThumbnailUrl: string | null;
+		gameImageUrl: string | null;
+	},
 ): EventListResponse {
 	return {
 		id: event.id,

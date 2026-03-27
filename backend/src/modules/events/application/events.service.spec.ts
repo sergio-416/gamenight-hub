@@ -186,7 +186,12 @@ describe('EventsService', () => {
 		it('should return all persisted events from database', async () => {
 			const mockEvents = [
 				{ ...makeEvent(), participantCount: 0, gameThumbnailUrl: null, gameImageUrl: null },
-				{ ...makeEvent({ id: 'uuid-2', title: 'Ticket Night' }), participantCount: 0, gameThumbnailUrl: null, gameImageUrl: null },
+				{
+					...makeEvent({ id: 'uuid-2', title: 'Ticket Night' }),
+					participantCount: 0,
+					gameThumbnailUrl: null,
+					gameImageUrl: null,
+				},
 			];
 			mockDb.select
 				.mockReturnValueOnce(chainResolving(mockEvents))

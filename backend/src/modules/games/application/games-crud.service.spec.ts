@@ -1,5 +1,5 @@
-import { UI } from '@gamenight-hub/shared';
 import { DB_TOKEN } from '@database/database.module.js';
+import { UI } from '@gamenight-hub/shared';
 import { NotFoundException } from '@nestjs/common';
 import { Test, type TestingModule } from '@nestjs/testing';
 import { buildMockDb, chainResolving } from '@test/db-mock.js';

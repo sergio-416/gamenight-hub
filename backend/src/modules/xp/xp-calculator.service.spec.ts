@@ -1,4 +1,13 @@
-import { XP_CAPS, XP_FOUNDING, XP_GAME_REWARDS, XP_GAME_THRESHOLDS, XP_ONE_TIME_BONUSES, XP_SOLO_BONUS, XP_STREAK, XP_WEEKEND_MULTIPLIER } from '@gamenight-hub/shared';
+import {
+	XP_CAPS,
+	XP_FOUNDING,
+	XP_GAME_REWARDS,
+	XP_GAME_THRESHOLDS,
+	XP_ONE_TIME_BONUSES,
+	XP_SOLO_BONUS,
+	XP_STREAK,
+	XP_WEEKEND_MULTIPLIER,
+} from '@gamenight-hub/shared';
 import { XpCalculatorService } from './xp-calculator.service.js';
 
 describe('XpCalculatorService', () => {
@@ -64,19 +73,31 @@ describe('XpCalculatorService', () => {
 		});
 
 		it('3 games from empty month returns [FIRST_GAMES_BONUS x3]', () => {
-			expect(service.calculateBatchGameXp(0, 3)).toEqual([XP_GAME_REWARDS.FIRST_GAMES_BONUS, XP_GAME_REWARDS.FIRST_GAMES_BONUS, XP_GAME_REWARDS.FIRST_GAMES_BONUS]);
+			expect(service.calculateBatchGameXp(0, 3)).toEqual([
+				XP_GAME_REWARDS.FIRST_GAMES_BONUS,
+				XP_GAME_REWARDS.FIRST_GAMES_BONUS,
+				XP_GAME_REWARDS.FIRST_GAMES_BONUS,
+			]);
 		});
 
 		it('2 games crossing tier boundary at count 4 returns [FIRST_GAMES_BONUS, SMALL_COLLECTION_BONUS]', () => {
-			expect(service.calculateBatchGameXp(XP_GAME_THRESHOLDS.SMALL_COLLECTION - 1, 2)).toEqual([XP_GAME_REWARDS.FIRST_GAMES_BONUS, XP_GAME_REWARDS.SMALL_COLLECTION_BONUS]);
+			expect(service.calculateBatchGameXp(XP_GAME_THRESHOLDS.SMALL_COLLECTION - 1, 2)).toEqual([
+				XP_GAME_REWARDS.FIRST_GAMES_BONUS,
+				XP_GAME_REWARDS.SMALL_COLLECTION_BONUS,
+			]);
 		});
 
 		it('1 game at count 14 returns [SMALL_COLLECTION_BONUS]', () => {
-			expect(service.calculateBatchGameXp(XP_GAME_THRESHOLDS.MEDIUM_COLLECTION - 1, 1)).toEqual([XP_GAME_REWARDS.SMALL_COLLECTION_BONUS]);
+			expect(service.calculateBatchGameXp(XP_GAME_THRESHOLDS.MEDIUM_COLLECTION - 1, 1)).toEqual([
+				XP_GAME_REWARDS.SMALL_COLLECTION_BONUS,
+			]);
 		});
 
 		it('2 games crossing tier boundary at count 29 returns [MEDIUM_COLLECTION_BONUS, LARGE_COLLECTION_BONUS]', () => {
-			expect(service.calculateBatchGameXp(XP_GAME_THRESHOLDS.LARGE_COLLECTION - 1, 2)).toEqual([XP_GAME_REWARDS.MEDIUM_COLLECTION_BONUS, XP_GAME_REWARDS.LARGE_COLLECTION_BONUS]);
+			expect(service.calculateBatchGameXp(XP_GAME_THRESHOLDS.LARGE_COLLECTION - 1, 2)).toEqual([
+				XP_GAME_REWARDS.MEDIUM_COLLECTION_BONUS,
+				XP_GAME_REWARDS.LARGE_COLLECTION_BONUS,
+			]);
 		});
 
 		it('0 batch size returns empty array', () => {
@@ -129,12 +150,18 @@ describe('XpCalculatorService', () => {
 
 		it('returns streak * weekend for streak=VETERAN_WEEKS on Saturday', () => {
 			const saturday = new Date('2026-03-14T12:00:00Z');
-			expect(service.getCombinedMultiplier(XP_STREAK.VETERAN_WEEKS, saturday)).toBeCloseTo(XP_STREAK.VETERAN_MULTIPLIER * XP_WEEKEND_MULTIPLIER, 5);
+			expect(service.getCombinedMultiplier(XP_STREAK.VETERAN_WEEKS, saturday)).toBeCloseTo(
+				XP_STREAK.VETERAN_MULTIPLIER * XP_WEEKEND_MULTIPLIER,
+				5,
+			);
 		});
 
 		it('returns LEGENDARY * WEEKEND for streak=LEGENDARY_WEEKS on Sunday', () => {
 			const sunday = new Date('2026-03-15T12:00:00Z');
-			expect(service.getCombinedMultiplier(XP_STREAK.LEGENDARY_WEEKS, sunday)).toBeCloseTo(XP_STREAK.LEGENDARY_MULTIPLIER * XP_WEEKEND_MULTIPLIER, 5);
+			expect(service.getCombinedMultiplier(XP_STREAK.LEGENDARY_WEEKS, sunday)).toBeCloseTo(
+				XP_STREAK.LEGENDARY_MULTIPLIER * XP_WEEKEND_MULTIPLIER,
+				5,
+			);
 		});
 	});
 
@@ -290,22 +317,34 @@ describe('XpCalculatorService', () => {
 
 		it('returns true for threshold+ games within 24h', () => {
 			const now = new Date('2026-03-01T23:00:00Z');
-			expect(service.isFoundingCollectionEligible(accountCreated, XP_FOUNDING.COLLECTION_THRESHOLD, now)).toBe(true);
+			expect(
+				service.isFoundingCollectionEligible(accountCreated, XP_FOUNDING.COLLECTION_THRESHOLD, now),
+			).toBe(true);
 		});
 
 		it('returns false for threshold-1 games within 24h', () => {
 			const now = new Date('2026-03-01T23:00:00Z');
-			expect(service.isFoundingCollectionEligible(accountCreated, XP_FOUNDING.COLLECTION_THRESHOLD - 1, now)).toBe(false);
+			expect(
+				service.isFoundingCollectionEligible(
+					accountCreated,
+					XP_FOUNDING.COLLECTION_THRESHOLD - 1,
+					now,
+				),
+			).toBe(false);
 		});
 
 		it('returns false for threshold+ games after 24h window', () => {
 			const now = new Date('2026-03-02T01:00:00Z');
-			expect(service.isFoundingCollectionEligible(accountCreated, XP_FOUNDING.COLLECTION_THRESHOLD, now)).toBe(false);
+			expect(
+				service.isFoundingCollectionEligible(accountCreated, XP_FOUNDING.COLLECTION_THRESHOLD, now),
+			).toBe(false);
 		});
 
 		it('returns true at exactly 24h boundary', () => {
 			const now = new Date('2026-03-02T00:00:00Z');
-			expect(service.isFoundingCollectionEligible(accountCreated, XP_FOUNDING.COLLECTION_THRESHOLD, now)).toBe(true);
+			expect(
+				service.isFoundingCollectionEligible(accountCreated, XP_FOUNDING.COLLECTION_THRESHOLD, now),
+			).toBe(true);
 		});
 
 		it('returns true for well above threshold within window', () => {

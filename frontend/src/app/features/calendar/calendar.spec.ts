@@ -4,7 +4,7 @@ import { ApplicationRef } from '@angular/core';
 import { provideRouter, Router } from '@angular/router';
 import { API_CONFIG } from '@core/config/api.config';
 import { provideTranslocoTesting } from '@core/testing/transloco-testing';
-import { PAGINATION, type CalendarEvent } from '@gamenight-hub/shared';
+import { type CalendarEvent, PAGINATION } from '@gamenight-hub/shared';
 import { provideTranslocoScope } from '@jsverse/transloco';
 import { render, screen } from '@testing-library/angular';
 import { Calendar } from './calendar';

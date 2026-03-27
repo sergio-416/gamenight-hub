@@ -1,5 +1,6 @@
 import { CacheModule } from '@common/cache/cache.module.js';
 import { DatabaseModule } from '@database/database.module.js';
+import { EVENT_EMITTER, THROTTLE } from '@gamenight-hub/shared';
 import { AuthModule } from '@modules/auth/auth.module.js';
 import { EmailModule } from '@modules/email/email.module.js';
 import { EventsModule } from '@modules/events/events.module.js';
@@ -16,12 +17,13 @@ import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
-import { EVENT_EMITTER, THROTTLE } from '@gamenight-hub/shared';
 
 @Module({
 	imports: [
 		ConfigModule.forRoot({ isGlobal: true }),
-		ThrottlerModule.forRoot([{ name: 'default', ttl: THROTTLE.WINDOW_MS, limit: THROTTLE.GLOBAL_LIMIT }]),
+		ThrottlerModule.forRoot([
+			{ name: 'default', ttl: THROTTLE.WINDOW_MS, limit: THROTTLE.GLOBAL_LIMIT },
+		]),
 		EventEmitterModule.forRoot({
 			wildcard: false,
 			delimiter: '.',

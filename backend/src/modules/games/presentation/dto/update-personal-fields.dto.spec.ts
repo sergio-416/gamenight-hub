@@ -50,7 +50,9 @@ describe('UpdatePersonalFieldsSchema', () => {
 		});
 
 		it('should reject complexity less than COMPLEXITY_MIN', () => {
-			const result = UpdatePersonalFieldsSchema.safeParse({ complexity: GAME_CONSTRAINTS.COMPLEXITY_MIN - 1 });
+			const result = UpdatePersonalFieldsSchema.safeParse({
+				complexity: GAME_CONSTRAINTS.COMPLEXITY_MIN - 1,
+			});
 
 			expect(result.success).toBe(false);
 			if (!result.success) {
@@ -59,7 +61,9 @@ describe('UpdatePersonalFieldsSchema', () => {
 		});
 
 		it('should reject complexity greater than COMPLEXITY_MAX', () => {
-			const result = UpdatePersonalFieldsSchema.safeParse({ complexity: GAME_CONSTRAINTS.COMPLEXITY_MAX + 1 });
+			const result = UpdatePersonalFieldsSchema.safeParse({
+				complexity: GAME_CONSTRAINTS.COMPLEXITY_MAX + 1,
+			});
 
 			expect(result.success).toBe(false);
 			if (!result.success) {

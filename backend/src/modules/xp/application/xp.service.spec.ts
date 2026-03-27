@@ -1,5 +1,5 @@
-import { XP_CAPS, XP_GAME_REWARDS } from '@gamenight-hub/shared';
 import { DB_TOKEN } from '@database/database.module.js';
+import { XP_CAPS, XP_GAME_REWARDS } from '@gamenight-hub/shared';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { Test, type TestingModule } from '@nestjs/testing';
 import { buildMockDb, chainResolving } from '@test/db-mock.js';
@@ -237,7 +237,10 @@ describe('XpService', () => {
 
 		it('should award XP for game_added with tier calculation', async () => {
 			const profile = makeProfile({ monthlyGameAdds: 2 });
-			const tx = makeTransaction({ baseXp: XP_GAME_REWARDS.FIRST_GAMES_BONUS, finalXp: XP_GAME_REWARDS.FIRST_GAMES_BONUS });
+			const tx = makeTransaction({
+				baseXp: XP_GAME_REWARDS.FIRST_GAMES_BONUS,
+				finalXp: XP_GAME_REWARDS.FIRST_GAMES_BONUS,
+			});
 
 			setupTxMock([[profile], [{ value: 0 }], [{ value: 0 }]], [tx]);
 
@@ -289,7 +292,10 @@ describe('XpService', () => {
 			const profile = makeProfile();
 			const tx = makeTransaction({ baseXp: 0, finalXp: 0 });
 
-			setupTxMock([[profile], [{ value: XP_CAPS.ACTION_CAP }], [{ value: XP_CAPS.ACTION_CAP }]], [tx]);
+			setupTxMock(
+				[[profile], [{ value: XP_CAPS.ACTION_CAP }], [{ value: XP_CAPS.ACTION_CAP }]],
+				[tx],
+			);
 
 			const result = await service.awardXp(USER_ID, 'game_added', {});
 
@@ -315,7 +321,10 @@ describe('XpService', () => {
 				monthlyGameAdds: 20,
 				monthlyGameAddsResetAt: oldResetDate,
 			});
-			const tx = makeTransaction({ baseXp: XP_GAME_REWARDS.FIRST_GAMES_BONUS, finalXp: XP_GAME_REWARDS.FIRST_GAMES_BONUS });
+			const tx = makeTransaction({
+				baseXp: XP_GAME_REWARDS.FIRST_GAMES_BONUS,
+				finalXp: XP_GAME_REWARDS.FIRST_GAMES_BONUS,
+			});
 
 			const _txDb = setupTxMock([[profile], [{ value: 0 }], [{ value: 0 }]], [tx]);
 
@@ -400,7 +409,10 @@ describe('XpService', () => {
 			const profile = makeProfile();
 			const tx = makeTransaction({ baseXp: 0, finalXp: 0 });
 
-			const txDb = setupTxMock([[profile], [{ value: XP_CAPS.ACTION_CAP }], [{ value: XP_CAPS.GRAND_CAP }]], [tx]);
+			const txDb = setupTxMock(
+				[[profile], [{ value: XP_CAPS.ACTION_CAP }], [{ value: XP_CAPS.GRAND_CAP }]],
+				[tx],
+			);
 
 			await service.awardXp(USER_ID, 'game_added', {});
 

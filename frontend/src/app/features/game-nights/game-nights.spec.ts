@@ -118,15 +118,33 @@ describe('GameNights', () => {
 
 			const httpMock = fixture.debugElement.injector.get(HttpTestingController);
 			httpMock.match(`${API_CONFIG.baseUrl}/locations`).forEach((req) => {
-				req.flush({ data: [], total: 0, page: PAGINATION.DEFAULT_PAGE, limit: PAGINATION.DEFAULT_LIMIT, totalPages: 0 });
+				req.flush({
+					data: [],
+					total: 0,
+					page: PAGINATION.DEFAULT_PAGE,
+					limit: PAGINATION.DEFAULT_LIMIT,
+					totalPages: 0,
+				});
 			});
 			httpMock.match(`${API_CONFIG.baseUrl}/events`).forEach((req) => {
-				req.flush({ data: [], total: 0, page: PAGINATION.DEFAULT_PAGE, limit: PAGINATION.DEFAULT_LIMIT, totalPages: 0 });
+				req.flush({
+					data: [],
+					total: 0,
+					page: PAGINATION.DEFAULT_PAGE,
+					limit: PAGINATION.DEFAULT_LIMIT,
+					totalPages: 0,
+				});
 			});
 			httpMock
 				.match(() => true)
 				.forEach((req) => {
-					req.flush({ data: [], total: 0, page: PAGINATION.DEFAULT_PAGE, limit: PAGINATION.DEFAULT_LIMIT, totalPages: 0 });
+					req.flush({
+						data: [],
+						total: 0,
+						page: PAGINATION.DEFAULT_PAGE,
+						limit: PAGINATION.DEFAULT_LIMIT,
+						totalPages: 0,
+					});
 				});
 			await fixture.whenStable();
 			detectChanges();
@@ -145,15 +163,33 @@ describe('GameNights', () => {
 		}) {
 			const httpMock = fixture.debugElement.injector.get(HttpTestingController);
 			httpMock.match(`${API_CONFIG.baseUrl}/locations`).forEach((req) => {
-				req.flush({ data: [], total: 0, page: PAGINATION.DEFAULT_PAGE, limit: PAGINATION.DEFAULT_LIMIT, totalPages: 0 });
+				req.flush({
+					data: [],
+					total: 0,
+					page: PAGINATION.DEFAULT_PAGE,
+					limit: PAGINATION.DEFAULT_LIMIT,
+					totalPages: 0,
+				});
 			});
 			httpMock.match(`${API_CONFIG.baseUrl}/events`).forEach((req) => {
-				req.flush({ data: [], total: 0, page: PAGINATION.DEFAULT_PAGE, limit: PAGINATION.DEFAULT_LIMIT, totalPages: 0 });
+				req.flush({
+					data: [],
+					total: 0,
+					page: PAGINATION.DEFAULT_PAGE,
+					limit: PAGINATION.DEFAULT_LIMIT,
+					totalPages: 0,
+				});
 			});
 			httpMock
 				.match(() => true)
 				.forEach((req) => {
-					req.flush({ data: [], total: 0, page: PAGINATION.DEFAULT_PAGE, limit: PAGINATION.DEFAULT_LIMIT, totalPages: 0 });
+					req.flush({
+						data: [],
+						total: 0,
+						page: PAGINATION.DEFAULT_PAGE,
+						limit: PAGINATION.DEFAULT_LIMIT,
+						totalPages: 0,
+					});
 				});
 		}
 

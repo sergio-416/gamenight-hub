@@ -1,5 +1,5 @@
-import { PAGINATION } from '@gamenight-hub/shared';
 import { FirebaseAuthGuard } from '@auth/infrastructure/guards/firebase-auth.guard.js';
+import { PAGINATION } from '@gamenight-hub/shared';
 import { Test, type TestingModule } from '@nestjs/testing';
 import { XpService } from '../application/xp.service.js';
 import { XpController } from './xp.controller.js';
@@ -96,7 +96,11 @@ describe('XpController', () => {
 			expect(result.page).toBe(PAGINATION.DEFAULT_PAGE);
 			expect(result.limit).toBe(PAGINATION.DEFAULT_LIMIT);
 			expect(result.totalPages).toBe(1);
-			expect(mockXpService.getHistory).toHaveBeenCalledWith(MOCK_UID, PAGINATION.DEFAULT_PAGE, PAGINATION.DEFAULT_LIMIT);
+			expect(mockXpService.getHistory).toHaveBeenCalledWith(
+				MOCK_UID,
+				PAGINATION.DEFAULT_PAGE,
+				PAGINATION.DEFAULT_LIMIT,
+			);
 		});
 
 		it('should return empty history for user with no transactions', async () => {

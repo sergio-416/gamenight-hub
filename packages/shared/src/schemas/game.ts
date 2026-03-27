@@ -22,7 +22,12 @@ export const GameSchema = z.object({
 	imageUrl: z.url().optional().nullable(),
 	status: GameStatusSchema.default('want_to_try'),
 	notes: z.string().optional(),
-	complexity: z.number().int().min(GAME_CONSTRAINTS.COMPLEXITY_MIN).max(GAME_CONSTRAINTS.COMPLEXITY_MAX).optional(),
+	complexity: z
+		.number()
+		.int()
+		.min(GAME_CONSTRAINTS.COMPLEXITY_MIN)
+		.max(GAME_CONSTRAINTS.COMPLEXITY_MAX)
+		.optional(),
 	isExpansion: z.boolean().optional(),
 	createdBy: z.string().optional(),
 	createdAt: z.coerce.date().optional(),
@@ -51,13 +56,23 @@ export const CreateGameSchema = z.object({
 	bggId: z.number().int().positive(),
 	status: GameStatusSchema.optional(),
 	notes: z.string().optional(),
-	complexity: z.number().int().min(GAME_CONSTRAINTS.COMPLEXITY_MIN).max(GAME_CONSTRAINTS.COMPLEXITY_MAX).optional(),
+	complexity: z
+		.number()
+		.int()
+		.min(GAME_CONSTRAINTS.COMPLEXITY_MIN)
+		.max(GAME_CONSTRAINTS.COMPLEXITY_MAX)
+		.optional(),
 });
 
 export const UpdateGameSchema = z.object({
 	status: GameStatusSchema.optional(),
 	notes: z.string().optional(),
-	complexity: z.number().int().min(GAME_CONSTRAINTS.COMPLEXITY_MIN).max(GAME_CONSTRAINTS.COMPLEXITY_MAX).optional(),
+	complexity: z
+		.number()
+		.int()
+		.min(GAME_CONSTRAINTS.COMPLEXITY_MIN)
+		.max(GAME_CONSTRAINTS.COMPLEXITY_MAX)
+		.optional(),
 });
 
 export type Game = z.infer<typeof GameSchema>;

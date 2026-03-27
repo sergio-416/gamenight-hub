@@ -1,7 +1,12 @@
 import type { PaginatedResponse, PaginationDto } from '@common/dto/pagination.dto.js';
 import { paginate } from '@common/dto/pagination.dto.js';
 import { ERROR_CODE } from '@common/error-codes';
-import { PAGINATION, UI, type CheckPlayedGameResponse, type GameStatus } from '@gamenight-hub/shared';
+import {
+	type CheckPlayedGameResponse,
+	type GameStatus,
+	PAGINATION,
+	UI,
+} from '@gamenight-hub/shared';
 import { ConflictException, Inject, Injectable, Logger } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { GameAddedEvent } from '../../xp/domain/xp-events.js';
@@ -9,9 +14,9 @@ import type { GameSearchResult } from '../domain/entities/game-search-result.ent
 import type { UpdatePersonalFieldsDto } from '../presentation/dto/update-personal-fields.dto.js';
 import { BggCsvService } from './bgg-csv.service.js';
 import { BggIntegrationService } from './bgg-integration.service.js';
+import { type GameResponse, toEnrichedGameResponse, toGameResponse } from './game.sanitiser.js';
 import { GamesAnalyticsService } from './games-analytics.service.js';
 import { GamesCrudService } from './games-crud.service.js';
-import { type GameResponse, toGameResponse, toEnrichedGameResponse } from './game.sanitiser.js';
 import { UserPlayedGamesService } from './user-played-games.service.js';
 
 @Injectable()
@@ -91,7 +96,12 @@ export class GamesService {
 		status?: GameStatus,
 	): Promise<PaginatedResponse<GameResponse>> {
 		const { data, total } = await this.crudService.findAll(createdBy, pagination, status);
-		return paginate(data.map(toGameResponse), total, pagination?.page ?? PAGINATION.DEFAULT_PAGE, pagination?.limit ?? PAGINATION.DEFAULT_LIMIT);
+		return paginate(
+			data.map(toGameResponse),
+			total,
+			pagination?.page ?? PAGINATION.DEFAULT_PAGE,
+			pagination?.limit ?? PAGINATION.DEFAULT_LIMIT,
+		);
 	}
 
 	async findOne(id: string, createdBy: string): Promise<GameResponse> {

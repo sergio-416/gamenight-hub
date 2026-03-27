@@ -1,10 +1,10 @@
-import { PAGINATION } from '@gamenight-hub/shared';
 import type { PaginationDto } from '@common/dto/pagination.dto.js';
 import { type PaginatedResponse, paginate } from '@common/dto/pagination.dto.js';
 import { ERROR_CODE } from '@common/error-codes';
 import { DB_TOKEN, type DrizzleDb } from '@database/database.module.js';
 import { events } from '@database/schema/events.js';
 import { type InsertLocation, locations, type SelectLocation } from '@database/schema/locations.js';
+import { PAGINATION } from '@gamenight-hub/shared';
 import { HttpService } from '@nestjs/axios';
 import { ForbiddenException, Inject, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';

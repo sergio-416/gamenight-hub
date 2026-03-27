@@ -3,7 +3,7 @@ import { ERROR_CODE } from '@common/error-codes';
 import { DB_TOKEN, type DrizzleDb } from '@database/database.module.js';
 import { bggGames } from '@database/schema/bgg-games.js';
 import { games, type InsertGame, type SelectGame } from '@database/schema/games.js';
-import { PAGINATION, UI, type GameStatus } from '@gamenight-hub/shared';
+import { type GameStatus, PAGINATION, UI } from '@gamenight-hub/shared';
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { and, count, eq, isNull } from 'drizzle-orm';
 import type { UpdatePersonalFieldsDto } from '../presentation/dto/update-personal-fields.dto.js';

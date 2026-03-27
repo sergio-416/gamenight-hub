@@ -3,7 +3,11 @@ import { httpResource } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { API_CONFIG } from '@core/config/api.config';
-import { PAGINATION, type PublicProfile, type PublicProfileGamesResponse } from '@gamenight-hub/shared';
+import {
+	PAGINATION,
+	type PublicProfile,
+	type PublicProfileGamesResponse,
+} from '@gamenight-hub/shared';
 import { TranslocoDirective } from '@jsverse/transloco';
 
 const TAB = {

@@ -2,7 +2,7 @@ import { DB_TOKEN, type DrizzleDb } from '@database/database.module.js';
 import { events } from '@database/schema/events.js';
 import { games } from '@database/schema/games.js';
 import { profiles } from '@database/schema/profiles.js';
-import { UI, type AdminStatsDto, type OrganiserStatsDto } from '@gamenight-hub/shared';
+import { type AdminStatsDto, type OrganiserStatsDto, UI } from '@gamenight-hub/shared';
 import { Inject, Injectable } from '@nestjs/common';
 import { and, count, eq, isNull, sql, sum } from 'drizzle-orm';
 

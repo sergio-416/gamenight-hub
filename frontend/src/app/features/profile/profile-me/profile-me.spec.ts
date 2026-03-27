@@ -75,9 +75,13 @@ function flushInitialRequests(httpMock: HttpTestingController, profileOverrides 
 			r.flush([]);
 		});
 	httpMock.expectOne(`${baseUrl}/profile/me`).flush(makeProfile(profileOverrides));
-	httpMock
-		.expectOne(`${baseUrl}/games`)
-		.flush({ data: [], total: 0, page: PAGINATION.DEFAULT_PAGE, limit: PAGINATION.DEFAULT_LIMIT, totalPages: 0 });
+	httpMock.expectOne(`${baseUrl}/games`).flush({
+		data: [],
+		total: 0,
+		page: PAGINATION.DEFAULT_PAGE,
+		limit: PAGINATION.DEFAULT_LIMIT,
+		totalPages: 0,
+	});
 	flushXpRequests(httpMock);
 }
 

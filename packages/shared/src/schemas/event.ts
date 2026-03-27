@@ -67,7 +67,11 @@ const CreateCalendarEventBaseSchema = z.object({
 	location: InlineLocationSchema.optional(),
 	startTime: z.iso.datetime({ offset: true }),
 	endTime: z.iso.datetime({ offset: true }).optional(),
-	maxPlayers: z.number().int().min(GAME_CONSTRAINTS.MIN_PLAYERS_EVENT).max(GAME_CONSTRAINTS.MAX_PLAYERS_LIMIT),
+	maxPlayers: z
+		.number()
+		.int()
+		.min(GAME_CONSTRAINTS.MIN_PLAYERS_EVENT)
+		.max(GAME_CONSTRAINTS.MAX_PLAYERS_LIMIT),
 	description: z.string().optional(),
 	color: EventColorSchema.optional(),
 	coverImage: z.string().min(1).max(GAME_CONSTRAINTS.COVER_IMAGE_MAX_LENGTH).optional(),

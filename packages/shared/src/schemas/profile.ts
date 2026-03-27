@@ -27,7 +27,10 @@ export const UpdateProfileSchema = z.object({
 		.optional()
 		.or(z.literal('')),
 
-	location: z.string().max(PROFILE_CONSTRAINTS.LOCATION_MAX, 'Location must be at most 100 characters').optional(),
+	location: z
+		.string()
+		.max(PROFILE_CONSTRAINTS.LOCATION_MAX, 'Location must be at most 100 characters')
+		.optional(),
 	postalZip: z
 		.string()
 		.regex(/^[0-9]{4,10}$/, 'Must be a valid postal code')

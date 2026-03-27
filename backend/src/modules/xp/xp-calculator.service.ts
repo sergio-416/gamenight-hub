@@ -1,4 +1,14 @@
-import { DAY, XP_CAPS, XP_FOUNDING, XP_GAME_REWARDS, XP_GAME_THRESHOLDS, XP_ONE_TIME_BONUSES, XP_SOLO_BONUS, XP_STREAK, XP_WEEKEND_MULTIPLIER } from '@gamenight-hub/shared';
+import {
+	DAY,
+	XP_CAPS,
+	XP_FOUNDING,
+	XP_GAME_REWARDS,
+	XP_GAME_THRESHOLDS,
+	XP_ONE_TIME_BONUSES,
+	XP_SOLO_BONUS,
+	XP_STREAK,
+	XP_WEEKEND_MULTIPLIER,
+} from '@gamenight-hub/shared';
 import { Injectable } from '@nestjs/common';
 
 export interface LevelInfo {
@@ -48,9 +58,12 @@ export class XpCalculatorService {
 	static readonly LEVEL_TABLE = LEVEL_TABLE;
 
 	calculateGameXp(monthlyCount: number): number {
-		if (monthlyCount < XP_GAME_THRESHOLDS.SMALL_COLLECTION) return XP_GAME_REWARDS.FIRST_GAMES_BONUS;
-		if (monthlyCount < XP_GAME_THRESHOLDS.MEDIUM_COLLECTION) return XP_GAME_REWARDS.SMALL_COLLECTION_BONUS;
-		if (monthlyCount < XP_GAME_THRESHOLDS.LARGE_COLLECTION) return XP_GAME_REWARDS.MEDIUM_COLLECTION_BONUS;
+		if (monthlyCount < XP_GAME_THRESHOLDS.SMALL_COLLECTION)
+			return XP_GAME_REWARDS.FIRST_GAMES_BONUS;
+		if (monthlyCount < XP_GAME_THRESHOLDS.MEDIUM_COLLECTION)
+			return XP_GAME_REWARDS.SMALL_COLLECTION_BONUS;
+		if (monthlyCount < XP_GAME_THRESHOLDS.LARGE_COLLECTION)
+			return XP_GAME_REWARDS.MEDIUM_COLLECTION_BONUS;
 		return XP_GAME_REWARDS.LARGE_COLLECTION_BONUS;
 	}
 
@@ -77,7 +90,9 @@ export class XpCalculatorService {
 
 	getWeekendMultiplier(date: Date): number {
 		const day = date.getUTCDay();
-		return day === DAY.SUNDAY || day === DAY.SATURDAY ? XP_WEEKEND_MULTIPLIER : XP_STREAK.BASE_MULTIPLIER;
+		return day === DAY.SUNDAY || day === DAY.SATURDAY
+			? XP_WEEKEND_MULTIPLIER
+			: XP_STREAK.BASE_MULTIPLIER;
 	}
 
 	getCombinedMultiplier(streakWeeks: number, date: Date): number {

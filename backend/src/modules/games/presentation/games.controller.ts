@@ -5,7 +5,7 @@ import { PaginationSchema } from '@common/dto/pagination.dto.js';
 import { ParseIntPipe } from '@common/pipes/parse-int.pipe.js';
 import { ParseUuidPipe } from '@common/pipes/parse-uuid.pipe.js';
 import { ZodValidationPipe } from '@common/pipes/zod-validation.pipe.js';
-import { SEARCH_CONSTRAINTS, THROTTLE, type GameStatus } from '@gamenight-hub/shared';
+import { type GameStatus, SEARCH_CONSTRAINTS, THROTTLE } from '@gamenight-hub/shared';
 import {
 	Body,
 	Controller,
@@ -39,7 +39,12 @@ export class GamesController {
 	@UseGuards(FirebaseAuthGuard)
 	@Throttle({ default: { ttl: THROTTLE.WINDOW_MS, limit: THROTTLE.SEARCH_LIMIT } })
 	async searchLocal(
-		@Query('query', new ZodValidationPipe(z.string().min(SEARCH_CONSTRAINTS.QUERY_MIN).max(SEARCH_CONSTRAINTS.QUERY_MAX)))
+		@Query(
+			'query',
+			new ZodValidationPipe(
+				z.string().min(SEARCH_CONSTRAINTS.QUERY_MIN).max(SEARCH_CONSTRAINTS.QUERY_MAX),
+			),
+		)
 		query: string,
 	) {
 		return this.gamesService.searchLocal(query);
@@ -50,7 +55,12 @@ export class GamesController {
 	@UseGuards(FirebaseAuthGuard)
 	@Throttle({ default: { ttl: THROTTLE.WINDOW_MS, limit: THROTTLE.BGG_LIMIT } })
 	async searchBgg(
-		@Query('query', new ZodValidationPipe(z.string().min(SEARCH_CONSTRAINTS.QUERY_MIN).max(SEARCH_CONSTRAINTS.QUERY_MAX)))
+		@Query(
+			'query',
+			new ZodValidationPipe(
+				z.string().min(SEARCH_CONSTRAINTS.QUERY_MIN).max(SEARCH_CONSTRAINTS.QUERY_MAX),
+			),
+		)
 		query: string,
 	) {
 		return this.gamesService.searchBgg(query);

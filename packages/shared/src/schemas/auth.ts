@@ -92,7 +92,9 @@ export interface UserClaims {
 }
 
 export const OrganiserRequestSchema = z.object({
-	orgName: z.string().min(ORGANISER_CONSTRAINTS.ORG_NAME_MIN, 'Organisation name must be at least 2 characters'),
+	orgName: z
+		.string()
+		.min(ORGANISER_CONSTRAINTS.ORG_NAME_MIN, 'Organisation name must be at least 2 characters'),
 	address: z.string().min(ORGANISER_CONSTRAINTS.ADDRESS_MIN, 'Please enter a valid address'),
 	email: z.email('Please enter a valid email'),
 });

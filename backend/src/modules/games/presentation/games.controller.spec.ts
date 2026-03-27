@@ -1,5 +1,5 @@
-import { PAGINATION, UI } from '@gamenight-hub/shared';
 import { FirebaseAuthGuard } from '@auth/infrastructure/guards/firebase-auth.guard.js';
+import { PAGINATION } from '@gamenight-hub/shared';
 import { Test, type TestingModule } from '@nestjs/testing';
 import { GamesService } from '../application/games.service.js';
 import { GamesController } from './games.controller.js';
@@ -78,7 +78,10 @@ describe('GamesController', () => {
 			};
 			mockGamesService.findAll.mockResolvedValue(paginatedGames);
 
-			const result = await controller.findAll(MOCK_UID, { page: PAGINATION.DEFAULT_PAGE, limit: PAGINATION.DEFAULT_LIMIT });
+			const result = await controller.findAll(MOCK_UID, {
+				page: PAGINATION.DEFAULT_PAGE,
+				limit: PAGINATION.DEFAULT_LIMIT,
+			});
 
 			expect(Array.isArray(result.data)).toBe(true);
 			expect(result.total).toBe(2);

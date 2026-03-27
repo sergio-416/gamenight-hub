@@ -1,4 +1,3 @@
-import { PAGINATION } from '@gamenight-hub/shared';
 import { type PaginatedResponse, paginate } from '@common/dto/pagination.dto.js';
 import { ERROR_CODE } from '@common/error-codes';
 import { DB_TOKEN, type DrizzleDb } from '@database/database.module.js';
@@ -7,6 +6,7 @@ import { games } from '@database/schema/games.js';
 import { locations } from '@database/schema/locations.js';
 import { participants } from '@database/schema/participants.js';
 import { profiles } from '@database/schema/profiles.js';
+import { PAGINATION } from '@gamenight-hub/shared';
 import {
 	BadRequestException,
 	ForbiddenException,
@@ -21,7 +21,12 @@ import { LocationsService } from '../../locations/application/locations.service.
 import { EventCreatedEvent } from '../domain/events/event-created.event.js';
 import type { CreateEventDto, UpdateEventDto } from '../presentation/dto/create-event.dto.js';
 import type { FindEventsDto } from '../presentation/dto/event-filter.dto.js';
-import { type EventDetailResponse, type EventListResponse, toEventDetailResponse, toEventListResponse } from './event.sanitiser.js';
+import {
+	type EventDetailResponse,
+	type EventListResponse,
+	toEventDetailResponse,
+	toEventListResponse,
+} from './event.sanitiser.js';
 
 @Injectable()
 export class EventsService {

@@ -19,6 +19,7 @@ import {
 	UseGuards,
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { toLocationResponse } from '../application/location.sanitiser.js';
 import type { NominatimResult } from '../application/locations.service.js';
 import { LocationsService } from '../application/locations.service.js';
 import type { CreateLocationWithEventDto, UpdateLocationDto } from './dto/create-location.dto.js';
@@ -27,7 +28,6 @@ import type { FindInBoundsDto } from './dto/find-in-bounds.dto.js';
 import { FindInBoundsSchema } from './dto/find-in-bounds.dto.js';
 import type { GeocodeDto } from './dto/geocode.dto.js';
 import { GeocodeSchema } from './dto/geocode.dto.js';
-import { toLocationResponse } from '../application/location.sanitiser.js';
 
 @ApiTags('Locations')
 @Controller({ path: 'locations', version: '1' })
