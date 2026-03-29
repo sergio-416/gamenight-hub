@@ -59,6 +59,7 @@ If we cannot meet these timelines, we will communicate the reason and a revised 
 ## Current Security Measures
 
 - **Static analysis**: CodeQL runs on every push to `main`, every PR, and on a weekly schedule (JavaScript/TypeScript + GitHub Actions)
+- **Dependency monitoring**: Dependabot is configured for automated version updates across Bun packages, GitHub Actions, Docker base images, and Docker Compose service images
 - **HTTP hardening**: Helmet with strict security headers (`X-Frame-Options`, `X-Content-Type-Options`, HSTS)
 - **Rate limiting**: Global and per-endpoint throttling via `@nestjs/throttler`; Nginx `limit_req` at the reverse proxy layer
 - **Transport security**: TLS 1.2/1.3 only, HSTS enabled, OCSP stapling
