@@ -11,7 +11,7 @@ cd "${DEPLOY_ROOT}"
 docker pull "${IMAGE}:${IMAGE_TAG}"
 docker tag "${IMAGE}:${IMAGE_TAG}" "${IMAGE}:latest"
 
-docker compose -f docker-compose.prod.yml up -d --no-deps backend
+docker compose -f compose.prod.yaml up -d --no-deps backend
 
 SECONDS_WAITED=0
 MAX_WAIT=60

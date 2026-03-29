@@ -64,7 +64,7 @@ ENVEOF
 
 echo "==> Stopping any service on port 80 (needed for standalone cert)..."
 systemctl stop nginx 2>/dev/null || true
-docker compose -f "$APP_DIR/docker-compose.prod.yml" down 2>/dev/null || true
+docker compose -f "$APP_DIR/compose.prod.yaml" down 2>/dev/null || true
 
 echo "==> Setting up SSL with Certbot (Let's Encrypt) — standalone mode for first cert..."
 apt-get install -y certbot
@@ -77,7 +77,7 @@ certbot certonly --standalone \
 
 echo "==> Setting up Certbot auto-renewal (webroot mode for renewals)..."
 cat > /etc/cron.d/certbot-renew <<'CRONEOF'
-0 3 * * * root certbot renew --quiet --webroot -w /var/www/certbot --deploy-hook "docker compose -f /opt/gamenight-hub/docker-compose.prod.yml exec nginx nginx -s reload"
+0 3 * * * root certbot renew --quiet --webroot -w /var/www/certbot --deploy-hook "docker compose -f /opt/gamenight-hub/compose.prod.yaml exec nginx nginx -s reload"
 CRONEOF
 
 echo "    NOTE: First cert uses --standalone (port 80 must be free)."
@@ -93,7 +93,7 @@ echo "==> Bootstrap complete!"
 echo ""
 echo "Next steps:"
 echo "  1. Edit $APP_DIR/.env with your actual secrets"
-echo "  2. Copy docker-compose.prod.yml to $APP_DIR/"
+echo "  2. Copy compose.prod.yaml to $APP_DIR/"
 echo "  3. Copy infrastructure/nginx/conf.d/ to $APP_DIR/infrastructure/nginx/conf.d/"
-echo "  4. Run: cd $APP_DIR && docker compose -f docker-compose.prod.yml up -d"
+echo "  4. Run: cd $APP_DIR && docker compose -f compose.prod.yaml up -d"
 echo "  5. Add GitHub Actions secrets: VPS_HOST, VPS_USER, VPS_SSH_KEY"
