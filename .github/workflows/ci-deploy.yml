@@ -109,7 +109,7 @@ jobs:
         run: tar -czf frontend.tar.gz -C frontend-dist .
 
       - name: SCP frontend tarball to VPS
-        uses: appleboy/scp-action@v0.1.7
+        uses: appleboy/scp-action@v1.0.0
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
@@ -118,7 +118,7 @@ jobs:
           target: /tmp/
 
       - name: SCP docker-compose to VPS
-        uses: appleboy/scp-action@v0.1.7
+        uses: appleboy/scp-action@v1.0.0
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
@@ -127,7 +127,7 @@ jobs:
           target: /opt/gamenight-hub/
 
       - name: Remove legacy docker-compose filename
-        uses: appleboy/ssh-action@v1.0.3
+        uses: appleboy/ssh-action@v1.2.5
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
@@ -135,7 +135,7 @@ jobs:
           script: rm -f /opt/gamenight-hub/docker-compose.prod.yml
 
       - name: SCP deploy scripts to VPS
-        uses: appleboy/scp-action@v0.1.7
+        uses: appleboy/scp-action@v1.0.0
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
@@ -145,7 +145,7 @@ jobs:
           strip_components: 2
 
       - name: Deploy frontend
-        uses: appleboy/ssh-action@v1.0.3
+        uses: appleboy/ssh-action@v1.2.5
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
@@ -155,7 +155,7 @@ jobs:
             /opt/gamenight-hub/scripts/deploy-frontend.sh /tmp/frontend.tar.gz
 
       - name: Login to GHCR on VPS
-        uses: appleboy/ssh-action@v1.0.3
+        uses: appleboy/ssh-action@v1.2.5
         env:
           GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
           GHCR_USER: ${{ github.actor }}
@@ -167,7 +167,7 @@ jobs:
           script: echo "${GHCR_TOKEN}" | docker login ghcr.io -u "${GHCR_USER}" --password-stdin
 
       - name: Deploy backend
-        uses: appleboy/ssh-action@v1.0.3
+        uses: appleboy/ssh-action@v1.2.5
         env:
           IMAGE_TAG: sha-${{ needs.build.outputs.sha_short }}
         with:
