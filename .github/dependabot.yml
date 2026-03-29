@@ -1,11 +1,187 @@
-# To get started with Dependabot version updates, you'll need to specify which
-# package ecosystems to update and where the package manifests are located.
-# Please see the documentation for all configuration options:
-# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
-
 version: 2
+
 updates:
-  - package-ecosystem: "" # See documentation for possible values
-    directory: "/" # Location of package manifests
+  # ─── Bun (workspace monorepo) ───────────────────────────────────────
+  # Single root entry discovers all workspaces via package.json "workspaces"
+  # and updates the shared bun.lock at /
+  - package-ecosystem: "bun"
+    directory: "/"
     schedule:
       interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Europe/Madrid"
+    open-pull-requests-limit: 15
+    labels:
+      - "dependencies"
+      - "bun"
+    commit-message:
+      prefix: "chore(deps)"
+    groups:
+      angular:
+        patterns:
+          - "@angular/*"
+          - "@angular-devkit/*"
+        update-types:
+          - "minor"
+          - "patch"
+      nestjs:
+        patterns:
+          - "@nestjs/*"
+        update-types:
+          - "minor"
+          - "patch"
+      firebase:
+        patterns:
+          - "firebase"
+          - "firebase-admin"
+          - "@angular/fire"
+        update-types:
+          - "minor"
+          - "patch"
+      dev-tooling:
+        dependency-type: "development"
+        patterns:
+          - "vitest"
+          - "@vitest/*"
+          - "@testing-library/*"
+          - "@playwright/*"
+          - "playwright"
+          - "@types/*"
+          - "typescript"
+          - "happy-dom"
+          - "jsdom"
+          - "msw"
+        update-types:
+          - "minor"
+          - "patch"
+      build-tooling:
+        patterns:
+          - "tailwindcss"
+          - "@tailwindcss/*"
+          - "postcss"
+          - "vite-tsconfig-paths"
+          - "@analogjs/*"
+          - "unplugin-swc"
+          - "@swc/*"
+          - "tsx"
+          - "tsc-alias"
+        update-types:
+          - "minor"
+          - "patch"
+      fontawesome:
+        patterns:
+          - "@fortawesome/*"
+        update-types:
+          - "minor"
+          - "patch"
+      prod-minor-patch:
+        dependency-type: "production"
+        update-types:
+          - "minor"
+          - "patch"
+        exclude-patterns:
+          - "@angular/*"
+          - "@angular-devkit/*"
+          - "@nestjs/*"
+          - "firebase"
+          - "firebase-admin"
+          - "@angular/fire"
+          - "@fortawesome/*"
+
+  # ─── GitHub Actions ─────────────────────────────────────────────────
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Europe/Madrid"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "github-actions"
+    commit-message:
+      prefix: "chore(deps)"
+    groups:
+      github-actions:
+        patterns:
+          - "actions/*"
+          - "github/*"
+      docker-actions:
+        patterns:
+          - "docker/*"
+      deploy-actions:
+        patterns:
+          - "appleboy/*"
+
+  # ─── Docker: Backend Dockerfile ─────────────────────────────────────
+  # FROM oven/bun:1.3-alpine (builder), FROM node:22-alpine (prod)
+  - package-ecosystem: "docker"
+    directory: "/backend"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Europe/Madrid"
+    open-pull-requests-limit: 3
+    labels:
+      - "dependencies"
+      - "docker"
+    commit-message:
+      prefix: "chore(deps)"
+    groups:
+      docker-base-images:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # ─── Docker: Frontend Dockerfile ────────────────────────────────────
+  # FROM oven/bun:1.3-alpine (builder), FROM nginx:alpine (prod)
+  - package-ecosystem: "docker"
+    directory: "/frontend"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Europe/Madrid"
+    open-pull-requests-limit: 3
+    labels:
+      - "dependencies"
+      - "docker"
+    commit-message:
+      prefix: "chore(deps)"
+    groups:
+      docker-base-images:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # ─── Docker Compose (service images) ────────────────────────────────
+  # Monitors image: directives in compose.yaml and compose.prod.yaml
+  # (postgres:17-alpine, redis:7-alpine, nginx:alpine)
+  # Variable-interpolated images like ${BACKEND_IMAGE:-...} are ignored
+  - package-ecosystem: "docker-compose"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Europe/Madrid"
+    open-pull-requests-limit: 3
+    labels:
+      - "dependencies"
+      - "docker"
+    commit-message:
+      prefix: "chore(deps)"
+    groups:
+      compose-images:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
