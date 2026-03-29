@@ -20,7 +20,7 @@ WORKDIR /app/backend
 RUN bun run build
 
 # ─── Stage 2: Production ──────────────────────────────────────────────────────
-FROM node:22-alpine AS production
+FROM node:25-alpine AS production
 
 WORKDIR /app
 
