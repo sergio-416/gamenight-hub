@@ -1,6 +1,6 @@
 # Production Docker Compose — used on gamenight-hub.com (72.61.201.76)
 # Requires: .env.production with all secrets set (never commit this file)
-# Usage: docker compose -f docker-compose.prod.yml up -d
+# Usage: docker compose -f compose.prod.yaml up -d
 
 services:
   postgres:
