@@ -113,8 +113,8 @@
 		"system": "Preferencia del sistema"
 	},
 	"dateTimePicker": {
-		"placeholder": "[ES] Select date & time",
-		"time": "[ES] Time"
+		"placeholder": "Seleccionar fecha y hora",
+		"time": "Hora"
 	},
 	"cvdSelector": {
 		"label": "Visión cromática",
@@ -125,21 +125,21 @@
 	},
 	"pwa": {
 		"update": {
-			"title": "[ES] Update Available",
-			"message": "[ES] A new version is ready",
-			"reload": "[ES] Reload",
-			"later": "[ES] Later"
+			"title": "Actualización disponible",
+			"message": "Una nueva versión está lista",
+			"reload": "Recargar",
+			"later": "Más tarde"
 		},
 		"install": {
-			"title": "[ES] Install App",
-			"message": "[ES] Add GameNight Hub to your home screen",
-			"action": "[ES] Install",
-			"dismiss": "[ES] Not now"
+			"title": "Instalar aplicación",
+			"message": "Añade GameNight Hub a tu pantalla de inicio",
+			"action": "Instalar",
+			"dismiss": "Ahora no"
 		},
 		"offline": {
-			"title": "[ES] You're Offline",
-			"message": "[ES] Check your connection and try again",
-			"retry": "[ES] Retry"
+			"title": "Estás sin conexión",
+			"message": "Comprueba tu conexión e inténtalo de nuevo",
+			"retry": "Reintentar"
 		}
 	}
 }

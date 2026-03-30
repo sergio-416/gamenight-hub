@@ -112,18 +112,18 @@
 		"expandCollection": "Enrichis ta collection de jeux de société"
 	},
 	"filters": {
-		"playersAny": "[FR] Any Players",
-		"players1": "[FR] 1 Player",
-		"players2": "[FR] 2 Players",
-		"players3": "[FR] 3 Players",
-		"players4": "[FR] 4 Players",
-		"players5": "[FR] 5 Players",
-		"players6Plus": "[FR] 6+ Players",
-		"categoryAll": "[FR] All Categories",
-		"sortNameAsc": "[FR] A → Z",
-		"sortNameDesc": "[FR] Z → A",
-		"sortNewest": "[FR] Newest First",
-		"sortOldest": "[FR] Oldest First"
+		"playersAny": "Tous les joueurs",
+		"players1": "1 joueur",
+		"players2": "2 joueurs",
+		"players3": "3 joueurs",
+		"players4": "4 joueurs",
+		"players5": "5 joueurs",
+		"players6Plus": "6+ joueurs",
+		"categoryAll": "Toutes les catégories",
+		"sortNameAsc": "A → Z",
+		"sortNameDesc": "Z → A",
+		"sortNewest": "Plus récents",
+		"sortOldest": "Plus anciens"
 	},
 	"status": {
 		"owned": "Possédé",

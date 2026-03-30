@@ -112,18 +112,18 @@
 		"expandCollection": "Expande a tua coleção de jogos de mesa"
 	},
 	"filters": {
-		"playersAny": "[PT] Any Players",
-		"players1": "[PT] 1 Player",
-		"players2": "[PT] 2 Players",
-		"players3": "[PT] 3 Players",
-		"players4": "[PT] 4 Players",
-		"players5": "[PT] 5 Players",
-		"players6Plus": "[PT] 6+ Players",
-		"categoryAll": "[PT] All Categories",
-		"sortNameAsc": "[PT] A → Z",
-		"sortNameDesc": "[PT] Z → A",
-		"sortNewest": "[PT] Newest First",
-		"sortOldest": "[PT] Oldest First"
+		"playersAny": "Qualquer jogador",
+		"players1": "1 jogador",
+		"players2": "2 jogadores",
+		"players3": "3 jogadores",
+		"players4": "4 jogadores",
+		"players5": "5 jogadores",
+		"players6Plus": "6+ jogadores",
+		"categoryAll": "Todas as categorias",
+		"sortNameAsc": "A → Z",
+		"sortNameDesc": "Z → A",
+		"sortNewest": "Mais recentes",
+		"sortOldest": "Mais antigos"
 	},
 	"status": {
 		"owned": "Na coleção",

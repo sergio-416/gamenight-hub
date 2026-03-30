@@ -112,18 +112,18 @@
 		"expandCollection": "Erweitere deine Spielesammlung"
 	},
 	"filters": {
-		"playersAny": "[DE] Any Players",
-		"players1": "[DE] 1 Player",
-		"players2": "[DE] 2 Players",
-		"players3": "[DE] 3 Players",
-		"players4": "[DE] 4 Players",
-		"players5": "[DE] 5 Players",
-		"players6Plus": "[DE] 6+ Players",
-		"categoryAll": "[DE] All Categories",
-		"sortNameAsc": "[DE] A → Z",
-		"sortNameDesc": "[DE] Z → A",
-		"sortNewest": "[DE] Newest First",
-		"sortOldest": "[DE] Oldest First"
+		"playersAny": "Beliebige Spieleranzahl",
+		"players1": "1 Spieler",
+		"players2": "2 Spieler",
+		"players3": "3 Spieler",
+		"players4": "4 Spieler",
+		"players5": "5 Spieler",
+		"players6Plus": "6+ Spieler",
+		"categoryAll": "Alle Kategorien",
+		"sortNameAsc": "A → Z",
+		"sortNameDesc": "Z → A",
+		"sortNewest": "Neueste zuerst",
+		"sortOldest": "Älteste zuerst"
 	},
 	"status": {
 		"owned": "Im Besitz",
