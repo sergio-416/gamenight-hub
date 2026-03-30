@@ -9,14 +9,14 @@
 	"profileSettings": "Configuració del Perfil",
 	"levelAndXp": "Nivell i XP",
 	"xpProgress": "{{ current }} / {{ next }} XP",
-	"streak": "[CA] {{ count }} week streak",
+	"streak": "{{ count }} setmanes consecutives",
 	"stats": {
 		"title": "Estadístiques",
 		"eventsJoined": "Esdeveniments Units",
 		"eventsHosted": "Esdeveniments Organitzats",
 		"gamesOwned": "Jocs en Propietat",
-		"totalXp": "[CA] Total XP",
-		"weekStreak": "[CA] Week Streak"
+		"totalXp": "XP total",
+		"weekStreak": "Ratxa setmanal"
 	},
 	"badges": {
 		"title": "Insígnies",

@@ -9,14 +9,14 @@
 	"profileSettings": "Ajustes del Perfil",
 	"levelAndXp": "Nivel y XP",
 	"xpProgress": "{{ current }} / {{ next }} XP",
-	"streak": "[ES] {{ count }} week streak",
+	"streak": "{{ count }} semanas consecutivas",
 	"stats": {
 		"title": "Estad\u00edsticas",
 		"eventsJoined": "Eventos Unidos",
 		"eventsHosted": "Eventos Organizados",
 		"gamesOwned": "Juegos en Propiedad",
-		"totalXp": "[ES] Total XP",
-		"weekStreak": "[ES] Week Streak"
+		"totalXp": "XP total",
+		"weekStreak": "Racha semanal"
 	},
 	"badges": {
 		"title": "Insignias",

@@ -112,18 +112,18 @@
 		"expandCollection": "Espandi la tua collezione da tavolo"
 	},
 	"filters": {
-		"playersAny": "[IT] Any Players",
-		"players1": "[IT] 1 Player",
-		"players2": "[IT] 2 Players",
-		"players3": "[IT] 3 Players",
-		"players4": "[IT] 4 Players",
-		"players5": "[IT] 5 Players",
-		"players6Plus": "[IT] 6+ Players",
-		"categoryAll": "[IT] All Categories",
-		"sortNameAsc": "[IT] A → Z",
-		"sortNameDesc": "[IT] Z → A",
-		"sortNewest": "[IT] Newest First",
-		"sortOldest": "[IT] Oldest First"
+		"playersAny": "Qualsiasi giocatore",
+		"players1": "1 giocatore",
+		"players2": "2 giocatori",
+		"players3": "3 giocatori",
+		"players4": "4 giocatori",
+		"players5": "5 giocatori",
+		"players6Plus": "6+ giocatori",
+		"categoryAll": "Tutte le categorie",
+		"sortNameAsc": "A → Z",
+		"sortNameDesc": "Z → A",
+		"sortNewest": "Più recenti",
+		"sortOldest": "Più vecchi"
 	},
 	"status": {
 		"owned": "Posseduto",

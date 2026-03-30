@@ -21,6 +21,7 @@ import { authInterceptor } from './core/interceptors/auth';
 import { PwaInstallService } from './core/services/pwa-install.service';
 import { PwaUpdateService } from './core/services/pwa-update.service';
 import { TranslocoHttpLoader } from './core/transloco-loader';
+import { detectBrowserLang } from './core/utils/detect-browser-lang';
 
 const AVAILABLE_LANGS = ['en', 'es', 'ca', 'fr', 'de', 'pt', 'it'] as const;
 const STORAGE_KEY = 'transloco-lang';
@@ -62,9 +63,20 @@ export const appConfig: ApplicationConfig = {
 		}),
 		provideAppInitializer(() => {
 			const service = inject(TranslocoService);
-			const stored = localStorage.getItem(STORAGE_KEY);
-			const lang =
-				stored && (AVAILABLE_LANGS as readonly string[]).includes(stored) ? stored : 'en';
+			let lang = 'en';
+
+			try {
+				const stored = localStorage.getItem(STORAGE_KEY);
+				if (stored && (AVAILABLE_LANGS as readonly string[]).includes(stored)) {
+					lang = stored;
+				} else {
+					lang = detectBrowserLang(AVAILABLE_LANGS, 'en');
+					localStorage.setItem(STORAGE_KEY, lang);
+				}
+			} catch {
+				lang = detectBrowserLang(AVAILABLE_LANGS, 'en');
+			}
+
 			service.setActiveLang(lang);
 			return firstValueFrom(service.load(lang));
 		}),

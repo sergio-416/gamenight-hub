@@ -112,18 +112,18 @@
 		"expandCollection": "Amplia la teva col·lecció de jocs de taula"
 	},
 	"filters": {
-		"playersAny": "[CA] Any Players",
-		"players1": "[CA] 1 Player",
-		"players2": "[CA] 2 Players",
-		"players3": "[CA] 3 Players",
-		"players4": "[CA] 4 Players",
-		"players5": "[CA] 5 Players",
-		"players6Plus": "[CA] 6+ Players",
-		"categoryAll": "[CA] All Categories",
-		"sortNameAsc": "[CA] A → Z",
-		"sortNameDesc": "[CA] Z → A",
-		"sortNewest": "[CA] Newest First",
-		"sortOldest": "[CA] Oldest First"
+		"playersAny": "Qualsevol jugador",
+		"players1": "1 jugador",
+		"players2": "2 jugadors",
+		"players3": "3 jugadors",
+		"players4": "4 jugadors",
+		"players5": "5 jugadors",
+		"players6Plus": "6+ jugadors",
+		"categoryAll": "Totes les categories",
+		"sortNameAsc": "A → Z",
+		"sortNameDesc": "Z → A",
+		"sortNewest": "Més recents",
+		"sortOldest": "Més antics"
 	},
 	"status": {
 		"owned": "En Propietat",
