@@ -6,11 +6,11 @@
 
 A full-stack platform for board-game enthusiasts to organise game nights, manage personal collections, and discover events nearby.
 
-[![CI](https://img.shields.io/github/actions/workflow/status/sergio-416/gamenight-hub/ci.yml?branch=main&label=CI&logo=github)](https://github.com/sergio-416/gamenight-hub/actions)
+[![CI/CD](https://img.shields.io/github/actions/workflow/status/sergio-416/gamenight-hub/ci-deploy.yml?branch=main&label=CI%2FCD&logo=github)](https://github.com/sergio-416/gamenight-hub/actions)
 [![Angular](https://img.shields.io/badge/Angular-21-dd0031?logo=angular&logoColor=white)](https://angular.dev)
 [![NestJS](https://img.shields.io/badge/NestJS-11-e0234e?logo=nestjs&logoColor=white)](https://nestjs.com)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178c6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17-4169e1?logo=postgresql&logoColor=white)](https://www.postgresql.org)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-18-4169e1?logo=postgresql&logoColor=white)](https://www.postgresql.org)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06b6d4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![Bun](https://img.shields.io/badge/Bun-1.3-fbf0df?logo=bun&logoColor=black)](https://bun.sh)
 [![License](https://img.shields.io/badge/License-Private-grey)](#)
@@ -64,8 +64,8 @@ GameNight Hub brings tabletop communities together. Create events with venue map
 | -------------------------------------------------------------- | ------------------------------------------ |
 | [NestJS 11](https://nestjs.com)                                | Modular REST API with dependency injection |
 | [Drizzle ORM v1](https://orm.drizzle.team)                     | Type-safe SQL with zero runtime overhead   |
-| [PostgreSQL 17](https://www.postgresql.org)                    | Primary relational database                |
-| [Redis 7](https://redis.io)                                    | Caching layer and pub/sub                  |
+| [PostgreSQL 18](https://www.postgresql.org)                    | Primary relational database                |
+| [Redis 8](https://redis.io)                                    | Caching layer and pub/sub                  |
 | [Firebase Admin](https://firebase.google.com/docs/admin/setup) | Server-side auth token verification        |
 | [Swagger / OpenAPI](https://swagger.io)                        | Auto-generated API documentation           |
 | [Socket.IO](https://socket.io)                                 | WebSocket server for real-time features    |
@@ -114,7 +114,7 @@ GameNight Hub brings tabletop communities together. Create events with venue map
 │                     INFRASTRUCTURE                          │
 │  Docker Compose  ·  Nginx  ·  Let's Encrypt  ·  VPS        │
 ├─────────────────┬───────────────────┬───────────────────────┤
-│  PostgreSQL 17  │     Redis 7       │   Firebase Auth       │
+│  PostgreSQL 18  │     Redis 8       │   Firebase Auth       │
 │  Drizzle ORM    │   Cache + Pub/Sub │   Magic Links + SSO   │
 └─────────────────┴───────────────────┴───────────────────────┘
 ```
@@ -143,7 +143,7 @@ GameNight_Hub/
 
 | Requirement             | Version              |
 | ----------------------- | -------------------- |
-| Node.js                 | 22+ (24 recommended) |
+| Node.js                 | 24+                  |
 | Bun                     | 1.3.10+              |
 | Docker & Docker Compose | Latest               |
 | Git                     | 2.x+                 |
@@ -219,9 +219,9 @@ GameNight_Hub/
 | Component   | Image                        | Exposed        |
 | ----------- | ---------------------------- | -------------- |
 | Nginx       | `nginx:alpine`               | 80, 443        |
-| Backend API | `node:22-alpine`             | Internal :3000 |
-| PostgreSQL  | `postgres:17-alpine`         | Internal :5432 |
-| Redis       | `redis:7-alpine`             | Internal :6379 |
+| Backend API | `node:25-alpine`             | Internal :3000 |
+| PostgreSQL  | `postgres:18-alpine`         | Internal :5432 |
+| Redis       | `redis:8-alpine`             | Internal :6379 |
 | Frontend    | Static files served by Nginx | —              |
 
 ### CI/CD Pipeline
@@ -277,17 +277,22 @@ Push to main
 
 ## Environment Variables
 
-| Variable                | Required | Description                            |
-| ----------------------- | -------- | -------------------------------------- |
-| `POSTGRES_URL`          | Yes      | PostgreSQL connection string           |
-| `REDIS_URL`             | Yes      | Redis connection string                |
-| `FIREBASE_PROJECT_ID`   | Yes      | Firebase project identifier            |
-| `FIREBASE_CLIENT_EMAIL` | Yes      | Firebase service account email         |
-| `FIREBASE_PRIVATE_KEY`  | Yes      | Firebase service account private key   |
-| `FRONTEND_URL`          | Yes      | Frontend origin for CORS               |
-| `NODE_ENV`              | Yes      | `development` or `production`          |
-| `PORT`                  | No       | API port (default: 3000)               |
-| `REDIS_PASSWORD`        | Prod     | Redis authentication (production only) |
+| Variable                | Required | Description                                       |
+| ----------------------- | -------- | ------------------------------------------------- |
+| `POSTGRES_URL`          | Yes      | PostgreSQL connection string                      |
+| `FIREBASE_PROJECT_ID`   | Yes      | Firebase project identifier                       |
+| `FIREBASE_CLIENT_EMAIL` | Yes      | Firebase service account email                    |
+| `FIREBASE_PRIVATE_KEY`  | Yes      | Firebase service account private key              |
+| `RESEND_API_KEY`        | Yes      | Resend API key for transactional email            |
+| `REDIS_URL`             | No       | Redis connection string (caching + pub/sub)       |
+| `FRONTEND_URL`          | No       | Frontend origin for CORS (default: localhost:4200)|
+| `NODE_ENV`              | No       | `development`, `production`, or `test`            |
+| `PORT`                  | No       | API port (default: 3000)                          |
+| `EMAIL_FROM`            | No       | Sender email address (default: onboarding@resend.dev) |
+| `BGG_API_TOKEN`         | No       | BoardGameGeek API token                           |
+| `GOOGLE_GENAI_API_KEY`  | No       | Google Generative AI API key                      |
+| `ENABLE_SWAGGER`        | No       | Set to `true` to enable Swagger UI at `/api/docs` |
+| `REDIS_PASSWORD`        | Prod     | Redis authentication (production only)            |
 
 ---
 
