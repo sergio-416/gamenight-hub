@@ -178,6 +178,11 @@ updates:
       - "docker"
     commit-message:
       prefix: "chore(deps)"
+    ignore:
+      # Major Postgres upgrades require pg_dump/pg_restore data migration.
+      # Do NOT auto-bump — plan these manually.
+      - dependency-name: "postgres"
+        update-types: ["version-update:semver-major"]
     groups:
       compose-images:
         patterns:
