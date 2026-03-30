@@ -1,7 +1,4 @@
-export function detectBrowserLang(
-	supported: readonly string[],
-	fallback: string,
-): string {
+export function detectBrowserLang(supported: readonly string[], fallback: string): string {
 	const browserLangs =
 		typeof navigator !== 'undefined'
 			? navigator.languages?.length
