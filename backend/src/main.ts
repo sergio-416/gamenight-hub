@@ -1,6 +1,7 @@
 import { VersioningType } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { apiReference } from '@scalar/nestjs-api-reference';
 import helmet from 'helmet';
 import { AppModule } from './app.module.js';
 import { DevExceptionFilter } from './common/filters/dev-exception.filter.js';
@@ -21,16 +22,18 @@ async function bootstrap() {
 
 	const app = await NestFactory.create(AppModule);
 
+	const swaggerEnabled = process.env.ENABLE_SWAGGER === 'true';
+
 	app.use(
 		helmet({
 			contentSecurityPolicy: {
 				directives: {
 					defaultSrc: ["'self'"],
-					scriptSrc: ["'self'"],
+					scriptSrc: ["'self'", ...(swaggerEnabled ? ['https://cdn.jsdelivr.net'] : [])],
 					styleSrc: ["'self'", "'unsafe-inline'"],
 					imgSrc: ["'self'", 'data:', 'https://cf.geekdo-images.com', 'https://tile.jawg.io'],
 					connectSrc: ["'self'", process.env.FRONTEND_URL ?? 'http://localhost:4200'],
-					fontSrc: ["'self'"],
+					fontSrc: ["'self'", ...(swaggerEnabled ? ['https://cdn.jsdelivr.net'] : [])],
 					objectSrc: ["'none'"],
 					frameAncestors: ["'none'"],
 				},
@@ -51,7 +54,7 @@ async function bootstrap() {
 		credentials: true,
 	});
 
-	if (process.env.ENABLE_SWAGGER === 'true') {
+	if (swaggerEnabled) {
 		const config = new DocumentBuilder()
 			.setTitle('GameNight Hub API')
 			.setDescription('REST API for the GameNight Hub application')
@@ -60,7 +63,13 @@ async function bootstrap() {
 			.build();
 
 		const document = SwaggerModule.createDocument(app, config);
-		SwaggerModule.setup('api/docs', app, document);
+
+		app.use(
+			'/api/docs',
+			apiReference({
+				spec: { content: document },
+			}),
+		);
 	}
 
 	await app.listen(process.env.PORT ?? 3000);
