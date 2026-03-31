@@ -13,6 +13,7 @@ export const EnvSchema = z.object({
 	FRONTEND_URL: z.url().default('http://localhost:4200'),
 	BGG_API_TOKEN: z.string().optional(),
 	GOOGLE_GENAI_API_KEY: z.string().optional(),
+	ENABLE_SWAGGER: z.enum(['true', 'false']).optional().default('false'),
 	RESEND_API_KEY: z.string().min(1, 'RESEND_API_KEY is required'),
 	EMAIL_FROM: z
 		.email({ message: 'EMAIL_FROM must be a valid email' })

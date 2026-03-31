@@ -13,12 +13,14 @@ import {
 	Post,
 	UsePipes,
 } from '@nestjs/common';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Throttle } from '@nestjs/throttler';
 
 const ACCEPTED_RESPONSE = {
 	message: 'If this email is registered, a sign-in link has been sent.',
 } as const;
 
+@ApiTags('Auth')
 @Controller({ path: 'auth', version: '1' })
 export class AuthController {
 	readonly #logger = new Logger(AuthController.name);
@@ -33,6 +35,7 @@ export class AuthController {
 		this.#emailService = emailService;
 	}
 
+	@ApiOperation({ summary: 'Request a magic link sign-in email' })
 	@Post('magic-link')
 	@Throttle({ default: { ttl: THROTTLE.WINDOW_MS, limit: THROTTLE.MAGIC_LINK_LIMIT } })
 	@HttpCode(HttpStatus.ACCEPTED)
