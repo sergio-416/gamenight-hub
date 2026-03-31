@@ -67,7 +67,7 @@ async function bootstrap() {
 		app.use(
 			'/api/docs',
 			apiReference({
-				spec: { content: document },
+				content: document,
 			}),
 		);
 	}
