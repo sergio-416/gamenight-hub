@@ -24,6 +24,7 @@ import { XpService } from '@shared/services/xp.service';
 	],
 	templateUrl: './header.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	host: { class: 'sticky top-0 z-20 block' },
 })
 export class Header {
 	readonly faBell = faBell;
