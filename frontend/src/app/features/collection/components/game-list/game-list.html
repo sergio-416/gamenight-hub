@@ -128,12 +128,20 @@
 					</p>
 				</div>
 				@if (game.status) {
-				<span
-					class="shrink-0 rounded-full px-2.5 py-0.5 text-xs font-medium"
-					[class]="statusColors[game.status]"
-				>
-					{{ statusLabels[game.status] }}
-				</span>
+					@if (game.status === 'owned' && game.categories?.length) {
+					<span
+						class="shrink-0 rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-on-surface-muted"
+					>
+						{{ game.categories[0] }}
+					</span>
+					} @else {
+					<span
+						class="shrink-0 rounded-full px-2.5 py-0.5 text-xs font-medium"
+						[class]="statusColors[game.status]"
+					>
+						{{ statusLabels[game.status] }}
+					</span>
+					}
 				} @if (isLoggedIn()) {
 				<button
 					type="button"
