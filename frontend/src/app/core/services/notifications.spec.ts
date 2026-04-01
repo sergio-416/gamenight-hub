@@ -30,8 +30,8 @@ describe('NotificationsService', () => {
 		service = TestBed.inject(NotificationsService);
 	});
 
-	it('should connect to websocket when connect is called', () => {
-		service.connect('mock-token', 'user-1');
+	it('should connect to websocket when connect is called', async () => {
+		await service.connect('mock-token', 'user-1');
 
 		expect(mockSocketFactory).toHaveBeenCalledWith(
 			expect.stringContaining('/notifications'),
@@ -39,22 +39,22 @@ describe('NotificationsService', () => {
 		);
 	});
 
-	it('should not reconnect if already connected', () => {
-		service.connect('token-1', 'user-1');
-		service.connect('token-2', 'user-1');
+	it('should not reconnect if already connected', async () => {
+		await service.connect('token-1', 'user-1');
+		await service.connect('token-2', 'user-1');
 
 		expect(mockSocketFactory).toHaveBeenCalledTimes(1);
 	});
 
-	it('should disconnect socket when disconnect is called', () => {
-		service.connect('mock-token', 'user-1');
+	it('should disconnect socket when disconnect is called', async () => {
+		await service.connect('mock-token', 'user-1');
 		service.disconnect();
 
 		expect(mockDisconnect).toHaveBeenCalled();
 	});
 
-	it('should show info toast when event.created is from another user', () => {
-		service.connect('mock-token', 'user-1');
+	it('should show info toast when event.created is from another user', async () => {
+		await service.connect('mock-token', 'user-1');
 
 		const call = mockOn.mock.calls.find((args) => args[0] === 'event.created');
 		const eventHandler = call?.[1] as (payload: {
@@ -71,8 +71,8 @@ describe('NotificationsService', () => {
 		expect(mockToastService.info).toHaveBeenCalledWith('New event: Catan Night');
 	});
 
-	it('should NOT show toast when event.created is from the current user', () => {
-		service.connect('mock-token', 'user-1');
+	it('should NOT show toast when event.created is from the current user', async () => {
+		await service.connect('mock-token', 'user-1');
 
 		const call = mockOn.mock.calls.find((args) => args[0] === 'event.created');
 		const eventHandler = call?.[1] as (payload: {
