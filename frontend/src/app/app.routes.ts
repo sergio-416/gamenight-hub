@@ -1,3 +1,4 @@
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import type { Routes } from '@angular/router';
 import { provideTranslocoScope } from '@jsverse/transloco';
 import { authGuard } from './core/guards/auth.guard';
@@ -111,7 +112,10 @@ export const routes: Routes = [
 			import('./features/auth/register-organiser/register-organiser').then(
 				(m) => m.RegisterOrganiser,
 			),
-		providers: [provideTranslocoScope('auth')],
+		providers: [
+			provideTranslocoScope('auth'),
+			provideFirestore(() => getFirestore()),
+		],
 	},
 	{
 		path: 'create-event',

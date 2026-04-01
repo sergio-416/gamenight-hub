@@ -2,14 +2,14 @@ import { Injectable, InjectionToken, inject, type OnDestroy } from '@angular/cor
 import { environment } from '@env';
 import type { EventCreatedPayload } from '@gamenight-hub/shared';
 import { TranslocoService } from '@jsverse/transloco';
-import { io, type Socket } from 'socket.io-client';
+import type { Socket } from 'socket.io-client';
 import { ToastService } from './toast';
 
-export type SocketFactory = typeof io;
+export type SocketFactory = (...args: unknown[]) => unknown;
 
-export const SOCKET_FACTORY = new InjectionToken<SocketFactory>('SOCKET_FACTORY', {
+export const SOCKET_FACTORY = new InjectionToken<SocketFactory | null>('SOCKET_FACTORY', {
 	providedIn: 'root',
-	factory: () => io,
+	factory: () => null,
 });
 
 @Injectable({ providedIn: 'root' })
@@ -20,17 +20,19 @@ export class NotificationsService implements OnDestroy {
 	#socket: Socket | null = null;
 	#currentUid: string | null = null;
 
-	connect(token: string, uid: string): void {
+	async connect(token: string, uid: string): Promise<void> {
 		if (this.#socket) return;
 		this.#currentUid = uid;
 
-		this.#socket = this.#socketFactory(`${environment.wsUrl}/notifications`, {
+		const socketFactory = this.#socketFactory ?? (await import('socket.io-client')).io;
+
+		this.#socket = socketFactory(`${environment.wsUrl}/notifications`, {
 			auth: { token },
 			transports: ['websocket'],
 			reconnection: true,
 			reconnectionDelay: 2000,
 			reconnectionAttempts: 5,
-		});
+		}) as Socket;
 
 		this.#socket.on('event.created', (payload: EventCreatedPayload) => {
 			if (payload.createdBy === this.#currentUid) return;

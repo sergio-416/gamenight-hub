@@ -42,4 +42,4 @@ export const EVENT_COVERS = [
 export type EventCoverSlug = (typeof EVENT_COVERS)[number]['slug'];
 
 export const getEventCoverPath = (slug: EventCoverSlug): string =>
-	`/assets/event-covers/${slug}.png`;
+	`/assets/event-covers/${slug}.webp`;
