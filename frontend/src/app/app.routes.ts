@@ -112,10 +112,7 @@ export const routes: Routes = [
 			import('./features/auth/register-organiser/register-organiser').then(
 				(m) => m.RegisterOrganiser,
 			),
-		providers: [
-			provideTranslocoScope('auth'),
-			provideFirestore(() => getFirestore()),
-		],
+		providers: [provideTranslocoScope('auth'), provideFirestore(() => getFirestore())],
 	},
 	{
 		path: 'create-event',
