@@ -1,0 +1,135 @@
+<ng-container *transloco="let t; read: 'profile'">
+	<div class="mb-4 flex items-center justify-between">
+		<p
+			class="text-xs font-semibold uppercase tracking-widest text-on-surface-dim"
+		>
+			{{ t('wantToTry.title') }}
+		</p>
+		<div class="flex items-center gap-2">
+			<span
+				class="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-500"
+			>
+				{{ games().length }}/4
+			</span>
+			@if (games().length > 0) {
+			<button
+				type="button"
+				(click)="toggleMarkPlayedMode()"
+				class="flex items-center gap-1.5 rounded-lg px-2 py-1 text-xs font-medium transition"
+				[class]="showMarkPlayedMode()
+				? 'bg-emerald-100 text-emerald-700'
+				: 'bg-slate-100 text-slate-600 hover:bg-slate-200'"
+				[attr.aria-label]="showMarkPlayedMode() ? 'Cancel selection' : 'Mark as played'"
+			>
+				<fa-icon
+					[icon]="showMarkPlayedMode() ? iconX : iconCheckSquare"
+					class="text-xs"
+				></fa-icon>
+				{{ showMarkPlayedMode() ? t('wantToTry.cancel') :
+				t('wantToTry.update') }}
+			</button>
+			}
+			@if (!showMarkPlayedMode() && games().length < 4) {
+			<button
+				type="button"
+				(click)="addGameRequested.emit('want_to_try')"
+				class="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 transition hover:bg-emerald-200"
+				[attr.aria-label]="t('wantToTry.ariaAddGame')"
+			>
+				<fa-icon [icon]="iconPlus" class="text-xs"></fa-icon>
+			</button>
+			}
+			@if (showMarkPlayedMode() && selectedPlayedCount() > 0) {
+			<button
+				type="button"
+				(click)="confirmMarkAsPlayed()"
+				class="flex items-center gap-1.5 rounded-lg bg-emerald-500 px-2 py-1 text-xs font-medium text-white transition hover:bg-emerald-600"
+			>
+				<fa-icon [icon]="iconCheck" class="text-xs"></fa-icon>
+				{{ t('wantToTry.confirm', { count: selectedPlayedCount() }) }}
+			</button>
+			}
+		</div>
+	</div>
+
+	@if (games().length === 0) {
+	<div
+		class="flex flex-col items-center justify-center py-6 text-center"
+	>
+		<fa-icon
+			[icon]="iconWand"
+			class="text-3xl text-slate-300"
+		></fa-icon>
+		<p class="mt-2 text-xs text-on-surface-dim">
+			{{ t('wantToTry.empty') }}
+		</p>
+	</div>
+	} @else {
+	<div class="space-y-2">
+		@for (game of games(); track game.id) {
+		<div
+			class="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 p-2.5"
+		>
+			<div class="flex min-w-0 flex-1 items-center gap-2">
+				@if (showMarkPlayedMode()) {
+				<button
+					type="button"
+					(click)="toggleGameSelection(game.id)"
+					class="flex h-5 w-5 shrink-0 items-center justify-center text-slate-400 transition hover:text-emerald-500"
+					[attr.aria-label]="isGameSelected(game.id) ? 'Deselect' : 'Select'"
+				>
+					<fa-icon
+						[icon]="isGameSelected(game.id) ? iconCheckSquare : iconSquare"
+						class="text-lg"
+						[class.text-emerald-500]="isGameSelected(game.id)"
+					></fa-icon>
+				</button>
+				} @if (game.thumbnailUrl) {
+				<img
+					[ngSrc]="game.thumbnailUrl"
+					[alt]="game.name"
+					width="32"
+					height="32"
+					class="h-8 w-8 shrink-0 rounded object-cover"
+				/>
+				}
+				<div class="min-w-0 flex-1">
+					<p
+						class="line-clamp-1 text-sm font-medium text-on-surface-strong"
+					>
+						{{ game.name }}
+					</p>
+					@if (game.yearPublished) {
+					<p class="text-xs text-on-surface-dim">
+						{{ game.yearPublished }}
+					</p>
+					}
+				</div>
+			</div>
+			@if (!showMarkPlayedMode()) {
+			<button
+				type="button"
+				(click)="toggleGameSelection(game.id)"
+				class="ml-2 inline-flex items-center gap-1.5 rounded-lg bg-emerald-600 px-3 py-1.5 text-sm font-medium text-white transition hover:bg-emerald-700"
+			>
+				<fa-icon [icon]="iconCheck" class="w-3.5"></fa-icon>
+				{{ t('wantToTry.markAsPlayed') }}
+			</button>
+			}
+		</div>
+		}
+	</div>
+	}
+
+	@if (showMarkPlayedConfirm()) {
+	<app-confirm-dialog
+		[isOpen]="showMarkPlayedConfirm()"
+		title="Mark as played?"
+		message="This action cannot be undone. The selected games will be moved to your played list and won't appear here anymore."
+		confirmText="Mark as Played"
+		[danger]="true"
+		(confirmed)="markAsPlayedConfirmed()"
+		(cancelled)="cancelMarkAsPlayed()"
+	></app-confirm-dialog>
+	}
+</ng-container>

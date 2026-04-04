@@ -1,5 +1,6 @@
 import { CacheService } from '@common/cache/cache.service.js';
 import { ERROR_CODE } from '@common/error-codes';
+import { UI } from '@gamenight-hub/shared';
 import { HttpService } from '@nestjs/axios';
 import { HttpException, HttpStatus, Inject, Injectable, Logger } from '@nestjs/common';
 import { AxiosError } from 'axios';
@@ -199,7 +200,7 @@ export class BggIntegrationService {
 				isExpansion: item.$.type === 'boardgameexpansion',
 			};
 
-			await this.cacheService.set(cacheKey, result, 86400);
+			await this.cacheService.set(cacheKey, result, UI.CACHE_TTL_ONE_DAY);
 
 			return result;
 		} catch (error) {

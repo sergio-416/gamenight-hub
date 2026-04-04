@@ -12,7 +12,9 @@
 	"map": {
 		"heading": "Mappa",
 		"close": "Chiudi",
-		"loadingLocations": "Caricamento sedi..."
+		"loadingLocations": "Caricamento sedi...",
+		"defaultVenue": "Luogo",
+		"delete": "Elimina"
 	},
 	"card": {
 		"full": "Completo",

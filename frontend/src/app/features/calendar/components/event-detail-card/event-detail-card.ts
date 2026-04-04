@@ -1,6 +1,8 @@
-import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, output } from '@angular/core';
 import { CATEGORY_BORDER_CLASSES, CATEGORY_DATE_CLASSES } from '@calendar/utils/category-colours';
+import { formatShortDayTime, formatTimeShort } from '@core/utils/date-format';
 import type { CalendarEvent, EventCategory } from '@gamenight-hub/shared';
+import { TranslocoService } from '@jsverse/transloco';
 
 @Component({
 	selector: 'app-event-detail-card',
@@ -10,6 +12,8 @@ import type { CalendarEvent, EventCategory } from '@gamenight-hub/shared';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EventDetailCard {
+	readonly #transloco = inject(TranslocoService);
+
 	readonly event = input.required<CalendarEvent>();
 	readonly isToday = input(false);
 
@@ -26,23 +30,14 @@ export class EventDetailCard {
 	readonly dateLabel = computed(() => {
 		const ev = this.event();
 		const date = ev.startTime instanceof Date ? ev.startTime : new Date(ev.startTime);
-		const time = new Intl.DateTimeFormat('en-US', {
-			hour: 'numeric',
-			minute: '2-digit',
-			hour12: true,
-		}).format(date);
+		const lang = this.#transloco.getActiveLang();
 
 		if (this.isToday()) {
-			return `TODAY \u2022 ${time}`;
+			const time = formatTimeShort(date, lang);
+			return `${this.#transloco.translate('calendar.details.todayLabel')} \u2022 ${time}`;
 		}
 
-		const dayPart = new Intl.DateTimeFormat('en-US', {
-			weekday: 'short',
-			month: 'short',
-			day: 'numeric',
-		}).format(date);
-
-		return `${dayPart.toUpperCase()} \u2022 ${time}`;
+		return formatShortDayTime(date, lang).toUpperCase();
 	});
 
 	readonly dateLabelClass = computed(() => {
@@ -60,11 +55,19 @@ export class EventDetailCard {
 		const parts: string[] = [];
 
 		if (ev.hostUsername) {
-			parts.push(`Hosted by ${ev.hostUsername}`);
+			parts.push(
+				this.#transloco.translate('calendar.details.hostedBy', {
+					username: ev.hostUsername,
+				}),
+			);
 		}
 
 		if (ev.maxPlayers) {
-			parts.push(`${ev.maxPlayers} players max`);
+			parts.push(
+				this.#transloco.translate('calendar.details.playersMax', {
+					count: ev.maxPlayers,
+				}),
+			);
 		}
 
 		return parts.join(' \u2022 ') || null;

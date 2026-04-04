@@ -1,0 +1,49 @@
+<ng-container *transloco="let t; read: 'events'">
+	<div class="flex items-center gap-3">
+		@if (isOwner()) {
+		<span
+			class="inline-flex h-10 items-center rounded-lg bg-emerald-50 px-5 text-sm font-medium text-emerald-700"
+			[class.w-full]="fullWidth()"
+			[class.justify-center]="fullWidth()"
+			[class.py-3]="fullWidth()"
+		>
+			{{ t('youAreHost') }}
+		</span>
+		} @else if (isLoggedIn()) { @if (isJoined()) {
+		<button
+			type="button"
+			class="inline-flex h-10 items-center rounded-lg border border-border px-6 text-sm font-medium text-on-surface-medium transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
+			[class.w-full]="fullWidth()"
+			[class.justify-center]="fullWidth()"
+			[class.py-3]="fullWidth()"
+			(click)="leaveEvent()"
+			[disabled]="leaving()"
+		>
+			@if (leaving()) { {{ t('leaving') }} } @else { {{ t('leaveEvent') }} }
+		</button>
+		} @else {
+		<button
+			type="button"
+			class="inline-flex h-10 items-center rounded-lg bg-emerald-500 px-6 text-sm font-medium text-white transition hover:bg-emerald-600 disabled:cursor-not-allowed disabled:bg-emerald-300"
+			[class.w-full]="fullWidth()"
+			[class.justify-center]="fullWidth()"
+			[class.py-3]="fullWidth()"
+			(click)="joinEvent()"
+			[disabled]="joining() || isFull()"
+		>
+			@if (joining()) { {{ t('joining') }} } @else if (isFull()) { {{
+			t('eventFull') }} } @else { {{ t('joinGame') }} }
+		</button>
+		} } @else {
+		<a
+			routerLink="/login"
+			class="inline-flex h-10 items-center rounded-lg bg-emerald-500 px-6 text-sm font-medium text-white transition hover:bg-emerald-600"
+			[class.w-full]="fullWidth()"
+			[class.justify-center]="fullWidth()"
+			[class.py-3]="fullWidth()"
+		>
+			{{ t('signInToJoin') }}
+		</a>
+		}
+	</div>
+</ng-container>

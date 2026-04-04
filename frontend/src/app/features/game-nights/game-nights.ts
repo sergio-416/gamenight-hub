@@ -12,6 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { API_CONFIG } from '@core/config/api.config';
 import { AuthService } from '@core/services/auth';
 import { ToastService } from '@core/services/toast';
+import { formatDateMedium } from '@core/utils/date-format';
 import { CategoryFilterBar } from '@game-nights/components/category-filter-bar/category-filter-bar';
 import { EventCard } from '@game-nights/components/event-card/event-card';
 import { GameNightsMap } from '@game-nights/components/map/map';
@@ -169,13 +170,8 @@ export class GameNights {
 		});
 	}
 
-	readonly #dateFormatter = new Intl.DateTimeFormat('en-US', {
-		dateStyle: 'medium',
-		timeStyle: 'short',
-	});
-
 	formatDate(dateStr: string | Date): string {
-		return this.#dateFormatter.format(dateStr instanceof Date ? dateStr : new Date(dateStr));
+		return formatDateMedium(dateStr, this.#transloco.getActiveLang());
 	}
 
 	navigateToCreateEvent(): void {

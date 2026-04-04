@@ -12,7 +12,9 @@
 	"map": {
 		"heading": "Mapa",
 		"close": "Tancar",
-		"loadingLocations": "Carregant ubicacions..."
+		"loadingLocations": "Carregant ubicacions...",
+		"defaultVenue": "Lloc",
+		"delete": "Eliminar"
 	},
 	"card": {
 		"full": "Ple",

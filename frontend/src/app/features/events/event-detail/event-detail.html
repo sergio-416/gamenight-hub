@@ -93,7 +93,7 @@
 				<div
 					class="flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 text-lg font-semibold text-emerald-700"
 				>
-					{{ hostInitial() }}
+					{{ hostUsername()[0]?.toUpperCase() ?? '?' }}
 				</div>
 				}
 				<div>
@@ -102,41 +102,15 @@
 					</p>
 				</div>
 			</div>
-			<div class="flex items-center gap-3">
-				@if (isOwner()) {
-				<span
-					class="inline-flex h-10 items-center rounded-lg bg-emerald-50 px-5 text-sm font-medium text-emerald-700"
-				>
-					{{ t('youAreHost') }}
-				</span>
-				} @else if (isLoggedIn()) { @if (isJoined()) {
-				<button
-					type="button"
-					class="inline-flex h-10 items-center rounded-lg border border-border px-6 text-sm font-medium text-on-surface-medium transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
-					(click)="leaveEvent()"
-					[disabled]="leaving()"
-				>
-					@if (leaving()) { {{ t('leaving') }} } @else { {{ t('leaveEvent') }} }
-				</button>
-				} @else {
-				<button
-					type="button"
-					class="inline-flex h-10 items-center rounded-lg bg-emerald-500 px-6 text-sm font-medium text-white transition hover:bg-emerald-600 disabled:cursor-not-allowed disabled:bg-emerald-300"
-					(click)="joinEvent()"
-					[disabled]="joining() || isFull()"
-				>
-					@if (joining()) { {{ t('joining') }} } @else if (isFull()) { {{
-					t('eventFull') }} } @else { {{ t('joinGame') }} }
-				</button>
-				} } @else {
-				<a
-					routerLink="/login"
-					class="inline-flex h-10 items-center rounded-lg bg-emerald-500 px-6 text-sm font-medium text-white transition hover:bg-emerald-600"
-				>
-					{{ t('signInToJoin') }}
-				</a>
-				}
-			</div>
+			<app-event-join-actions
+				[isLoggedIn]="isLoggedIn()"
+				[isOwner]="isOwner()"
+				[isJoined]="isJoined()"
+				[isFull]="isFull()"
+				[eventId]="ev.id"
+				(joined)="onParticipantsChanged()"
+				(left)="onParticipantsChanged()"
+			/>
 		</div>
 
 		@if (infoPills().length > 0) {
@@ -218,317 +192,11 @@
 					</p>
 				</div>
 				} @if (isOwner()) {
-				<div
-					class="rounded-xl border border-border bg-surface-raised p-6 shadow-sm"
-				>
-					<div class="mb-4 flex items-center gap-2">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							class="h-5 w-5 text-emerald-500"
-							viewBox="0 0 20 20"
-							fill="currentColor"
-							aria-hidden="true"
-						>
-							<path
-								fill-rule="evenodd"
-								d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-								clip-rule="evenodd"
-							/>
-						</svg>
-						<h2 class="text-base font-semibold text-on-surface-strong">
-							{{ t('ownerZone') }}
-						</h2>
-					</div>
-					@if (!isEditing() && !confirmingDelete()) {
-					<div class="flex gap-3">
-						<button
-							type="button"
-							class="inline-flex h-10 flex-1 items-center justify-center gap-2 rounded-lg border border-emerald-200 text-sm font-medium text-emerald-600 transition hover:bg-emerald-50"
-							(click)="startEditing()"
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								class="h-4 w-4"
-								viewBox="0 0 20 20"
-								fill="currentColor"
-								aria-hidden="true"
-							>
-								<path
-									d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"
-								/>
-							</svg>
-							{{ t('editEvent') }}
-						</button>
-						<button
-							type="button"
-							class="inline-flex h-10 flex-1 items-center justify-center gap-2 rounded-lg border border-red-200 text-sm font-medium text-red-600 transition hover:bg-red-50"
-							(click)="startDelete()"
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								class="h-4 w-4"
-								viewBox="0 0 20 20"
-								fill="currentColor"
-								aria-hidden="true"
-							>
-								<path
-									fill-rule="evenodd"
-									d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-									clip-rule="evenodd"
-								/>
-							</svg>
-							{{ t('delete') }}
-						</button>
-					</div>
-					} @if (isEditing()) {
-					<div class="space-y-4">
-						@if (saveError()) {
-						<div
-							class="rounded-lg bg-red-50 px-4 py-2 text-sm text-red-600"
-							role="alert"
-						>
-							{{ saveError() }}
-						</div>
-						}
-
-						<div>
-							<label
-								for="edit-title"
-								class="mb-1 block text-sm font-medium text-on-surface-strong"
-							>
-								{{ t('edit.titleLabel') }} <span class="text-pink-500">*</span>
-							</label>
-							<input
-								id="edit-title"
-								type="text"
-								[value]="editForm().title ?? ''"
-								(input)="onTitleInput($event)"
-								class="h-10 w-full rounded-lg border border-border px-4 text-sm text-on-surface-strong outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
-								[placeholder]="t('edit.titlePlaceholder')"
-							/>
-						</div>
-
-						<div>
-							<label
-								for="edit-description"
-								class="mb-1 block text-sm font-medium text-on-surface-strong"
-							>
-								{{ t('edit.descriptionLabel') }}
-							</label>
-							<textarea
-								id="edit-description"
-								[value]="editForm().description || ''"
-								(input)="onDescriptionInput($event)"
-								rows="3"
-								class="w-full resize-none rounded-lg border border-border px-4 py-2 text-sm text-on-surface-strong outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
-								[placeholder]="t('edit.descriptionPlaceholder')"
-							></textarea>
-						</div>
-
-						<div>
-							<label
-								class="mb-1 block text-sm font-medium text-on-surface-strong"
-							>
-								{{ t('edit.coverImageLabel') }}
-							</label>
-							<div class="flex items-center gap-3">
-								@if (editCoverPreview()) {
-								<div
-									class="relative h-16 w-28 overflow-hidden rounded-lg bg-slate-100"
-								>
-									<img
-										[ngSrc]="editCoverPreview()!"
-										[alt]="t('edit.coverPreviewAlt')"
-										fill
-										class="object-cover"
-									/>
-								</div>
-								<button
-									type="button"
-									class="text-sm font-medium text-emerald-600 hover:underline"
-									(click)="openCoverPicker()"
-								>
-									{{ t('edit.changeCover') }}
-								</button>
-								} @else {
-								<button
-									type="button"
-									class="inline-flex h-10 items-center gap-2 rounded-lg border border-dashed border-border-strong px-4 text-sm font-medium text-on-surface-muted transition hover:border-emerald-400 hover:text-emerald-600"
-									(click)="openCoverPicker()"
-								>
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										class="h-4 w-4"
-										viewBox="0 0 20 20"
-										fill="currentColor"
-										aria-hidden="true"
-									>
-										<path
-											fill-rule="evenodd"
-											d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
-											clip-rule="evenodd"
-										/>
-									</svg>
-									{{ t('edit.chooseCoverImage') }}
-								</button>
-								}
-							</div>
-						</div>
-
-						<div>
-							<label
-								for="edit-max-players"
-								class="mb-1 block text-sm font-medium text-on-surface-strong"
-							>
-								{{ t('edit.maxPlayersLabel') }}
-								<span class="text-pink-500">*</span>
-							</label>
-							<input
-								id="edit-max-players"
-								type="number"
-								[value]="editForm().maxPlayers || ''"
-								(input)="onMaxPlayersInput($event)"
-								(keydown)="preventE($event)"
-								min="2"
-								class="h-10 w-full rounded-lg border border-border px-4 text-sm text-on-surface-strong outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
-								[placeholder]="t('edit.maxPlayersPlaceholder')"
-							/>
-							@if (editPlayerWarning()) {
-							<div
-								class="mt-2 flex items-start gap-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-700"
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									class="mt-0.5 h-3.5 w-3.5 shrink-0"
-									viewBox="0 0 20 20"
-									fill="currentColor"
-									aria-hidden="true"
-								>
-									<path
-										fill-rule="evenodd"
-										d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
-										clip-rule="evenodd"
-									/>
-								</svg>
-								{{ editPlayerWarning() }}
-							</div>
-							}
-						</div>
-
-						<div>
-							<label
-								for="edit-start"
-								class="mb-1 block text-sm font-medium text-on-surface-strong"
-							>
-								{{ t('edit.startTimeLabel') }}
-								<span class="text-pink-500">*</span>
-							</label>
-							<input
-								id="edit-start"
-								type="datetime-local"
-								[value]="startTimeLocal()"
-								(input)="onStartTimeInput($event)"
-								class="h-10 w-full rounded-lg border border-border px-4 text-sm text-on-surface-strong outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
-							/>
-						</div>
-
-						<div>
-							<button
-								type="button"
-								class="flex items-center gap-2 text-sm font-medium text-on-surface-muted transition hover:text-emerald-600"
-								(click)="toggleEndTime()"
-							>
-								<span
-									class="flex h-5 w-5 items-center justify-center rounded border transition"
-									[class.border-emerald-500]="showEndTime()"
-									[class.bg-emerald-500]="showEndTime()"
-									[class.border-border-strong]="!showEndTime()"
-								>
-									@if (showEndTime()) {
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										class="h-3 w-3 text-white"
-										viewBox="0 0 20 20"
-										fill="currentColor"
-										aria-hidden="true"
-									>
-										<path
-											fill-rule="evenodd"
-											d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-											clip-rule="evenodd"
-										/>
-									</svg>
-									}
-								</span>
-								{{ t('edit.addEndTime') }}
-							</button>
-							@if (showEndTime()) {
-							<div class="mt-2">
-								<input
-									id="edit-end"
-									type="datetime-local"
-									[value]="endTimeLocal()"
-									(input)="onEndTimeInput($event)"
-									class="h-10 w-full rounded-lg border border-border px-4 text-sm text-on-surface-strong outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
-								/>
-							</div>
-							}
-						</div>
-
-						<div class="flex justify-end gap-3 pt-2">
-							<button
-								type="button"
-								class="inline-flex h-10 items-center justify-center rounded-lg border border-border px-4 text-sm font-medium text-on-surface-medium transition hover:bg-slate-50"
-								(click)="cancelEditing()"
-							>
-								{{ t('edit.cancel') }}
-							</button>
-							<button
-								type="button"
-								class="inline-flex h-10 items-center justify-center rounded-lg bg-emerald-500 px-6 text-sm font-medium tracking-wide text-white transition hover:bg-emerald-600 disabled:cursor-not-allowed disabled:bg-emerald-300"
-								(click)="save()"
-								[disabled]="!isEditValid() || saving()"
-							>
-								@if (saving()) { {{ t('edit.saving') }} } @else { {{
-								t('edit.saveChanges') }} }
-							</button>
-						</div>
-					</div>
-					} @if (confirmingDelete()) {
-					<div class="space-y-3">
-						@if (deleteError()) {
-						<div
-							class="rounded-lg bg-red-50 px-4 py-2 text-sm text-red-600"
-							role="alert"
-						>
-							{{ deleteError() }}
-						</div>
-						}
-						<p class="text-sm font-medium text-red-700">
-							{{ t('deleteConfirm.message') }}
-						</p>
-						<div class="flex gap-3">
-							<button
-								type="button"
-								class="inline-flex h-10 items-center justify-center rounded-lg bg-red-600 px-4 text-sm font-medium text-white transition hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-50"
-								(click)="executeDelete()"
-								[disabled]="deleting()"
-							>
-								@if (deleting()) { {{ t('deleteConfirm.deleting') }} } @else {
-								{{ t('deleteConfirm.yesDelete') }} }
-							</button>
-							<button
-								type="button"
-								class="inline-flex h-10 items-center justify-center rounded-lg border border-border px-4 text-sm font-medium text-on-surface-medium transition hover:bg-slate-50"
-								(click)="cancelDelete()"
-								[disabled]="deleting()"
-							>
-								{{ t('deleteConfirm.cancel') }}
-							</button>
-						</div>
-					</div>
-					}
-				</div>
+				<app-event-edit-panel
+					[event]="ev"
+					(saved)="onEventSaved()"
+					(deleted)="onEventSaved()"
+				/>
 				}
 			</div>
 
@@ -583,68 +251,13 @@
 					}
 				</div>
 
-				<div
-					class="rounded-xl border border-border bg-surface-raised p-5 shadow-sm"
-				>
-					<h2 class="mb-4 text-sm font-semibold text-on-surface-strong">
-						{{ t('playersJoined') }} @if (event()?.maxPlayers) {
-						<span class="text-on-surface-dim"
-							>({{ participantCount() }}/{{ event()?.maxPlayers }})</span
-						>
-						}
-					</h2>
-
-					@if (participants().length > 0) {
-					<div class="mb-3 flex items-center">
-						<div class="flex -space-x-3">
-							@for (p of participants().slice(0, PARTICIPANTS_PREVIEW_LIMIT); track p.id; let i = $index)
-							{ @if (p.avatar) {
-							<img
-								[ngSrc]="p.avatar!"
-								[alt]="p.username ?? 'Player'"
-								width="40"
-								height="40"
-								class="h-10 w-10 rounded-full border-2 border-white object-cover"
-								[style.z-index]="5 - i"
-							/>
-							} @else {
-							<div
-								class="flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-emerald-100 text-xs font-semibold text-emerald-700"
-								[style.z-index]="5 - i"
-							>
-								{{ (p.username ?? '?')[0].toUpperCase() }}
-							</div>
-							} }
-						</div>
-						@if (participants().length > PARTICIPANTS_PREVIEW_LIMIT) {
-						<span
-							class="ml-1 flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-emerald-50 text-xs font-semibold text-emerald-600"
-						>
-							+{{ participants().length - PARTICIPANTS_PREVIEW_LIMIT }}
-						</span>
-						}
-					</div>
-					}
-
-					<p
-						class="text-sm font-medium"
-						[class]="spotsLeft() === 0 ? 'text-red-600' : spotsLeft() !== null && spotsLeft()! <= 3 ? 'text-amber-600' : 'text-on-surface-muted'"
-					>
-						{{ urgencyText() }}
-					</p>
-
-					@if (event()?.maxPlayers) {
-					<div
-						class="mt-3 h-2 w-full overflow-hidden rounded-full bg-slate-100"
-					>
-						<div
-							class="h-full rounded-full transition-all"
-							[class]="capacityPercent() >= 100 ? 'bg-red-500' : capacityPercent() >= 75 ? 'bg-amber-500' : 'bg-emerald-500'"
-							[style.width.%]="capacityPercent()"
-						></div>
-					</div>
-					}
-				</div>
+				<app-event-participants-card
+					[participants]="participants()"
+					[maxPlayers]="ev.maxPlayers"
+					[hostUsername]="hostUsername()"
+					[hostAvatar]="hostAvatar()"
+					[isOwner]="isOwner()"
+				/>
 			</div>
 		</div>
 	</div>
@@ -653,41 +266,18 @@
 	<div
 		class="fixed inset-x-0 bottom-0 border-t border-border bg-surface-raised p-3 shadow-lg lg:hidden"
 	>
-		@if (isOwner()) {
-		<span
-			class="flex w-full items-center justify-center rounded-lg bg-emerald-50 py-3 text-sm font-medium text-emerald-700"
-		>
-			{{ t('youAreHost') }}
-		</span>
-		} @else if (isJoined()) {
-		<button
-			type="button"
-			class="w-full rounded-lg border border-border py-3 text-sm font-medium text-on-surface-medium transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
-			(click)="leaveEvent()"
-			[disabled]="leaving()"
-		>
-			@if (leaving()) { {{ t('leaving') }} } @else { {{ t('leaveEvent') }} }
-		</button>
-		} @else {
-		<button
-			type="button"
-			class="w-full rounded-lg bg-emerald-500 py-3 text-sm font-medium text-white transition hover:bg-emerald-600 disabled:cursor-not-allowed disabled:bg-emerald-300"
-			(click)="joinEvent()"
-			[disabled]="joining() || isFull()"
-		>
-			@if (joining()) { {{ t('joining') }} } @else if (isFull()) { {{
-			t('eventFull') }} } @else { {{ t('joinGame') }} }
-		</button>
-		}
+		<app-event-join-actions
+			[isLoggedIn]="isLoggedIn()"
+			[isOwner]="isOwner()"
+			[isJoined]="isJoined()"
+			[isFull]="isFull()"
+			[eventId]="ev.id"
+			[fullWidth]="true"
+			(joined)="onParticipantsChanged()"
+			(left)="onParticipantsChanged()"
+		/>
 	</div>
 	}
-
-	<app-cover-image-picker
-		[isOpen]="coverPickerOpen()"
-		[selectedSlug]="editForm().coverImage"
-		(selected)="onCoverSelected($event)"
-		(closed)="closeCoverPicker()"
-	/>
 
 	}
 </ng-container>
