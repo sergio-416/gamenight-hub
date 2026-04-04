@@ -12,7 +12,9 @@
 	"map": {
 		"heading": "Map",
 		"close": "Close",
-		"loadingLocations": "Loading locations..."
+		"loadingLocations": "Loading locations...",
+		"defaultVenue": "Venue",
+		"delete": "Delete"
 	},
 	"card": {
 		"full": "Full",

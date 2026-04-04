@@ -12,7 +12,9 @@
 	"map": {
 		"heading": "Carte",
 		"close": "Fermer",
-		"loadingLocations": "Chargement des lieux..."
+		"loadingLocations": "Chargement des lieux...",
+		"defaultVenue": "Lieu",
+		"delete": "Supprimer"
 	},
 	"card": {
 		"full": "Complet",

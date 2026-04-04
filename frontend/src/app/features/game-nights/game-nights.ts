@@ -10,9 +10,9 @@ import {
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { API_CONFIG } from '@core/config/api.config';
-import { formatDateMedium } from '@core/utils/date-format';
 import { AuthService } from '@core/services/auth';
 import { ToastService } from '@core/services/toast';
+import { formatDateMedium } from '@core/utils/date-format';
 import { CategoryFilterBar } from '@game-nights/components/category-filter-bar/category-filter-bar';
 import { EventCard } from '@game-nights/components/event-card/event-card';
 import { GameNightsMap } from '@game-nights/components/map/map';

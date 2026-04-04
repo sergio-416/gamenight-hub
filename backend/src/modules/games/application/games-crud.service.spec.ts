@@ -211,7 +211,7 @@ describe('GamesCrudService', () => {
 	});
 
 	describe('findCollectionRecommendations', () => {
-		it('should return category-matched games first then random', async () => {
+		it('should return category-matched games first then fillers', async () => {
 			const current = makeGame({ categories: ['Strategy'] });
 			const match1 = makeGame({
 				id: 'uuid-m1',
@@ -229,51 +229,70 @@ describe('GamesCrudService', () => {
 				categories: ['Party'],
 			});
 
-			mockDb.select.mockReturnValue(chainResolving([current, match1, match2, noMatch]));
+			mockDb.select
+				.mockReturnValueOnce(chainResolving([{ categories: current.categories }]))
+				.mockReturnValueOnce(chainResolving([match1, match2]))
+				.mockReturnValueOnce(chainResolving([noMatch]));
 
 			const result = await service.findCollectionRecommendations(current.id, OWNER_UID);
 
 			expect(result.length).toBeLessThanOrEqual(UI.RECOMMENDATIONS_TOTAL);
-			expect(result.every((g) => g.id !== current.id)).toBe(true);
+			expect(result).toContain(match1);
+			expect(result).toContain(match2);
 		});
 
-		it('should return empty array when only current game exists', async () => {
-			const current = makeGame();
-			mockDb.select.mockReturnValue(chainResolving([current]));
+		it('should return empty array when current game not found', async () => {
+			mockDb.select.mockReturnValueOnce(chainResolving([]));
 
-			const result = await service.findCollectionRecommendations(current.id, OWNER_UID);
+			const result = await service.findCollectionRecommendations('nonexistent', OWNER_UID);
 
 			expect(result).toEqual([]);
 		});
 
-		it('should not include duplicates across slots', async () => {
-			const current = makeGame({ categories: ['Strategy'] });
-			const g1 = makeGame({
-				id: 'uuid-1',
-				name: 'G1',
-				categories: ['Strategy'],
-			});
-			const g2 = makeGame({
-				id: 'uuid-2',
-				name: 'G2',
-				categories: ['Strategy'],
-			});
-			const g3 = makeGame({
-				id: 'uuid-3',
-				name: 'G3',
-				categories: ['Strategy'],
-			});
-			const g4 = makeGame({ id: 'uuid-4', name: 'G4', categories: ['Party'] });
-			const g5 = makeGame({ id: 'uuid-5', name: 'G5', categories: ['Party'] });
-			const g6 = makeGame({ id: 'uuid-6', name: 'G6', categories: ['Party'] });
+		it('should skip category query when current game has no categories', async () => {
+			const filler = makeGame({ id: 'uuid-f1', name: 'Filler' });
 
-			mockDb.select.mockReturnValue(chainResolving([current, g1, g2, g3, g4, g5, g6]));
+			mockDb.select
+				.mockReturnValueOnce(chainResolving([{ categories: null }]))
+				.mockReturnValueOnce(chainResolving([filler]));
 
-			const result = await service.findCollectionRecommendations(current.id, OWNER_UID);
+			const result = await service.findCollectionRecommendations('some-id', OWNER_UID);
 
-			const ids = result.map((g) => g.id);
-			expect(new Set(ids).size).toBe(ids.length);
+			expect(result).toContain(filler);
+			expect(mockDb.select).toHaveBeenCalledTimes(2);
+		});
+
+		it('should not exceed RECOMMENDATIONS_TOTAL', async () => {
+			const matches = Array.from({ length: 4 }, (_, i) =>
+				makeGame({ id: `uuid-m${i}`, name: `Match${i}`, categories: ['Strategy'] }),
+			);
+			const fillers = Array.from({ length: 4 }, (_, i) =>
+				makeGame({ id: `uuid-f${i}`, name: `Filler${i}`, categories: ['Party'] }),
+			);
+
+			mockDb.select
+				.mockReturnValueOnce(chainResolving([{ categories: ['Strategy'] }]))
+				.mockReturnValueOnce(chainResolving(matches.slice(0, UI.RECOMMENDATIONS_FIRST)))
+				.mockReturnValueOnce(chainResolving(fillers.slice(0, UI.RECOMMENDATIONS_EXTRA)));
+
+			const result = await service.findCollectionRecommendations('some-id', OWNER_UID);
+
 			expect(result.length).toBeLessThanOrEqual(UI.RECOMMENDATIONS_TOTAL);
+		});
+
+		it('should skip fillers query when category matches fill total', async () => {
+			const matches = Array.from({ length: UI.RECOMMENDATIONS_TOTAL }, (_, i) =>
+				makeGame({ id: `uuid-m${i}`, name: `Match${i}`, categories: ['Strategy'] }),
+			);
+
+			mockDb.select
+				.mockReturnValueOnce(chainResolving([{ categories: ['Strategy'] }]))
+				.mockReturnValueOnce(chainResolving(matches));
+
+			const result = await service.findCollectionRecommendations('some-id', OWNER_UID);
+
+			expect(result).toHaveLength(UI.RECOMMENDATIONS_TOTAL);
+			expect(mockDb.select).toHaveBeenCalledTimes(2);
 		});
 	});
 });

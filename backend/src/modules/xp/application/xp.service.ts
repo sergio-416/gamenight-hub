@@ -1,7 +1,7 @@
-import { UI } from '@gamenight-hub/shared';
 import { DB_TOKEN, type DrizzleDb } from '@database/database.module.js';
 import { type SelectXpProfile, xpProfiles } from '@database/schema/xp-profiles.js';
 import { xpTransactions } from '@database/schema/xp-transactions.js';
+import { UI } from '@gamenight-hub/shared';
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { and, count, desc, eq, gte, sql } from 'drizzle-orm';

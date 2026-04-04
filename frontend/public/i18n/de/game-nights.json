@@ -12,7 +12,9 @@
 	"map": {
 		"heading": "Karte",
 		"close": "Schließen",
-		"loadingLocations": "Orte werden geladen..."
+		"loadingLocations": "Orte werden geladen...",
+		"defaultVenue": "Ort",
+		"delete": "Löschen"
 	},
 	"card": {
 		"full": "Voll",

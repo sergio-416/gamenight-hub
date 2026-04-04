@@ -1,0 +1,221 @@
+<ng-container *transloco="let t; read: 'profile'">
+	<section class="flex flex-col gap-4">
+		<div
+			class="rounded-2xl border border-border bg-surface-raised p-5 shadow-sm"
+		>
+			<div class="mb-4 flex items-center justify-between">
+				<p
+					class="text-xs font-semibold uppercase tracking-widest text-on-surface-dim"
+				>
+					{{ t('gameCollection.recentlyAdded') }}
+				</p>
+				<span
+					class="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-500"
+				>
+					{{ ownedCount() === 1 ? t('gameCollection.gameSingular', {
+					count: ownedCount() }) : t('gameCollection.gamePlural', { count:
+					ownedCount() }) }}
+				</span>
+			</div>
+			@if (gamesLoading()) {
+			<div class="flex items-center justify-center py-10">
+				<div
+					class="h-6 w-6 animate-spin rounded-full border-2 border-border border-t-emerald-500"
+				></div>
+			</div>
+			} @else if (ownedGames().length === 0) {
+			<div
+				class="flex flex-col items-center justify-center py-10 text-center"
+			>
+				<fa-icon
+					[icon]="iconDice"
+					class="text-4xl text-slate-300"
+				></fa-icon>
+				<p class="mt-3 text-sm font-medium text-on-surface-medium">
+					{{ t('gameCollection.noGames') }}
+				</p>
+				<p class="mt-1 text-xs text-on-surface-dim">
+					{{ t('gameCollection.ownedGamesAppear') }}
+				</p>
+			</div>
+			} @else {
+			<div class="grid grid-cols-4 gap-2">
+				@for (game of recentGames(); track game.id; let idx = $index) {
+				<div
+					class="group relative flex flex-col overflow-hidden rounded-xl border border-slate-100 bg-slate-50 transition hover:border-slate-200 hover:shadow-sm"
+				>
+					<div
+						class="relative aspect-3/4 w-full overflow-hidden bg-slate-100"
+					>
+						@if (game.imageUrl || game.thumbnailUrl) {
+						<img
+							[ngSrc]="(game.imageUrl ?? game.thumbnailUrl)!"
+							[alt]="game.name"
+							fill
+							sizes="(max-width: 767px) 25vw, 12vw"
+							class="object-cover transition group-hover:scale-105"
+							[priority]="idx < 4"
+						/>
+						} @else {
+						<div
+							class="flex h-full w-full items-center justify-center bg-linear-to-br from-slate-200 to-slate-300"
+						>
+							<span class="text-lg font-bold text-slate-400"
+								>{{ game.name[0]?.toUpperCase() }}</span
+							>
+						</div>
+						}
+					</div>
+					<div class="p-1.5">
+						<p
+							class="line-clamp-1 text-[11px] font-medium text-on-surface-strong"
+						>
+							{{ game.name }}
+						</p>
+					</div>
+				</div>
+				}
+			</div>
+			@if (ownedCount() > 0) {
+			<div class="mt-3 text-right">
+				<a
+					routerLink="/collection"
+					class="text-xs font-medium text-emerald-600 transition-colors hover:text-emerald-500"
+				>
+					{{ t('gameCollection.viewCollection', { count: ownedCount() })
+					}}
+				</a>
+			</div>
+			} }
+		</div>
+
+		<div
+			class="rounded-2xl border border-border bg-surface-raised p-5 shadow-sm"
+		>
+			<div class="mb-4 flex items-center justify-between">
+				<p
+					class="text-xs font-semibold uppercase tracking-widest text-on-surface-dim"
+				>
+					{{ t('wantToPlay.title') }}
+				</p>
+				<div class="flex items-center gap-2">
+					<span
+						class="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-500"
+					>
+						{{ wantToPlayCount() }}/4
+					</span>
+					@if (wantToPlayCount() < 4) {
+					<button
+						type="button"
+						(click)="addGameRequested.emit('want_to_play')"
+						class="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 transition hover:bg-emerald-200"
+						[attr.aria-label]="t('wantToPlay.ariaAddGame')"
+					>
+						<fa-icon [icon]="iconPlus" class="text-xs"></fa-icon>
+					</button>
+					}
+				</div>
+			</div>
+			@if (gamesLoading()) {
+			<div class="flex items-center justify-center py-6">
+				<div
+					class="h-5 w-5 animate-spin rounded-full border-2 border-border border-t-indigo-600"
+				></div>
+			</div>
+			} @else if (wantToPlayGames().length === 0) {
+			<div
+				class="flex flex-col items-center justify-center py-6 text-center"
+			>
+				<fa-icon
+					[icon]="iconBullseye"
+					class="text-3xl text-slate-300"
+				></fa-icon>
+				<p class="mt-2 text-xs text-on-surface-dim">
+					{{ t('wantToPlay.empty') }}
+				</p>
+			</div>
+			} @else {
+			<div class="space-y-2">
+				@for (game of wantToPlayGames(); track game.id) {
+				<div
+					class="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 p-2.5"
+				>
+					<div class="flex min-w-0 flex-1 items-center gap-2.5">
+						@if (game.thumbnailUrl) {
+						<img
+							[ngSrc]="game.thumbnailUrl"
+							[alt]="game.name"
+							width="32"
+							height="32"
+							class="h-8 w-8 shrink-0 rounded object-cover"
+						/>
+						}
+						<div class="min-w-0 flex-1">
+							<p
+								class="line-clamp-1 text-sm font-medium text-on-surface-strong"
+							>
+								{{ game.name }}
+							</p>
+							@if (game.yearPublished) {
+							<p class="text-xs text-on-surface-dim">
+								{{ game.yearPublished }}
+							</p>
+							}
+						</div>
+					</div>
+					<button
+						type="button"
+						(click)="removeWantToPlay(game.id)"
+						class="ml-2 flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-slate-400 transition hover:bg-red-50 hover:text-red-500"
+						[attr.aria-label]="t('wantToPlay.ariaRemove')"
+					>
+						<fa-icon [icon]="iconTrash" class="text-xs"></fa-icon>
+					</button>
+				</div>
+				}
+			</div>
+			}
+		</div>
+
+		<div
+			class="rounded-2xl border border-border bg-surface-raised p-5 shadow-sm"
+		>
+			@if (gamesLoading()) {
+			<div class="mb-4 flex items-center justify-between">
+				<p
+					class="text-xs font-semibold uppercase tracking-widest text-on-surface-dim"
+				>
+					{{ t('wantToTry.title') }}
+				</p>
+				<span
+					class="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-500"
+				>
+					{{ wantToTryCount() }}/4
+				</span>
+			</div>
+			<div class="flex items-center justify-center py-6">
+				<div
+					class="h-5 w-5 animate-spin rounded-full border-2 border-border border-t-indigo-600"
+				></div>
+			</div>
+			} @else {
+			<app-profile-mark-played
+				[games]="wantToTryGames()"
+				(completed)="onMarkPlayedCompleted()"
+				(addGameRequested)="addGameRequested.emit($event)"
+			/>
+			}
+		</div>
+	</section>
+
+	@if (showRemoveConfirm()) {
+	<app-confirm-dialog
+		[isOpen]="showRemoveConfirm()"
+		title="Remove game?"
+		message="This will remove the game from your Want to Play list. You can add it again anytime."
+		confirmText="Remove"
+		(confirmed)="removeWantToPlayConfirmed()"
+		(cancelled)="cancelRemoveWantToPlay()"
+	></app-confirm-dialog>
+	}
+</ng-container>

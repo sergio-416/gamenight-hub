@@ -1,6 +1,6 @@
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
-import { signal } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, signal } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { API_CONFIG } from '@core/config/api.config';
 import { AuthService } from '@core/services/auth';
@@ -55,6 +55,7 @@ const mockAuthService = {
 
 async function renderProfileMe() {
 	const result = await render(ProfileMe, {
+		schemas: [CUSTOM_ELEMENTS_SCHEMA],
 		providers: [
 			provideHttpClient(),
 			provideHttpClientTesting(),
@@ -82,6 +83,15 @@ function flushInitialRequests(httpMock: HttpTestingController, profileOverrides 
 		limit: PAGINATION.DEFAULT_LIMIT,
 		totalPages: 0,
 	});
+	flushXpRequests(httpMock);
+}
+
+function flushPendingRequests(httpMock: HttpTestingController) {
+	httpMock
+		.match((req) => req.url.includes('owned-bgg-ids'))
+		.forEach((r) => {
+			r.flush([]);
+		});
 	flushXpRequests(httpMock);
 }
 
@@ -132,7 +142,7 @@ describe('ProfileMe', () => {
 			expect(screen.getByText(/loading/i)).toBeTruthy();
 
 			flushInitialRequests(httpMock);
-			httpMock.verify();
+			flushPendingRequests(httpMock);
 		});
 	});
 
@@ -146,7 +156,7 @@ describe('ProfileMe', () => {
 				expect(screen.getByText('john_doe')).toBeTruthy();
 			});
 
-			httpMock.verify();
+			flushPendingRequests(httpMock);
 		});
 
 		it('should display bio after profile loads', async () => {
@@ -158,7 +168,7 @@ describe('ProfileMe', () => {
 				expect(screen.getByText('I love board games')).toBeTruthy();
 			});
 
-			httpMock.verify();
+			flushPendingRequests(httpMock);
 		});
 
 		it('should display location after profile loads', async () => {
@@ -170,7 +180,7 @@ describe('ProfileMe', () => {
 				expect(screen.getByText('Barcelona')).toBeTruthy();
 			});
 
-			httpMock.verify();
+			flushPendingRequests(httpMock);
 		});
 
 		it('should show edit button so user can update their profile', async () => {
@@ -182,7 +192,7 @@ describe('ProfileMe', () => {
 				expect(screen.getByRole('button', { name: /profile settings/i })).toBeTruthy();
 			});
 
-			httpMock.verify();
+			flushPendingRequests(httpMock);
 		});
 	});
 
@@ -199,8 +209,8 @@ describe('ProfileMe', () => {
 
 			expect(screen.getByLabelText(/bio/i)).toBeTruthy();
 
-			flushXpRequests(httpMock);
-			httpMock.verify();
+			flushPendingRequests(httpMock);
+			flushPendingRequests(httpMock);
 		});
 
 		it('should show save button in edit mode', async () => {
@@ -214,8 +224,8 @@ describe('ProfileMe', () => {
 
 			expect(screen.getByRole('button', { name: /save/i })).toBeTruthy();
 
-			flushXpRequests(httpMock);
-			httpMock.verify();
+			flushPendingRequests(httpMock);
+			flushPendingRequests(httpMock);
 		});
 
 		it('should submit updated profile when user saves', async () => {
@@ -241,8 +251,8 @@ describe('ProfileMe', () => {
 				expect(screen.getByText('Updated bio text')).toBeTruthy();
 			});
 
-			flushXpRequests(httpMock);
-			httpMock.verify();
+			flushPendingRequests(httpMock);
+			flushPendingRequests(httpMock);
 		});
 
 		it('should hide edit form and show profile after successful save', async () => {
@@ -262,8 +272,8 @@ describe('ProfileMe', () => {
 				expect(screen.getByRole('button', { name: /profile settings/i })).toBeTruthy();
 			});
 
-			flushXpRequests(httpMock);
-			httpMock.verify();
+			flushPendingRequests(httpMock);
+			flushPendingRequests(httpMock);
 		});
 	});
 
@@ -279,8 +289,8 @@ describe('ProfileMe', () => {
 
 			expect(screen.getByLabelText(/public profile/i)).toBeTruthy();
 
-			flushXpRequests(httpMock);
-			httpMock.verify();
+			flushPendingRequests(httpMock);
+			flushPendingRequests(httpMock);
 		});
 	});
 });

@@ -5,7 +5,7 @@ import { bggGames } from '@database/schema/bgg-games.js';
 import { games, type InsertGame, type SelectGame } from '@database/schema/games.js';
 import { type GameStatus, PAGINATION, UI } from '@gamenight-hub/shared';
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { and, count, eq, isNull } from 'drizzle-orm';
+import { and, count, eq, isNull, sql } from 'drizzle-orm';
 import type { UpdatePersonalFieldsDto } from '../presentation/dto/update-personal-fields.dto.js';
 
 export interface PaginatedGames {
@@ -96,47 +96,58 @@ export class GamesCrudService {
 	}
 
 	async findCollectionRecommendations(gameId: string, createdBy: string): Promise<SelectGame[]> {
-		const allGames = await this.#db
-			.select()
+		const [currentGame] = await this.#db
+			.select({ categories: games.categories })
 			.from(games)
-			.where(and(eq(games.createdBy, createdBy), isNull(games.deletedAt)));
+			.where(and(eq(games.id, gameId), eq(games.createdBy, createdBy), isNull(games.deletedAt)));
 
-		const currentGame = allGames.find((g) => g.id === gameId);
 		if (!currentGame) return [];
 
-		const others = allGames.filter((g) => g.id !== gameId);
-		if (others.length === 0) return [];
+		const currentCategories = currentGame.categories ?? [];
 
-		const currentCategories = new Set(currentGame.categories ?? []);
+		const categoryMatches =
+			currentCategories.length > 0
+				? await this.#db
+						.select()
+						.from(games)
+						.where(
+							and(
+								eq(games.createdBy, createdBy),
+								isNull(games.deletedAt),
+								sql`${games.id} != ${gameId}`,
+								sql`${games.categories} && ${currentCategories}`,
+							),
+						)
+						.orderBy(sql`random()`)
+						.limit(UI.RECOMMENDATIONS_FIRST)
+				: [];
 
-		const categoryMatches: SelectGame[] = [];
-		const nonMatches: SelectGame[] = [];
+		const usedIds = categoryMatches.map((g) => g.id);
+		const remaining = UI.RECOMMENDATIONS_TOTAL - categoryMatches.length;
 
-		for (const game of others) {
-			const hasOverlap = (game.categories ?? []).some((c) => currentCategories.has(c));
-			if (hasOverlap) {
-				categoryMatches.push(game);
-			} else {
-				nonMatches.push(game);
-			}
-		}
+		const fillers =
+			remaining > 0
+				? await this.#db
+						.select()
+						.from(games)
+						.where(
+							and(
+								eq(games.createdBy, createdBy),
+								isNull(games.deletedAt),
+								sql`${games.id} != ${gameId}`,
+								usedIds.length > 0
+									? sql`${games.id} NOT IN (${sql.join(
+											usedIds.map((id) => sql`${id}`),
+											sql`, `,
+										)})`
+									: undefined,
+							),
+						)
+						.orderBy(sql`random()`)
+						.limit(remaining)
+				: [];
 
-		const shuffled = (arr: SelectGame[]) =>
-			arr
-				.map((g) => ({ g, sort: Math.random() }))
-				.sort((a, b) => a.sort - b.sort)
-				.map(({ g }) => g);
-
-		const first3 = shuffled(categoryMatches).slice(0, UI.RECOMMENDATIONS_FIRST);
-		const remaining = UI.RECOMMENDATIONS_FIRST - first3.length;
-		const fillers = shuffled(nonMatches).slice(0, remaining);
-		const slot1to3 = [...first3, ...fillers];
-
-		const usedIds = new Set(slot1to3.map((g) => g.id));
-		const pool = others.filter((g) => !usedIds.has(g.id));
-		const slot4to5 = shuffled(pool).slice(0, UI.RECOMMENDATIONS_EXTRA);
-
-		return [...slot1to3, ...slot4to5].slice(0, UI.RECOMMENDATIONS_TOTAL);
+		return [...categoryMatches, ...fillers];
 	}
 
 	async update(

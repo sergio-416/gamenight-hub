@@ -16,7 +16,7 @@ import { environment } from '@env';
 import type { EventWithParticipants } from '@game-nights/models/event-with-participants';
 import type { Location } from '@game-nights/models/location.model';
 import { LocationsService } from '@game-nights/services/locations';
-import { TranslocoDirective } from '@jsverse/transloco';
+import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 import * as L from 'leaflet';
 
 export const LEAFLET = new InjectionToken<typeof L>('leaflet', {
@@ -31,6 +31,7 @@ export const LEAFLET = new InjectionToken<typeof L>('leaflet', {
 })
 export class GameNightsMap implements AfterViewInit, OnDestroy {
 	readonly #locationsService = inject(LocationsService);
+	readonly #transloco = inject(TranslocoService);
 	readonly #L = inject(LEAFLET);
 
 	readonly reloadTrigger = input<number>(0);
@@ -168,7 +169,8 @@ export class GameNightsMap implements AfterViewInit, OnDestroy {
 			popupContent.appendChild(title);
 
 			const venueType = document.createElement('p');
-			venueType.textContent = location.venueType || 'Venue';
+			venueType.textContent =
+				location.venueType || this.#transloco.translate('game-nights.map.defaultVenue');
 			popupContent.appendChild(venueType);
 
 			if (location.address) {
@@ -179,7 +181,7 @@ export class GameNightsMap implements AfterViewInit, OnDestroy {
 
 			if (this.isLoggedIn()) {
 				const deleteButton = document.createElement('button');
-				deleteButton.textContent = 'Delete';
+				deleteButton.textContent = this.#transloco.translate('game-nights.map.delete');
 				deleteButton.className = 'delete-btn';
 				deleteButton.style.cssText = `
 					background: var(--color-danger);

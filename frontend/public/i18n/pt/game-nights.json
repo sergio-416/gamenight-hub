@@ -12,7 +12,9 @@
 	"map": {
 		"heading": "Mapa",
 		"close": "Fechar",
-		"loadingLocations": "A carregar localizações..."
+		"loadingLocations": "A carregar localizações...",
+		"defaultVenue": "Local",
+		"delete": "Eliminar"
 	},
 	"card": {
 		"full": "Cheio",

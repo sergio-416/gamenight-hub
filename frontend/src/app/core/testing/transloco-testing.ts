@@ -272,6 +272,8 @@ const EN_GAME_NIGHTS = {
 		heading: 'Map',
 		close: 'Close',
 		loadingLocations: 'Loading locations...',
+		defaultVenue: 'Venue',
+		delete: 'Delete',
 	},
 	card: {
 		full: 'Full',

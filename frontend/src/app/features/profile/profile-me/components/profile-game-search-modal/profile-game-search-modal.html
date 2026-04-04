@@ -1,0 +1,94 @@
+<ng-container *transloco="let t; read: 'profile'">
+	@if (isOpen()) {
+	<div
+		class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4 backdrop-blur-sm"
+		role="dialog"
+		aria-modal="true"
+		aria-labelledby="add-game-modal-title"
+		cdkTrapFocus
+		cdkTrapFocusAutoCapture
+		(click)="close()"
+	>
+		<div
+			class="flex w-full max-w-md flex-col gap-4 rounded-2xl border border-border bg-surface-raised p-5 shadow-2xl"
+			role="document"
+			(click)="$event.stopPropagation()"
+		>
+			<header class="flex items-center justify-between">
+				<h3
+					id="add-game-modal-title"
+					class="text-lg font-semibold text-on-surface"
+				>
+					Add to {{ status() === 'want_to_play' ? 'Want to Play' :
+					'Want to Try' }}
+				</h3>
+				<button
+					type="button"
+					(click)="close()"
+					class="flex h-8 w-8 items-center justify-center rounded-full text-slate-400 transition hover:bg-slate-100 hover:text-slate-600"
+					aria-label="Close modal"
+				>
+					<fa-icon [icon]="iconX" class="text-sm"></fa-icon>
+				</button>
+			</header>
+
+			<div class="relative">
+				<fa-icon
+					[icon]="iconSearch"
+					class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+				></fa-icon>
+				<input
+					type="text"
+					[value]="searchQuery()"
+					(input)="onSearchInput($event)"
+					placeholder="Search your collection..."
+					class="w-full rounded-xl border border-border py-2.5 pl-9 pr-4 text-sm text-on-surface placeholder:text-on-surface-dim focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+				/>
+			</div>
+
+			@if (searchLoading()) {
+			<div class="flex items-center justify-center py-8">
+				<fa-icon
+					[icon]="iconSpinner"
+					class="animate-spin text-2xl text-emerald-500"
+				></fa-icon>
+			</div>
+			} @else if (searchResults().length > 0) {
+			<div class="max-h-64 space-y-1 overflow-y-auto">
+				@for (game of searchResults(); track game.bggId) {
+				<button
+					type="button"
+					(click)="importGame(game)"
+					[disabled]="importLoading()"
+					class="flex w-full items-center justify-between rounded-lg px-3 py-2 text-left transition hover:bg-slate-50 disabled:opacity-50"
+				>
+					<div class="min-w-0 flex-1">
+						<p class="truncate text-sm font-medium text-on-surface-strong">
+							{{ game.name }}
+						</p>
+						@if (game.yearPublished) {
+						<p class="text-xs text-on-surface-dim">
+							{{ game.yearPublished }}
+						</p>
+						}
+					</div>
+					<fa-icon
+						[icon]="iconPlus"
+						class="ml-2 text-emerald-500"
+					></fa-icon>
+				</button>
+				}
+			</div>
+			} @else if (searchQuery().length >= 2) {
+			<p class="py-4 text-center text-sm text-slate-400">
+				No games found in your collection
+			</p>
+			} @else {
+			<p class="py-4 text-center text-sm text-slate-400">
+				Type to search your collection
+			</p>
+			}
+		</div>
+	</div>
+	}
+</ng-container>
