@@ -375,7 +375,7 @@ describe('XpService', () => {
 			await service.awardXp(USER_ID, 'game_added', {});
 
 			const levelUpCalls = mockEventEmitter.emit.mock.calls.filter(
-				([event]: [string]) => event === 'xp.level-up',
+				([event]: string[]) => event === 'xp.level-up',
 			);
 			expect(levelUpCalls).toHaveLength(0);
 		});

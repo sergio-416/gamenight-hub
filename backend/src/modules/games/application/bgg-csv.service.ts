@@ -55,8 +55,8 @@ export class BggCsvService implements OnModuleInit {
 					fuzzy: 0.2,
 					combineWith: 'AND',
 					boost: { nameNorm: 2, nameCompact: 1.5 },
-					boostDocument: (_id: string, _term: string, storedFields: Record<string, unknown>) => {
-						const rank = parseInt(storedFields.rank as string, 10);
+					boostDocument: (_id: string, _term: string, storedFields?: Record<string, unknown>) => {
+						const rank = parseInt(storedFields?.rank as string, 10);
 						if (Number.isNaN(rank) || rank <= 0) return 0.5;
 						return 1 + 10 / Math.log2(rank + 2);
 					},
