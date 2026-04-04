@@ -31,7 +31,7 @@ import type { Server, Socket } from 'socket.io';
 })
 export class NotificationsGateway implements OnGatewayConnection, OnGatewayDisconnect {
 	@WebSocketServer()
-	readonly server: Server;
+	readonly server!: Server;
 
 	readonly #logger = new Logger(NotificationsGateway.name);
 	readonly #authService: AuthService;
