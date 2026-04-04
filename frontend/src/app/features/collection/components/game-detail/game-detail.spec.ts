@@ -3,6 +3,7 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { ApplicationRef, ErrorHandler } from '@angular/core';
 import { ActivatedRoute, convertToParamMap, Router } from '@angular/router';
 import { API_CONFIG } from '@core/config/api.config';
+import { ToastService } from '@core/services/toast';
 import { provideTranslocoTesting } from '@core/testing/transloco-testing';
 import { fireEvent, type RenderResult, render, screen } from '@testing-library/angular';
 import { of } from 'rxjs';
@@ -34,6 +35,7 @@ describe('GameDetail', () => {
 	};
 
 	const mockRouter = { navigate: vi.fn() };
+	const mockToast = { error: vi.fn(), success: vi.fn() };
 	const silentErrorHandler = { handleError: () => {} };
 
 	const gameUrl = `${API_CONFIG.baseUrl}${API_CONFIG.endpoints.games}/1/enriched`;
@@ -47,6 +49,7 @@ describe('GameDetail', () => {
 				provideHttpClientTesting(),
 				provideTranslocoTesting(),
 				{ provide: Router, useValue: mockRouter },
+				{ provide: ToastService, useValue: mockToast },
 				{ provide: ErrorHandler, useValue: silentErrorHandler },
 				{
 					provide: ActivatedRoute,

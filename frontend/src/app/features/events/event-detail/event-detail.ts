@@ -4,6 +4,8 @@ import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@a
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { API_CONFIG } from '@core/config/api.config';
+import { formatDateFull, formatTime as formatTimeUtil } from '@core/utils/date-format';
+import { appendTimezoneOffset } from '@core/utils/timezone';
 import { AuthService } from '@core/services/auth';
 import { type Participant, ParticipantsService } from '@core/services/participants';
 import { ToastService } from '@core/services/toast';
@@ -257,25 +259,13 @@ export class EventDetail {
 	readonly #deleteError = signal<string | null>(null);
 	readonly deleteError = this.#deleteError.asReadonly();
 
-	readonly #startDateFormatter = new Intl.DateTimeFormat('en-US', {
-		weekday: 'long',
-		month: 'long',
-		day: 'numeric',
-		year: 'numeric',
-	});
-
-	readonly #timeFormatter = new Intl.DateTimeFormat('en-US', {
-		hour: 'numeric',
-		minute: '2-digit',
-	});
-
 	formatStartTime(dateStr: string | Date): string {
-		const d = dateStr instanceof Date ? dateStr : new Date(dateStr);
-		return `${this.#startDateFormatter.format(d)} · ${this.#timeFormatter.format(d)}`;
+		const lang = this.#transloco.getActiveLang();
+		return `${formatDateFull(dateStr, lang)} \u00b7 ${formatTimeUtil(dateStr, lang)}`;
 	}
 
 	formatTime(dateStr: string | Date): string {
-		return this.#timeFormatter.format(dateStr instanceof Date ? dateStr : new Date(dateStr));
+		return formatTimeUtil(dateStr, this.#transloco.getActiveLang());
 	}
 
 	startEditing(): void {
@@ -472,13 +462,7 @@ export class EventDetail {
 	}
 
 	#toDate(datetimeLocalValue: string): string {
-		const date = new Date(datetimeLocalValue);
-		const offsetMinutes = date.getTimezoneOffset();
-		const sign = offsetMinutes <= 0 ? '+' : '-';
-		const absMinutes = Math.abs(offsetMinutes);
-		const hh = String(Math.floor(absMinutes / 60)).padStart(2, '0');
-		const mm = String(absMinutes % 60).padStart(2, '0');
-		return `${datetimeLocalValue}:00${sign}${hh}:${mm}`;
+		return appendTimezoneOffset(datetimeLocalValue);
 	}
 
 	#toDatetimeLocal(value: string | Date | undefined): string {

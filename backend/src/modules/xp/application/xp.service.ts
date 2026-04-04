@@ -1,3 +1,4 @@
+import { UI } from '@gamenight-hub/shared';
 import { DB_TOKEN, type DrizzleDb } from '@database/database.module.js';
 import { type SelectXpProfile, xpProfiles } from '@database/schema/xp-profiles.js';
 import { xpTransactions } from '@database/schema/xp-transactions.js';
@@ -38,7 +39,7 @@ function getISOWeek(date: Date): number {
 	const d = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));
 	d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
 	const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
-	return Math.ceil(((d.getTime() - yearStart.getTime()) / 86400000 + 1) / 7);
+	return Math.ceil(((d.getTime() - yearStart.getTime()) / UI.MS_PER_DAY + 1) / 7);
 }
 
 function getISOWeekYear(date: Date): number {

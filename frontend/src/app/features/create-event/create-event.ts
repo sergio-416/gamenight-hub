@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastService } from '@core/services/toast';
+import { toISOWithOffset } from '@core/utils/timezone';
 import { CreateCalendarEventSchema } from '@features/calendar/models/event.model';
 import { EventsService } from '@features/calendar/services/events';
 import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';

@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import type { EnrichedGame } from '@collection/models/game.model';
 import { GamesService } from '@collection/services/games';
 import { API_CONFIG } from '@core/config/api.config';
+import { ToastService } from '@core/services/toast';
 import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 import { ConfirmDialog } from '@shared/components/confirm-dialog';
 import { ImageLightbox } from '@shared/components/image-lightbox';
@@ -33,6 +34,7 @@ export class GameDetail {
 	readonly #route = inject(ActivatedRoute);
 	readonly #router = inject(Router);
 	readonly #gamesService = inject(GamesService);
+	readonly #toast = inject(ToastService);
 	readonly #transloco = inject(TranslocoService);
 	readonly #lang = toSignal(this.#transloco.langChanges$, { initialValue: '' });
 	readonly #apiUrl = API_CONFIG.baseUrl;
@@ -137,16 +139,26 @@ export class GameDetail {
 		const game = this.game();
 		if (!game) return;
 		this.removeDialogOpen.set(false);
-		this.#gamesService.deleteGame(game.id).subscribe(() => {
-			this.#router.navigate(['/collection']);
+		this.#gamesService.deleteGame(game.id).subscribe({
+			next: () => {
+				this.#router.navigate(['/collection']);
+			},
+			error: () => {
+				this.#toast.error('Failed to remove game');
+			},
 		});
 	}
 
 	updateStatus(status: 'owned' | 'want_to_play'): void {
 		const id = this.game()?.id;
 		if (!id) return;
-		this.#gamesService.updateGame(id, { status }).subscribe(() => {
-			this.gameResource.reload();
+		this.#gamesService.updateGame(id, { status }).subscribe({
+			next: () => {
+				this.gameResource.reload();
+			},
+			error: () => {
+				this.#toast.error('Failed to update game status');
+			},
 		});
 	}
 }

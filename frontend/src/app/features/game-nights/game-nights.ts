@@ -10,6 +10,7 @@ import {
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { API_CONFIG } from '@core/config/api.config';
+import { formatDateMedium } from '@core/utils/date-format';
 import { AuthService } from '@core/services/auth';
 import { ToastService } from '@core/services/toast';
 import { CategoryFilterBar } from '@game-nights/components/category-filter-bar/category-filter-bar';
@@ -169,13 +170,8 @@ export class GameNights {
 		});
 	}
 
-	readonly #dateFormatter = new Intl.DateTimeFormat('en-US', {
-		dateStyle: 'medium',
-		timeStyle: 'short',
-	});
-
 	formatDate(dateStr: string | Date): string {
-		return this.#dateFormatter.format(dateStr instanceof Date ? dateStr : new Date(dateStr));
+		return formatDateMedium(dateStr, this.#transloco.getActiveLang());
 	}
 
 	navigateToCreateEvent(): void {

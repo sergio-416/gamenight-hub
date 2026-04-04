@@ -46,3 +46,9 @@ export const DAY = {
 	SUNDAY: 0,
 	SATURDAY: 6,
 } as const;
+
+export const TIER_THRESHOLDS = {
+	INTERMEDIATE: 4,
+	ADVANCED: 7,
+	MASTER: 10,
+} as const;

@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, output } from '@angular/core';
 import { EventDetailCard } from '@calendar/components/event-detail-card/event-detail-card';
 import { isSameDay } from '@calendar/utils/calendar-dates';
+import { formatDayMonth } from '@core/utils/date-format';
 import type { CalendarEvent } from '@gamenight-hub/shared';
-import { TranslocoDirective } from '@jsverse/transloco';
+import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 
 @Component({
 	selector: 'app-event-details-strip',
@@ -12,6 +13,8 @@ import { TranslocoDirective } from '@jsverse/transloco';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EventDetailsStrip {
+	readonly #transloco = inject(TranslocoService);
+
 	readonly events = input.required<CalendarEvent[]>();
 	readonly selectedDay = input<Date | null>(null);
 
@@ -19,14 +22,9 @@ export class EventDetailsStrip {
 
 	readonly sectionLabel = computed(() => {
 		const day = this.selectedDay();
-		if (!day) return 'Upcoming Events';
-
-		const formatted = new Intl.DateTimeFormat('en-US', {
-			month: 'long',
-			day: 'numeric',
-		}).format(day);
-
-		return `Events on ${formatted}`;
+		if (!day) return this.#transloco.translate('calendar.details.upcoming');
+		const formatted = formatDayMonth(day, this.#transloco.getActiveLang());
+		return this.#transloco.translate('calendar.details.eventsOn', { date: formatted });
 	});
 
 	readonly hasEvents = computed(() => this.events().length > 0);

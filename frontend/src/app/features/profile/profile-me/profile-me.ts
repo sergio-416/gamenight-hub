@@ -5,6 +5,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@a
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Router, RouterLink } from '@angular/router';
 import { API_CONFIG } from '@core/config/api.config';
+import { formatFullDate, formatMonthYear } from '@core/utils/date-format';
 import { AuthService } from '@core/services/auth';
 import { ProfileService } from '@core/services/profile.service';
 import { ToastService } from '@core/services/toast';
@@ -42,12 +43,14 @@ import type {
 	Profile,
 	UpdateProfileDto,
 } from '@gamenight-hub/shared';
-import { TranslocoDirective } from '@jsverse/transloco';
+import { UI } from '@gamenight-hub/shared';
+import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 import { ConfirmDialog } from '@shared/components/confirm-dialog/confirm-dialog';
 import { DeleteAccountDialog } from '@shared/components/delete-account-dialog/delete-account-dialog';
 import { XpHistory } from '@shared/components/xp-history/xp-history';
 import { LEVEL_TIERS } from '@shared/models/xp.model';
 import { XpService } from '@shared/services/xp.service';
+import { getTierColors } from '@shared/utils/tier-colors';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 
 type PaginatedGames = PaginatedResponse<Game>;
@@ -74,45 +77,13 @@ export class ProfileMe {
 	readonly #router = inject(Router);
 	readonly #toastService = inject(ToastService);
 	readonly #xpService = inject(XpService);
+	readonly #transloco = inject(TranslocoService);
 	readonly #base = API_CONFIG.baseUrl;
 
 	readonly xpProfile = computed(() => this.#xpService.profile());
 	readonly tierLabel = computed(() => LEVEL_TIERS[this.xpProfile()?.level ?? 1] ?? 'Novice');
 
-	readonly tierColors = computed(() => {
-		const level = this.xpProfile()?.level ?? 1;
-		if (level >= 10)
-			return {
-				bg: 'bg-purple-500',
-				ring: 'ring-purple-300',
-				text: 'text-purple-600',
-				bar: 'bg-purple-500',
-				pill: 'bg-purple-100 text-purple-700',
-			};
-		if (level >= 7)
-			return {
-				bg: 'bg-amber-500',
-				ring: 'ring-amber-300',
-				text: 'text-amber-600',
-				bar: 'bg-amber-500',
-				pill: 'bg-amber-100 text-amber-700',
-			};
-		if (level >= 4)
-			return {
-				bg: 'bg-indigo-500',
-				ring: 'ring-indigo-300',
-				text: 'text-indigo-600',
-				bar: 'bg-indigo-500',
-				pill: 'bg-indigo-100 text-indigo-700',
-			};
-		return {
-			bg: 'bg-emerald-500',
-			ring: 'ring-emerald-300',
-			text: 'text-emerald-600',
-			bar: 'bg-emerald-500',
-			pill: 'bg-emerald-100 text-emerald-700',
-		};
-	});
+	readonly tierColors = computed(() => getTierColors(this.xpProfile()?.level ?? 1));
 
 	readonly #profileResource = httpResource<Profile>(() => `${this.#base}/profile/me`);
 	readonly #profileOverride = signal<Profile | null>(null);
@@ -132,17 +103,16 @@ export class ProfileMe {
 	readonly memberSince = computed(() => {
 		const p = this.profile();
 		if (!p?.createdAt) return '';
-		return new Date(p.createdAt).toLocaleDateString('en-GB', {
-			month: 'long',
-			year: 'numeric',
-		});
+		return formatMonthYear(new Date(p.createdAt), this.#transloco.getActiveLang());
 	});
 
 	readonly nameCooldownDaysRemaining = computed(() => {
 		const p = this.profile();
 		if (!p?.nameChangedAt) return 0;
 		const daysSince = (Date.now() - new Date(p.nameChangedAt).getTime()) / (1000 * 60 * 60 * 24);
-		return daysSince < 30 ? Math.ceil(30 - daysSince) : 0;
+		return daysSince < UI.NAME_CHANGE_COOLDOWN_DAYS
+			? Math.ceil(UI.NAME_CHANGE_COOLDOWN_DAYS - daysSince)
+			: 0;
 	});
 
 	readonly nameFieldsLocked = computed(() => this.nameCooldownDaysRemaining() > 0);
@@ -151,12 +121,8 @@ export class ProfileMe {
 		const p = this.profile();
 		if (!p?.nameChangedAt) return '';
 		const unlock = new Date(p.nameChangedAt);
-		unlock.setDate(unlock.getDate() + 30);
-		return unlock.toLocaleDateString('en-GB', {
-			day: 'numeric',
-			month: 'long',
-			year: 'numeric',
-		});
+		unlock.setDate(unlock.getDate() + UI.NAME_CHANGE_COOLDOWN_DAYS);
+		return formatFullDate(unlock, this.#transloco.getActiveLang());
 	});
 
 	readonly #gamesResource = httpResource<PaginatedGames>(
@@ -316,11 +282,7 @@ export class ProfileMe {
 	}
 
 	formatBirthday(birthday: string): string {
-		return new Date(birthday).toLocaleDateString('en-GB', {
-			day: 'numeric',
-			month: 'long',
-			year: 'numeric',
-		});
+		return formatFullDate(new Date(birthday), this.#transloco.getActiveLang());
 	}
 
 	openAddGameModal(status: GameStatus): void {
