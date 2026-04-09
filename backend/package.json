@@ -61,10 +61,10 @@
 		"@swc/core": "^1.15.24",
 		"@testcontainers/postgresql": "^11.13.0",
 		"@types/express": "^5.0.6",
-		"@types/node": "^25.5.0",
+		"@types/node": "^25.5.2",
 		"@types/supertest": "^7.2.0",
 		"@types/xml2js": "^0.4.14",
-		"@vitest/coverage-v8": "^4.1.2",
+		"@vitest/coverage-v8": "^4.1.4",
 		"axios": "1.14.0",
 		"dotenv": "^17.4.1",
 		"drizzle-kit": "^1.0.0-beta.20",
@@ -78,6 +78,6 @@
 		"tsx": "^4.21.0",
 		"typescript": "^5.9.3",
 		"unplugin-swc": "^1.5.9",
-		"vitest": "^4.1.2"
+		"vitest": "^4.1.4"
 	}
 }
