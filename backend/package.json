@@ -37,7 +37,7 @@
 		"@nestjs/swagger": "^11.2.7",
 		"@nestjs/throttler": "^6.5.0",
 		"@nestjs/websockets": "^11.1.18",
-		"@scalar/nestjs-api-reference": "^1.1.6",
+		"@scalar/nestjs-api-reference": "^1.1.7",
 		"csv-parse": "^6.2.1",
 		"drizzle-orm": "^1.0.0-beta.20",
 		"firebase-admin": "^13.7.0",
