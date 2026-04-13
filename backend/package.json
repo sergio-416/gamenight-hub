@@ -40,7 +40,7 @@
 		"@scalar/nestjs-api-reference": "^1.1.6",
 		"csv-parse": "^6.2.1",
 		"drizzle-orm": "^1.0.0-beta.20",
-		"firebase-admin": "^13.7.0",
+		"firebase-admin": "^13.8.0",
 		"helmet": "^8.1.0",
 		"ioredis": "^5.10.1",
 		"minisearch": "^7.2.0",

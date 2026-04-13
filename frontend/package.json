@@ -37,7 +37,7 @@
 		"@jsverse/transloco": "^8.2.1",
 		"@jsverse/transloco-messageformat": "^8.2.1",
 		"apexcharts": "^5.10.4",
-		"firebase": "^12.11.0",
+		"firebase": "^12.12.0",
 		"leaflet": "^1.9.4",
 		"ng-apexcharts": "^2.3.0",
 		"rxjs": "^7.8.2",
