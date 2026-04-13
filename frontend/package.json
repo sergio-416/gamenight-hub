@@ -57,7 +57,7 @@
 		"@testing-library/dom": "^10.4.1",
 		"@testing-library/user-event": "^14.6.1",
 		"@types/leaflet": "^1.9.21",
-		"@types/node": "^25.5.2",
+		"@types/node": "^25.6.0",
 		"@vitest/browser-playwright": "^4.1.4",
 		"@vitest/coverage-v8": "^4.1.4",
 		"@vitest/ui": "^4.1.4",
