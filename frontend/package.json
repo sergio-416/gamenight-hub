@@ -46,7 +46,7 @@
 		"zod": "^4.3.6"
 	},
 	"devDependencies": {
-		"@analogjs/vite-plugin-angular": "^2.4.4",
+		"@analogjs/vite-plugin-angular": "^2.4.9",
 		"@angular/build": "^21.2.6",
 		"@angular/cli": "^21.2.6",
 		"@angular/compiler-cli": "^21.2.7",
@@ -66,7 +66,7 @@
 		"jsdom": "^29.0.2",
 		"msw": "^2.13.2",
 		"playwright": "^1.58.2",
-		"postcss": "^8.5.9",
+		"postcss": "^8.5.10",
 		"sharp": "^0.34.5",
 		"tailwindcss": "^4.2.2",
 		"typescript": "^5.9.3",
