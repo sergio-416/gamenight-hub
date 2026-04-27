@@ -57,20 +57,20 @@
 		"@testing-library/dom": "^10.4.1",
 		"@testing-library/user-event": "^14.6.1",
 		"@types/leaflet": "^1.9.21",
-		"@types/node": "^25.5.2",
-		"@vitest/browser-playwright": "^4.1.4",
-		"@vitest/coverage-v8": "^4.1.4",
-		"@vitest/ui": "^4.1.4",
+		"@types/node": "^25.6.0",
+		"@vitest/browser-playwright": "^4.1.5",
+		"@vitest/coverage-v8": "^4.1.5",
+		"@vitest/ui": "^4.1.5",
 		"favicons": "^7.2.0",
-		"happy-dom": "^20.8.9",
-		"jsdom": "^29.0.2",
-		"msw": "^2.13.2",
+		"happy-dom": "^20.9.0",
+		"jsdom": "^29.1.0",
+		"msw": "^2.13.6",
 		"playwright": "^1.58.2",
 		"postcss": "^8.5.9",
 		"sharp": "^0.34.5",
 		"tailwindcss": "^4.2.2",
 		"typescript": "^5.9.3",
 		"vite-tsconfig-paths": "^6.1.1",
-		"vitest": "^4.1.4"
+		"vitest": "^4.1.5"
 	}
 }
