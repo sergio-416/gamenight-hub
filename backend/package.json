@@ -37,7 +37,7 @@
 		"@nestjs/swagger": "^11.2.7",
 		"@nestjs/throttler": "^6.5.0",
 		"@nestjs/websockets": "^11.1.18",
-		"@scalar/nestjs-api-reference": "^1.1.6",
+		"@scalar/nestjs-api-reference": "^1.1.13",
 		"csv-parse": "^6.2.1",
 		"drizzle-orm": "^1.0.0-rc.2-203eab8",
 		"firebase-admin": "^13.8.0",
@@ -48,11 +48,11 @@
 		"pino-http": "^11.0.0",
 		"postgres": "^3.4.9",
 		"reflect-metadata": "^0.2.2",
-		"resend": "^6.10.0",
+		"resend": "^6.12.2",
 		"rxjs": "^7.8.2",
 		"socket.io": "^4.8.3",
 		"xml2js": "^0.6.2",
-		"zod": "^4.3.6"
+		"zod": "^4.4.1"
 	},
 	"devDependencies": {
 		"@nestjs/cli": "^11.0.19",
