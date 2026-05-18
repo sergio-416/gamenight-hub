@@ -17,7 +17,7 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.4.14",
-		"@oxc-project/runtime": "^0.128.0"
+		"@oxc-project/runtime": "^0.131.0"
 	},
 	"overrides": {
 		"vite": "^8.0.0"
