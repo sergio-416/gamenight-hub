@@ -6,7 +6,7 @@
       "name": "gamenight-hub",
       "devDependencies": {
         "@biomejs/biome": "^2.4.14",
-        "@oxc-project/runtime": "^0.128.0",
+        "@oxc-project/runtime": "^0.132.0",
       },
     },
     "backend": {
@@ -825,7 +825,7 @@
 
     "@oxc-parser/binding-win32-x64-msvc": ["@oxc-parser/binding-win32-x64-msvc@0.121.0", "", { "os": "win32", "cpu": "x64" }, "sha512-BOp1KCzdboB1tPqoCPXgntgFs0jjeSyOXHzgxVFR7B/qfr3F8r4YDacHkTOUNXtDgM8YwKnkf3rE5gwALYX7NA=="],
 
-    "@oxc-project/runtime": ["@oxc-project/runtime@0.128.0", "", {}, "sha512-MDmIwudSG4Ad3GzMlj98CgUzKukckMN6zaNr8FG46Lq+0dMHm7Iy8caVD6JBTTugzh0qqr/gL+WOwll4sOI0YQ=="],
+    "@oxc-project/runtime": ["@oxc-project/runtime@0.132.0", "", {}, "sha512-Y8if5Ci7/WP163yuVBxG98zxB0dK3QKiO9vKHXVP05MNHYFdoqMx5bhl8x69SNOaFM+hV0uadGHJmZ+zU3oILQ=="],
 
     "@oxc-project/types": ["@oxc-project/types@0.121.0", "", {}, "sha512-CGtOARQb9tyv7ECgdAlFxi0Fv7lmzvmlm2rpD/RdijOO9rfk/JvB1CjT8EnoD+tjna/IYgKKw3IV7objRb+aYw=="],
 
